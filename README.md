@@ -1,4 +1,4 @@
-# TradeView
+# TradingView Machine Learning
 
 TradeView is a free and open source Trading View bot written in Python. It is designed to support all major exchanges. It contains back testing, money management tools as well as strategy optimization by machine learning.
 
