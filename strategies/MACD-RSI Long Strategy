@@ -1,8 +1,8 @@
 // @version=4
 // This source code is subject to the terms of the Mozilla Public License 2.0 at https://mozilla.org/MPL/2.0/
 // © Bunghole 2020
-
 strategy(default_qty_type = strategy.percent_of_equity, default_qty_value = 100, pyramiding = 0, title="MACD Long Strategy", overlay=true, shorttitle="MACD Long Strategy", currency = 'USD', initial_capital = 100000)
+
 
 // Stoploss and Profits Inputs
 enable = input(false, title="Enable Just a Stoploss Level?")
@@ -10,8 +10,6 @@ enable_takeprofit = input(false, title="Enable Just a Profit Level?")
 both = input(false, title="Enable Both?(If enabled, please disable upper boxes stoploss and profit.)")
 stoploss_input = input(1.0, title='Stop Loss %', type=input.float, minval=0)/100
 takeprofit_input = input(2.0, title='Take Profit %', type=input.float, minval=0)/100
-
-
 stoploss_level = strategy.position_avg_price * (1 - stoploss_input)
 takeprofit_level = strategy.position_avg_price * (1 + takeprofit_input)
 plot(enable and stoploss_input and stoploss_level ? stoploss_level: na, color=color.red, style=plot.style_linebr, linewidth=2, title="Stoploss")
@@ -27,10 +25,8 @@ len = input(14, minval=1, title="RSI Line Length")
 up = rma(max(change(src), 0), len)
 down = rma(-min(change(src), 0), len)
 rsi = down == 0 ? 100 : up == 0 ? 0 : 100 - 100 / (1 + up / down)
-wasOversold = rsi[0] <= RSIOverSold or rsi[1] <= RSIOverSold or rsi[2] <= RSIOverSold or
-   rsi[3] <= RSIOverSold or rsi[4] <= RSIOverSold or rsi[5] <= RSIOverSold
-wasOverbought = rsi[0] >= RSIOverBought or rsi[1] >= RSIOverBought or rsi[2] >= RSIOverBought or
-   rsi[3] >= RSIOverBought or rsi[4] >= RSIOverBought or rsi[5] >= RSIOverBought
+wasOversold = rsi[0] <= RSIOverSold or rsi[1] <= RSIOverSold or rsi[2] <= RSIOverSold or rsi[3] <= RSIOverSold or rsi[4] <= RSIOverSold or rsi[5] <= RSIOverSold
+wasOverbought = rsi[0] >= RSIOverBought or rsi[1] >= RSIOverBought or rsi[2] >= RSIOverBought or rsi[3] >= RSIOverBought or rsi[4] >= RSIOverBought or rsi[5] >= RSIOverBought
 
 
 // MACD INPUTS
@@ -53,7 +49,6 @@ b = input(false, title="Enable EMA 2")
 c = input(false, title="Enable EMA 3")
 d = input(false, title="Enable EMA 4")
 e = input(false, title="Enable EMA 5")
-
 lena = input(9, minval=1, title="Length EMA 1")
 srca = input(close, title="Source EMA 1")
 lenb = input(21, minval=1, title="Length EMA 2")
@@ -64,13 +59,11 @@ lend = input(100, minval=1, title="Length EMA 4")
 srcd = input(close, title="Source EMA 4")
 lene = input(200, minval=1, title="Length EMA 5")
 srce = input(close, title="Source EMA 5")
-
 outa = ema(srca, lena)
 outb = ema(srcb, lenb)
 outc = ema(srcc, lenc)
 outd = ema(srcd, lend)
 oute = ema(srce, lene)
-
 plot(a and outa ? outa: na, title="EMA 1", color=color.yellow)
 plot(b and outb ? outb: na, title="EMA 2", color=color.teal)
 plot(c and outc ? outc: na, title="EMA 3", color=color.orange)
@@ -80,18 +73,17 @@ plot(e and oute ? oute: na, title="EMA 5", color=color.blue, linewidth=2)
 // Strategy Long
 strategy.risk.allow_entry_in(strategy.direction.long)
 Long = wasOversold and crossoverBull
-LongCondition1 = wasOverbought and crossoverBear
-LongCondition2 = crossunder(FastMA, SlowMA) and  avg_2 > 0
-ExitLongCondition = wasOverbought and crossoverBear
+exitLong = wasOverbought and crossoverBear
 
 strategy.entry("Long", strategy.long, when = Long, alert_message = "Buy!")
-strategy.close("Long", when = LongCondition1)
-
+strategy.close("Long", when = exitLong)
 if enable == true
     strategy.exit("Stop Loss", "Long", stop = stoploss_level)
-
 if enable_takeprofit == true
     strategy.exit("TP", "Long", limit = takeprofit_level)
-
 if both == true
     strategy.exit("Stoploss/TP", "Long", stop = stoploss_level, limit = takeprofit_level)
+
+
+alertcondition(Long, title='Enter MACD/RSI Long', message='Enter Trade!')
+alertcondition(exitLong, title='Exit MACD/RSI', message='Time to exit trade!')
