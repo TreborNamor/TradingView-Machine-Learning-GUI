@@ -57,8 +57,8 @@ Long2 = (crossover(adxSignal, 16)) and (plusDi > minusDi)
 ExitLongCondition = (adxSignal > 43) and (plusDi > 24)
 ExitLongCondition2 = crossunder(plusDi, minusDi)
 
-strategy.entry("Long", strategy.long, when = Long2, alert_message = "Buy!")
-strategy.close("Long", when = ExitLongCondition2)
+strategy.entry("Long", strategy.long, when = Long, alert_message = "Buy!")
+strategy.close("Long", when = ExitLongCondition)
 
 if enable == true
     strategy.exit("Stop Loss", "Long", stop = stoploss_level)
