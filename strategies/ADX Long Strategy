@@ -1,0 +1,70 @@
+// @version=4
+// This source code is subject to the terms of the Mozilla Public License 2.0 at https://mozilla.org/MPL/2.0/
+// © Bunghole 2020
+
+strategy(default_qty_type = strategy.percent_of_equity, default_qty_value = 100, pyramiding = 0, title="ADX Long Strategy", overlay=true, shorttitle="ADX Long Strategy", currency = 'USD', initial_capital = 100000)
+
+// Stoploss and Profits Inputs
+enable = input(false, title="Enable Just a Stoploss Level?")
+enable_takeprofit = input(false, title="Enable Just a Profit Level?")
+both = input(false, title="Enable Both?(If enabled, please disable upper boxes stoploss and profit.)")
+stoploss_input = input(1.0, title='Stop Loss %', type=input.float, minval=0)/100
+takeprofit_input = input(2.0, title='Take Profit %', type=input.float, minval=0)/100
+
+
+stoploss_level = strategy.position_avg_price * (1 - stoploss_input)
+takeprofit_level = strategy.position_avg_price * (1 + takeprofit_input)
+plot(enable and stoploss_input and stoploss_level ? stoploss_level: na, color=color.red, style=plot.style_linebr, linewidth=2, title="Stoploss")
+plot(enable_takeprofit and takeprofit_input ? takeprofit_level: na, color=color.green, style=plot.style_linebr, linewidth=2, title="Profit")
+plot(both and stoploss_input and stoploss_level ? stoploss_level: na, color=color.red, style=plot.style_linebr, linewidth=2, title="Stoploss")
+plot(both and takeprofit_input ? takeprofit_level: na, color=color.green, style=plot.style_linebr, linewidth=2, title="Profit")
+
+adxlen = input(14, title="ADX Smoothing")
+dilen = input(25, title="DI Length")
+dirmov(len) =>
+	up = change(high)
+	down = -change(low)
+	truerange = rma(tr, len)
+	plus = fixnan(100 * rma(up > down and up > 0 ? up : 0, len) / truerange)
+	minus = fixnan(100 * rma(down > up and down > 0 ? down : 0, len) / truerange)
+	[plus, minus]
+
+adx(dilen, adxlen) => 
+	[plus, minus] = dirmov(dilen)
+	sum = plus + minus
+	adx = 100 * rma(abs(plus - minus) / (sum == 0 ? 1 : sum), adxlen)
+
+adxHigh(dilen, adxlen) => 
+	[plus, minus] = dirmov(dilen)
+	plus
+	
+adxLow(dilen, adxlen) => 
+	[plus, minus] = dirmov(dilen)
+	minus
+    
+adxSignal = adx(dilen, adxlen)
+plusDi = adxHigh(dilen, adxlen)
+minusDi = adxLow(dilen, adxlen)
+
+buyEntry = crossover(minusDi, plusDi)
+sellExit = crossover(plusDi, minusDi)
+
+
+// Strategy Long
+strategy.risk.allow_entry_in(strategy.direction.long)
+Long = (adxSignal > 16) and (minusDi > 4) and (buyEntry)
+Long2 = (crossover(adxSignal, 16)) and (plusDi > minusDi)
+ExitLongCondition = (adxSignal > 43) and (plusDi > 24)
+ExitLongCondition2 = crossunder(plusDi, minusDi)
+
+strategy.entry("Long", strategy.long, when = Long2, alert_message = "Buy!")
+strategy.close("Long", when = ExitLongCondition2)
+
+if enable == true
+    strategy.exit("Stop Loss", "Long", stop = stoploss_level)
+
+if enable_takeprofit == true
+    strategy.exit("TP", "Long", limit = takeprofit_level)
+    
+if both == true
+    strategy.exit("Stoploss/TP", "Long", stop = stoploss_level, limit = takeprofit_level)
