@@ -5,10 +5,10 @@ import time
 import numpy as np
 
 url = 'https://www.tradingview.com/chart/H5Sc6piM/#'  # enter your trading view profile link here.
-min_stoploss = 0
-max_stoploss = 20
-increment = 1
-take_profit_range = np.arange(min_stoploss, max_stoploss, increment)
+min_value = 0  # enter your minimum stoploss value.
+max_value = 20  # enter your maximum stoploss value.
+increment = .1  # You can increment count in decimals or in whole numbers.
+range = np.arange(min_value, max_value, increment)
 
 
 def run_script(driver):
@@ -16,23 +16,23 @@ def run_script(driver):
     wait = WebDriverWait(driver, 5)
     driver.get(url)
 
-    # Click Strategy Tester tab then extracting data from webpage.
+    # clicking Strategy Tester tab.
     click.strategy_tester()
     print("Generating Max Profit For Stop Loss.\n")
     print("Loading script...")
-    for number in take_profit_range:
+    for number in range:
         count = round(number, 2)
         try:
-            # click settings button and check duplicate values.
+            # clicking settings button.
             previous_net_profit = click.settings_button(wait)
 
-            # click stop loss input text box and enter number.
+            # clicking stop loss input text box and enter number.
             click.stoploss_input(count, wait)
 
             # extract the net profit percentage.
             current_net_profit = get.net_value(count, wait)
 
-            # check if duplicate Net Profit values.
+            # checking if duplicate Net Profit values.
             if check.duplicate(count, previous_net_profit, current_net_profit):
                 break
 
@@ -40,7 +40,7 @@ def run_script(driver):
             print("script has timed out.")
             break
 
-    # adding new take profit to your strategy.
+    # adding the new value to your strategy.
     click.settings_button(wait)
     best_key = find.best_key()
     click.stoploss_input(best_key, wait)
