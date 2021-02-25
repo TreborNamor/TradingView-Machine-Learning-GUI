@@ -1,12 +1,12 @@
 from selenium.common.exceptions import NoSuchElementException, StaleElementReferenceException, TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
-from functions import click, webdriver, show_me, get, find, check
+from functions import click, webdriver, show_me, get, find
 import time
 import numpy as np
 
 url = 'https://www.tradingview.com/chart/H5Sc6piM/#'  # enter your trading view profile link here.
-min_value = 0  # enter your minimum takeprofit value.
-max_value = 20  # enter your maximum takeprofit value.
+min_value = 0  # enter your minimum take profit value.
+max_value = 10  # enter your maximum take profit value.
 increment = .1  # You can increment count in decimals or in whole numbers.
 range = np.arange(min_value, max_value, increment)
 
@@ -16,25 +16,21 @@ def run_script(driver):
     wait = WebDriverWait(driver, 5)
     driver.get(url)
 
-    # clicking Strategy Tester tab.
     click.strategy_tester()
+    try:
+        click.overview()
+    except NoSuchElementException:
+        time.sleep(1)
+        click.overview()
+
     print("Generating Max Profit For Stop Loss.\n")
     print("Loading script...")
     for number in range:
         count = round(number, 2)
         try:
-            # clicking settings button.
-            previous_net_profit = click.settings_button(wait)
-
-            # clicking stop loss input text box and enter number.
-            click.takeprofit_input(count, wait)
-
-            # extracting the net profit percentage.
-            current_net_profit = get.net_value(count, wait)
-
-            # checking if duplicate Net Profit values.
-            if check.duplicate(count, previous_net_profit, current_net_profit):
-                break
+            click.settings_button(wait)
+            click.takeprofit_input(count, wait)  # clicking stop loss input text box and entering number.
+            get.net_value(count, wait)
 
         except (StaleElementReferenceException, TimeoutException, NoSuchElementException):
             print("script has timed out.")
@@ -47,11 +43,33 @@ def run_script(driver):
     time.sleep(.5)
 
     print("\n----------Results----------\n")
-    show_me.total_trades()
-    show_me.max_takeprofit()
-    show_me.netprofit()
-    show_me.percent_profitable()
+    click.overview()
+    show_me.best_takeprofit()
+    click.performance_summary()
+    show_me.total_closed_trades()
+    show_me.win_rate()
+    show_me.net_profit()
     show_me.max_drawdown()
+    show_me.sharpe_ratio()
+    show_me.win_loss_ratio()
+    show_me.avg_win_trade()
+    show_me.avg_loss_trade()
+    show_me.avg_bars_in_winning_trades()
+    # show_me.gross_profit()
+    # show_me.gross_loss()
+    # show_me.buy_and_hold_return()
+    # show_me.max_contracts_held()
+    # show_me.open_pl()
+    # show_me.commission_paid()
+    # show_me.total_open_trades()
+    # show_me.number_winning_trades()
+    # show_me.number_losing_trades()
+    # show_me.percent_profitable()
+    # show_me.avg_trade()
+    # show_me.largest_win_trade()
+    # show_me.largest_loss_trade()
+    # show_me.avg_bars_in_trades()
+    # show_me.avg_bars_in_losing_trades()
 
 
 if __name__ == '__main__':
