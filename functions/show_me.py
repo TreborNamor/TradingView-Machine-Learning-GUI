@@ -1,108 +1,255 @@
-from selenium import webdriver
-from webdriver_manager.firefox import GeckoDriverManager
-from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
-from selenium.webdriver.firefox.options import Options
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-import bs4
-import time
 from termcolor import colored
-
 from database.profit import profits
 from functions.webdriver import driver
 
 
-def max_stoploss():
+def best_stoploss():
     try:
-        max_stoploss = max(profits, key=profits.get)
-        max_percentage = profits[max_stoploss]
+        best_stoploss = max(profits, key=profits.get)
+        max_percentage = profits[best_stoploss]
         if max_percentage > 0:
-            print(colored(f"Max Stoploss: " + str(max_stoploss) + "%", 'green'))
+            profitable = colored(str(best_stoploss) + " %", 'green')
+            print(f"Best Stoploss: " + str(profitable))
         else:
-            print(colored(f"Max Stoploss: " + str(max_stoploss) + "%", 'red'))
-
+            profitable = colored(str(best_stoploss) + " %", 'red')
+            print(f"Best Stoploss: " + str(profitable))
     except (UnboundLocalError, ValueError):
         print("error printing stoploss.")
 
 
-def max_takeprofit():
+def best_takeprofit():
     try:
-        max_take_profit = max(profits, key=profits.get)
-        max_percentage = profits[max_take_profit]
+        best_takeprofit = max(profits, key=profits.get)
+        max_percentage = profits[best_takeprofit]
         if max_percentage > 0:
-            print(colored(f"Max Take Profit: " + str(max_take_profit) + "%", 'green'))
+            profitable = colored(str(best_takeprofit) + " %", 'green')
+            print(f"Best Take Profit: " + str(profitable))
         else:
-            print(colored(f"Max Take Profit: " + str(max_take_profit) + "%", 'red'))
-
+            profitable = colored(str(best_takeprofit) + " %", 'red')
+            print(f"Best Take Profit: " + str(profitable))
     except (UnboundLocalError, ValueError):
-        print("error printing stoploss.")
+        print("error printing take profit.")
 
 
-def netprofit():
+def net_profit():
+    net_profit = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[0].find_element_by_class_name("additional_percent_value")
     try:
-        max_stoploss = max(profits, key=profits.get)
-        max_percentage = profits[max_stoploss]
-        if max_percentage > 0:
-            print(colored(f"Net Profit: " + str(max_percentage) + "%", 'green'))
-        else:
-            print(colored(f"Net Profit: " + str(max_percentage) + "%", 'red'))
-
-    except (UnboundLocalError, ValueError):
-        print("error printing net profit.")
+        negative = net_profit.find_element_by_class_name("neg")
+        if negative:
+            display = colored(f'{net_profit.text}', 'red')
+            print(f'Net Profit: {display}')
+    except NoSuchElementException:
+        display = colored(f'{net_profit.text}', 'green')
+        print(f'Net Profit: {display}')
 
 
-def total_trades():
-    total_trades = driver.find_elements_by_xpath("//*[@class='data-item']")[1].text.split("Total Closed Trades")[0]
-    print(f"Total Trades: " + str(total_trades.replace(" ", "")), end="")
+def gross_profit():
+    gross_profit = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[1].find_element_by_class_name("additional_percent_value")
+    try:
+        negative = gross_profit.find_element_by_class_name("neg")
+        if negative:
+            display = colored(f'{gross_profit.text}', 'red')
+            print(f'Gross Profit: {display}')
+    except NoSuchElementException:
+        display = colored(f'{gross_profit.text}', 'green')
+        print(f'Gross Profit: {display}')
 
 
-def percent_profitable():
-    percent_profitable = driver.find_elements_by_xpath("//*[@class='data-item']")[2].text.split("%\n Percent "
-                                                                                                "Profitable")[0]
-    if float(percent_profitable) <= 30:
-        print(colored(f"Percent Profitable: " + str(percent_profitable) + "%", 'red'))
-    elif 49 >= float(percent_profitable) > 30:
-        print(colored(f"Percent Profitable: " + str(percent_profitable) + "%", 'yellow'))
-    else:
-        print(colored(f"Percent Profitable: " + str(percent_profitable) + "%", 'green'))
-
-
-def profit_factor():
-    profit_factor = driver.find_elements_by_xpath("//*[@class='data-item']")[3].text.split("Profit Factor")[0]
-    print(f"Profit Factor: " + str(profit_factor), end="")
+def gross_loss():
+    gross_loss = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[2].find_element_by_class_name("additional_percent_value")
+    try:
+        negative = gross_loss.find_element_by_class_name("neg")
+        if negative:
+            display = colored(f'{gross_loss.text}', 'red')
+            print(f'Gross Loss: {display}')
+    except NoSuchElementException:
+        display = colored(f'{gross_loss.text}', 'green')
+        print(f'Gross Loss: {display}')
 
 
 def max_drawdown():
+    max_drawdown = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[3].find_element_by_class_name("additional_percent_value")
     try:
-        check = driver.find_elements_by_class_name("additional_percent_value")[1]
-        check.find_element_by_xpath('./span[contains(@class, "neg")]')
-        negative = True
+        negative = max_drawdown.find_element_by_class_name("neg")
+        if negative:
+            display = colored(f'{max_drawdown.text}', 'red')
+            print(f'Max Drawdown: {display}')
     except NoSuchElementException:
-        negative = False
-    if negative:
-        max_drawdown = driver.find_elements_by_class_name("additional_percent_value")[1].text.split("Max Drawdown")[0]
-        print(colored(f'Max Drawdown: {max_drawdown}', 'red'))
-    else:
-        max_drawdown = driver.find_elements_by_class_name("additional_percent_value")[1].text.split("Max Drawdown")[0]
-        print(colored(f'Max Drawdown: {max_drawdown}', 'green'))
+        display = colored(f'{max_drawdown.text}', 'green')
+        print(f'Max Drawdown: {display}')
+
+
+def buy_and_hold_return():
+    buy_and_hold_return = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[4].find_element_by_class_name("additional_percent_value")
+    try:
+        negative = buy_and_hold_return.find_element_by_class_name("neg")
+        if negative:
+            display = colored(f'{buy_and_hold_return.text}', 'red')
+            print(f'Buy & Hold Return: {display}')
+    except NoSuchElementException:
+        display = colored(f'{buy_and_hold_return.text}', 'green')
+        print(f'Buy & Hold Return: {display}')
+
+
+def sharpe_ratio():
+    sharpe_ratio = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[5].find_elements_by_tag_name("td")[1]
+    try:
+        negative = sharpe_ratio.find_element_by_class_name("neg")
+        if negative:
+            display = colored(f'{sharpe_ratio.text}', 'red')
+            print(f'Sharpe Ratio: {display}')
+    except NoSuchElementException:
+        display = colored(f'{sharpe_ratio.text}', 'green')
+        print(f'Sharpe Ratio: {display}')
+
+
+def profit_factor():
+    profit_factor = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[6].find_elements_by_tag_name("td")[1]
+    try:
+        negative = profit_factor.find_element_by_class_name("neg")
+        if negative:
+            display = colored(f'{profit_factor.text}', 'red')
+            print(f'Profit Factor: {display}')
+    except NoSuchElementException:
+        display = colored(f'{profit_factor.text}', 'green')
+        print(f'Profit Factor: {display}')
+
+
+def max_contracts_held():
+    max_contracts_held = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[7].find_elements_by_tag_name("td")[1]
+    try:
+        negative = max_contracts_held.find_element_by_class_name("neg")
+        if negative:
+            display = colored(f'{max_contracts_held.text}', 'red')
+            print(f'Max Contracts Held: {display}')
+    except NoSuchElementException:
+        display = colored(f'{max_contracts_held.text}', 'green')
+        print(f'Max Contracts Held: {display}')
+
+
+def open_pl():
+    open_pl = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[8].find_element_by_class_name("additional_percent_value")
+    try:
+        negative = open_pl.find_element_by_class_name("neg")
+        if negative:
+            display = colored(f'{open_pl.text}', 'red')
+            print(f'Open PL: {display}')
+    except NoSuchElementException:
+        display = colored(f'{open_pl.text}', 'green')
+        print(f'Open PL: {display}')
+
+
+def commission_paid():
+    commission_paid = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[9].find_elements_by_tag_name("td")[1]
+    print(f'Commission Paid: {commission_paid.text}')
+
+
+def total_closed_trades():
+    total_closed_trades = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[10].find_elements_by_tag_name("td")[1]
+    print(f'Total Closed Trades: {total_closed_trades.text}')
+
+
+def total_open_trades():
+    total_open_trades = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[11].find_elements_by_tag_name("td")[1]
+    print(f'Total Open Trades: {total_open_trades.text}')
+
+
+def number_winning_trades():
+    number_winning_trades = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[12].find_elements_by_tag_name("td")[1]
+    print(f'Number Winning Trades: {number_winning_trades.text}')
+
+
+def number_losing_trades():
+    number_losing_trades = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[13].find_elements_by_tag_name("td")[1]
+    print(f'Number Losing Trades: {number_losing_trades.text}')
+
+
+def percent_profitable():
+    percent_profitable = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[14].find_elements_by_tag_name("td")[1]
+    print(f'Percent Profitable: {percent_profitable.text}')
 
 
 def avg_trade():
+    avg_trade = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[15].find_element_by_class_name("additional_percent_value")
     try:
-        check = driver.find_elements_by_class_name("additional_percent_value")[2]
-        check.find_element_by_xpath('./span[contains(@class, "neg")]')
-        negative = True
+        negative = avg_trade.find_element_by_class_name("neg")
+        if negative:
+            display = colored(f'{avg_trade.text}', 'red')
+            print(f'Avg Trade: {display}')
     except NoSuchElementException:
-        negative = False
-    if negative:
-        avg_trade = driver.find_elements_by_class_name("additional_percent_value")[2].text.split("Avg Trade")[0]
-        print(colored(f'Average Trade: {avg_trade}', 'red'))
-    else:
-        avg_trade = driver.find_elements_by_class_name("additional_percent_value")[2].text.split("Avg Trade")[0]
-        print(colored(f'Average Trade: {avg_trade}', 'green'))
+        display = colored(f'{avg_trade.text}', 'green')
+        print(f'Avg Trade: {display}')
 
 
-def avg_bars():
-    avg_bars = driver.find_elements_by_xpath("//*[@class='data-item']")[6].text.split("Avg # Bars in Trades")[0]
-    print(f"Average # Bars in Trades: " + str(avg_bars))
+def avg_win_trade():
+    avg_win_trade = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[16].find_element_by_class_name("additional_percent_value")
+    try:
+        negative = avg_win_trade.find_element_by_class_name("neg")
+        if negative:
+            display = colored(f'{avg_win_trade.text}', 'red')
+            print(f'Avg Win Trade: {display}')
+    except NoSuchElementException:
+        display = colored(f'{avg_win_trade.text}', 'green')
+        print(f'Avg Win Trade: {display}')
+
+
+def avg_loss_trade():
+    avg_loss_trade = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[17].find_element_by_class_name("additional_percent_value")
+    try:
+        negative = avg_loss_trade.find_element_by_class_name("neg")
+        if negative:
+            display = colored(f'{avg_loss_trade.text}', 'red')
+            print(f'Avg Loss Trade: {display}')
+    except NoSuchElementException:
+        display = colored(f'{avg_loss_trade.text}', 'green')
+        print(f'Avg Loss Trade: {display}')
+
+
+def win_loss_ratio():
+    win_loss_ratio = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[18].find_elements_by_tag_name("td")[1]
+    print(f'Win/Loss Ratio: {win_loss_ratio.text}')
+
+
+def largest_winning_trade():
+    largest_winning_trade = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[19].find_element_by_class_name("additional_percent_value")
+    try:
+        negative = largest_winning_trade.find_element_by_class_name("neg")
+        if negative:
+            display = colored(f'{largest_winning_trade.text}', 'red')
+            print(f'Largest Win Trade: {display}')
+    except NoSuchElementException:
+        display = colored(f'{largest_winning_trade.text}', 'green')
+        print(f'Largest Win Trade: {display}')
+
+
+def largest_losing_trade():
+    largest_losing_trade = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[20].find_element_by_class_name("additional_percent_value")
+    try:
+        negative = largest_losing_trade.find_element_by_class_name("neg")
+        if negative:
+            display = colored(f'{largest_losing_trade.text}', 'red')
+            print(f'Largest Loss Trade: {display}')
+    except NoSuchElementException:
+        display = colored(f'{largest_losing_trade.text}', 'green')
+        print(f'Largest Loss Trade: {display}')
+
+
+def avg_bars_in_trades():
+    avg_bars_in_trades = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[21].find_elements_by_tag_name("td")[1]
+    print(f'Avg Bars In Trades: {avg_bars_in_trades.text}')
+
+
+def avg_bars_in_winning_trades():
+    avg_bars_in_winning_trades = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[22].find_elements_by_tag_name("td")[1]
+    print(f'Avg Bars In Winning Trades: {avg_bars_in_winning_trades.text}')
+
+
+def avg_bars_in_losing_trades():
+    avg_bars_in_losing_trades = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[23].find_elements_by_tag_name("td")[1]
+    print(f'Avg Bars In Losing Trades: {avg_bars_in_losing_trades.text}')
+
+
+def win_rate():
+    win_rate = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[14].find_elements_by_tag_name("td")[1]
+    print(f'Win Rate: {win_rate.text}')
