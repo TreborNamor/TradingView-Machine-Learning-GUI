@@ -27,7 +27,7 @@ hesitate to read the source code and understand the mechanism of this bot.
 
 [TradingView_Machine Learning](https://github.com/TreborNamor/TradingView_Machine_Learning/archive/master.zip)
 
-#2. Extract And Open Folder With Pycharm.
+#2. Extract Zip File And Open The Folder With Pycharm.
 
 #3. Go to Terminal And type code below to get pip packages.
 - pip install beautifulsoup4
@@ -36,9 +36,12 @@ hesitate to read the source code and understand the mechanism of this bot.
 - pip install numpy
 - pip install termcolor
 
-#3. Go To functions folder, and click webdriver.py
-Put your firefox profile in that file to make sure Python can find your web browser.
-- profile = webdriver.FirefoxProfile(r'C:\Users\Trebor\AppData\Roaming\Mozilla\Firefox\Profiles\kwftlp36.default-release')
+#3. Go To functions folder in PyCharm, and click webdriver.py
+You'll need to put your firefox profile in that file to make sure Python can find your web browser.
+- profile = webdriver.FirefoxProfile(r'C:\Users\Robert\AppData\Roaming\Mozilla\Firefox\Profiles\kwftlp36.default-release')
+- if you need help finding firefox profile go to this website and copy the root directory folder into script.
+- it should look like this. "C:\Users\Robert\AppData\Roaming\Mozilla\Firefox\Profiles\kwftlp36.default-release"
+- [Find Profile](https://support.mozilla.org/en-US/kb/profile-manager-create-remove-switch-firefox-profiles)
 
 #4. Go To Scripts Folder
 
