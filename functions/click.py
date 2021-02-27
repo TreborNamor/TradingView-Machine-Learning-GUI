@@ -12,6 +12,8 @@ def strategy_tester():
     active = strategy_tester.get_attribute('data-active')
     if active == 'false':
         strategy_tester.click()
+    else:
+        pass
 
 
 def settings_button(wait):
@@ -26,6 +28,45 @@ def settings_button(wait):
         "apply-common-tooltip']")
     settings_button.click()
     return duplicate
+
+
+def overview():
+    strategy_tester = driver.find_elements_by_xpath("//*[@class='title-1C5azoXt']")[2]
+    active = strategy_tester.get_attribute('data-active')
+    if active == 'false':
+        strategy_tester.click()
+        time.sleep(.3)
+        overview = driver.find_element_by_class_name("report-tabs").find_elements_by_tag_name("li")[0]
+        overview.click()
+    else:
+        overview = driver.find_element_by_class_name("report-tabs").find_elements_by_tag_name("li")[0]
+        overview.click()
+
+
+def performance_summary():
+    strategy_tester = driver.find_elements_by_xpath("//*[@class='title-1C5azoXt']")[2]
+    active = strategy_tester.get_attribute('data-active')
+    if active == 'false':
+        strategy_tester.click()
+        time.sleep(.3)
+        performance_tab = driver.find_element_by_class_name("report-tabs").find_elements_by_tag_name("li")[1]
+        performance_tab.click()
+    else:
+        performance_tab = driver.find_element_by_class_name("report-tabs").find_elements_by_tag_name("li")[1]
+        performance_tab.click()
+
+
+def list_of_trades():
+    strategy_tester = driver.find_elements_by_xpath("//*[@class='title-1C5azoXt']")[2]
+    active = strategy_tester.get_attribute('data-active')
+    if active == 'false':
+        strategy_tester.click()
+        time.sleep(.3)
+        list_of_trades = driver.find_element_by_class_name("report-tabs").find_elements_by_tag_name("li")[2]
+        list_of_trades.click()
+    else:
+        list_of_trades = driver.find_element_by_class_name("report-tabs").find_elements_by_tag_name("li")[2]
+        list_of_trades.click()
 
 
 def stoploss_input(count, wait):
