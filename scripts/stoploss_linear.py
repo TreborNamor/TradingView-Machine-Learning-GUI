@@ -6,7 +6,7 @@ import numpy as np
 
 url = 'https://www.tradingview.com/chart/H5Sc6piM/#'  # enter your trading view profile link here.
 min_value = 0  # enter your minimum stop loss value.
-max_value = 10  # enter your maximum stop loss value.
+max_value = 20  # enter your maximum stop loss value.
 increment = .1  # You can increment count in decimals or in whole numbers.
 range = np.arange(min_value, max_value, increment)
 
@@ -29,9 +29,8 @@ def run_script(driver):
         count = round(number, 2)
         try:
             click.settings_button(wait)
-            click.stoploss_input(count, wait)  # clicking stop loss input text box and entering number.
-            get.net_value(count, wait)
-
+            click.stoploss_input(count, wait)
+            get.net_profit(count, wait)
         except (StaleElementReferenceException, TimeoutException, NoSuchElementException):
             print("script has timed out.")
             break
