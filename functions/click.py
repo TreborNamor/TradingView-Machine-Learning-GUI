@@ -6,9 +6,20 @@ import time
 from functions.webdriver import driver
 
 
+def settings_button(wait):
+    """click settings button."""
+    wait.until(EC.visibility_of_element_located((By.XPATH, "//*[@class='icon-button "
+                                                           "js-backtesting-open-format-dialog "
+                                                           "apply-common-tooltip']")))
+    settings_button = driver.find_element_by_xpath(
+        "//*[@class='icon-button js-backtesting-open-format-dialog "
+        "apply-common-tooltip']")
+    settings_button.click()
+
+
 def strategy_tester():
     """check if strategy tester tab is active if not click to open tab."""
-    strategy_tester = driver.find_elements_by_xpath("//*[@class='title-1C5azoXt']")[2]
+    strategy_tester = driver.find_elements_by_xpath("//*[@class='title-37voAVwR']")[2]
     active = strategy_tester.get_attribute('data-active')
     if active == 'false':
         strategy_tester.click()
@@ -16,26 +27,12 @@ def strategy_tester():
         pass
 
 
-def settings_button(wait):
-    """click settings button and check duplicate."""
-    wait.until(EC.visibility_of_element_located((By.XPATH, "//*[@class='icon-button "
-                                                           "js-backtesting-open-format-dialog "
-                                                           "apply-common-tooltip']")))
-    duplicate_check = driver.find_elements_by_class_name("additional_percent_value")[0].text.split(" %")
-    duplicate = float(duplicate_check[0])
-    settings_button = driver.find_element_by_xpath(
-        "//*[@class='icon-button js-backtesting-open-format-dialog "
-        "apply-common-tooltip']")
-    settings_button.click()
-    return duplicate
-
-
 def overview():
-    strategy_tester = driver.find_elements_by_xpath("//*[@class='title-1C5azoXt']")[2]
+    strategy_tester = driver.find_elements_by_xpath("//*[@class='title-37voAVwR']")[2]
     active = strategy_tester.get_attribute('data-active')
     if active == 'false':
         strategy_tester.click()
-        time.sleep(.3)
+        # time.sleep(.3)
         overview = driver.find_element_by_class_name("report-tabs").find_elements_by_tag_name("li")[0]
         overview.click()
     else:
@@ -44,11 +41,11 @@ def overview():
 
 
 def performance_summary():
-    strategy_tester = driver.find_elements_by_xpath("//*[@class='title-1C5azoXt']")[2]
+    strategy_tester = driver.find_elements_by_xpath("//*[@class='title-37voAVwR']")[2]
     active = strategy_tester.get_attribute('data-active')
     if active == 'false':
         strategy_tester.click()
-        time.sleep(.3)
+        # time.sleep(.3)
         performance_tab = driver.find_element_by_class_name("report-tabs").find_elements_by_tag_name("li")[1]
         performance_tab.click()
     else:
@@ -57,7 +54,7 @@ def performance_summary():
 
 
 def list_of_trades():
-    strategy_tester = driver.find_elements_by_xpath("//*[@class='title-1C5azoXt']")[2]
+    strategy_tester = driver.find_elements_by_xpath("//*[@class='title-37voAVwR']")[2]
     active = strategy_tester.get_attribute('data-active')
     if active == 'false':
         strategy_tester.click()
@@ -70,8 +67,8 @@ def list_of_trades():
 
 
 def stoploss_input(count, wait):
-    wait.until(EC.visibility_of_element_located((By.XPATH, "//*[@class='innerInput-29Ku0bwF']")))
-    stoploss_input_box = driver.find_elements_by_xpath("//*[@class='innerInput-29Ku0bwF']")[0]
+    wait.until(EC.visibility_of_element_located((By.XPATH, "//*[@class='innerInput-21h1g6jU']")))
+    stoploss_input_box = driver.find_elements_by_xpath("//*[@class='innerInput-21h1g6jU']")[0]
     stoploss_input_box.send_keys(Keys.BACK_SPACE + Keys.BACK_SPACE + Keys.BACK_SPACE + Keys.BACK_SPACE)
     stoploss_input_box.send_keys(str(count))
     stoploss_input_box.send_keys(Keys.ENTER)
@@ -80,8 +77,8 @@ def stoploss_input(count, wait):
 
 
 def takeprofit_input(count, wait):
-    wait.until(EC.visibility_of_element_located((By.XPATH, "//*[@class='innerInput-29Ku0bwF']")))
-    takeprofit_input_box = driver.find_elements_by_xpath("//*[@class='innerInput-29Ku0bwF']")[1]
+    wait.until(EC.visibility_of_element_located((By.XPATH, "//*[@class='innerInput-21h1g6jU']")))
+    takeprofit_input_box = driver.find_elements_by_xpath("//*[@class='innerInput-21h1g6jU']")[1]
     takeprofit_input_box.send_keys(Keys.BACK_SPACE + Keys.BACK_SPACE + Keys.BACK_SPACE + Keys.BACK_SPACE)
     takeprofit_input_box.send_keys(str(count))
     takeprofit_input_box.send_keys(Keys.ENTER)
@@ -90,9 +87,9 @@ def takeprofit_input(count, wait):
 
 
 def both_inputs(stoploss_value, takeprofit_value, wait):
-    wait.until(EC.visibility_of_element_located((By.XPATH, "//*[@class='innerInput-29Ku0bwF']")))
-    stoploss_input_box = driver.find_elements_by_xpath("//*[@class='innerInput-29Ku0bwF']")[0]
-    takeprofit_input_box = driver.find_elements_by_xpath("//*[@class='innerInput-29Ku0bwF']")[1]
+    wait.until(EC.visibility_of_element_located((By.XPATH, "//*[@class='innerInput-21h1g6jU']")))
+    stoploss_input_box = driver.find_elements_by_xpath("//*[@class='innerInput-21h1g6jU']")[0]
+    takeprofit_input_box = driver.find_elements_by_xpath("//*[@class='innerInput-21h1g6jU']")[1]
     stoploss_input_box.send_keys(Keys.BACK_SPACE + Keys.BACK_SPACE + Keys.BACK_SPACE + Keys.BACK_SPACE)
     stoploss_input_box.send_keys(str(stoploss_value))
     takeprofit_input_box.send_keys(Keys.BACK_SPACE + Keys.BACK_SPACE + Keys.BACK_SPACE + Keys.BACK_SPACE)
