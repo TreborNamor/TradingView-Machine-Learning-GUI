@@ -6,13 +6,13 @@ import numpy as np
 
 url = 'https://www.tradingview.com/chart/H5Sc6piM/#'  # enter your trading view profile link here.
 min_value = 0  # enter your minimum take profit value.
-max_value = 10  # enter your maximum take profit value.
+max_value = 20  # enter your maximum take profit value.
 increment = .1  # You can increment count in decimals or in whole numbers.
 range = np.arange(min_value, max_value, increment)
 
 
 def run_script(driver):
-    """find the best stop loss value."""
+    """find the best take profit value."""
     wait = WebDriverWait(driver, 5)
     driver.get(url)
 
@@ -23,15 +23,14 @@ def run_script(driver):
         time.sleep(1)
         click.overview()
 
-    print("Generating Max Profit For Stop Loss.\n")
+    print("Generating Max Profit For Take Profit.\n")
     print("Loading script...")
     for number in range:
         count = round(number, 2)
         try:
             click.settings_button(wait)
-            click.takeprofit_input(count, wait)  # clicking stop loss input text box and entering number.
-            get.net_value(count, wait)
-
+            click.takeprofit_input(count, wait)
+            get.net_profit(count, wait)
         except (StaleElementReferenceException, TimeoutException, NoSuchElementException):
             print("script has timed out.")
             break
@@ -40,7 +39,7 @@ def run_script(driver):
     click.settings_button(wait)
     best_key = find.best_key()
     click.takeprofit_input(best_key, wait)
-    time.sleep(.5)
+    time.sleep(1)
 
     print("\n----------Results----------\n")
     click.overview()
