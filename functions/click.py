@@ -1,6 +1,8 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
+from selenium.common.exceptions import NoSuchElementException, ElementNotInteractableException, TimeoutException, \
+    WebDriverException
 import time
 
 from functions.webdriver import driver
@@ -19,11 +21,14 @@ def settings_button(wait):
 
 def strategy_tester():
     """check if strategy tester tab is active if not click to open tab."""
-    strategy_tester = driver.find_elements_by_xpath("//*[@class='title-37voAVwR']")[2]
-    active = strategy_tester.get_attribute('data-active')
-    if active == 'false':
-        strategy_tester.click()
-    else:
+    try:
+        strategy_tester = driver.find_elements_by_xpath("//*[@class='title-37voAVwR']")[2]
+        active = strategy_tester.get_attribute('data-active')
+        if active == 'false':
+            strategy_tester.click()
+        else:
+            pass
+    except (NoSuchElementException, ElementNotInteractableException):
         pass
 
 
@@ -67,8 +72,8 @@ def list_of_trades():
 
 
 def stoploss_input(count, wait):
-    wait.until(EC.visibility_of_element_located((By.XPATH, "//*[@class='innerInput-21h1g6jU']")))
-    stoploss_input_box = driver.find_elements_by_xpath("//*[@class='innerInput-21h1g6jU']")[0]
+    wait.until(EC.visibility_of_element_located((By.XPATH, "//*[@class='input-kqrD3MqR with-end-slot-kqrD3MqR']")))
+    stoploss_input_box = driver.find_elements_by_xpath("//*[@class='input-kqrD3MqR with-end-slot-kqrD3MqR']")[0]
     stoploss_input_box.send_keys(Keys.BACK_SPACE + Keys.BACK_SPACE + Keys.BACK_SPACE + Keys.BACK_SPACE)
     stoploss_input_box.send_keys(str(count))
     stoploss_input_box.send_keys(Keys.ENTER)
@@ -77,8 +82,8 @@ def stoploss_input(count, wait):
 
 
 def takeprofit_input(count, wait):
-    wait.until(EC.visibility_of_element_located((By.XPATH, "//*[@class='innerInput-21h1g6jU']")))
-    takeprofit_input_box = driver.find_elements_by_xpath("//*[@class='innerInput-21h1g6jU']")[1]
+    wait.until(EC.visibility_of_element_located((By.XPATH, "//*[@class='input-kqrD3MqR with-end-slot-kqrD3MqR']")))
+    takeprofit_input_box = driver.find_elements_by_xpath("//*[@class='input-kqrD3MqR with-end-slot-kqrD3MqR']")[1]
     takeprofit_input_box.send_keys(Keys.BACK_SPACE + Keys.BACK_SPACE + Keys.BACK_SPACE + Keys.BACK_SPACE)
     takeprofit_input_box.send_keys(str(count))
     takeprofit_input_box.send_keys(Keys.ENTER)
@@ -87,9 +92,9 @@ def takeprofit_input(count, wait):
 
 
 def both_inputs(stoploss_value, takeprofit_value, wait):
-    wait.until(EC.visibility_of_element_located((By.XPATH, "//*[@class='innerInput-21h1g6jU']")))
-    stoploss_input_box = driver.find_elements_by_xpath("//*[@class='innerInput-21h1g6jU']")[0]
-    takeprofit_input_box = driver.find_elements_by_xpath("//*[@class='innerInput-21h1g6jU']")[1]
+    wait.until(EC.visibility_of_element_located((By.XPATH, "//*[@class='input-kqrD3MqR with-end-slot-kqrD3MqR']")))
+    stoploss_input_box = driver.find_elements_by_xpath("//*[@class='input-kqrD3MqR with-end-slot-kqrD3MqR']")[0]
+    takeprofit_input_box = driver.find_elements_by_xpath("//*[@class='input-kqrD3MqR with-end-slot-kqrD3MqR']")[1]
     stoploss_input_box.send_keys(Keys.BACK_SPACE + Keys.BACK_SPACE + Keys.BACK_SPACE + Keys.BACK_SPACE)
     stoploss_input_box.send_keys(str(stoploss_value))
     takeprofit_input_box.send_keys(Keys.BACK_SPACE + Keys.BACK_SPACE + Keys.BACK_SPACE + Keys.BACK_SPACE)
