@@ -32,7 +32,7 @@ hesitate to read the source code and understand the mechanism of this bot.
 #3. Go to Terminal And type code below to get pip packages.
 - pip install beautifulsoup4
 - pip install selenium
-- pip install webdriver-manager
+- pip install webdriver-manager==3.4.0
 - pip install numpy
 - pip install termcolor
 
