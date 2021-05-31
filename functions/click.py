@@ -22,7 +22,7 @@ def settings_button(wait):
 def strategy_tester():
     """check if strategy tester tab is active if not click to open tab."""
     try:
-        strategy_tester = driver.find_elements_by_xpath("//*[@class='title-37voAVwR']")[2]
+        strategy_tester = driver.find_elements_by_xpath("//*[@class='title-37voAVwR']")[3]
         active = strategy_tester.get_attribute('data-active')
         if active == 'false':
             strategy_tester.click()
@@ -33,7 +33,7 @@ def strategy_tester():
 
 
 def overview():
-    strategy_tester = driver.find_elements_by_xpath("//*[@class='title-37voAVwR']")[2]
+    strategy_tester = driver.find_elements_by_xpath("//*[@class='title-37voAVwR']")[3]
     active = strategy_tester.get_attribute('data-active')
     if active == 'false':
         strategy_tester.click()
@@ -46,7 +46,7 @@ def overview():
 
 
 def performance_summary():
-    strategy_tester = driver.find_elements_by_xpath("//*[@class='title-37voAVwR']")[2]
+    strategy_tester = driver.find_elements_by_xpath("//*[@class='title-37voAVwR']")[3]
     active = strategy_tester.get_attribute('data-active')
     if active == 'false':
         strategy_tester.click()
@@ -59,7 +59,7 @@ def performance_summary():
 
 
 def list_of_trades():
-    strategy_tester = driver.find_elements_by_xpath("//*[@class='title-37voAVwR']")[2]
+    strategy_tester = driver.find_elements_by_xpath("//*[@class='title-37voAVwR']")[3]
     active = strategy_tester.get_attribute('data-active')
     if active == 'false':
         strategy_tester.click()
