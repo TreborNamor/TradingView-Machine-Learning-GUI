@@ -28,21 +28,38 @@ def strategy_tester():
             strategy_tester.click()
         else:
             pass
-    except (NoSuchElementException, ElementNotInteractableException):
-        pass
+    except (IndexError, NoSuchElementException, ElementNotInteractableException) as error:
+        if error:
+            strategy_tester = driver.find_elements_by_xpath("//*[@class='title-37voAVwR']")[2]
+            active = strategy_tester.get_attribute('data-active')
+            if active == 'false':
+                strategy_tester.click()
 
 
 def overview():
-    strategy_tester = driver.find_elements_by_xpath("//*[@class='title-37voAVwR']")[3]
-    active = strategy_tester.get_attribute('data-active')
-    if active == 'false':
-        strategy_tester.click()
-        # time.sleep(.3)
-        overview = driver.find_element_by_class_name("report-tabs").find_elements_by_tag_name("li")[0]
-        overview.click()
-    else:
-        overview = driver.find_element_by_class_name("report-tabs").find_elements_by_tag_name("li")[0]
-        overview.click()
+    try:
+        strategy_tester = driver.find_elements_by_xpath("//*[@class='title-37voAVwR']")[3]
+        active = strategy_tester.get_attribute('data-active')
+        if active == 'false':
+            strategy_tester.click()
+            # time.sleep(.3)
+            overview = driver.find_element_by_class_name("report-tabs").find_elements_by_tag_name("li")[0]
+            overview.click()
+        else:
+            overview = driver.find_element_by_class_name("report-tabs").find_elements_by_tag_name("li")[0]
+            overview.click()
+    except (IndexError, NoSuchElementException, ElementNotInteractableException) as error:
+        if error:
+            strategy_tester = driver.find_elements_by_xpath("//*[@class='title-37voAVwR']")[2]
+            active = strategy_tester.get_attribute('data-active')
+            if active == 'false':
+                strategy_tester.click()
+                # time.sleep(.3)
+                overview = driver.find_element_by_class_name("report-tabs").find_elements_by_tag_name("li")[0]
+                overview.click()
+            else:
+                overview = driver.find_element_by_class_name("report-tabs").find_elements_by_tag_name("li")[0]
+                overview.click()
 
 
 def performance_summary():
