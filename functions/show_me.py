@@ -2,7 +2,7 @@ from selenium.common.exceptions import NoSuchElementException
 from termcolor import colored
 from database.profit import profits
 from functions.webdriver import driver
-
+from functions import find
 
 def best_stoploss():
     try:
@@ -30,6 +30,17 @@ def best_takeprofit():
             print(f"Best Take Profit: " + str(profitable))
     except (UnboundLocalError, ValueError):
         print("error printing take profit.")
+
+
+def best_both():
+    try:
+        best_key = find.best_key_both()
+        best_stoploss = profits[best_key][1]
+        best_takeprofit = profits[best_key][3]
+        print(f"Best Stop Loss: {best_stoploss}")
+        print(f"Best Take Profit: {best_takeprofit}\n")
+    except (UnboundLocalError, ValueError):
+        print("error printing stoploss.")
 
 
 def net_profit():
@@ -104,8 +115,20 @@ def sharpe_ratio():
         print(f'Sharpe Ratio: {display}')
 
 
+def sortino_ratio():
+    sortino_ratio = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[6].find_elements_by_tag_name("td")[1]
+    try:
+        negative = sortino_ratio.find_element_by_class_name("neg")
+        if negative:
+            display = colored(f'{sortino_ratio.text}', 'red')
+            print(f'Sortino Ratio: {display}')
+    except NoSuchElementException:
+        display = colored(f'{sortino_ratio.text}', 'green')
+        print(f'Sortino Ratio: {display}')
+
+
 def profit_factor():
-    profit_factor = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[6].find_elements_by_tag_name("td")[1]
+    profit_factor = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[7].find_elements_by_tag_name("td")[1]
     try:
         negative = profit_factor.find_element_by_class_name("neg")
         if negative:
@@ -117,7 +140,7 @@ def profit_factor():
 
 
 def max_contracts_held():
-    max_contracts_held = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[7].find_elements_by_tag_name("td")[1]
+    max_contracts_held = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[8].find_elements_by_tag_name("td")[1]
     try:
         negative = max_contracts_held.find_element_by_class_name("neg")
         if negative:
@@ -129,7 +152,7 @@ def max_contracts_held():
 
 
 def open_pl():
-    open_pl = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[8].find_element_by_class_name("additional_percent_value")
+    open_pl = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[9].find_element_by_class_name("additional_percent_value")
     try:
         negative = open_pl.find_element_by_class_name("neg")
         if negative:
@@ -141,37 +164,37 @@ def open_pl():
 
 
 def commission_paid():
-    commission_paid = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[9].find_elements_by_tag_name("td")[1]
+    commission_paid = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[10].find_elements_by_tag_name("td")[1]
     print(f'Commission Paid: {commission_paid.text}')
 
 
 def total_closed_trades():
-    total_closed_trades = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[10].find_elements_by_tag_name("td")[1]
+    total_closed_trades = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[11].find_elements_by_tag_name("td")[1]
     print(f'Total Closed Trades: {total_closed_trades.text}')
 
 
 def total_open_trades():
-    total_open_trades = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[11].find_elements_by_tag_name("td")[1]
+    total_open_trades = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[12].find_elements_by_tag_name("td")[1]
     print(f'Total Open Trades: {total_open_trades.text}')
 
 
 def number_winning_trades():
-    number_winning_trades = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[12].find_elements_by_tag_name("td")[1]
+    number_winning_trades = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[13].find_elements_by_tag_name("td")[1]
     print(f'Number Winning Trades: {number_winning_trades.text}')
 
 
 def number_losing_trades():
-    number_losing_trades = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[13].find_elements_by_tag_name("td")[1]
+    number_losing_trades = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[14].find_elements_by_tag_name("td")[1]
     print(f'Number Losing Trades: {number_losing_trades.text}')
 
 
 def percent_profitable():
-    percent_profitable = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[14].find_elements_by_tag_name("td")[1]
+    percent_profitable = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[15].find_elements_by_tag_name("td")[1]
     print(f'Percent Profitable: {percent_profitable.text}')
 
 
 def avg_trade():
-    avg_trade = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[15].find_element_by_class_name("additional_percent_value")
+    avg_trade = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[16].find_element_by_class_name("additional_percent_value")
     try:
         negative = avg_trade.find_element_by_class_name("neg")
         if negative:
@@ -183,7 +206,7 @@ def avg_trade():
 
 
 def avg_win_trade():
-    avg_win_trade = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[16].find_element_by_class_name("additional_percent_value")
+    avg_win_trade = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[17].find_element_by_class_name("additional_percent_value")
     try:
         negative = avg_win_trade.find_element_by_class_name("neg")
         if negative:
@@ -195,7 +218,7 @@ def avg_win_trade():
 
 
 def avg_loss_trade():
-    avg_loss_trade = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[17].find_element_by_class_name("additional_percent_value")
+    avg_loss_trade = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[18].find_element_by_class_name("additional_percent_value")
     try:
         negative = avg_loss_trade.find_element_by_class_name("neg")
         if negative:
@@ -207,12 +230,12 @@ def avg_loss_trade():
 
 
 def win_loss_ratio():
-    win_loss_ratio = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[18].find_elements_by_tag_name("td")[1]
+    win_loss_ratio = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[19].find_elements_by_tag_name("td")[1]
     print(f'Win/Loss Ratio: {win_loss_ratio.text}')
 
 
 def largest_winning_trade():
-    largest_winning_trade = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[19].find_element_by_class_name("additional_percent_value")
+    largest_winning_trade = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[20].find_element_by_class_name("additional_percent_value")
     try:
         negative = largest_winning_trade.find_element_by_class_name("neg")
         if negative:
@@ -224,7 +247,7 @@ def largest_winning_trade():
 
 
 def largest_losing_trade():
-    largest_losing_trade = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[20].find_element_by_class_name("additional_percent_value")
+    largest_losing_trade = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[21].find_element_by_class_name("additional_percent_value")
     try:
         negative = largest_losing_trade.find_element_by_class_name("neg")
         if negative:
@@ -236,20 +259,25 @@ def largest_losing_trade():
 
 
 def avg_bars_in_trades():
-    avg_bars_in_trades = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[21].find_elements_by_tag_name("td")[1]
+    avg_bars_in_trades = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[22].find_elements_by_tag_name("td")[1]
     print(f'Avg Bars In Trades: {avg_bars_in_trades.text}')
 
 
 def avg_bars_in_winning_trades():
-    avg_bars_in_winning_trades = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[22].find_elements_by_tag_name("td")[1]
+    avg_bars_in_winning_trades = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[23].find_elements_by_tag_name("td")[1]
     print(f'Avg Bars In Winning Trades: {avg_bars_in_winning_trades.text}')
 
 
 def avg_bars_in_losing_trades():
-    avg_bars_in_losing_trades = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[23].find_elements_by_tag_name("td")[1]
+    avg_bars_in_losing_trades = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[24].find_elements_by_tag_name("td")[1]
     print(f'Avg Bars In Losing Trades: {avg_bars_in_losing_trades.text}')
 
 
+def margin_calls():
+    margin_calls = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[25].find_elements_by_tag_name("td")[1]
+    print(f'Avg Bars In Losing Trades: {margin_calls.text}')
+
+
 def win_rate():
-    win_rate = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[14].find_elements_by_tag_name("td")[1]
+    win_rate = driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[15].find_elements_by_tag_name("td")[1]
     print(f'Win Rate: {win_rate.text}')
