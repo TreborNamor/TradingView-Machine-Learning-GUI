@@ -9,13 +9,16 @@ from functions.webdriver import driver
 
 def settings_button(wait):
     """click settings button."""
-    wait.until(EC.visibility_of_element_located((By.XPATH, "//*[@class='icon-button "
-                                                           "js-backtesting-open-format-dialog "
-                                                           "apply-common-tooltip']")))
-    settings_button = driver.find_element_by_xpath(
-        "//*[@class='icon-button js-backtesting-open-format-dialog "
-        "apply-common-tooltip']")
-    settings_button.click()
+    try:
+        wait.until(EC.visibility_of_element_located((By.XPATH, "//*[@class='icon-button "
+                                                               "js-backtesting-open-format-dialog "
+                                                               "apply-common-tooltip']")))
+        settings_button = driver.find_element_by_xpath(
+            "//*[@class='icon-button js-backtesting-open-format-dialog "
+            "apply-common-tooltip']")
+        settings_button.click()
+    except AttributeError:
+        pass
 
 
 def strategy_tester():
