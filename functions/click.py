@@ -1,8 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
-from selenium.common.exceptions import NoSuchElementException, ElementNotInteractableException, TimeoutException, \
-    WebDriverException
+from selenium.common.exceptions import NoSuchElementException, ElementNotInteractableException
 import time
 
 from functions.webdriver import driver
@@ -22,70 +21,72 @@ def settings_button(wait):
 def strategy_tester():
     """check if strategy tester tab is active if not click to open tab."""
     try:
-        strategy_tester = driver.find_elements_by_xpath("//*[@class='title-37voAVwR']")[3]
-        active = strategy_tester.get_attribute('data-active')
-        if active == 'false':
-            strategy_tester.click()
-        else:
-            pass
-    except (IndexError, NoSuchElementException, ElementNotInteractableException) as error:
-        if error:
-            strategy_tester = driver.find_elements_by_xpath("//*[@class='title-37voAVwR']")[2]
-            active = strategy_tester.get_attribute('data-active')
-            if active == 'false':
-                strategy_tester.click()
+        strategy_tester_tab = driver.find_elements_by_xpath("//*[@class='title-37voAVwR']")
+        for index, web_element in enumerate(strategy_tester_tab):
+            if web_element.text == 'Strategy Tester':
+                active_tab = strategy_tester_tab[index].get_attribute('data-active')
+                if active_tab == 'false':
+                    strategy_tester_tab[index].click()
+                break
+    except (IndexError, NoSuchElementException, ElementNotInteractableException):
+        print("Could Not Click Strategy Tester Tab. Please Check web element XPATH.")
 
 
 def overview():
     try:
-        strategy_tester = driver.find_elements_by_xpath("//*[@class='title-37voAVwR']")[3]
-        active = strategy_tester.get_attribute('data-active')
-        if active == 'false':
-            strategy_tester.click()
-            # time.sleep(.3)
-            overview = driver.find_element_by_class_name("report-tabs").find_elements_by_tag_name("li")[0]
-            overview.click()
-        else:
-            overview = driver.find_element_by_class_name("report-tabs").find_elements_by_tag_name("li")[0]
-            overview.click()
-    except (IndexError, NoSuchElementException, ElementNotInteractableException) as error:
-        if error:
-            strategy_tester = driver.find_elements_by_xpath("//*[@class='title-37voAVwR']")[2]
-            active = strategy_tester.get_attribute('data-active')
-            if active == 'false':
-                strategy_tester.click()
-                # time.sleep(.3)
-                overview = driver.find_element_by_class_name("report-tabs").find_elements_by_tag_name("li")[0]
-                overview.click()
-            else:
-                overview = driver.find_element_by_class_name("report-tabs").find_elements_by_tag_name("li")[0]
-                overview.click()
+        strategy_tester_tab = driver.find_elements_by_xpath("//*[@class='title-37voAVwR']")
+        for index, web_element in enumerate(strategy_tester_tab):
+            if web_element.text == 'Strategy Tester':
+                active_tab = strategy_tester_tab[index].get_attribute('data-active')
+                if active_tab == 'false':
+                    strategy_tester_tab[index].click()
+                    # time.sleep(.3)
+                    overview = driver.find_element_by_class_name("report-tabs").find_elements_by_tag_name("li")[0]
+                    overview.click()
+                else:
+                    overview = driver.find_element_by_class_name("report-tabs").find_elements_by_tag_name("li")[0]
+                    overview.click()
+                break
+    except (IndexError, NoSuchElementException, ElementNotInteractableException):
+        print("Could Not Click Strategy Tester Tab. Please Check web element XPATH.")
 
 
 def performance_summary():
-    strategy_tester = driver.find_elements_by_xpath("//*[@class='title-37voAVwR']")[3]
-    active = strategy_tester.get_attribute('data-active')
-    if active == 'false':
-        strategy_tester.click()
-        # time.sleep(.3)
-        performance_tab = driver.find_element_by_class_name("report-tabs").find_elements_by_tag_name("li")[1]
-        performance_tab.click()
-    else:
-        performance_tab = driver.find_element_by_class_name("report-tabs").find_elements_by_tag_name("li")[1]
-        performance_tab.click()
+    try:
+        strategy_tester_tab = driver.find_elements_by_xpath("//*[@class='title-37voAVwR']")
+        for index, web_element in enumerate(strategy_tester_tab):
+            if web_element.text == 'Strategy Tester':
+                active_tab = strategy_tester_tab[index].get_attribute('data-active')
+                if active_tab == 'false':
+                    strategy_tester_tab[index].click()
+                    # time.sleep(.3)
+                    performance_tab = driver.find_elements_by_class_name("report-tabs").find_elements_by_tag_name("li")[1]
+                    performance_tab.click()
+                else:
+                    performance_tab = driver.find_element_by_class_name("report-tabs").find_elements_by_tag_name("li")[1]
+                    performance_tab.click()
+                break
+    except (IndexError, NoSuchElementException, ElementNotInteractableException):
+        print("Could Not Click Strategy Tester Tab. Please Check web element XPATH.")
 
 
 def list_of_trades():
-    strategy_tester = driver.find_elements_by_xpath("//*[@class='title-37voAVwR']")[3]
-    active = strategy_tester.get_attribute('data-active')
-    if active == 'false':
-        strategy_tester.click()
-        time.sleep(.3)
-        list_of_trades = driver.find_element_by_class_name("report-tabs").find_elements_by_tag_name("li")[2]
-        list_of_trades.click()
-    else:
-        list_of_trades = driver.find_element_by_class_name("report-tabs").find_elements_by_tag_name("li")[2]
-        list_of_trades.click()
+    try:
+        strategy_tester_tab = driver.find_elements_by_xpath("//*[@class='title-37voAVwR']")
+        for index, web_element in enumerate(strategy_tester_tab):
+            if web_element.text == 'Strategy Tester':
+                active_tab = strategy_tester_tab[index].get_attribute('data-active')
+                if active_tab == 'false':
+                    strategy_tester_tab[index].click()
+                    # time.sleep(.3)
+                    list_of_trades = driver.find_element_by_class_name("report-tabs").find_elements_by_tag_name("li")[2]
+                    list_of_trades.click()
+                else:
+                    list_of_trades = driver.find_element_by_class_name("report-tabs").find_elements_by_tag_name("li")[2]
+                    list_of_trades.click()
+                break
+    except (IndexError, NoSuchElementException, ElementNotInteractableException):
+        print("Could Not Click Strategy Tester Tab. Please Check web element XPATH.")
 
 
 def stoploss_input(count, wait):
