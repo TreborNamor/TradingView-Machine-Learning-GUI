@@ -1,89 +1,80 @@
 // @version=4
 // This source code is subject to the terms of the Mozilla Public License 2.0 at https://mozilla.org/MPL/2.0/
-// © Bunghole 2020
-strategy(default_qty_type = strategy.percent_of_equity, default_qty_value = 100, pyramiding = 0, title="MACD Long Strategy", overlay=true, shorttitle="MACD Long Strategy", currency = 'USD', initial_capital = 100000)
+// © Bunghole 2021
+
+strategy(title="MACD Long Strategy", initial_capital = 100000, default_qty_type = strategy.percent_of_equity, default_qty_value = 100, pyramiding = 0, currency = 'USD')
+
+//// Stoploss and Take Profit Parameters
+// Enable Long Strategy
+enable_long_strategy = input(true, title="Enable Long Strategy", group="SL/TP For Long Strategy",inline="1")
+long_stoploss_value = input(defval=50, title='Stoploss %', type=input.float, minval=0, group="SL/TP For Long Strategy",inline="2")
+long_stoploss_percentage = (close * (long_stoploss_value / 100)) / syminfo.mintick
+long_takeprofit_value = input(defval=50, title='Take Profit %', type=input.float, minval=0, group="SL/TP For Long Strategy",inline="2")
+long_takeprofit_percentage = (close * (long_takeprofit_value / 100)) / syminfo.mintick
+
+// Enable Short Strategy
+enable_short_strategy = input(true, title="Enable Short Strategy", group="SL/TP For Short Strategy",inline="3")
+short_stoploss_value = input(defval=50, title='Stoploss %', type=input.float, minval=0, group= "SL/TP For Short Strategy",inline="4")
+short_stoploss_percentage = (close * (short_stoploss_value / 100)) / syminfo.mintick
+short_takeprofit_value = input(defval=50, title='Take Profit %', type=input.float, minval=0, group="SL/TP For Short Strategy",inline="4")
+short_takeprofit_percentage = (close * (short_takeprofit_value / 100)) / syminfo.mintick
 
 
-// Stoploss and Profits Inputs
-enable = input(false, title="Enable Just a Stoploss Level?")
-enable_takeprofit = input(false, title="Enable Just a Profit Level?")
-both = input(false, title="Enable Both?(If enabled, please disable upper boxes stoploss and profit.)")
-stoploss_input = input(1.0, title='Stop Loss %', type=input.float, minval=0)/100
-takeprofit_input = input(2.0, title='Take Profit %', type=input.float, minval=0)/100
-stoploss_level = strategy.position_avg_price * (1 - stoploss_input)
-takeprofit_level = strategy.position_avg_price * (1 + takeprofit_input)
-plot(enable and stoploss_input and stoploss_level ? stoploss_level: na, color=color.red, style=plot.style_linebr, linewidth=2, title="Stoploss")
-plot(enable_takeprofit and takeprofit_input ? takeprofit_level: na, color=color.green, style=plot.style_linebr, linewidth=2, title="Profit")
-plot(both and stoploss_input and stoploss_level ? stoploss_level: na, color=color.red, style=plot.style_linebr, linewidth=2, title="Stoploss")
-plot(both and takeprofit_input ? takeprofit_level: na, color=color.green, style=plot.style_linebr, linewidth=2, title="Profit")
+//// Indicator Inputs
+// RSI
+rsi_over_sold = input(defval=30, minval=1, title="Over Sold Level", group="RSI")
+rsi_over_bought = input(defval=70, minval=1, title="Over Bought Level", group="RSI")
+rsi_length = input(defval=14, minval=1, title="RSI Length", group="RSI")
+rsi = rsi(close, rsi_length)
 
-// RSI INPUTS
-RSIOverSold = input(30, minval=1, title="RSI Over Sold Level")
-RSIOverBought = input(70, minval=1, title="RSI Over Bought Level")
-src = close
-len = input(14, minval=1, title="RSI Line Length")
-up = rma(max(change(src), 0), len)
-down = rma(-min(change(src), 0), len)
-rsi = down == 0 ? 100 : up == 0 ? 0 : 100 - 100 / (1 + up / down)
-wasOversold = rsi[0] <= RSIOverSold or rsi[1] <= RSIOverSold or rsi[2] <= RSIOverSold or rsi[3] <= RSIOverSold or rsi[4] <= RSIOverSold or rsi[5] <= RSIOverSold
-wasOverbought = rsi[0] >= RSIOverBought or rsi[1] >= RSIOverBought or rsi[2] >= RSIOverBought or rsi[3] >= RSIOverBought or rsi[4] >= RSIOverBought or rsi[5] >= RSIOverBought
+// MACD
+fast_ma = input(defval=12, minval=1, title="FastMA Length", type=input.integer, group="MACD")
+slow_ma = input(defval=26, minval=1, title="SlowMA Length", type=input.integer, group="MACD")
+signal_length = input(defval=9, minval=1, title="Signal Length", type=input.integer, group="MACD")
+[macd_line, signal_line, hist_line] = macd(close, fast_ma, slow_ma, signal_length)
 
+// EMA
+a = input(false, title="Enable EMA Length", group="EMA", inline="1")
+b = input(false, title="Enable EMA Length", group="EMA", inline="2")
+c = input(false, title="Enable EMA Length", group="EMA", inline="3")
+d = input(false, title="Enable EMA Length", group="EMA", inline="4")
+e = input(false, title="Enable EMA Length", group="EMA", inline="5")
+lena = input(9, minval=1, title="-", group="EMA", inline="1")
+lenb = input(21, minval=1, title="-", group="EMA", inline="2")
+lenc = input(50, minval=1, title="-", group="EMA", inline="3")
+lend = input(100, minval=1, title="-", group="EMA", inline="4")
+lene = input(200, minval=1, title="-", group="EMA", inline="5")
+outa = ema(close, lena)
+outb = ema(close, lenb)
+outc = ema(close, lenc)
+outd = ema(close, lend)
+oute = ema(close, lene)
 
-// MACD INPUTS
-FastMA = input(title="MACD FastMA", type=input.integer, defval=12)
-SlowMA = input(title="MACD SlowMA", type=input.integer, defval=26)
-Signal = input(title="MACD Signal Line", type=input.integer, minval = 1, maxval = 50, defval = 9)
-Source = input(title="Source", type=input.source, defval=close)
-[currMacd, _, _] = macd(close[0], FastMA, SlowMA, Signal)
-[prevMacd, _, _] = macd(close[1], FastMA, SlowMA, Signal)
-signal = ema(currMacd, 9)
-avg_1 = avg(currMacd, signal)
-crossoverBear = cross(currMacd, signal) and currMacd < signal ? avg_1 : na
-avg_2 = avg(currMacd, signal)
-crossoverBull = cross(currMacd, signal) and currMacd > signal ? avg_2 : na
-
-
-// EMA INPUTS
-a = input(false, title="Enable EMA 1")
-b = input(false, title="Enable EMA 2")
-c = input(false, title="Enable EMA 3")
-d = input(false, title="Enable EMA 4")
-e = input(false, title="Enable EMA 5")
-lena = input(9, minval=1, title="Length EMA 1")
-srca = input(close, title="Source EMA 1")
-lenb = input(21, minval=1, title="Length EMA 2")
-srcb = input(close, title="Source EMA 2")
-lenc = input(50, minval=1, title="Length EMA 3")
-srcc = input(close, title="Source EMA 3")
-lend = input(100, minval=1, title="Length EMA 4")
-srcd = input(close, title="Source EMA 4")
-lene = input(200, minval=1, title="Length EMA 5")
-srce = input(close, title="Source EMA 5")
-outa = ema(srca, lena)
-outb = ema(srcb, lenb)
-outc = ema(srcc, lenc)
-outd = ema(srcd, lend)
-oute = ema(srce, lene)
+//EMA Plots
 plot(a and outa ? outa: na, title="EMA 1", color=color.yellow)
 plot(b and outb ? outb: na, title="EMA 2", color=color.teal)
 plot(c and outc ? outc: na, title="EMA 3", color=color.orange)
 plot(d and outd ? outd: na, title="EMA 4", color=color.green, linewidth=2)
 plot(e and oute ? oute: na, title="EMA 5", color=color.blue, linewidth=2)
 
-// Strategy Long
-strategy.risk.allow_entry_in(strategy.direction.long)
-Long = wasOversold and crossoverBull
-exitLong = wasOverbought and crossoverBear
 
-strategy.entry("Long", strategy.long, when = Long, alert_message = "Buy!")
-strategy.close("Long", when = exitLong)
-if enable == true
-    strategy.exit("Stop Loss", "Long", stop = stoploss_level)
-if enable_takeprofit == true
-    strategy.exit("TP", "Long", limit = takeprofit_level)
-if both == true
-    strategy.exit("Stoploss/TP", "Long", stop = stoploss_level, limit = takeprofit_level)
+//// Strategy
+// Creating Long and Short Strategy
+was_over_sold =  barssince(rsi <= rsi_over_sold) <= 10
+was_over_bought = barssince(rsi >= rsi_over_bought) <= 10
+crossover_bull = crossover(macd_line, signal_line)
+crossover_bear = crossunder(signal_line, macd_line)
+buy_signal = was_over_sold and crossover_bull
+sell_signal = was_over_bought and crossover_bear
 
+// Long Strategy
+if buy_signal and enable_long_strategy == true
+    strategy.entry("Long", true, when=buy_signal, alert_message="Open Long Position")
+    strategy.exit("Long  SL/TP", from_entry="Long", loss=long_stoploss_percentage, profit=long_takeprofit_percentage, alert_message="Your Long SL/TP Limit As Been Triggered.")
+    strategy.close("Long", when=sell_signal, alert_message="Close Long Position")
 
-alertcondition(Long, title='Enter MACD/RSI Long', message='Enter Trade!')
-alertcondition(exitLong, title='Exit MACD/RSI', message='Time to exit trade!')
+// Short Strategy
+if sell_signal and enable_short_strategy == true
+    strategy.entry("Short", false, when = sell_signal, alert_message="Open Short Position")
+    strategy.exit("Short SL/TP", from_entry="Short", loss=short_stoploss_percentage, profit=short_takeprofit_percentage, alert_message="Your Short SL/TP Limit As Been Triggered.")
+    strategy.close("Short", when=buy_signal, alert_message="Close Short Position")
