@@ -1,22 +1,22 @@
 // @version=4
 // This source code is subject to the terms of the Mozilla Public License 2.0 at https://mozilla.org/MPL/2.0/
 // © Bunghole 2021
-strategy(title="MACD Long Strategy", initial_capital = 100000, default_qty_type = strategy.percent_of_equity, default_qty_value = 100, pyramiding = 0, currency = 'USD')
+strategy(title="MACD Long Strategy", initial_capital = 100000, default_qty_type = strategy.percent_of_equity, default_qty_value = 100, pyramiding = 0, currency = 'USD', overlay=true)
 
 
 //// Stoploss and Take Profit Parameters
 // Enable Long Strategy
 enable_long_strategy = input(true, title="Enable Long Strategy", group="SL/TP For Long Strategy",inline="1")
-long_stoploss_value = input(defval=50, title='Stoploss %', type=input.float, minval=0, group="SL/TP For Long Strategy",inline="2")
+long_stoploss_value = input(defval=50, title='Stoploss %', type=input.float, minval=0.1, group="SL/TP For Long Strategy",inline="2")
 long_stoploss_percentage = (close * (long_stoploss_value / 100)) / syminfo.mintick
-long_takeprofit_value = input(defval=50, title='Take Profit %', type=input.float, minval=0, group="SL/TP For Long Strategy",inline="2")
+long_takeprofit_value = input(defval=50, title='Take Profit %', type=input.float, minval=0.1, group="SL/TP For Long Strategy",inline="2")
 long_takeprofit_percentage = (close * (long_takeprofit_value / 100)) / syminfo.mintick
 
 // Enable Short Strategy
 enable_short_strategy = input(true, title="Enable Short Strategy", group="SL/TP For Short Strategy",inline="3")
-short_stoploss_value = input(defval=50, title='Stoploss %', type=input.float, minval=0, group= "SL/TP For Short Strategy",inline="4")
+short_stoploss_value = input(defval=50, title='Stoploss %', type=input.float, minval=0.1, group= "SL/TP For Short Strategy",inline="4")
 short_stoploss_percentage = (close * (short_stoploss_value / 100)) / syminfo.mintick
-short_takeprofit_value = input(defval=50, title='Take Profit %', type=input.float, minval=0, group="SL/TP For Short Strategy",inline="4")
+short_takeprofit_value = input(defval=50, title='Take Profit %', type=input.float, minval=0.1, group="SL/TP For Short Strategy",inline="4")
 short_takeprofit_percentage = (close * (short_takeprofit_value / 100)) / syminfo.mintick
 
 // Date Range
