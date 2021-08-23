@@ -4,6 +4,7 @@ from database.profit import profits
 from functions.webdriver import driver
 from functions import find
 
+
 def best_stoploss():
     try:
         best_stoploss = max(profits, key=profits.get)
@@ -39,6 +40,21 @@ def best_both():
         best_takeprofit = profits[best_key][3]
         print(f"Best Stop Loss: {best_stoploss}")
         print(f"Best Take Profit: {best_takeprofit}\n")
+    except (UnboundLocalError, ValueError):
+        print("error printing stoploss.")
+
+
+def best_all():
+    try:
+        best_key = find.best_key_both()
+        best_long_stoploss = profits[best_key][1]
+        best_long_takeprofit = profits[best_key][3]
+        best_short_stoploss = profits[best_key][5]
+        best_short_takeprofit = profits[best_key][7]
+        print(f"Best Long Stop Loss: {best_long_stoploss}")
+        print(f"Best Long Take Profit: {best_long_takeprofit}")
+        print(f"Best Short Stop Loss: {best_short_stoploss}")
+        print(f"Best Short Take Profit: {best_short_takeprofit}\n")
     except (UnboundLocalError, ValueError):
         print("error printing stoploss.")
 
