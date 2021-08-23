@@ -2,23 +2,35 @@
 // This source code is subject to the terms of the Mozilla Public License 2.0 at https://mozilla.org/MPL/2.0/
 // © Bunghole 2020
 
-strategy(default_qty_type = strategy.percent_of_equity, default_qty_value = 100, pyramiding = 0, title="ADX Long Strategy", overlay=true, shorttitle="ADX Long Strategy", currency = 'USD', initial_capital = 100000)
+strategy(title="ADX Long Strategy", initial_capital = 100000, default_qty_type = strategy.percent_of_equity, default_qty_value = 100, pyramiding = 0, currency = 'USD', overlay=true)
 
-// Stoploss and Profits Inputs
-enable = input(false, title="Enable Just a Stoploss Level?")
-enable_takeprofit = input(false, title="Enable Just a Profit Level?")
-both = input(false, title="Enable Both?(If enabled, please disable upper boxes stoploss and profit.)")
-stoploss_input = input(1.0, title='Stop Loss %', type=input.float, minval=0)/100
-takeprofit_input = input(2.0, title='Take Profit %', type=input.float, minval=0)/100
+//// Stoploss and Take Profit Parameters
+// Enable Long Strategy
+enable_long_strategy = input(true, title="Enable Long Strategy", group="SL/TP For Long Strategy",inline="1")
+long_stoploss_value = input(defval=50, title='Stoploss %', type=input.float, minval=0.1, group="SL/TP For Long Strategy",inline="2")
+long_stoploss_percentage = (close * (long_stoploss_value / 100)) / syminfo.mintick
+long_takeprofit_value = input(defval=50, title='Take Profit %', type=input.float, minval=0.1, group="SL/TP For Long Strategy",inline="2")
+long_takeprofit_percentage = (close * (long_takeprofit_value / 100)) / syminfo.mintick
+
+// Enable Short Strategy
+enable_short_strategy = input(true, title="Enable Short Strategy", group="SL/TP For Short Strategy",inline="3")
+short_stoploss_value = input(defval=50, title='Stoploss %', type=input.float, minval=0.1, group= "SL/TP For Short Strategy",inline="4")
+short_stoploss_percentage = (close * (short_stoploss_value / 100)) / syminfo.mintick
+short_takeprofit_value = input(defval=50, title='Take Profit %', type=input.float, minval=0.1, group="SL/TP For Short Strategy",inline="4")
+short_takeprofit_percentage = (close * (short_takeprofit_value / 100)) / syminfo.mintick
+
+// Date Range
+start_date = input(title="Start Date", type=input.integer, defval=1, minval=1, maxval=31)
+start_month = input(title="Start Month", type=input.integer, defval=1, minval=1, maxval=12)
+start_year = input(title="Start Year", type=input.integer, defval=1804, minval=1800, maxval=3000)
+end_date = input(title="End Date", type=input.integer, defval=1, minval=1, maxval=31)
+end_month = input(title="End Month", type=input.integer, defval=1, minval=1, maxval=12)
+end_year = input(title="End Year", type=input.integer, defval=2077, minval=1800, maxval=3000)
+in_date_range = (time >= timestamp(syminfo.timezone, start_year, start_month, start_date, 0, 0)) and (time < timestamp(syminfo.timezone, end_year, end_month, end_date, 0, 0))
 
 
-stoploss_level = strategy.position_avg_price * (1 - stoploss_input)
-takeprofit_level = strategy.position_avg_price * (1 + takeprofit_input)
-plot(enable and stoploss_input and stoploss_level ? stoploss_level: na, color=color.red, style=plot.style_linebr, linewidth=2, title="Stoploss")
-plot(enable_takeprofit and takeprofit_input ? takeprofit_level: na, color=color.green, style=plot.style_linebr, linewidth=2, title="Profit")
-plot(both and stoploss_input and stoploss_level ? stoploss_level: na, color=color.red, style=plot.style_linebr, linewidth=2, title="Stoploss")
-plot(both and takeprofit_input ? takeprofit_level: na, color=color.green, style=plot.style_linebr, linewidth=2, title="Profit")
-
+//// Indicators
+// ADX
 adxlen = input(14, title="ADX Smoothing")
 dilen = input(25, title="DI Length")
 dirmov(len) =>
@@ -28,43 +40,37 @@ dirmov(len) =>
 	plus = fixnan(100 * rma(up > down and up > 0 ? up : 0, len) / truerange)
 	minus = fixnan(100 * rma(down > up and down > 0 ? down : 0, len) / truerange)
 	[plus, minus]
-
 adx(dilen, adxlen) => 
 	[plus, minus] = dirmov(dilen)
 	sum = plus + minus
 	adx = 100 * rma(abs(plus - minus) / (sum == 0 ? 1 : sum), adxlen)
-
 adxHigh(dilen, adxlen) => 
 	[plus, minus] = dirmov(dilen)
 	plus
-	
 adxLow(dilen, adxlen) => 
 	[plus, minus] = dirmov(dilen)
 	minus
-    
 adxSignal = adx(dilen, adxlen)
 plusDi = adxHigh(dilen, adxlen)
 minusDi = adxLow(dilen, adxlen)
 
-buyEntry = crossover(minusDi, plusDi)
-sellExit = crossover(plusDi, minusDi)
 
+//// Strategy
+// Creating Long and Short Strategy
+buyEntry = minusDi > plusDi
+sellExit = plusDi > minusDi
+buy_signal = (buyEntry) and (adxSignal > 16) and (minusDi > 4)
+sell_signal = (plusDi > 24) and (adxSignal > 43) and sellExit
 
-// Strategy Long
-strategy.risk.allow_entry_in(strategy.direction.long)
-Long = (adxSignal > 16) and (minusDi > 4) and (buyEntry)
-Long2 = (crossover(adxSignal, 16)) and (plusDi > minusDi)
-ExitLongCondition = (adxSignal > 43) and (plusDi > 24)
-ExitLongCondition2 = crossunder(plusDi, minusDi)
-
-strategy.entry("Long", strategy.long, when = Long, alert_message = "Buy!")
-strategy.close("Long", when = ExitLongCondition)
-
-if enable == true
-    strategy.exit("Stop Loss", "Long", stop = stoploss_level)
-
-if enable_takeprofit == true
-    strategy.exit("TP", "Long", limit = takeprofit_level)
+// Long Strategy
+if buy_signal and in_date_range and enable_long_strategy == true
+    strategy.entry("Long", true, when=buy_signal, alert_message="Open Long Position")
+    strategy.exit("Long  SL/TP", from_entry="Long", loss=long_stoploss_percentage, profit=long_takeprofit_percentage, alert_message="Your Long SL/TP Limit As Been Triggered.")
+    strategy.close("Long", when=sell_signal, alert_message="Close Long Position")
     
-if both == true
-    strategy.exit("Stoploss/TP", "Long", stop = stoploss_level, limit = takeprofit_level)
+// Short Strategy
+if sell_signal and in_date_range and enable_short_strategy == true
+    strategy.entry("Short", false, when = sell_signal, alert_message="Open Short Position")
+    strategy.exit("Short SL/TP", from_entry="Short", loss=short_stoploss_percentage, profit=short_takeprofit_percentage, alert_message="Your Short SL/TP Limit As Been Triggered.")
+    strategy.close("Short", when=buy_signal, alert_message="Close Short Position")
+    
