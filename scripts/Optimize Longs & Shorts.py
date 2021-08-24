@@ -11,7 +11,7 @@ from database.profit import profits
 # Follow my AI Bot on Telegram https://t.me/joinchat/BPVwDm2L-QQ0OTI5
 # Donate TP for Bunghole (Bitcoin Address): 384RSWF69Zk4pfGvAc7dyeZ1XrcVH8K6GF
 
-url = 'https://www.tradingview.com/chart/H5Sc6piM/'  # enter your trading view profile link here.
+url = 'https://www.tradingview.com/chart/'
 
 # Enter your minimum and maximum values for stop loss and take profit.
 min_long_stoploss_value = 0
@@ -24,8 +24,8 @@ max_short_stoploss_value = 15
 min_short_takeprofit_value = 0
 max_short_takeprofit_value = 30
 
-decimal_place = 1  # enter decimal place of values. (Default 1st decimal place)
-max_attempts = 30  # For example, 30 attempts to find best stop loss and take profit values.
+decimal_place = 2  # enter decimal place of values. (Default 1st decimal place)
+max_attempts = 300  # For example, 30 attempts to find best stop loss and take profit values.
 
 
 def run_script(driver):
@@ -43,6 +43,8 @@ def run_script(driver):
     print("Loading script...\n")
     click.settings_button(wait)
     click.input_tab()
+    click.enable_both_checkboxes()
+    click.rest_all_inputs()
     click.ok_button()
 
     count = 0
