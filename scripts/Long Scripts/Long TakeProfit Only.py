@@ -1,88 +1,258 @@
-from selenium.common.exceptions import NoSuchElementException, StaleElementReferenceException, TimeoutException
-from selenium.webdriver.support.ui import WebDriverWait
-from functions import click, webdriver, show_me, get, find
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.keys import Keys
+from selenium.common.exceptions import NoSuchElementException, ElementNotInteractableException
 import time
-import numpy as np
-
-# Welcome to my SL/TP generator.
-# Feel free to contribute to this project if you like.
-# Follow me on TradingView at https://www.tradingview.com/u/Bunghole
-# Follow my AI Bot on Telegram https://t.me/joinchat/BPVwDm2L-QQ0OTI5
-# Donate TP for Bunghole (Bitcoin Address): 384RSWF69Zk4pfGvAc7dyeZ1XrcVH8K6GF
-
-url = ''  # enter your trading view profile link here.
-min_value = 0  # enter your minimum take profit value.
-max_value = 20  # enter your maximum take profit value.
-increment = 1  # You can increment count in decimals or in whole numbers.
-range = np.arange(min_value, max_value, increment)
+from functions.webdriver import driver
 
 
-def run_script(driver):
-    """find the best take profit value."""
-
-    # Loading Webpage.
-    wait = WebDriverWait(driver, 10)
-    driver.get(url)
-    click.strategy_tester()
+def settings_button(wait):
+    """click settings button."""
     try:
-        click.overview()
-    except NoSuchElementException:
-        time.sleep(1)
-        click.overview()
-    print("Generating Max Profit For Take Profit.")
-    print("Loading script...\n")
-    click.settings_button(wait)
-    click.input_tab()
-    click.ok_button()
-
-    # Searching for best take profit for your strategy.
-    for number in range:
-        count = round(number, 2)
-        try:
-            click.settings_button(wait)
-            click.long_takeprofit_input(count, wait)
-            get.net_profit_takeprofit(count, wait)
-        except (StaleElementReferenceException, TimeoutException, NoSuchElementException):
-            print("script has timed out.")
-            break
-
-    # adding the best take profit to your strategy on TradingView.
-    click.settings_button(wait)
-    best_key = find.best_takeprofit()
-    click.long_takeprofit_input(best_key, wait)
-    time.sleep(1)
-
-    # Printing Results of the best take profit value found.
-    print("\n----------Results----------\n")
-    click.overview()
-    show_me.best_takeprofit()
-    click.performance_summary()
-    show_me.total_closed_trades()
-    show_me.win_rate()
-    show_me.net_profit()
-    show_me.max_drawdown()
-    show_me.sharpe_ratio()
-    show_me.sortino_ratio()
-    show_me.win_loss_ratio()
-    show_me.avg_win_trade()
-    show_me.avg_loss_trade()
-    show_me.avg_bars_in_winning_trades()
-    # show_me.gross_profit()
-    # show_me.gross_loss()
-    # show_me.buy_and_hold_return()
-    # show_me.max_contracts_held()
-    # show_me.open_pl()
-    # show_me.commission_paid()
-    # show_me.total_open_trades()
-    # show_me.number_winning_trades()
-    # show_me.number_losing_trades()
-    # show_me.percent_profitable()
-    # show_me.avg_trade()
-    # show_me.largest_win_trade()
-    # show_me.largest_loss_trade()
-    # show_me.avg_bars_in_trades()
-    # show_me.avg_bars_in_losing_trades()
+        wait.until(EC.visibility_of_element_located((By.XPATH, "//*[@class='icon-button "
+                                                               "js-backtesting-open-format-dialog "
+                                                               "apply-common-tooltip']")))
+        settings_button = driver.find_element_by_xpath(
+            "//*[@class='icon-button js-backtesting-open-format-dialog "
+            "apply-common-tooltip']")
+        settings_button.click()
+    except AttributeError:
+        pass
 
 
-if __name__ == '__main__':
-    run_script(webdriver.driver)
+def strategy_tester():
+    """check if strategy tester tab is active if not click to open tab."""
+    try:
+        strategy_tester_tab = driver.find_elements_by_xpath("//*[@class='title-37voAVwR']")
+        for index, web_element in enumerate(strategy_tester_tab):
+            if web_element.text == 'Strategy Tester':
+                active_tab = strategy_tester_tab[index].get_attribute('data-active')
+                if active_tab == 'false':
+                    strategy_tester_tab[index].click()
+                break
+    except (IndexError, NoSuchElementException, ElementNotInteractableException):
+        print("Could Not Click Strategy Tester Tab. Please Check web element XPATH.")
+
+
+def overview():
+    try:
+        strategy_tester_tab = driver.find_elements_by_xpath("//*[@class='title-37voAVwR']")
+        for index, web_element in enumerate(strategy_tester_tab):
+            if web_element.text == 'Strategy Tester':
+                active_tab = strategy_tester_tab[index].get_attribute('data-active')
+                if active_tab == 'false':
+                    strategy_tester_tab[index].click()
+                    # time.sleep(.3)
+                    overview = driver.find_element_by_class_name("report-tabs").find_elements_by_tag_name("li")[0]
+                    overview.click()
+                else:
+                    overview = driver.find_element_by_class_name("report-tabs").find_elements_by_tag_name("li")[0]
+                    overview.click()
+                break
+    except (IndexError, NoSuchElementException, ElementNotInteractableException):
+        print("Could Not Click Strategy Tester Tab. Please Check web element XPATH.")
+
+
+def performance_summary():
+    """click perfromance summary tab."""
+    try:
+        strategy_tester_tab = driver.find_elements_by_xpath("//*[@class='title-37voAVwR']")
+        for index, web_element in enumerate(strategy_tester_tab):
+            if web_element.text == 'Strategy Tester':
+                active_tab = strategy_tester_tab[index].get_attribute('data-active')
+                if active_tab == 'false':
+                    strategy_tester_tab[index].click()
+                    # time.sleep(.3)
+                    performance_tab = driver.find_elements_by_class_name("report-tabs").find_elements_by_tag_name("li")[1]
+                    performance_tab.click()
+                else:
+                    performance_tab = driver.find_element_by_class_name("report-tabs").find_elements_by_tag_name("li")[1]
+                    performance_tab.click()
+                break
+    except (IndexError, NoSuchElementException, ElementNotInteractableException):
+        print("Could Not Click Strategy Tester Tab. Please Check web element XPATH.")
+
+
+def list_of_trades():
+    """click list of trades tab."""
+    try:
+        strategy_tester_tab = driver.find_elements_by_xpath("//*[@class='title-37voAVwR']")
+        for index, web_element in enumerate(strategy_tester_tab):
+            if web_element.text == 'Strategy Tester':
+                active_tab = strategy_tester_tab[index].get_attribute('data-active')
+                if active_tab == 'false':
+                    strategy_tester_tab[index].click()
+                    # time.sleep(.3)
+                    list_of_trades = driver.find_element_by_class_name("report-tabs").find_elements_by_tag_name("li")[2]
+                    list_of_trades.click()
+                else:
+                    list_of_trades = driver.find_element_by_class_name("report-tabs").find_elements_by_tag_name("li")[2]
+                    list_of_trades.click()
+                break
+    except (IndexError, NoSuchElementException, ElementNotInteractableException):
+        print("Could Not Click Strategy Tester Tab. Please Check web element XPATH.")
+
+
+def long_stoploss_input(count, wait):
+    """click short stoploss input."""
+    wait.until(EC.visibility_of_element_located((By.XPATH, "//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")))
+    stoploss_input_box = driver.find_elements_by_xpath("//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")[0]
+    stoploss_input_box.send_keys(Keys.BACK_SPACE + Keys.BACK_SPACE + Keys.BACK_SPACE + Keys.BACK_SPACE)
+    stoploss_input_box.send_keys(str(count))
+    stoploss_input_box.send_keys(Keys.ENTER)
+    time.sleep(.5)
+    ok_button = driver.find_element_by_name("submit")
+    ok_button.click()
+
+
+def long_takeprofit_input(count, wait):
+    """click long take profit input."""
+    wait.until(EC.visibility_of_element_located((By.XPATH, "//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")))
+    takeprofit_input_box = driver.find_elements_by_xpath("//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")[1]
+    takeprofit_input_box.send_keys(Keys.BACK_SPACE + Keys.BACK_SPACE + Keys.BACK_SPACE + Keys.BACK_SPACE)
+    takeprofit_input_box.send_keys(str(count))
+    takeprofit_input_box.send_keys(Keys.ENTER)
+    time.sleep(.5)
+    ok_button = driver.find_element_by_name("submit")
+    ok_button.click()
+
+
+def short_stoploss_input(count, wait):
+    """click short stoploss input."""
+    wait.until(EC.visibility_of_element_located((By.XPATH, "//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")))
+    stoploss_input_box = driver.find_elements_by_xpath("//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")[2]
+    stoploss_input_box.send_keys(Keys.BACK_SPACE + Keys.BACK_SPACE + Keys.BACK_SPACE + Keys.BACK_SPACE)
+    stoploss_input_box.send_keys(str(count))
+    stoploss_input_box.send_keys(Keys.ENTER)
+    time.sleep(.5)
+    ok_button = driver.find_element_by_name("submit")
+    ok_button.click()
+
+
+def short_takeprofit_input(count, wait):
+    """click short take profit input."""
+    wait.until(EC.visibility_of_element_located((By.XPATH, "//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")))
+    stoploss_input_box = driver.find_elements_by_xpath("//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")[3]
+    stoploss_input_box.send_keys(Keys.BACK_SPACE + Keys.BACK_SPACE + Keys.BACK_SPACE + Keys.BACK_SPACE)
+    stoploss_input_box.send_keys(str(count))
+    stoploss_input_box.send_keys(Keys.ENTER)
+    time.sleep(.5)
+    ok_button = driver.find_element_by_name("submit")
+    ok_button.click()
+
+
+def long_inputs(long_stoploss_value, long_takeprofit_value, wait):
+    """click both long inputs."""
+    wait.until(EC.visibility_of_element_located((By.XPATH, "//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")))
+    stoploss_input_box = driver.find_elements_by_xpath("//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")[0]
+    takeprofit_input_box = driver.find_elements_by_xpath("//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")[1]
+    stoploss_input_box.send_keys(Keys.BACK_SPACE + Keys.BACK_SPACE + Keys.BACK_SPACE + Keys.BACK_SPACE)
+    stoploss_input_box.send_keys(str(long_stoploss_value))
+    takeprofit_input_box.send_keys(Keys.BACK_SPACE + Keys.BACK_SPACE + Keys.BACK_SPACE + Keys.BACK_SPACE)
+    takeprofit_input_box.send_keys(str(long_takeprofit_value))
+    takeprofit_input_box.send_keys(Keys.ENTER)
+    time.sleep(.5)
+    ok_button = driver.find_element_by_name("submit")
+    ok_button.click()
+
+
+def short_inputs(short_stoploss_value, short_takeprofit_value, wait):
+    """click both short inputs."""
+    wait.until(EC.visibility_of_element_located((By.XPATH, "//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")))
+    stoploss_input_box = driver.find_elements_by_xpath("//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")[2]
+    takeprofit_input_box = driver.find_elements_by_xpath("//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")[3]
+    stoploss_input_box.send_keys(Keys.BACK_SPACE + Keys.BACK_SPACE + Keys.BACK_SPACE + Keys.BACK_SPACE)
+    stoploss_input_box.send_keys(str(short_stoploss_value))
+    takeprofit_input_box.send_keys(Keys.BACK_SPACE + Keys.BACK_SPACE + Keys.BACK_SPACE + Keys.BACK_SPACE)
+    takeprofit_input_box.send_keys(str(short_takeprofit_value))
+    takeprofit_input_box.send_keys(Keys.ENTER)
+    time.sleep(.5)
+    ok_button = driver.find_element_by_name("submit")
+    ok_button.click()
+
+
+def all_inputs(long_stoploss_value, long_takeprofit_value, short_stoploss_value, short_takeprofit_value, wait):
+    """click short stoploss input."""
+    wait.until(EC.visibility_of_element_located((By.XPATH, "//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")))
+    long_stoploss_input_box = driver.find_elements_by_xpath("//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")[0]
+    long_takeprofit_input_box = driver.find_elements_by_xpath("//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")[1]
+    short_stoploss_input_box = driver.find_elements_by_xpath("//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")[2]
+    short_takeprofit_input_box = driver.find_elements_by_xpath("//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")[3]
+    long_stoploss_input_box.send_keys(Keys.BACK_SPACE * 8)
+    long_stoploss_input_box.send_keys(str(long_stoploss_value))
+    long_takeprofit_input_box.send_keys(Keys.BACK_SPACE * 8)
+    long_takeprofit_input_box.send_keys(str(long_takeprofit_value))
+    short_stoploss_input_box.send_keys(Keys.BACK_SPACE * 8)
+    short_stoploss_input_box.send_keys(str(short_stoploss_value))
+    short_takeprofit_input_box.send_keys(Keys.BACK_SPACE * 8)
+    short_takeprofit_input_box.send_keys(str(short_takeprofit_value))
+    short_takeprofit_input_box.send_keys(Keys.ENTER)
+    time.sleep(.5)
+    ok_button = driver.find_element_by_name("submit")
+    ok_button.click()
+
+
+def input_tab():
+    """making sure the input tab is clicked."""
+    try:
+        input_tab = driver.find_elements_by_xpath("//*[@class='tab-1KEqJy8_ withHover-1KEqJy8_ tab-3I2ohC86']")[0]
+        if input_tab.get_attribute("data-value") == "inputs":
+            input_tab.click()
+    except IndexError:
+        pass
+
+
+def ok_button():
+    time.sleep(.5)
+    ok_button = driver.find_element_by_name("submit")
+    ok_button.click()
+
+
+def enable_both_checkboxes():
+    long_checkbox = driver.find_elements_by_xpath("//*[@class='input-24iGIobO']")[0]
+    short_checkbox = driver.find_elements_by_xpath("//*[@class='input-24iGIobO']")[1]
+    if not long_checkbox.get_attribute("checked"):
+        click_long_checkbox = driver.find_elements_by_xpath("//*[@class='box-3574HVnv check-382c8Fu1']")[0]
+        click_long_checkbox.click()
+    if not short_checkbox.get_attribute("checked"):
+        click_short_checkbox = driver.find_elements_by_xpath("//*[@class='box-3574HVnv check-382c8Fu1']")[1]
+        click_short_checkbox.click()
+
+
+def enable_long_strategy_checkbox():
+    long_checkbox = driver.find_elements_by_xpath("//*[@class='input-24iGIobO']")[0]
+    short_checkbox = driver.find_elements_by_xpath("//*[@class='input-24iGIobO']")[1]
+    if not long_checkbox.get_attribute("checked"):
+        click_long_checkbox = driver.find_elements_by_xpath("//*[@class='box-3574HVnv check-382c8Fu1']")[0]
+        click_long_checkbox.click()
+    if short_checkbox.get_attribute("checked"):
+        click_short_checkbox = driver.find_elements_by_xpath("//*[@class='box-3574HVnv check-382c8Fu1']")[1]
+        click_short_checkbox.click()
+
+
+def enable_short_strategy_checkbox():
+    long_checkbox = driver.find_elements_by_xpath("//*[@class='input-24iGIobO']")[0]
+    short_checkbox = driver.find_elements_by_xpath("//*[@class='input-24iGIobO']")[1]
+    if long_checkbox.get_attribute("checked"):
+        click_long_checkbox = driver.find_elements_by_xpath("//*[@class='box-3574HVnv check-382c8Fu1']")[0]
+        click_long_checkbox.click()
+    if not short_checkbox.get_attribute("checked"):
+        click_short_checkbox = driver.find_elements_by_xpath("//*[@class='box-3574HVnv check-382c8Fu1']")[1]
+        click_short_checkbox.click()
+
+
+def rest_all_inputs():
+    """click short stoploss input."""
+    long_stoploss_input_box = driver.find_elements_by_xpath("//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")[0]
+    long_takeprofit_input_box = driver.find_elements_by_xpath("//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")[1]
+    short_stoploss_input_box = driver.find_elements_by_xpath("//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")[2]
+    short_takeprofit_input_box = driver.find_elements_by_xpath("//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")[3]
+    long_stoploss_input_box.send_keys(Keys.BACK_SPACE * 8)
+    long_stoploss_input_box.send_keys(str("50"))
+    long_takeprofit_input_box.send_keys(Keys.BACK_SPACE * 8)
+    long_takeprofit_input_box.send_keys(str("50"))
+    short_stoploss_input_box.send_keys(Keys.BACK_SPACE * 8)
+    short_stoploss_input_box.send_keys(str("50"))
+    short_takeprofit_input_box.send_keys(Keys.BACK_SPACE * 8)
+    short_takeprofit_input_box.send_keys(str("50"))
+    short_takeprofit_input_box.send_keys(Keys.ENTER)
