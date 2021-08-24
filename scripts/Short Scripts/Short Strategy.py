@@ -11,7 +11,7 @@ from database.profit import profits
 # Follow my AI Bot on Telegram https://t.me/joinchat/BPVwDm2L-QQ0OTI5
 # Donate TP for Bunghole (Bitcoin Address): 384RSWF69Zk4pfGvAc7dyeZ1XrcVH8K6GF
 
-url = 'https://www.tradingview.com/chart/H5Sc6piM/'  # enter your trading view profile link here.
+url = 'https://www.tradingview.com/chart/'
 
 # Enter your minimum and maximum values for stop loss and take profit.
 min_stoploss_value = 0
@@ -38,6 +38,8 @@ def run_script(driver):
     print("Loading script...\n")
     click.settings_button(wait)
     click.input_tab()
+    click.enable_short_strategy_checkbox()
+    click.rest_all_inputs()
     click.ok_button()
 
     count = 0
