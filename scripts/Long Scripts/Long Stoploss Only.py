@@ -10,7 +10,7 @@ import numpy as np
 # Follow my AI Bot on Telegram https://t.me/joinchat/BPVwDm2L-QQ0OTI5
 # Donate TP for Bunghole (Bitcoin Address): 384RSWF69Zk4pfGvAc7dyeZ1XrcVH8K6GF
 
-url = ''  # enter your trading view profile link here.
+url = 'https://www.tradingview.com/chart/'
 min_value = 0  # enter your minimum stop loss value.
 max_value = 20  # enter your maximum stop loss value.
 increment = 1  # You can increment count in decimals or in whole numbers.
@@ -33,6 +33,8 @@ def run_script(driver):
     print("Loading script...\n")
     click.settings_button(wait)
     click.input_tab()
+    click.enable_long_strategy_checkbox()
+    click.rest_all_inputs()
     click.ok_button()
 
     # Searching for best stop loss for your strategy.
