@@ -178,13 +178,13 @@ def all_inputs(long_stoploss_value, long_takeprofit_value, short_stoploss_value,
     long_takeprofit_input_box = driver.find_elements_by_xpath("//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")[1]
     short_stoploss_input_box = driver.find_elements_by_xpath("//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")[2]
     short_takeprofit_input_box = driver.find_elements_by_xpath("//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")[3]
-    long_stoploss_input_box.send_keys(Keys.BACK_SPACE + Keys.BACK_SPACE + Keys.BACK_SPACE + Keys.BACK_SPACE)
+    long_stoploss_input_box.send_keys(Keys.BACK_SPACE * 8)
     long_stoploss_input_box.send_keys(str(long_stoploss_value))
-    long_takeprofit_input_box.send_keys(Keys.BACK_SPACE + Keys.BACK_SPACE + Keys.BACK_SPACE + Keys.BACK_SPACE)
+    long_takeprofit_input_box.send_keys(Keys.BACK_SPACE * 8)
     long_takeprofit_input_box.send_keys(str(long_takeprofit_value))
-    short_stoploss_input_box.send_keys(Keys.BACK_SPACE + Keys.BACK_SPACE + Keys.BACK_SPACE + Keys.BACK_SPACE)
+    short_stoploss_input_box.send_keys(Keys.BACK_SPACE * 8)
     short_stoploss_input_box.send_keys(str(short_stoploss_value))
-    short_takeprofit_input_box.send_keys(Keys.BACK_SPACE + Keys.BACK_SPACE + Keys.BACK_SPACE + Keys.BACK_SPACE)
+    short_takeprofit_input_box.send_keys(Keys.BACK_SPACE * 8)
     short_takeprofit_input_box.send_keys(str(short_takeprofit_value))
     short_takeprofit_input_box.send_keys(Keys.ENTER)
     time.sleep(.5)
@@ -206,3 +206,53 @@ def ok_button():
     time.sleep(.5)
     ok_button = driver.find_element_by_name("submit")
     ok_button.click()
+
+
+def enable_both_checkboxes():
+    long_checkbox = driver.find_elements_by_xpath("//*[@class='input-24iGIobO']")[0]
+    short_checkbox = driver.find_elements_by_xpath("//*[@class='input-24iGIobO']")[1]
+    if not long_checkbox.get_attribute("checked"):
+        click_long_checkbox = driver.find_elements_by_xpath("//*[@class='box-3574HVnv check-382c8Fu1']")[0]
+        click_long_checkbox.click()
+    if not short_checkbox.get_attribute("checked"):
+        click_short_checkbox = driver.find_elements_by_xpath("//*[@class='box-3574HVnv check-382c8Fu1']")[1]
+        click_short_checkbox.click()
+
+
+def enable_long_strategy_checkbox():
+    long_checkbox = driver.find_elements_by_xpath("//*[@class='input-24iGIobO']")[0]
+    short_checkbox = driver.find_elements_by_xpath("//*[@class='input-24iGIobO']")[1]
+    if not long_checkbox.get_attribute("checked"):
+        click_long_checkbox = driver.find_elements_by_xpath("//*[@class='box-3574HVnv check-382c8Fu1']")[0]
+        click_long_checkbox.click()
+    if short_checkbox.get_attribute("checked"):
+        click_short_checkbox = driver.find_elements_by_xpath("//*[@class='box-3574HVnv check-382c8Fu1']")[1]
+        click_short_checkbox.click()
+
+
+def enable_short_strategy_checkbox():
+    long_checkbox = driver.find_elements_by_xpath("//*[@class='input-24iGIobO']")[0]
+    short_checkbox = driver.find_elements_by_xpath("//*[@class='input-24iGIobO']")[1]
+    if long_checkbox.get_attribute("checked"):
+        click_long_checkbox = driver.find_elements_by_xpath("//*[@class='box-3574HVnv check-382c8Fu1']")[0]
+        click_long_checkbox.click()
+    if not short_checkbox.get_attribute("checked"):
+        click_short_checkbox = driver.find_elements_by_xpath("//*[@class='box-3574HVnv check-382c8Fu1']")[1]
+        click_short_checkbox.click()
+
+
+def rest_all_inputs():
+    """click short stoploss input."""
+    long_stoploss_input_box = driver.find_elements_by_xpath("//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")[0]
+    long_takeprofit_input_box = driver.find_elements_by_xpath("//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")[1]
+    short_stoploss_input_box = driver.find_elements_by_xpath("//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")[2]
+    short_takeprofit_input_box = driver.find_elements_by_xpath("//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")[3]
+    long_stoploss_input_box.send_keys(Keys.BACK_SPACE * 8)
+    long_stoploss_input_box.send_keys(str("50"))
+    long_takeprofit_input_box.send_keys(Keys.BACK_SPACE * 8)
+    long_takeprofit_input_box.send_keys(str("50"))
+    short_stoploss_input_box.send_keys(Keys.BACK_SPACE * 8)
+    short_stoploss_input_box.send_keys(str("50"))
+    short_takeprofit_input_box.send_keys(Keys.BACK_SPACE * 8)
+    short_takeprofit_input_box.send_keys(str("50"))
+    short_takeprofit_input_box.send_keys(Keys.ENTER)
