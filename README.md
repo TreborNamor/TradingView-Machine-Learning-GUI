@@ -1,6 +1,6 @@
 # TradeView GUI
 
-TradeView is a free and open source Trading View bot written in Python. It is designed to support all major exchanges. It contains back testing, money management tools as well as strategy optimization by machine learning. [Here is live example of TradeView](https://vimeo.com/594029262)
+TradeView is a free and open source Trading View bot written in Python. It is designed to support all major exchanges. It contains back testing, money management tools as well as strategy optimization by machine learning. [Here is live example of TradeView](https://vimeo.com/594037879)
 
 ![image](https://github.com/TreborNamor/TradingView_Machine_Learning/blob/16ab9d3fae94258a715965e271d5c80b6517051c/pictures/TradeViewGUI.png)
 ![image](https://github.com/TreborNamor/TradingView_Machine_Learning/blob/16ab9d3fae94258a715965e271d5c80b6517051c/pictures/TradeViewResultsExample.png)
