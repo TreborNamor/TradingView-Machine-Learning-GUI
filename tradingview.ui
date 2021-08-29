@@ -153,7 +153,7 @@ color: rgb(165, 191, 218);
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI Historic'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;img src=&quot;C:\Users\Trebor\PycharmProjects\TradingView_Machine_Learning\pictures\botpicture.png&quot; /&gt;&lt;/p&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;img src=&quot;icon.png&quot; /&gt;&lt;/p&gt;
 &lt;h1 align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Comic Sans MS','sans-serif'; font-size:24pt; font-weight:600; color:#444f95;&quot;&gt;TradingView Strategy Optimizer&lt;/span&gt;&lt;/h1&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Comic Sans MS','sans-serif'; font-size:10pt; color:#616161;&quot;&gt;created by Robert Roman&lt;/span&gt;&lt;/p&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://www.youtube.com/channel/UCHvDZCGcUudHg6aPYPsiZWA&quot;&gt;&lt;span style=&quot; font-family:'Comic Sans MS','sans-serif'; font-size:10pt; text-decoration: underline; color:#616161;&quot;&gt;YouTube&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
@@ -421,13 +421,13 @@ p, li { white-space: pre-wrap; }
 color: rgb(170, 255, 255);</string>
               </property>
               <property name="text">
-               <string>15</string>
+               <string/>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
               <property name="placeholderText">
-               <string>15</string>
+               <string/>
               </property>
               <property name="clearButtonEnabled">
                <bool>false</bool>
@@ -506,13 +506,13 @@ color: rgb(170, 255, 255);</string>
 color: rgb(170, 255, 255);</string>
               </property>
               <property name="text">
-               <string>30</string>
+               <string/>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
               <property name="placeholderText">
-               <string>30</string>
+               <string/>
               </property>
               <property name="clearButtonEnabled">
                <bool>false</bool>
@@ -541,57 +541,13 @@ color: rgb(170, 255, 255);</string>
 color: rgb(170, 255, 255);</string>
               </property>
               <property name="text">
-               <string>0</string>
+               <string/>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
               <property name="placeholderText">
-               <string>0</string>
-              </property>
-              <property name="clearButtonEnabled">
-               <bool>false</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="6" column="1">
-             <widget class="QLineEdit" name="LongIncrementValue">
-              <property name="enabled">
-               <bool>true</bool>
-              </property>
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>40</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="layoutDirection">
-               <enum>Qt::RightToLeft</enum>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">background-color: rgb(21, 21, 47);
-color: rgb(170, 255, 255);</string>
-              </property>
-              <property name="text">
-               <string>.1</string>
-              </property>
-              <property name="frame">
-               <bool>true</bool>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-              <property name="readOnly">
-               <bool>false</bool>
-              </property>
-              <property name="placeholderText">
-               <string>.1</string>
+               <string/>
               </property>
               <property name="clearButtonEnabled">
                <bool>false</bool>
@@ -703,14 +659,58 @@ color: rgb(170, 255, 255);</string>
                <string notr="true">background-color: rgb(21, 21, 47);
 color: rgb(170, 255, 255);</string>
               </property>
+              <property name="inputMask">
+               <string/>
+              </property>
               <property name="text">
-               <string>0</string>
+               <string/>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
+              <property name="clearButtonEnabled">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="1">
+             <widget class="QLineEdit" name="LongIncrementValue">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>40</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="layoutDirection">
+               <enum>Qt::RightToLeft</enum>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(21, 21, 47);
+color: rgb(170, 255, 255);</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="frame">
+               <bool>true</bool>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+              <property name="readOnly">
+               <bool>false</bool>
+              </property>
               <property name="placeholderText">
-               <string>0</string>
+               <string/>
               </property>
               <property name="clearButtonEnabled">
                <bool>false</bool>
@@ -756,13 +756,13 @@ color: rgb(170, 255, 255);</string>
 color: rgb(170, 255, 255);</string>
               </property>
               <property name="text">
-               <string>15</string>
+               <string/>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
               <property name="placeholderText">
-               <string>15</string>
+               <string/>
               </property>
               <property name="clearButtonEnabled">
                <bool>false</bool>
@@ -828,13 +828,13 @@ color: rgb(170, 255, 255);</string>
 color: rgb(170, 255, 255);</string>
               </property>
               <property name="text">
-               <string>.1</string>
+               <string/>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
               <property name="placeholderText">
-               <string>.1</string>
+               <string/>
               </property>
               <property name="clearButtonEnabled">
                <bool>false</bool>
@@ -879,13 +879,13 @@ color: rgb(170, 255, 255);</string>
 color: rgb(170, 255, 255);</string>
               </property>
               <property name="text">
-               <string>0</string>
+               <string/>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
               <property name="placeholderText">
-               <string>0</string>
+               <string/>
               </property>
               <property name="clearButtonEnabled">
                <bool>false</bool>
@@ -911,13 +911,13 @@ color: rgb(170, 255, 255);</string>
 color: rgb(170, 255, 255);</string>
               </property>
               <property name="text">
-               <string>0</string>
+               <string/>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
               <property name="placeholderText">
-               <string>0</string>
+               <string/>
               </property>
               <property name="clearButtonEnabled">
                <bool>false</bool>
@@ -973,13 +973,13 @@ p, li { white-space: pre-wrap; }
 color: rgb(170, 255, 255);</string>
               </property>
               <property name="text">
-               <string>30</string>
+               <string/>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
               <property name="placeholderText">
-               <string>30</string>
+               <string/>
               </property>
               <property name="clearButtonEnabled">
                <bool>false</bool>
@@ -1204,13 +1204,13 @@ p, li { white-space: pre-wrap; }
 color: rgb(170, 255, 255);</string>
               </property>
               <property name="text">
-               <string>2</string>
+               <string/>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
               <property name="placeholderText">
-               <string>2</string>
+               <string/>
               </property>
               <property name="clearButtonEnabled">
                <bool>false</bool>
@@ -1264,13 +1264,13 @@ color: rgb(170, 255, 255);</string>
 color: rgb(170, 255, 255);</string>
               </property>
               <property name="text">
-               <string>100</string>
+               <string/>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
               <property name="placeholderText">
-               <string>30</string>
+               <string/>
               </property>
               <property name="clearButtonEnabled">
                <bool>false</bool>
@@ -1309,7 +1309,7 @@ color: rgb(170, 255, 255);</string>
 color: rgb(170, 255, 255);</string>
               </property>
               <property name="placeholderText">
-               <string extracomment="Enter Your FireFox Profile Here.">C:\Users\Trebor\AppData\Roaming\Mozilla\Firefox\Profiles\&quot;your-profile-string&quot;</string>
+               <string extracomment="Enter Your FireFox Profile Here.">Enter your firefox profile here.</string>
               </property>
              </widget>
             </item>

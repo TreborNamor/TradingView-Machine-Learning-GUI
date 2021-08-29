@@ -35,8 +35,8 @@ class Main(QMainWindow):
         self.maxAttemptsValue.textChanged.connect(self.gui_save)
         self.firefoxProfileString.textChanged.connect(self.gui_save)
         self.FirefoxcheckBox.stateChanged.connect(self.gui_save)
-
         self.comboBox.currentTextChanged.connect(self.comboBoxSelection)
+
         if self.comboBox.currentIndex() == 0:
             self.minLongStoplossValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
             self.maxLongStoplossValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
@@ -62,6 +62,34 @@ class Main(QMainWindow):
             self.maxAttemptsValue.setEnabled(True)
             self.LongIncrementValue.setEnabled(False)
             self.ShortIncrementValue.setEnabled(False)
+
+        if self.minLongStoplossValue.text() == '':
+            self.minLongStoplossValue.setText('0')
+        if self.minLongTakeprofitValue.text() == '':
+            self.minLongTakeprofitValue.setText('0')
+        if self.minShortStoplossValue.text() == '':
+            self.minShortStoplossValue.setText('0')
+        if self.minShortTakeprofitValue.text() == '':
+            self.minShortTakeprofitValue.setText('0')
+
+        if self.maxLongStoplossValue.text() == '':
+            self.maxLongStoplossValue.setText('30')
+        if self.maxLongTakeprofitValue.text() == '':
+            self.maxLongTakeprofitValue.setText('30')
+        if self.maxShortStoplossValue.text() == '':
+            self.maxShortStoplossValue.setText('30')
+        if self.maxShortTakeprofitValue.text() == '':
+            self.maxShortTakeprofitValue.setText('30')
+
+        if self.LongIncrementValue.text() == '':
+            self.ShortIncrementValue.setText('.1')
+        if self.maxShortTakeprofitValue.text() == '':
+            self.maxShortTakeprofitValue.setText('.1')
+        if self.decimalPlaceValue.text() == '':
+            self.decimalPlaceValue.setText('1')
+        if self.maxAttemptsValue.text() == '':
+            self.maxAttemptsValue.setText('30')
+
 
     def create_driver(self):
         """Creating driver."""
