@@ -63,34 +63,6 @@ class Main(QMainWindow):
             self.LongIncrementValue.setEnabled(False)
             self.ShortIncrementValue.setEnabled(False)
 
-        if self.minLongStoplossValue.text() == '':
-            self.minLongStoplossValue.setText('0')
-        if self.minLongTakeprofitValue.text() == '':
-            self.minLongTakeprofitValue.setText('0')
-        if self.minShortStoplossValue.text() == '':
-            self.minShortStoplossValue.setText('0')
-        if self.minShortTakeprofitValue.text() == '':
-            self.minShortTakeprofitValue.setText('0')
-
-        if self.maxLongStoplossValue.text() == '':
-            self.maxLongStoplossValue.setText('30')
-        if self.maxLongTakeprofitValue.text() == '':
-            self.maxLongTakeprofitValue.setText('30')
-        if self.maxShortStoplossValue.text() == '':
-            self.maxShortStoplossValue.setText('30')
-        if self.maxShortTakeprofitValue.text() == '':
-            self.maxShortTakeprofitValue.setText('30')
-
-        if self.LongIncrementValue.text() == '':
-            self.ShortIncrementValue.setText('.1')
-        if self.maxShortTakeprofitValue.text() == '':
-            self.maxShortTakeprofitValue.setText('.1')
-        if self.decimalPlaceValue.text() == '':
-            self.decimalPlaceValue.setText('1')
-        if self.maxAttemptsValue.text() == '':
-            self.maxAttemptsValue.setText('30')
-
-
     def create_driver(self):
         """Creating driver."""
         try:
@@ -211,7 +183,7 @@ class Main(QMainWindow):
             self.maxLongStoplossValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
             self.minLongTakeprofitValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
             self.maxLongTakeprofitValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
-            self.LongIncrementValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
+            self.LongIncrementValue.setStyleSheet("color: rgb(21, 21, 47)")
             self.minShortStoplossValue.setStyleSheet("color: rgb(21, 21, 47)")
             self.maxShortStoplossValue.setStyleSheet("color: rgb(21, 21, 47)")
             self.minShortTakeprofitValue.setStyleSheet("color: rgb(21, 21, 47)")
@@ -223,7 +195,7 @@ class Main(QMainWindow):
             self.maxLongStoplossValue.setEnabled(True)
             self.minLongTakeprofitValue.setEnabled(True)
             self.maxLongTakeprofitValue.setEnabled(True)
-            self.LongIncrementValue.setEnabled(True)
+            self.LongIncrementValue.setEnabled(False)
             self.minShortStoplossValue.setEnabled(False)
             self.maxShortStoplossValue.setEnabled(False)
             self.minShortTakeprofitValue.setEnabled(False)
@@ -242,7 +214,7 @@ class Main(QMainWindow):
             self.maxShortStoplossValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
             self.minShortTakeprofitValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
             self.maxShortTakeprofitValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
-            self.ShortIncrementValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
+            self.ShortIncrementValue.setStyleSheet("color: rgb(21, 21, 47)")
             self.decimalPlaceValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
             self.maxAttemptsValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
             self.minLongStoplossValue.setEnabled(False)
@@ -254,7 +226,7 @@ class Main(QMainWindow):
             self.maxShortStoplossValue.setEnabled(True)
             self.minShortTakeprofitValue.setEnabled(True)
             self.maxShortTakeprofitValue.setEnabled(True)
-            self.ShortIncrementValue.setEnabled(True)
+            self.ShortIncrementValue.setEnabled(False)
             self.decimalPlaceValue.setEnabled(True)
             self.maxAttemptsValue.setEnabled(True)
 

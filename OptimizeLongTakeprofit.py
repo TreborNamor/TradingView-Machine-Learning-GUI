@@ -19,7 +19,12 @@ class LongTakeProfit(Functions):
         """find the best take profit value."""
 
         # Loading Webpage.
-        my_range = np.arange(float(self.minLongTakeprofitValue.text()), float(self.maxLongTakeprofitValue.text()), float(self.LongIncrementValue.text()))
+        try:
+            my_range = np.arange(float(self.minLongTakeprofitValue.text()), float(self.maxLongTakeprofitValue.text()), float(self.LongIncrementValue.text()))
+        except ValueError:
+            print("\nValue Error: Make sure all available text input boxes are filled with a number for script to run properly.\n")
+            return
+
         wait = WebDriverWait(self.driver, 10)
         try:
             self.driver.get(url)

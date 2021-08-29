@@ -19,7 +19,12 @@ class ShortStoploss(Functions):
         """find the best stop loss value."""
 
         # Loading Webpage.
-        my_range = np.arange(float(self.minShortStoplossValue.text()), float(self.maxShortStoplossValue.text()), float(self.ShortIncrementValue.text()))
+        try:
+            my_range = np.arange(float(self.minShortStoplossValue.text()), float(self.maxShortStoplossValue.text()), float(self.ShortIncrementValue.text()))
+        except ValueError:
+            print("\nValue Error: Make sure all available text input boxes are filled with a number for script to run properly.\n")
+            return
+
         wait = WebDriverWait(self.driver, 10)
         try:
             self.driver.get(url)
