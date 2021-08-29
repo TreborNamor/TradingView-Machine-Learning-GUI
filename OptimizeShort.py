@@ -2,8 +2,8 @@ import random
 from selenium.common.exceptions import NoSuchElementException, StaleElementReferenceException, TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 import time
-from database.profit import profits
-from execute_script import Main
+from profit import profits
+from TradeViewGUI import Main
 from my_functions import Functions
 
 url = 'https://www.tradingview.com/chart/'
@@ -19,7 +19,11 @@ class ShortScript(Functions):
     def run_script(self):
         """find the best stop loss value."""
         wait = WebDriverWait(self.driver, 5)
-        self.driver.get(url)
+        try:
+            self.driver.get(url)
+        except Exception:
+            print('WebDriver Error: Please Check Your FireFox Profile Path Is Correct.\n')
+            print('Find Your Firefox Path Instructions. https://imgur.com/gallery/rdCqeT5 ')
         time.sleep(1)
         self.click_strategy_tester()
         try:

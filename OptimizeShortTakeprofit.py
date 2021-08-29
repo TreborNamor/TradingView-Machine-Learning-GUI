@@ -2,7 +2,7 @@ from selenium.common.exceptions import NoSuchElementException, StaleElementRefer
 from selenium.webdriver.support.ui import WebDriverWait
 import time
 import numpy as np
-from execute_script import Main
+from TradeViewGUI import Main
 from my_functions import Functions
 
 url = 'https://www.tradingview.com/chart/'
@@ -21,7 +21,11 @@ class ShortTakeProfit(Functions):
         # Loading Webpage.
         my_range = np.arange(float(self.minShortTakeprofitValue.text()), float(self.maxShortTakeprofitValue.text()), float(self.ShortIncrementValue.text()))
         wait = WebDriverWait(self.driver, 10)
-        self.driver.get(url)
+        try:
+            self.driver.get(url)
+        except Exception:
+            print('WebDriver Error: Please Check Your FireFox Profile Path Is Correct.\n')
+            print('Find Your Firefox Path Instructions. https://imgur.com/gallery/rdCqeT5 ')
         self.click_strategy_tester()
         try:
             self.click_overview()

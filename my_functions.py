@@ -1,20 +1,13 @@
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
-from selenium.common.exceptions import NoSuchElementException, ElementNotInteractableException
-import time
-from execute_script import Main
+from selenium.common.exceptions import ElementNotInteractableException
+from profit import profits
+from TradeViewGUI import Main
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support import expected_conditions as EC
 import time
-from termcolor import colored
-from database.profit import profits
 from selenium.common.exceptions import NoSuchElementException
 from termcolor import colored
-from database.profit import profits
-# from functions.webdriver import driver
-from functions import find
+
 
 class Functions(Main):
     """You will find click, get, find, and show_me functions here."""
@@ -262,7 +255,7 @@ class Functions(Main):
             click_short_checkbox.click()
 
     def click_enable_short_strategy_checkbox(self):
-        long_checkbox = self.self.driver.find_elements_by_xpath("//*[@class='input-24iGIobO']")[0]
+        long_checkbox = self.driver.find_elements_by_xpath("//*[@class='input-24iGIobO']")[0]
         short_checkbox = self.driver.find_elements_by_xpath("//*[@class='input-24iGIobO']")[1]
         if long_checkbox.get_attribute("checked"):
             click_long_checkbox = self.driver.find_elements_by_xpath("//*[@class='box-3574HVnv check-382c8Fu1']")[0]
@@ -443,7 +436,7 @@ class Functions(Main):
 
     def print_best_both(self):
         try:
-            best_key = find.best_key_both()
+            best_key = self.find_best_key_both()
             best_stoploss = profits[best_key][1]
             best_takeprofit = profits[best_key][3]
             print(f"Best Stop Loss: {best_stoploss}")
@@ -453,7 +446,7 @@ class Functions(Main):
 
     def print_best_all(self):
         try:
-            best_key = find.best_key_both()
+            best_key = self.find_best_key_both()
             best_long_stoploss = profits[best_key][1]
             best_long_takeprofit = profits[best_key][3]
             best_short_stoploss = profits[best_key][5]
