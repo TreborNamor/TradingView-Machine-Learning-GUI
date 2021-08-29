@@ -1,6 +1,9 @@
-# TradingView Machine Learning
+# TradeView GUI
 
 TradeView is a free and open source Trading View bot written in Python. It is designed to support all major exchanges. It contains back testing, money management tools as well as strategy optimization by machine learning.
+
+![image](https://github.com/TreborNamor/TradingView_Machine_Learning/blob/16ab9d3fae94258a715965e271d5c80b6517051c/pictures/TradeViewGUI.png)
+![image](https://github.com/TreborNamor/TradingView_Machine_Learning/blob/16ab9d3fae94258a715965e271d5c80b6517051c/pictures/TradeViewResultsExample.png)
 
 ## Disclaimer
 
@@ -27,24 +30,12 @@ hesitate to read the source code and understand the mechanism of this bot.
 
 [TradingView_Machine Learning](https://github.com/TreborNamor/TradingView_Machine_Learning/archive/master.zip)
 
-#2. Extract Zip File And Open The Folder With Pycharm.
+#2. Extract zip file to Desktop and Execute TradeViewGUI.exe file.
+![image](https://github.com/TreborNamor/TradingView_Machine_Learning/blob/bd4a703fb0b3ec964c305dd7c720b17b111535fc/pictures/extractZip.png)
 
-#3. Go to Terminal And type code below to get pip packages.
-- pip install beautifulsoup4
-- pip install selenium
-- pip install webdriver-manager==3.4.0
-- pip install numpy
-- pip install termcolor
+#3. Copy and Paste Firefox Profile Path to App.
+![image](https://github.com/TreborNamor/TradingView_Machine_Learning/blob/16ab9d3fae94258a715965e271d5c80b6517051c/pictures/FindFirefoxPath.png)
+![image](https://github.com/TreborNamor/TradingView_Machine_Learning/blob/bd4a703fb0b3ec964c305dd7c720b17b111535fc/pictures/addPath.png)
 
-#3. Go To functions folder in PyCharm, and click webdriver.py
-You'll need to put your firefox profile in that file to make sure Python can find your web browser.
-- profile = webdriver.FirefoxProfile(r'C:\Users\Robert\AppData\Roaming\Mozilla\Firefox\Profiles\kwftlp36.default-release')
-- if you need help finding firefox profile go to this website and copy the root directory folder into script.
-- it should look like this. "C:\Users\Robert\AppData\Roaming\Mozilla\Firefox\Profiles\kwftlp36.default-release"
-- [Find Profile](https://support.mozilla.org/en-US/kb/profile-manager-create-remove-switch-firefox-profiles)
-
-#4. Go To Scripts Folder
-
-- In the scripts folder you'll find scripts to optimize stoploss, take profit, or both files.
-
-#5. Click A Script And Run It.
+#4. Enter Your long and short parameters and click Run button.
+![image](https://github.com/TreborNamor/TradingView_Machine_Learning/blob/bd4a703fb0b3ec964c305dd7c720b17b111535fc/pictures/parameters.png)
