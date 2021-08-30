@@ -22,9 +22,7 @@ hesitate to read the source code and understand the mechanism of this bot.
 
 ## Installation
 
-#1. Download Pycharm, Firefox, and TradingView_Machine_Learning folder here.
-
-[PyCharm Community Edition](https://www.jetbrains.com/pycharm/download)
+#1. Download Firefox, and TradingView_Machine_Learning folder here.
 
 [FireFox](https://www.mozilla.org/en-US/firefox/new/)
 
