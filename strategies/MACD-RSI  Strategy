@@ -19,13 +19,23 @@ short_stoploss_percentage = (close * (short_stoploss_value / 100)) / syminfo.min
 short_takeprofit_value = input(defval=50, title='Take Profit %', type=input.float, minval=0.1, group="SL/TP For Short Strategy",inline="4")
 short_takeprofit_percentage = (close * (short_takeprofit_value / 100)) / syminfo.mintick
 
+// Plot Stoploss & Take Profit Levels
+long_stoploss_price = strategy.position_avg_price * (1 - long_stoploss_value/100)
+long_takeprofit_price = strategy.position_avg_price * (1 + long_takeprofit_value/100)
+short_stoploss_price = strategy.position_avg_price * (1 + short_stoploss_value/100)
+short_takeprofit_price = strategy.position_avg_price * (1 - short_takeprofit_value/100)
+plot(enable_long_strategy and not enable_short_strategy ? long_stoploss_price: na, color=#ff0000, style=plot.style_linebr, linewidth=2, title="Long SL Level")
+plot(enable_long_strategy and not enable_short_strategy ? long_takeprofit_price: na, color=#008000, style=plot.style_linebr, linewidth=2, title="Long TP Level")
+plot(enable_short_strategy and not enable_long_strategy ? short_stoploss_price: na, color=#ff0000, style=plot.style_linebr, linewidth=2, title="Short SL Level")
+plot(enable_short_strategy and not enable_long_strategy ? short_takeprofit_price: na, color=#008000, style=plot.style_linebr, linewidth=2, title="Short TP Level")
+
 // Date Range
-start_date = input(title="Start Date", type=input.integer, defval=1, minval=1, maxval=31)
-start_month = input(title="Start Month", type=input.integer, defval=1, minval=1, maxval=12)
-start_year = input(title="Start Year", type=input.integer, defval=1804, minval=1800, maxval=3000)
-end_date = input(title="End Date", type=input.integer, defval=1, minval=1, maxval=31)
-end_month = input(title="End Month", type=input.integer, defval=1, minval=1, maxval=12)
-end_year = input(title="End Year", type=input.integer, defval=2077, minval=1800, maxval=3000)
+start_date = input(title="Start Date", type=input.integer, defval=1, minval=1, maxval=31, group="Date Range")
+start_month = input(title="Start Month", type=input.integer, defval=1, minval=1, maxval=12, group="Date Range")
+start_year = input(title="Start Year", type=input.integer, defval=1804, minval=1800, maxval=3000, group="Date Range")
+end_date = input(title="End Date", type=input.integer, defval=1, minval=1, maxval=3, group="Date Range")
+end_month = input(title="End Month", type=input.integer, defval=1, minval=1, maxval=12, group="Date Range")
+end_year = input(title="End Year", type=input.integer, defval=2077, minval=1800, maxval=3000, group="Date Range")
 in_date_range = (time >= timestamp(syminfo.timezone, start_year, start_month, start_date, 0, 0)) and (time < timestamp(syminfo.timezone, end_year, end_month, end_date, 0, 0))
 
 
