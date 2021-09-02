@@ -6,10 +6,9 @@ import time
 from profit import profits
 from my_functions import Functions
 
-url = 'https://www.tradingview.com/chart/'
-
 
 class LongShortScript(Functions):
+    """find the best stop loss and take profit values for your strategy."""
 
     def __init__(self):
         Main.__init__(self)
@@ -17,34 +16,39 @@ class LongShortScript(Functions):
         self.run_script()
 
     def run_script(self):
-        """find the best stop loss value."""
+        # Loading website with web driver.
         wait = WebDriverWait(self.driver, 15)
         try:
-            self.driver.get(url)
+            self.driver.get('https://www.tradingview.com/chart/')
         except Exception:
             print('WebDriver Error: Please Check Your FireFox Profile Path Is Correct.\n')
             print('Find Your Firefox Path Instructions. https://imgur.com/gallery/rdCqeT5 ')
             return
-        time.sleep(1)
-        self.click_strategy_tester()
+
+        # Making sure strategy tester tab is clicked so automation runs properly.
         try:
+            self.click_strategy_tester(wait)
             self.click_overview()
         except NoSuchElementException:
-            time.sleep(1)
             self.click_overview()
         print("Generating Max Profit For Stop Loss.")
         print("Loading script...\n")
+
+        # Making sure we are on inputs tab and resetting values to default settings.
         self.click_settings_button(wait)
         self.click_input_tab()
         self.click_enable_both_checkboxes()
         self.click_rest_all_inputs()
         self.click_ok_button()
 
+        # Loop through max attempts while randomizing values each attempt.
         count = 0
         try:
             while count < int(self.maxAttemptsValue.text()):
                 try:
                     count += 1
+
+                    # Creating random values every loop.
                     long_stoploss_value = round(
                         random.uniform(float(self.minLongStoplossValue.text()), float(self.maxLongStoplossValue.text())),
                         int(self.decimalPlaceValue.text()))
@@ -58,27 +62,29 @@ class LongShortScript(Functions):
                         random.uniform(float(self.minShortTakeprofitValue.text()), float(self.maxShortTakeprofitValue.text())),
                         int(self.decimalPlaceValue.text()))
 
-                    # click settings button
+                    # Click settings button
                     self.click_settings_button(wait)
 
-                    # click both input boxes and add values.
+                    # Click all input boxes and add new values.
                     self.click_all_inputs(long_stoploss_value, long_takeprofit_value, short_stoploss_value,
                                           short_takeprofit_value, wait)
 
-                    # extract the net profit percentage.
+                    # Saving the profitability of the new values into a dictionary.
                     self.get_net_all(long_stoploss_value, long_takeprofit_value, short_stoploss_value, short_takeprofit_value, wait)
-                except (StaleElementReferenceException, TimeoutException, NoSuchElementException):
-                    continue
+
+                except (StaleElementReferenceException, TimeoutException, NoSuchElementException) as error:
+                    if error:
+                        count -= 1
+                        continue
         except ValueError:
             print("\nValue Error: Make sure all available text input boxes are filled with a number for script to run properly.\n")
             return
 
-        # adding new parameters to your strategy.
+        # Adding the best parameters into your strategy.
         self.click_settings_button(wait)
         best_key = self.find_best_key_both()
-        self.click_all_inputs(profits[best_key][1], profits[best_key][3], profits[best_key][5], profits[best_key][7],
-                              wait)
-        time.sleep(.5)
+        self.click_all_inputs(profits[best_key][1], profits[best_key][3], profits[best_key][5], profits[best_key][7], wait)
+        self.driver.implicitly_wait(1)
 
         print("\n----------Results----------\n")
         self.click_overview()

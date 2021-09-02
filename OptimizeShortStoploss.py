@@ -5,38 +5,32 @@ import numpy as np
 from TradeViewGUI import Main
 from my_functions import Functions
 
-url = 'https://www.tradingview.com/chart/'
-
 
 class ShortStoploss(Functions):
-
+    """find the best stop loss values for your strategy."""
     def __init__(self):
         Main.__init__(self)
         self.driver = self.create_driver()
         self.run_script()
 
     def run_script(self):
-        """find the best stop loss value."""
-
-        # Loading Webpage.
+        # Loading website with web driver.
+        wait = WebDriverWait(self.driver, 15)
         try:
-            my_range = np.arange(float(self.minShortStoplossValue.text()), float(self.maxShortStoplossValue.text()), float(self.ShortIncrementValue.text()))
-        except ValueError:
-            print("\nValue Error: Make sure all available text input boxes are filled with a number for script to run properly.\n")
-            return
-
-        wait = WebDriverWait(self.driver, 10)
-        try:
-            self.driver.get(url)
+            self.driver.get('https://www.tradingview.com/chart/')
         except Exception:
             print('WebDriver Error: Please Check Your FireFox Profile Path Is Correct.\n')
             print('Find Your Firefox Path Instructions. https://imgur.com/gallery/rdCqeT5 ')
-        self.click_strategy_tester()
+            return
+
+        # Making sure strategy tester tab is clicked so automation runs properly.
         try:
+            self.click_strategy_tester(wait)
             self.click_overview()
         except NoSuchElementException:
-            time.sleep(1)
             self.click_overview()
+
+        # Making sure we are on inputs tab and resetting values to default settings.
         print("Generating Max Profit For Stop Loss.")
         print("Loading script...\n")
         self.click_settings_button(wait)
@@ -45,27 +39,34 @@ class ShortStoploss(Functions):
         self.click_rest_all_inputs()
         self.click_ok_button()
 
-        # Searching for best stop loss for your strategy.
-        for number in my_range:
-            count = round(number, 2)
-            try:
-                self.click_settings_button(wait)
-                self.click_short_stoploss_input(count, wait)
-                self.get_net_profit_stoploss(count, wait)
-            except (StaleElementReferenceException, TimeoutException, NoSuchElementException):
-                print("script has timed out.")
-                break
+        try:
+            # Creating my range variable.
+            my_range = np.arange(float(self.minShortStoplossValue.text()), float(self.maxShortStoplossValue.text()), float(self.ShortIncrementValue.text()))
 
-        # adding the best stop loss to your strategy on TradingView.
+            # Increment through my range.
+            for number in my_range:
+                count = round(number, 2)
+                try:
+                    self.click_settings_button(wait)
+                    self.click_short_stoploss_input(count, wait)
+                    self.get_net_profit_stoploss(count, wait)
+                except (StaleElementReferenceException, TimeoutException, NoSuchElementException)as error:
+                    if error:
+                        count -= 1
+                        continue
+        except ValueError:
+            print("\nValue Error: Make sure all available text input boxes are filled with a number for script to run properly.\n")
+            return
+
+        # Adding the best parameters into your strategy.
         self.click_settings_button(wait)
         best_key = self.find_best_stoploss()
         self.click_short_stoploss_input(best_key, wait)
-        time.sleep(.5)
+        self.driver.implicitly_wait(1)
 
-        # Printing Results of the best stop loss value found.
         print("\n----------Results----------\n")
         self.click_overview()
-        self.print_show_me.best_stoploss()
+        self.print_best_stoploss()
         self.click_performance_summary()
         self.print_total_closed_trades()
         self.print_win_rate()

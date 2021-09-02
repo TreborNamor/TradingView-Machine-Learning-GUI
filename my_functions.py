@@ -1,5 +1,5 @@
 from selenium.webdriver.common.keys import Keys
-from selenium.common.exceptions import ElementNotInteractableException
+from selenium.common.exceptions import ElementNotInteractableException, StaleElementReferenceException
 from profit import profits
 from TradeViewGUI import Main
 from selenium.webdriver.common.by import By
@@ -7,7 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 from selenium.common.exceptions import NoSuchElementException
 from termcolor import colored
-
+from selenium.webdriver.support.ui import WebDriverWait
 
 class Functions(Main):
     """You will find click, get, find, and show_me functions here."""
@@ -39,9 +39,10 @@ class Functions(Main):
         except AttributeError:
             pass
 
-    def click_strategy_tester(self):
+    def click_strategy_tester(self, wait):
         """check if strategy tester tab is active if not click to open tab."""
         try:
+            wait.until(EC.visibility_of_element_located((By.XPATH, "//*[@class='title-37voAVwR']")))
             strategy_tester_tab = self.driver.find_elements_by_xpath("//*[@class='title-37voAVwR']")
             for index, web_element in enumerate(strategy_tester_tab):
                 if web_element.text == 'Strategy Tester':
@@ -285,17 +286,14 @@ class Functions(Main):
         short_takeprofit_input_box.send_keys(Keys.ENTER)
 
     # Get Functions
-    def get_net_all(self, long_stoploss_value, long_takeprofit_value, short_stoploss_value, short_takeprofit_value,
-                    wait):
+    def get_net_all(self, long_stoploss_value, long_takeprofit_value, short_stoploss_value, short_takeprofit_value, wait):
         wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "additional_percent_value")))
         try:
-            time.sleep(.5)
             check = self.driver.find_elements_by_class_name("additional_percent_value")[0]
             check.find_element_by_xpath('./span[contains(@class, "neg")]')
             negative = True
         except NoSuchElementException:
             negative = False
-
         if negative:
             net_profit = self.driver.find_elements_by_class_name("additional_percent_value")[0].text.split(" %")
             net_value = -float(net_profit[0])
@@ -524,28 +522,32 @@ class Functions(Main):
             print(f'Buy & Hold Return: {display}')
 
     def print_sharpe_ratio(self):
-        sharpe_ratio = \
-        self.driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name(
-            "tbody").find_elements_by_tag_name("tr")[5].find_elements_by_tag_name("td")[1]
         try:
-            negative = sharpe_ratio.find_element_by_class_name("neg")
+            negative = self.driver.find_element_by_class_name("report-data").find_element_by_tag_name(
+                "table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[5].find_elements_by_tag_name(
+                "td")[1].find_element_by_class_name("neg")
             if negative:
-                display = colored(f'{sharpe_ratio.text}', 'red')
+                display = colored(f'{negative.text}', 'red')
                 print(f'Sharpe Ratio: {display}')
         except NoSuchElementException:
+            sharpe_ratio = self.driver.find_element_by_class_name("report-data").find_element_by_tag_name(
+                "table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[5].find_elements_by_tag_name(
+                "td")[1]
             display = colored(f'{sharpe_ratio.text}', 'green')
             print(f'Sharpe Ratio: {display}')
 
     def print_sortino_ratio(self):
-        sortino_ratio = \
-        self.driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name(
-            "tbody").find_elements_by_tag_name("tr")[6].find_elements_by_tag_name("td")[1]
         try:
-            negative = sortino_ratio.find_element_by_class_name("neg")
+            negative = self.driver.find_element_by_class_name("report-data").find_element_by_tag_name(
+                "table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[6].find_elements_by_tag_name(
+                "td")[1].find_element_by_class_name("neg")
             if negative:
-                display = colored(f'{sortino_ratio.text}', 'red')
+                display = colored(f'{negative.text}', 'red')
                 print(f'Sortino Ratio: {display}')
         except NoSuchElementException:
+            sortino_ratio = self.driver.find_element_by_class_name("report-data").find_element_by_tag_name(
+                "table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[6].find_elements_by_tag_name(
+                "td")[1]
             display = colored(f'{sortino_ratio.text}', 'green')
             print(f'Sortino Ratio: {display}')
 
@@ -638,15 +640,17 @@ class Functions(Main):
             print(f'Avg Trade: {display}')
 
     def print_avg_win_trade(self):
-        avg_win_trade = \
-        self.driver.find_element_by_class_name("report-data").find_element_by_tag_name("table").find_element_by_tag_name(
-            "tbody").find_elements_by_tag_name("tr")[17].find_element_by_class_name("additional_percent_value")
         try:
-            negative = avg_win_trade.find_element_by_class_name("neg")
+            negative = self.driver.find_element_by_class_name("report-data").find_element_by_tag_name(
+                "table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[
+                17].find_element_by_class_name("additional_percent_value").find_element_by_class_name("neg")
             if negative:
-                display = colored(f'{avg_win_trade.text}', 'red')
+                display = colored(f'{negative.text}', 'red')
                 print(f'Avg Win Trade: {display}')
         except NoSuchElementException:
+            avg_win_trade = self.driver.find_element_by_class_name("report-data").find_element_by_tag_name(
+                "table").find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")[
+                17].find_element_by_class_name("additional_percent_value")
             display = colored(f'{avg_win_trade.text}', 'green')
             print(f'Avg Win Trade: {display}')
 
