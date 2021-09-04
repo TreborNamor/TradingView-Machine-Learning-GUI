@@ -1,0 +1,6 @@
+
+*.xml
+*.pyc
+*.log
+geckodriver.log
+geckodriver.log
