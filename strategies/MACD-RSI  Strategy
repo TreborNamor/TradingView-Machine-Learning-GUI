@@ -82,7 +82,7 @@ plot(e and oute ? oute: na, title="EMA 5", color=color.blue, linewidth=2)
 was_over_sold =  barssince(rsi <= rsi_over_sold) <= 10
 was_over_bought = barssince(rsi >= rsi_over_bought) <= 10
 crossover_bull = crossover(macd_line, signal_line)
-crossover_bear = crossunder(signal_line, macd_line)
+crossover_bear = crossunder(macd_line, signal_line)
 buy_signal = was_over_sold and crossover_bull
 sell_signal = was_over_bought and crossover_bear
 
