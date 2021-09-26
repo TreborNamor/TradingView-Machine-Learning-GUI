@@ -1,10 +1,13 @@
 import random
-from selenium.common.exceptions import NoSuchElementException, StaleElementReferenceException, TimeoutException
+
+from selenium.common.exceptions import (NoSuchElementException,
+                                        StaleElementReferenceException,
+                                        TimeoutException)
 from selenium.webdriver.support.ui import WebDriverWait
-import time
+
+from my_functions import Functions
 from profit import profits
 from TradeViewGUI import Main
-from my_functions import Functions
 
 
 class ShortScript(Functions):
@@ -19,10 +22,14 @@ class ShortScript(Functions):
         # Loading website with web driver.
         wait = WebDriverWait(self.driver, 15)
         try:
-            self.driver.get('https://www.tradingview.com/chart/')
+            self.driver.get("https://www.tradingview.com/chart/")
         except Exception:
-            print('WebDriver Error: Please Check Your FireFox Profile Path Is Correct.\n')
-            print('Find Your Firefox Path Instructions. https://imgur.com/gallery/rdCqeT5 ')
+            print(
+                "WebDriver Error: Please Check Your FireFox Profile Path Is Correct.\n"
+            )
+            print(
+                "Find Your Firefox Path Instructions. https://imgur.com/gallery/rdCqeT5 "
+            )
             return
 
         # Making sure strategy tester tab is clicked so automation runs properly.
@@ -46,15 +53,23 @@ class ShortScript(Functions):
         try:
             while count < int(self.maxAttemptsValue.text()):
                 try:
-                    count += 1
+                    count = 1
 
                     # Creating random values every loop.
                     stoploss_value = round(
-                        random.uniform(float(self.minShortStoplossValue.text()), float(self.maxShortStoplossValue.text())),
-                        int(self.decimalPlaceValue.text()))
+                        random.uniform(
+                            float(self.minShortStoplossValue.text()),
+                            float(self.maxShortStoplossValue.text()),
+                        ),
+                        int(self.decimalPlaceValue.text()),
+                    )
                     takeprofit_value = round(
-                        random.uniform(float(self.minShortTakeprofitValue.text()), float(self.maxShortTakeprofitValue.text())),
-                        int(self.decimalPlaceValue.text()))
+                        random.uniform(
+                            float(self.minShortTakeprofitValue.text()),
+                            float(self.maxShortTakeprofitValue.text()),
+                        ),
+                        int(self.decimalPlaceValue.text()),
+                    )
 
                     # Click settings button
                     self.click_settings_button(wait)
@@ -65,12 +80,18 @@ class ShortScript(Functions):
                     # Saving the profitability of the new values into a dictionary.
                     self.get_net_both(stoploss_value, takeprofit_value, wait)
 
-                except (StaleElementReferenceException, TimeoutException, NoSuchElementException) as error:
+                except (
+                    StaleElementReferenceException,
+                    TimeoutException,
+                    NoSuchElementException,
+                ) as error:
                     if error:
                         count -= 1
                         continue
         except ValueError:
-            print("\nValue Error: Make sure all available text input boxes are filled with a number for script to run properly.\n")
+            print(
+                "\nValue Error: Make sure all available text input boxes are filled with a number for script to run properly.\n"
+            )
             return
 
         # Adding the best parameters into your strategy.

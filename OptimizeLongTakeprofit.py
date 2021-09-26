@@ -1,13 +1,16 @@
-from selenium.common.exceptions import NoSuchElementException, StaleElementReferenceException, TimeoutException
-from selenium.webdriver.support.ui import WebDriverWait
-import time
 import numpy as np
-from TradeViewGUI import Main
+from selenium.common.exceptions import (NoSuchElementException,
+                                        StaleElementReferenceException,
+                                        TimeoutException)
+from selenium.webdriver.support.ui import WebDriverWait
+
 from my_functions import Functions
+from TradeViewGUI import Main
 
 
 class LongTakeProfit(Functions):
     """find the best take profit values for your strategy."""
+
     def __init__(self):
         Main.__init__(self)
         self.driver = self.create_driver()
@@ -17,10 +20,14 @@ class LongTakeProfit(Functions):
         # Loading website with web driver.
         wait = WebDriverWait(self.driver, 15)
         try:
-            self.driver.get('https://www.tradingview.com/chart/')
+            self.driver.get("https://www.tradingview.com/chart/")
         except Exception:
-            print('WebDriver Error: Please Check Your FireFox Profile Path Is Correct.\n')
-            print('Find Your Firefox Path Instructions. https://imgur.com/gallery/rdCqeT5 ')
+            print(
+                "WebDriver Error: Please Check Your FireFox Profile Path Is Correct.\n"
+            )
+            print(
+                "Find Your Firefox Path Instructions. https://imgur.com/gallery/rdCqeT5 "
+            )
             return
 
         # Making sure strategy tester tab is clicked so automation runs properly.
@@ -41,7 +48,11 @@ class LongTakeProfit(Functions):
 
         try:
             # Creating my range variable.
-            my_range = np.arange(float(self.minLongTakeprofitValue.text()), float(self.maxLongTakeprofitValue.text()), float(self.LongIncrementValue.text()))
+            my_range = np.arange(
+                float(self.minLongTakeprofitValue.text()),
+                float(self.maxLongTakeprofitValue.text()),
+                float(self.LongIncrementValue.text()),
+            )
 
             # Increment through my range.
             for number in my_range:
@@ -50,12 +61,18 @@ class LongTakeProfit(Functions):
                     self.click_settings_button(wait)
                     self.click_long_takeprofit_input(count, wait)
                     self.get_net_profit_takeprofit(count, wait)
-                except (StaleElementReferenceException, TimeoutException, NoSuchElementException) as error:
+                except (
+                    StaleElementReferenceException,
+                    TimeoutException,
+                    NoSuchElementException,
+                ) as error:
                     if error:
                         count -= 1
                         continue
         except ValueError:
-            print("\nValue Error: Make sure all available text input boxes are filled with a number for script to run properly.\n")
+            print(
+                "\nValue Error: Make sure all available text input boxes are filled with a number for script to run properly.\n"
+            )
             return
 
         # Adding the best parameters into your strategy.

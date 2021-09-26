@@ -1,20 +1,20 @@
-from distutils.util import strtobool
-from PyQt5 import uic
-from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QCheckBox
-from PyQt5.QtCore import QSettings
-from PyQt5.QtWidgets import QWidget, QLineEdit
 import sys
+from distutils.util import strtobool
+
+from PyQt5 import uic
+from PyQt5.QtCore import QSettings
+from PyQt5.QtWidgets import (QApplication, QCheckBox, QLineEdit, QMainWindow,
+                             QMessageBox, QWidget)
 from selenium import webdriver
-from webdriver_manager.firefox import GeckoDriverManager
 from selenium.webdriver.firefox.options import Options
+from webdriver_manager.firefox import GeckoDriverManager
 
 
 class Main(QMainWindow):
-
     def __init__(self):
         super().__init__()
-        self.ui = uic.loadUi('tradingview.ui', self)
-        self.settings = QSettings('TradingviewOptimizer', 'Strategy Parameters')
+        self.ui = uic.loadUi("tradingview.ui", self)
+        self.settings = QSettings("TradingviewOptimizer", "Strategy Parameters")
         self.gui_restore()
         self.pushButton.clicked.connect(self.optimize_longs_shorts)
         self.pushButton.clicked.connect(self.optimize_long)
@@ -40,18 +40,38 @@ class Main(QMainWindow):
         self.comboBox.currentTextChanged.connect(self.comboBoxSelection)
 
         if self.comboBox.currentIndex() == 0:
-            self.minLongStoplossValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
-            self.maxLongStoplossValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
-            self.minLongTakeprofitValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
-            self.maxLongTakeprofitValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
+            self.minLongStoplossValue.setStyleSheet(
+                "background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);"
+            )
+            self.maxLongStoplossValue.setStyleSheet(
+                "background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);"
+            )
+            self.minLongTakeprofitValue.setStyleSheet(
+                "background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);"
+            )
+            self.maxLongTakeprofitValue.setStyleSheet(
+                "background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);"
+            )
             self.LongIncrementValue.setStyleSheet("color: rgb(21, 21, 47)")
-            self.minShortStoplossValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
-            self.maxShortStoplossValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
-            self.minShortTakeprofitValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
-            self.maxShortTakeprofitValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
+            self.minShortStoplossValue.setStyleSheet(
+                "background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);"
+            )
+            self.maxShortStoplossValue.setStyleSheet(
+                "background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);"
+            )
+            self.minShortTakeprofitValue.setStyleSheet(
+                "background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);"
+            )
+            self.maxShortTakeprofitValue.setStyleSheet(
+                "background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);"
+            )
             self.ShortIncrementValue.setStyleSheet("color: rgb(21, 21, 47)")
-            self.decimalPlaceValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
-            self.maxAttemptsValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
+            self.decimalPlaceValue.setStyleSheet(
+                "background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);"
+            )
+            self.maxAttemptsValue.setStyleSheet(
+                "background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);"
+            )
             self.minLongStoplossValue.setEnabled(True)
             self.maxLongStoplossValue.setEnabled(True)
             self.minLongTakeprofitValue.setEnabled(True)
@@ -74,7 +94,9 @@ class Main(QMainWindow):
             elif not self.FirefoxcheckBox.isChecked():
                 options.headless = False
             profile = webdriver.FirefoxProfile(self.firefoxProfileString.text())
-            driver = webdriver.Firefox(profile, options=options, executable_path=GeckoDriverManager().install())
+            driver = webdriver.Firefox(
+                profile, options=options, executable_path=GeckoDriverManager().install()
+            )
             return driver
         except Exception:
             pass
@@ -94,7 +116,7 @@ class Main(QMainWindow):
         for obj in self.findChildren(QWidget):
             if isinstance(obj, QLineEdit):
                 name = obj.objectName()
-                value = (self.settings.value(name))
+                value = self.settings.value(name)
                 obj.setText(value)
             if isinstance(obj, QCheckBox):
                 name = obj.objectName()
@@ -107,7 +129,7 @@ class Main(QMainWindow):
             QMessageBox.Warning,
             "Window Close",
             "Are you sure you want to close the window?",
-            buttons=QMessageBox.Yes | QMessageBox.No
+            buttons=QMessageBox.Yes | QMessageBox.No,
         )
         msgBox.setDefaultButton(QMessageBox.No)
         msgBox.exec_()
@@ -121,52 +143,79 @@ class Main(QMainWindow):
     def optimize_longs_shorts(self):
         if self.comboBox.currentIndex() == 0:
             import OptimizeLongsShorts
+
             OptimizeLongsShorts.LongShortScript()
 
     def optimize_long(self):
         if self.comboBox.currentIndex() == 1:
             import OptimizeLong
+
             OptimizeLong.LongScript()
 
     def optimize_short(self):
         if self.comboBox.currentIndex() == 2:
             import OptimizeShort
+
             OptimizeShort.ShortScript()
 
     def optimize_long_stoploss(self):
         if self.comboBox.currentIndex() == 3:
             import OptimizeLongStoploss
+
             OptimizeLongStoploss.LongStoploss()
 
     def optimize_long_takeprofit(self):
         if self.comboBox.currentIndex() == 4:
             import OptimizeLongTakeprofit
+
             OptimizeLongTakeprofit.LongTakeProfit()
 
     def optimize_short_stoploss(self):
         if self.comboBox.currentIndex() == 5:
             import OptimizeShortStoploss
+
             OptimizeShortStoploss.ShortStoploss()
 
     def optimize_short_takeprofit(self):
         if self.comboBox.currentIndex() == 6:
             import OptimizeShortTakeprofit
+
             OptimizeShortTakeprofit.ShortTakeProfit()
 
     def comboBoxSelection(self):
         if self.comboBox.currentIndex() == 0:
-            self.minLongStoplossValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
-            self.maxLongStoplossValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
-            self.minLongTakeprofitValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
-            self.maxLongTakeprofitValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
+            self.minLongStoplossValue.setStyleSheet(
+                "background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);"
+            )
+            self.maxLongStoplossValue.setStyleSheet(
+                "background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);"
+            )
+            self.minLongTakeprofitValue.setStyleSheet(
+                "background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);"
+            )
+            self.maxLongTakeprofitValue.setStyleSheet(
+                "background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);"
+            )
             self.LongIncrementValue.setStyleSheet("color: rgb(21, 21, 47)")
-            self.minShortStoplossValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
-            self.maxShortStoplossValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
-            self.minShortTakeprofitValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
-            self.maxShortTakeprofitValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
+            self.minShortStoplossValue.setStyleSheet(
+                "background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);"
+            )
+            self.maxShortStoplossValue.setStyleSheet(
+                "background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);"
+            )
+            self.minShortTakeprofitValue.setStyleSheet(
+                "background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);"
+            )
+            self.maxShortTakeprofitValue.setStyleSheet(
+                "background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);"
+            )
             self.ShortIncrementValue.setStyleSheet("color: rgb(21, 21, 47)")
-            self.decimalPlaceValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
-            self.maxAttemptsValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
+            self.decimalPlaceValue.setStyleSheet(
+                "background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);"
+            )
+            self.maxAttemptsValue.setStyleSheet(
+                "background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);"
+            )
             self.minLongStoplossValue.setEnabled(True)
             self.maxLongStoplossValue.setEnabled(True)
             self.minLongTakeprofitValue.setEnabled(True)
@@ -181,18 +230,30 @@ class Main(QMainWindow):
             self.ShortIncrementValue.setEnabled(False)
 
         if self.comboBox.currentIndex() == 1:
-            self.minLongStoplossValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
-            self.maxLongStoplossValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
-            self.minLongTakeprofitValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
-            self.maxLongTakeprofitValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
+            self.minLongStoplossValue.setStyleSheet(
+                "background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);"
+            )
+            self.maxLongStoplossValue.setStyleSheet(
+                "background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);"
+            )
+            self.minLongTakeprofitValue.setStyleSheet(
+                "background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);"
+            )
+            self.maxLongTakeprofitValue.setStyleSheet(
+                "background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);"
+            )
             self.LongIncrementValue.setStyleSheet("color: rgb(21, 21, 47)")
             self.minShortStoplossValue.setStyleSheet("color: rgb(21, 21, 47)")
             self.maxShortStoplossValue.setStyleSheet("color: rgb(21, 21, 47)")
             self.minShortTakeprofitValue.setStyleSheet("color: rgb(21, 21, 47)")
             self.maxShortTakeprofitValue.setStyleSheet("color: rgb(21, 21, 47)")
             self.ShortIncrementValue.setStyleSheet("color: rgb(21, 21, 47)")
-            self.decimalPlaceValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
-            self.maxAttemptsValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
+            self.decimalPlaceValue.setStyleSheet(
+                "background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);"
+            )
+            self.maxAttemptsValue.setStyleSheet(
+                "background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);"
+            )
             self.minLongStoplossValue.setEnabled(True)
             self.maxLongStoplossValue.setEnabled(True)
             self.minLongTakeprofitValue.setEnabled(True)
@@ -212,13 +273,25 @@ class Main(QMainWindow):
             self.minLongTakeprofitValue.setStyleSheet("color: rgb(21, 21, 47)")
             self.maxLongTakeprofitValue.setStyleSheet("color: rgb(21, 21, 47)")
             self.LongIncrementValue.setStyleSheet("color: rgb(21, 21, 47)")
-            self.minShortStoplossValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
-            self.maxShortStoplossValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
-            self.minShortTakeprofitValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
-            self.maxShortTakeprofitValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
+            self.minShortStoplossValue.setStyleSheet(
+                "background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);"
+            )
+            self.maxShortStoplossValue.setStyleSheet(
+                "background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);"
+            )
+            self.minShortTakeprofitValue.setStyleSheet(
+                "background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);"
+            )
+            self.maxShortTakeprofitValue.setStyleSheet(
+                "background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);"
+            )
             self.ShortIncrementValue.setStyleSheet("color: rgb(21, 21, 47)")
-            self.decimalPlaceValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
-            self.maxAttemptsValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
+            self.decimalPlaceValue.setStyleSheet(
+                "background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);"
+            )
+            self.maxAttemptsValue.setStyleSheet(
+                "background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);"
+            )
             self.minLongStoplossValue.setEnabled(False)
             self.maxLongStoplossValue.setEnabled(False)
             self.minLongTakeprofitValue.setEnabled(False)
@@ -233,11 +306,17 @@ class Main(QMainWindow):
             self.maxAttemptsValue.setEnabled(True)
 
         if self.comboBox.currentIndex() == 3:
-            self.minLongStoplossValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
-            self.maxLongStoplossValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
+            self.minLongStoplossValue.setStyleSheet(
+                "background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);"
+            )
+            self.maxLongStoplossValue.setStyleSheet(
+                "background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);"
+            )
             self.minLongTakeprofitValue.setStyleSheet("color: rgb(21, 21, 47)")
             self.maxLongTakeprofitValue.setStyleSheet("color: rgb(21, 21, 47)")
-            self.LongIncrementValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
+            self.LongIncrementValue.setStyleSheet(
+                "background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);"
+            )
 
             self.minShortStoplossValue.setStyleSheet("color: rgb(21, 21, 47)")
             self.maxShortStoplossValue.setStyleSheet("color: rgb(21, 21, 47)")
@@ -266,9 +345,15 @@ class Main(QMainWindow):
         if self.comboBox.currentIndex() == 4:
             self.minLongStoplossValue.setStyleSheet("color: rgb(21, 21, 47)")
             self.maxLongStoplossValue.setStyleSheet("color: rgb(21, 21, 47)")
-            self.minLongTakeprofitValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
-            self.maxLongTakeprofitValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
-            self.LongIncrementValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
+            self.minLongTakeprofitValue.setStyleSheet(
+                "background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);"
+            )
+            self.maxLongTakeprofitValue.setStyleSheet(
+                "background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);"
+            )
+            self.LongIncrementValue.setStyleSheet(
+                "background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);"
+            )
             self.minShortStoplossValue.setStyleSheet("color: rgb(21, 21, 47)")
             self.maxShortStoplossValue.setStyleSheet("color: rgb(21, 21, 47)")
             self.minShortTakeprofitValue.setStyleSheet("color: rgb(21, 21, 47)")
@@ -295,11 +380,17 @@ class Main(QMainWindow):
             self.minLongTakeprofitValue.setStyleSheet("color: rgb(21, 21, 47)")
             self.maxLongTakeprofitValue.setStyleSheet("color: rgb(21, 21, 47)")
             self.LongIncrementValue.setStyleSheet("color: rgb(21, 21, 47)")
-            self.minShortStoplossValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
-            self.maxShortStoplossValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
+            self.minShortStoplossValue.setStyleSheet(
+                "background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);"
+            )
+            self.maxShortStoplossValue.setStyleSheet(
+                "background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);"
+            )
             self.minShortTakeprofitValue.setStyleSheet("color: rgb(21, 21, 47)")
             self.maxShortTakeprofitValue.setStyleSheet("color: rgb(21, 21, 47)")
-            self.ShortIncrementValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
+            self.ShortIncrementValue.setStyleSheet(
+                "background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);"
+            )
             self.decimalPlaceValue.setStyleSheet("color: rgb(21, 21, 47)")
             self.maxAttemptsValue.setStyleSheet("color: rgb(21, 21, 47)")
             self.minLongStoplossValue.setEnabled(False)
@@ -323,9 +414,15 @@ class Main(QMainWindow):
             self.LongIncrementValue.setStyleSheet("color: rgb(21, 21, 47)")
             self.minShortStoplossValue.setStyleSheet("color: rgb(21, 21, 47)")
             self.maxShortStoplossValue.setStyleSheet("color: rgb(21, 21, 47)")
-            self.minShortTakeprofitValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
-            self.maxShortTakeprofitValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
-            self.ShortIncrementValue.setStyleSheet("background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);")
+            self.minShortTakeprofitValue.setStyleSheet(
+                "background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);"
+            )
+            self.maxShortTakeprofitValue.setStyleSheet(
+                "background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);"
+            )
+            self.ShortIncrementValue.setStyleSheet(
+                "background-color: rgb(21, 21, 47); color: rgb(170, 255, 255);"
+            )
             self.decimalPlaceValue.setStyleSheet("color: rgb(21, 21, 47)")
             self.maxAttemptsValue.setStyleSheet("color: rgb(21, 21, 47)")
             self.minLongStoplossValue.setEnabled(False)
@@ -340,6 +437,8 @@ class Main(QMainWindow):
             self.ShortIncrementValue.setEnabled(True)
             self.decimalPlaceValue.setEnabled(False)
             self.maxAttemptsValue.setEnabled(False)
+
+
 def main():
     app = QApplication(sys.argv)
     win = Main()

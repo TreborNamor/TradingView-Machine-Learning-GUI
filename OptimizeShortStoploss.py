@@ -1,13 +1,18 @@
-from selenium.common.exceptions import NoSuchElementException, StaleElementReferenceException, TimeoutException
+import random
+
+from selenium.common.exceptions import (NoSuchElementException,
+                                        StaleElementReferenceException,
+                                        TimeoutException)
 from selenium.webdriver.support.ui import WebDriverWait
-import time
-import numpy as np
-from TradeViewGUI import Main
+
 from my_functions import Functions
+from profit import profits
+from TradeViewGUI import Main
 
 
-class ShortStoploss(Functions):
-    """find the best stop loss values for your strategy."""
+class ShortScript(Functions):
+    """find the best stop loss and take profit values for your strategy."""
+
     def __init__(self):
         Main.__init__(self)
         self.driver = self.create_driver()
@@ -17,10 +22,14 @@ class ShortStoploss(Functions):
         # Loading website with web driver.
         wait = WebDriverWait(self.driver, 15)
         try:
-            self.driver.get('https://www.tradingview.com/chart/')
+            self.driver.get("https://www.tradingview.com/chart/")
         except Exception:
-            print('WebDriver Error: Please Check Your FireFox Profile Path Is Correct.\n')
-            print('Find Your Firefox Path Instructions. https://imgur.com/gallery/rdCqeT5 ')
+            print(
+                "WebDriver Error: Please Check Your FireFox Profile Path Is Correct.\n"
+            )
+            print(
+                "Find Your Firefox Path Instructions. https://imgur.com/gallery/rdCqeT5 "
+            )
             return
 
         # Making sure strategy tester tab is clicked so automation runs properly.
@@ -29,48 +38,75 @@ class ShortStoploss(Functions):
             self.click_overview()
         except NoSuchElementException:
             self.click_overview()
-
-        # Making sure we are on inputs tab and resetting values to default settings.
         print("Generating Max Profit For Stop Loss.")
         print("Loading script...\n")
+
+        # Making sure we are on inputs tab and resetting values to default settings.
         self.click_settings_button(wait)
         self.click_input_tab()
         self.click_enable_short_strategy_checkbox()
         self.click_rest_all_inputs()
         self.click_ok_button()
 
+        # Loop through max attempts while randomizing values each attempt.
+        count = 0
         try:
-            # Creating my range variable.
-            my_range = np.arange(float(self.minShortStoplossValue.text()), float(self.maxShortStoplossValue.text()), float(self.ShortIncrementValue.text()))
-
-            # Increment through my range.
-            for number in my_range:
-                count = round(number, 2)
+            while count < int(self.maxAttemptsValue.text()):
                 try:
+                    count = 1
+
+                    # Creating random values every loop.
+                    stoploss_value = round(
+                        random.uniform(
+                            float(self.minShortStoplossValue.text()),
+                            float(self.maxShortStoplossValue.text()),
+                        ),
+                        int(self.decimalPlaceValue.text()),
+                    )
+                    takeprofit_value = round(
+                        random.uniform(
+                            float(self.minShortTakeprofitValue.text()),
+                            float(self.maxShortTakeprofitValue.text()),
+                        ),
+                        int(self.decimalPlaceValue.text()),
+                    )
+
+                    # Click settings button
                     self.click_settings_button(wait)
-                    self.click_short_stoploss_input(count, wait)
-                    self.get_net_profit_stoploss(count, wait)
-                except (StaleElementReferenceException, TimeoutException, NoSuchElementException)as error:
+
+                    # Click both input boxes and add new values.
+                    self.click_short_inputs(stoploss_value, takeprofit_value, wait)
+
+                    # Saving the profitability of the new values into a dictionary.
+                    self.get_net_both(stoploss_value, takeprofit_value, wait)
+
+                except (
+                    StaleElementReferenceException,
+                    TimeoutException,
+                    NoSuchElementException,
+                ) as error:
                     if error:
                         count -= 1
                         continue
         except ValueError:
-            print("\nValue Error: Make sure all available text input boxes are filled with a number for script to run properly.\n")
+            print(
+                "\nValue Error: Make sure all available text input boxes are filled with a number for script to run properly.\n"
+            )
             return
 
         # Adding the best parameters into your strategy.
         self.click_settings_button(wait)
-        best_key = self.find_best_stoploss()
-        self.click_short_stoploss_input(best_key, wait)
+        best_key = self.find_best_key_both()
+        self.click_short_inputs(profits[best_key][1], profits[best_key][3], wait)
         self.driver.implicitly_wait(1)
 
         print("\n----------Results----------\n")
         self.click_overview()
-        self.print_best_stoploss()
+        self.print_best_both()
         self.click_performance_summary()
         self.print_total_closed_trades()
-        self.print_win_rate()
         self.print_net_profit()
+        self.print_win_rate()
         self.print_max_drawdown()
         self.print_sharpe_ratio()
         self.print_sortino_ratio()
