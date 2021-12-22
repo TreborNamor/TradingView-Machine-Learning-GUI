@@ -122,7 +122,7 @@ class Main(QMainWindow):
                 name = obj.objectName()
                 value = self.settings.value(name)  # get stored value from registry
                 if value is not None:
-                    obj.setChecked(strtobool(value))  # restore checkbox
+                    obj.setChecked(value == 'True')  # restore checkbox
 
     def closeEvent(self, event):
         msgBox = QMessageBox(

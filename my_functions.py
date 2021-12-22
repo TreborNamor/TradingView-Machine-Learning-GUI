@@ -69,7 +69,7 @@ class Functions(Main):
                     break
         except (IndexError, NoSuchElementException, ElementNotInteractableException):
             print(
-                "Could Not Click Strategy Tester Tab. Please Check web element XPATH."
+                "Could Not Click Strategy Tester Tab: strategy tester. Please Check web element XPATH."
             )
 
     def click_overview(self):
@@ -96,7 +96,7 @@ class Functions(Main):
                     break
         except (IndexError, NoSuchElementException, ElementNotInteractableException):
             print(
-                "Could Not Click Strategy Tester Tab. Please Check web element XPATH."
+                "Could Not Click Strategy Tester Tab: report-tabs. Please Check web element XPATH."
             )
 
     def click_performance_summary(self):
@@ -122,7 +122,7 @@ class Functions(Main):
                     break
         except (IndexError, NoSuchElementException, ElementNotInteractableException):
             print(
-                "Could Not Click Strategy Tester Tab. Please Check web element XPATH."
+                "Could Not Click Strategy Tester Tab: perfromance summary. Please Check web element XPATH."
             )
 
     def click_list_of_trades(self):
@@ -148,7 +148,7 @@ class Functions(Main):
                     break
         except (IndexError, NoSuchElementException, ElementNotInteractableException):
             print(
-                "Could Not Click Strategy Tester Tab. Please Check web element XPATH."
+                "Could Not Click Strategy Tester Tab: trades tab. Please Check web element XPATH."
             )
 
     def click_long_stoploss_input(self, count, wait):
@@ -277,6 +277,7 @@ class Functions(Main):
         ok_button = self.driver.find_element_by_name("submit")
         ok_button.click()
 
+
     def click_all_inputs(
             self,
             long_stoploss_value,
@@ -330,6 +331,7 @@ class Functions(Main):
         ok_button.click()
 
     def click_enable_both_checkboxes(self):
+        time.sleep(1)
         long_checkbox = self.driver.find_elements_by_xpath(
             "//*[@class='input-24iGIobO']")[0]
         short_checkbox = self.driver.find_elements_by_xpath(
@@ -412,63 +414,30 @@ class Functions(Main):
     ):
         wait.until(EC.visibility_of_element_located(
             (By.CLASS_NAME, "additional_percent_value")))
-        try:
-            check = self.driver.find_elements_by_class_name(
-                "additional_percent_value")[0]
-            check.find_element_by_xpath('./span[contains(@class, "neg")]')
-            negative = True
-        except NoSuchElementException:
-            negative = False
-        if negative:
-            net_profit = self.driver.find_elements_by_class_name(
-                "additional_percent_value"
-            )[0].text.split(" %")
-            net_value = -float(net_profit[0])
-            profits.update(
-                {
-                    -net_value: [
-                        "Long Stoploss:",
-                        long_stoploss_value,
-                        "Long Take Profit:",
-                        long_takeprofit_value,
-                        "Short Stoploss:",
-                        short_stoploss_value,
-                        "Short Take Profit:",
-                        short_takeprofit_value,
-                    ]
-                }
+
+        net_profit = float(self.driver.find_element_by_xpath("/html/body/div[2]/div[6]/div[2]/div[4]/div[3]/div/div/div[1]/div[1]/p/span/span").text.split("%")[0])
+        trades_amount = self.driver.find_element_by_xpath("/html/body/div[2]/div[6]/div[2]/div[4]/div[3]/div/div/div[1]/div[2]/strong").text
+        max_drawdown = self.driver.find_element_by_xpath("/html/body/div[2]/div[6]/div[2]/div[4]/div[3]/div/div/div[1]/div[5]/p/span/span").text
+        profits.update(
+            {
+                net_profit: [
+                    "Long Stoploss:",
+                    long_stoploss_value,
+                    "Long Take Profit:",
+                    long_takeprofit_value,
+                    "Short Stoploss:",
+                    short_stoploss_value,
+                    "Short Take Profit:",
+                    short_takeprofit_value,
+                ]
+            }
+        )
+        print(
+            colored(
+                f"Net Profit:{net_profit}, trades:{trades_amount}  max_drawdown:{max_drawdown}  --> Long Stoploss: {long_stoploss_value}, Long Take Profit: {long_takeprofit_value}, Short Stoploss: {short_stoploss_value}, Short Take Profit: {short_takeprofit_value}",
+                "red",
             )
-            print(
-                colored(
-                    f"Net Profit: -{net_value}% --> Long Stoploss: {long_stoploss_value}, Long Take Profit: {long_takeprofit_value}, Short Stoploss: {short_stoploss_value}, Short Take Profit: {short_takeprofit_value}",
-                    "red",
-                )
-            )
-        else:
-            net_profit = self.driver.find_elements_by_class_name(
-                "additional_percent_value"
-            )[0].text.split(" %")
-            net_value = float(net_profit[0])
-            profits.update(
-                {
-                    net_value: [
-                        "Long Stoploss:",
-                        long_stoploss_value,
-                        "Long Take Profit:",
-                        long_takeprofit_value,
-                        "Short Stoploss:",
-                        short_stoploss_value,
-                        "Short Take Profit:",
-                        short_takeprofit_value,
-                    ]
-                }
-            )
-            print(
-                colored(
-                    f"Net Profit: {net_value}% --> Long Stoploss: {long_stoploss_value}, Long Take Profit: {long_takeprofit_value}, Short Stoploss: {short_stoploss_value}, Short Take Profit: {short_takeprofit_value}",
-                    "green",
-                )
-            )
+        )
         return net_profit
 
     def get_net_both(self, stoploss_value, takeprofit_value, wait):

@@ -18,7 +18,7 @@ class ShortTakeProfit(Functions):
 
     def run_script(self):
         # Loading website with web driver.
-        wait = WebDriverWait(self.driver, 15)
+        wait = WebDriverWait(self.driver, 20)
         try:
             self.driver.get("https://www.tradingview.com/chart/")
         except Exception:

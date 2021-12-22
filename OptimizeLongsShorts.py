@@ -53,7 +53,7 @@ class LongShortScript(Functions):
         try:
             while count < int(self.maxAttemptsValue.text()):
                 try:
-                    count = 1
+                    count = count + 1
 
                     # Creating random values every loop.
                     long_stoploss_value = round(
