@@ -7,12 +7,13 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from termcolor import colored
 
-from profit import profits
 from TradeViewGUI import Main
+from profit import profits
 
 
-class Functions(Main):
-    """You will find click, get, find, and show_me functions here."""
+class TvGetter:
+    def __init__(self, driver):
+        self.driver = driver
 
     # Find Functions
     def find_best_stoploss(self):

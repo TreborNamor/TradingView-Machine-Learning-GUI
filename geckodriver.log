@@ -2721,3 +2721,915 @@ _.df/<@https://pagead2.googlesyndication.com/gpt/pubads_impl_2021120601.js:6:228
 XH@https://pagead2.googlesyndication.com/gpt/pubads_impl_2021120601.js:18:60333
 WH.prototype.j/this.l.onload@https://pagead2.googlesyndication.com/gpt/pubads_impl_2021120601.js:18:59532
 
+1640193884373	geckodriver	INFO	Listening on 127.0.0.1:60975
+1640193893668	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-headless" "-foreground" "-no-remote" "-profile" "/var/folders/_y/0c61p6fd3kxb8d7c2l2pd_jc0000gn/T/rust_mozprofileR194bg"
+*** You are running in headless mode.
+1640193894065	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+console.error: BackgroundUpdate: 
+  _reasonsToNotScheduleUpdates: Failed to check for Maintenance Service Registry Key: [Exception... "Component returned failure code: 0x80004001 (NS_ERROR_NOT_IMPLEMENTED) [nsIUpdateProcessor.getServiceRegKeyExists]"  nsresult: "0x80004001 (NS_ERROR_NOT_IMPLEMENTED)"  location: "JS frame :: resource://gre/modules/BackgroundUpdate.jsm :: _reasonsToNotScheduleUpdates :: line 243"  data: no]
+1640193895771	Marionette	INFO	Listening on port 61000
+2021-12-22 19:24:55.844 plugin-container[71142:1660048] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:24:55.845 plugin-container[71142:1660048] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1640193895862	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+2021-12-22 19:24:55.870 plugin-container[71142:1660048] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:24:55.870 plugin-container[71142:1660048] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 19:24:55.871 plugin-container[71142:1660047] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:24:55.871 plugin-container[71142:1660047] nil host used in call to allowsAnyHTTPSCertificateForHost:
+JavaScript warning: https://www.tradingview.com/static/bundles/3766.bb588146383ef3752969.js, line 17: unreachable code after return statement
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+JavaScript warning: https://accounts.google.com/ServiceLogin?service=mail&passive=true&rm=false&continue=https://mail.google.com/mail/&ss=1&scc=1&ltmpl=default&ltmplcache=2&emr=1&osid=1# line 1 > eval line 3283 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1640194071585	geckodriver	INFO	Listening on 127.0.0.1:61572
+1640194083660	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-headless" "-foreground" "-no-remote" "-profile" "/var/folders/_y/0c61p6fd3kxb8d7c2l2pd_jc0000gn/T/rust_mozprofilevHeXwt"
+*** You are running in headless mode.
+1640194084060	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+console.error: BackgroundUpdate: 
+  _reasonsToNotScheduleUpdates: Failed to check for Maintenance Service Registry Key: [Exception... "Component returned failure code: 0x80004001 (NS_ERROR_NOT_IMPLEMENTED) [nsIUpdateProcessor.getServiceRegKeyExists]"  nsresult: "0x80004001 (NS_ERROR_NOT_IMPLEMENTED)"  location: "JS frame :: resource://gre/modules/BackgroundUpdate.jsm :: _reasonsToNotScheduleUpdates :: line 243"  data: no]
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+1640194085841	Marionette	INFO	Listening on port 61656
+1640194085947	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+2021-12-22 19:28:05.974 plugin-container[71211:1662339] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:28:05.975 plugin-container[71211:1662339] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 19:28:06.024 plugin-container[71211:1662339] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:28:06.024 plugin-container[71211:1662339] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 19:28:06.024 plugin-container[71211:1662360] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:28:06.024 plugin-container[71211:1662360] nil host used in call to allowsAnyHTTPSCertificateForHost:
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+JavaScript warning: https://www.tradingview.com/static/bundles/3766.bb588146383ef3752969.js, line 17: unreachable code after return statement
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+1640194141332	geckodriver	INFO	Listening on 127.0.0.1:61851
+1640194153719	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-headless" "-foreground" "-no-remote" "-profile" "/var/folders/_y/0c61p6fd3kxb8d7c2l2pd_jc0000gn/T/rust_mozprofileAeCgQi"
+*** You are running in headless mode.
+1640194154213	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+console.error: BackgroundUpdate: 
+  _reasonsToNotScheduleUpdates: Failed to check for Maintenance Service Registry Key: [Exception... "Component returned failure code: 0x80004001 (NS_ERROR_NOT_IMPLEMENTED) [nsIUpdateProcessor.getServiceRegKeyExists]"  nsresult: "0x80004001 (NS_ERROR_NOT_IMPLEMENTED)"  location: "JS frame :: resource://gre/modules/BackgroundUpdate.jsm :: _reasonsToNotScheduleUpdates :: line 243"  data: no]
+1640194156657	Marionette	INFO	Listening on port 61868
+2021-12-22 19:29:16.732 plugin-container[71244:1663774] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:29:16.732 plugin-container[71244:1663774] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1640194156742	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+2021-12-22 19:29:16.745 plugin-container[71244:1663774] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:29:16.745 plugin-container[71244:1663774] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 19:29:16.745 plugin-container[71244:1663773] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:29:16.745 plugin-container[71244:1663773] nil host used in call to allowsAnyHTTPSCertificateForHost:
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+1640194175674	geckodriver	INFO	Listening on 127.0.0.1:62006
+JavaScript warning: https://accounts.google.com/ServiceLogin?service=mail&passive=true&rm=false&continue=https://mail.google.com/mail/&ss=1&scc=1&ltmpl=default&ltmplcache=2&emr=1&osid=1# line 1 > eval line 4889 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1640194192028	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-headless" "-foreground" "-no-remote" "-profile" "/var/folders/_y/0c61p6fd3kxb8d7c2l2pd_jc0000gn/T/rust_mozprofileFZ56xn"
+*** You are running in headless mode.
+1640194192563	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+console.error: BackgroundUpdate: 
+  _reasonsToNotScheduleUpdates: Failed to check for Maintenance Service Registry Key: [Exception... "Component returned failure code: 0x80004001 (NS_ERROR_NOT_IMPLEMENTED) [nsIUpdateProcessor.getServiceRegKeyExists]"  nsresult: "0x80004001 (NS_ERROR_NOT_IMPLEMENTED)"  location: "JS frame :: resource://gre/modules/BackgroundUpdate.jsm :: _reasonsToNotScheduleUpdates :: line 243"  data: no]
+1640194196408	Marionette	INFO	Listening on port 62058
+2021-12-22 19:29:56.634 plugin-container[71282:1664830] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:29:56.635 plugin-container[71282:1664830] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 19:29:56.640 plugin-container[71282:1664830] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:29:56.640 plugin-container[71282:1664830] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 19:29:56.641 plugin-container[71282:1664829] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:29:56.641 plugin-container[71282:1664829] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1640194196846	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1640194206005	geckodriver	INFO	Listening on 127.0.0.1:62156
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+JavaScript warning: https://accounts.google.com/ServiceLogin?service=mail&passive=true&rm=false&continue=https://mail.google.com/mail/&ss=1&scc=1&ltmpl=default&ltmplcache=2&emr=1&osid=1# line 1 > eval line 218 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1640194222426	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-headless" "-foreground" "-no-remote" "-profile" "/var/folders/_y/0c61p6fd3kxb8d7c2l2pd_jc0000gn/T/rust_mozprofileWchHB0"
+*** You are running in headless mode.
+1640194223081	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+console.error: BackgroundUpdate: 
+  _reasonsToNotScheduleUpdates: Failed to check for Maintenance Service Registry Key: [Exception... "Component returned failure code: 0x80004001 (NS_ERROR_NOT_IMPLEMENTED) [nsIUpdateProcessor.getServiceRegKeyExists]"  nsresult: "0x80004001 (NS_ERROR_NOT_IMPLEMENTED)"  location: "JS frame :: resource://gre/modules/BackgroundUpdate.jsm :: _reasonsToNotScheduleUpdates :: line 243"  data: no]
+1640194227151	Marionette	INFO	Listening on port 62217
+2021-12-22 19:30:27.368 plugin-container[71304:1665769] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:30:27.368 plugin-container[71304:1665769] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 19:30:27.375 plugin-container[71304:1665769] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:30:27.375 plugin-container[71304:1665769] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 19:30:27.376 plugin-container[71304:1665798] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:30:27.376 plugin-container[71304:1665798] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1640194227685	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1640194232588	geckodriver	INFO	Listening on 127.0.0.1:62358
+JavaScript warning: https://accounts.google.com/ServiceLogin?service=mail&passive=true&rm=false&continue=https://mail.google.com/mail/&ss=1&scc=1&ltmpl=default&ltmplcache=2&emr=1&osid=1# line 1 > eval line 2145 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1640194250543	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-headless" "-foreground" "-no-remote" "-profile" "/var/folders/_y/0c61p6fd3kxb8d7c2l2pd_jc0000gn/T/rust_mozprofilekoRZuH"
+*** You are running in headless mode.
+1640194251061	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+console.error: BackgroundUpdate: 
+  _reasonsToNotScheduleUpdates: Failed to check for Maintenance Service Registry Key: [Exception... "Component returned failure code: 0x80004001 (NS_ERROR_NOT_IMPLEMENTED) [nsIUpdateProcessor.getServiceRegKeyExists]"  nsresult: "0x80004001 (NS_ERROR_NOT_IMPLEMENTED)"  location: "JS frame :: resource://gre/modules/BackgroundUpdate.jsm :: _reasonsToNotScheduleUpdates :: line 243"  data: no]
+1640194254720	Marionette	INFO	Listening on port 62439
+2021-12-22 19:30:54.821 plugin-container[71319:1666645] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:30:54.822 plugin-container[71319:1666645] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1640194254833	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+2021-12-22 19:30:54.838 plugin-container[71319:1666645] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:30:54.838 plugin-container[71319:1666645] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 19:30:54.838 plugin-container[71319:1666659] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:30:54.838 plugin-container[71319:1666659] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1640194260139	geckodriver	INFO	Listening on 127.0.0.1:62521
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+JavaScript warning: https://accounts.google.com/ServiceLogin?service=mail&passive=true&rm=false&continue=https://mail.google.com/mail/&ss=1&scc=1&ltmpl=default&ltmplcache=2&emr=1&osid=1# line 1 > eval line 1126 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1640194284595	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-headless" "-foreground" "-no-remote" "-profile" "/var/folders/_y/0c61p6fd3kxb8d7c2l2pd_jc0000gn/T/rust_mozprofileiN3sfm"
+*** You are running in headless mode.
+1640194285588	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+console.error: BackgroundUpdate: 
+  _reasonsToNotScheduleUpdates: Failed to check for Maintenance Service Registry Key: [Exception... "Component returned failure code: 0x80004001 (NS_ERROR_NOT_IMPLEMENTED) [nsIUpdateProcessor.getServiceRegKeyExists]"  nsresult: "0x80004001 (NS_ERROR_NOT_IMPLEMENTED)"  location: "JS frame :: resource://gre/modules/BackgroundUpdate.jsm :: _reasonsToNotScheduleUpdates :: line 243"  data: no]
+1640194289490	Marionette	INFO	Listening on port 62683
+2021-12-22 19:31:29.600 plugin-container[71347:1668090] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:31:29.601 plugin-container[71347:1668090] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 19:31:29.607 plugin-container[71347:1668090] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:31:29.607 plugin-container[71347:1668090] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 19:31:29.608 plugin-container[71347:1668094] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:31:29.608 plugin-container[71347:1668094] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1640194289610	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1640194294673	geckodriver	INFO	Listening on 127.0.0.1:62793
+JavaScript warning: https://accounts.google.com/ServiceLogin?service=mail&passive=true&rm=false&continue=https://mail.google.com/mail/&ss=1&scc=1&ltmpl=default&ltmplcache=2&emr=1&osid=1# line 1 > eval line 6318 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+1640194317847	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-headless" "-foreground" "-no-remote" "-profile" "/var/folders/_y/0c61p6fd3kxb8d7c2l2pd_jc0000gn/T/rust_mozprofiled4XzSN"
+*** You are running in headless mode.
+1640194319106	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+console.error: BackgroundUpdate: 
+  _reasonsToNotScheduleUpdates: Failed to check for Maintenance Service Registry Key: [Exception... "Component returned failure code: 0x80004001 (NS_ERROR_NOT_IMPLEMENTED) [nsIUpdateProcessor.getServiceRegKeyExists]"  nsresult: "0x80004001 (NS_ERROR_NOT_IMPLEMENTED)"  location: "JS frame :: resource://gre/modules/BackgroundUpdate.jsm :: _reasonsToNotScheduleUpdates :: line 243"  data: no]
+1640194323018	Marionette	INFO	Listening on port 62861
+2021-12-22 19:32:03.189 plugin-container[71367:1669044] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:32:03.249 plugin-container[71367:1669044] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 19:32:03.385 plugin-container[71367:1669044] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:32:03.385 plugin-container[71367:1669044] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 19:32:03.386 plugin-container[71367:1669041] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:32:03.386 plugin-container[71367:1669041] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1640194324224	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1640194324276	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1640194329566	geckodriver	INFO	Listening on 127.0.0.1:63003
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+JavaScript warning: https://accounts.google.com/ServiceLogin?service=mail&passive=true&rm=false&continue=https://mail.google.com/mail/&ss=1&scc=1&ltmpl=default&ltmplcache=2&emr=1&osid=1# line 1 > eval line 6248 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x5A000C,name=PHttpChannel::Msg___delete__) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x690023,name=PNecko::Msg_RemoveRequestContext) Channel closing: too late to send/recv, messages will be lost
+
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+[GFX1-]: Receive IPC close with reason=AbnormalShutdown
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+[GFX1-]: Receive IPC close with reason=AbnormalShutdown
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+[GFX1-]: Receive IPC close with reason=AbnormalShutdown
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+[GFX1-]: Receive IPC close with reason=AbnormalShutdown
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+[GFX1-]: Receive IPC close with reason=AbnormalShutdown
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+[GFX1-]: Receive IPC close with reason=AbnormalShutdown
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+1640194450239	geckodriver	INFO	Listening on 127.0.0.1:63281
+1640194462444	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-headless" "-foreground" "-no-remote" "-profile" "/var/folders/_y/0c61p6fd3kxb8d7c2l2pd_jc0000gn/T/rust_mozprofilerF3oZk"
+*** You are running in headless mode.
+1640194462953	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+console.error: BackgroundUpdate: 
+  _reasonsToNotScheduleUpdates: Failed to check for Maintenance Service Registry Key: [Exception... "Component returned failure code: 0x80004001 (NS_ERROR_NOT_IMPLEMENTED) [nsIUpdateProcessor.getServiceRegKeyExists]"  nsresult: "0x80004001 (NS_ERROR_NOT_IMPLEMENTED)"  location: "JS frame :: resource://gre/modules/BackgroundUpdate.jsm :: _reasonsToNotScheduleUpdates :: line 243"  data: no]
+1640194465380	Marionette	INFO	Listening on port 63358
+2021-12-22 19:34:25.498 plugin-container[71434:1671320] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:34:25.499 plugin-container[71434:1671320] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 19:34:25.504 plugin-container[71434:1671320] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:34:25.504 plugin-container[71434:1671320] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 19:34:25.504 plugin-container[71434:1671364] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:34:25.504 plugin-container[71434:1671364] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1640194465775	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1640194469927	geckodriver	INFO	Listening on 127.0.0.1:63425
+JavaScript warning: https://accounts.google.com/ServiceLogin?service=mail&passive=true&rm=false&continue=https://mail.google.com/mail/&ss=1&scc=1&ltmpl=default&ltmplcache=2&emr=1&osid=1# line 1 > eval line 4177 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+1640194488008	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-headless" "-foreground" "-no-remote" "-profile" "/var/folders/_y/0c61p6fd3kxb8d7c2l2pd_jc0000gn/T/rust_mozprofileV5Gjtb"
+*** You are running in headless mode.
+1640194489046	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+console.error: BackgroundUpdate: 
+  _reasonsToNotScheduleUpdates: Failed to check for Maintenance Service Registry Key: [Exception... "Component returned failure code: 0x80004001 (NS_ERROR_NOT_IMPLEMENTED) [nsIUpdateProcessor.getServiceRegKeyExists]"  nsresult: "0x80004001 (NS_ERROR_NOT_IMPLEMENTED)"  location: "JS frame :: resource://gre/modules/BackgroundUpdate.jsm :: _reasonsToNotScheduleUpdates :: line 243"  data: no]
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+1640194493187	Marionette	INFO	Listening on port 63494
+2021-12-22 19:34:53.493 plugin-container[71456:1672228] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:34:53.495 plugin-container[71456:1672228] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 19:34:53.511 plugin-container[71456:1672228] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:34:53.512 plugin-container[71456:1672228] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 19:34:53.523 plugin-container[71456:1672261] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:34:53.523 plugin-container[71456:1672261] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1640194493864	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1640194493886	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+
+###!!! [Parent][RunMessage] Error: Channel error: cannot send/recv
+
+1640194502962	geckodriver	INFO	Listening on 127.0.0.1:63635
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+JavaScript warning: https://accounts.google.com/ServiceLogin?service=mail&passive=true&rm=false&continue=https://mail.google.com/mail/&ss=1&scc=1&ltmpl=default&ltmplcache=2&emr=1&osid=1# line 1 > eval line 5227 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1640194522666	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-headless" "-foreground" "-no-remote" "-profile" "/var/folders/_y/0c61p6fd3kxb8d7c2l2pd_jc0000gn/T/rust_mozprofileYEQTbC"
+*** You are running in headless mode.
+1640194523240	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+console.error: BackgroundUpdate: 
+  _reasonsToNotScheduleUpdates: Failed to check for Maintenance Service Registry Key: [Exception... "Component returned failure code: 0x80004001 (NS_ERROR_NOT_IMPLEMENTED) [nsIUpdateProcessor.getServiceRegKeyExists]"  nsresult: "0x80004001 (NS_ERROR_NOT_IMPLEMENTED)"  location: "JS frame :: resource://gre/modules/BackgroundUpdate.jsm :: _reasonsToNotScheduleUpdates :: line 243"  data: no]
+1640194526719	Marionette	INFO	Listening on port 63687
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+2021-12-22 19:35:26.890 plugin-container[71483:1673107] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:35:26.891 plugin-container[71483:1673107] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 19:35:26.963 plugin-container[71483:1673107] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:35:26.963 plugin-container[71483:1673107] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 19:35:26.963 plugin-container[71483:1673141] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:35:26.963 plugin-container[71483:1673141] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1640194527251	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+1640194538916	geckodriver	INFO	Listening on 127.0.0.1:63778
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+[GFX1-]: Receive IPC close with reason=AbnormalShutdown
+Exiting due to channel error.
+Exiting due to channel error.
+[GFX1-]: Receive IPC close with reason=AbnormalShutdown
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+[GFX1-]: Receive IPC close with reason=AbnormalShutdown
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+1640194567849	geckodriver	INFO	Listening on 127.0.0.1:63883
+1640194584032	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-headless" "-foreground" "-no-remote" "-profile" "/var/folders/_y/0c61p6fd3kxb8d7c2l2pd_jc0000gn/T/rust_mozprofile6AzrVS"
+*** You are running in headless mode.
+1640194584525	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+1640194587591	Marionette	INFO	Listening on port 63944
+2021-12-22 19:36:27.705 plugin-container[71521:1674167] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:36:27.705 plugin-container[71521:1674167] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1640194587708	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+2021-12-22 19:36:27.714 plugin-container[71521:1674167] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:36:27.714 plugin-container[71521:1674167] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 19:36:27.714 plugin-container[71521:1674190] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:36:27.714 plugin-container[71521:1674190] nil host used in call to allowsAnyHTTPSCertificateForHost:
+console.error: BackgroundUpdate: 
+  _reasonsToNotScheduleUpdates: Failed to check for Maintenance Service Registry Key: [Exception... "Component returned failure code: 0x80004001 (NS_ERROR_NOT_IMPLEMENTED) [nsIUpdateProcessor.getServiceRegKeyExists]"  nsresult: "0x80004001 (NS_ERROR_NOT_IMPLEMENTED)"  location: "JS frame :: resource://gre/modules/BackgroundUpdate.jsm :: _reasonsToNotScheduleUpdates :: line 243"  data: no]
+1640194592060	geckodriver	INFO	Listening on 127.0.0.1:64009
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+1640194608066	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-headless" "-foreground" "-no-remote" "-profile" "/var/folders/_y/0c61p6fd3kxb8d7c2l2pd_jc0000gn/T/rust_mozprofile71lZ58"
+*** You are running in headless mode.
+1640194608801	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+console.error: BackgroundUpdate: 
+  _reasonsToNotScheduleUpdates: Failed to check for Maintenance Service Registry Key: [Exception... "Component returned failure code: 0x80004001 (NS_ERROR_NOT_IMPLEMENTED) [nsIUpdateProcessor.getServiceRegKeyExists]"  nsresult: "0x80004001 (NS_ERROR_NOT_IMPLEMENTED)"  location: "JS frame :: resource://gre/modules/BackgroundUpdate.jsm :: _reasonsToNotScheduleUpdates :: line 243"  data: no]
+1640194612936	Marionette	INFO	Listening on port 64086
+JavaScript warning: https://accounts.google.com/ServiceLogin?service=mail&passive=true&rm=false&continue=https://mail.google.com/mail/&ss=1&scc=1&ltmpl=default&ltmplcache=2&emr=1&osid=1# line 1 > eval line 2834 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+2021-12-22 19:36:53.078 plugin-container[71534:1674904] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:36:53.079 plugin-container[71534:1674904] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 19:36:53.086 plugin-container[71534:1674904] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:36:53.086 plugin-container[71534:1674904] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 19:36:53.087 plugin-container[71534:1674929] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:36:53.087 plugin-container[71534:1674929] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1640194613328	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1640194618300	geckodriver	INFO	Listening on 127.0.0.1:64258
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+1640194638352	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-headless" "-foreground" "-no-remote" "-profile" "/var/folders/_y/0c61p6fd3kxb8d7c2l2pd_jc0000gn/T/rust_mozprofile829gPv"
+*** You are running in headless mode.
+1640194639164	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+JavaScript warning: https://accounts.google.com/ServiceLogin?service=mail&passive=true&rm=false&continue=https://mail.google.com/mail/&ss=1&scc=1&ltmpl=default&ltmplcache=2&emr=1&osid=1# line 1 > eval line 7597 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+console.error: BackgroundUpdate: 
+  _reasonsToNotScheduleUpdates: Failed to check for Maintenance Service Registry Key: [Exception... "Component returned failure code: 0x80004001 (NS_ERROR_NOT_IMPLEMENTED) [nsIUpdateProcessor.getServiceRegKeyExists]"  nsresult: "0x80004001 (NS_ERROR_NOT_IMPLEMENTED)"  location: "JS frame :: resource://gre/modules/BackgroundUpdate.jsm :: _reasonsToNotScheduleUpdates :: line 243"  data: no]
+1640194642260	Marionette	INFO	Listening on port 64327
+2021-12-22 19:37:22.467 plugin-container[71558:1675799] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:37:22.468 plugin-container[71558:1675799] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 19:37:22.478 plugin-container[71558:1675799] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:37:22.478 plugin-container[71558:1675799] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 19:37:22.482 plugin-container[71558:1675821] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:37:22.482 plugin-container[71558:1675821] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1640194642737	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1640194647048	geckodriver	INFO	Listening on 127.0.0.1:64411
+JavaScript warning: https://accounts.google.com/ServiceLogin?service=mail&passive=true&rm=false&continue=https://mail.google.com/mail/&ss=1&scc=1&ltmpl=default&ltmplcache=2&emr=1&osid=1# line 1 > eval line 4606 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+1640194667214	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-headless" "-foreground" "-no-remote" "-profile" "/var/folders/_y/0c61p6fd3kxb8d7c2l2pd_jc0000gn/T/rust_mozprofileqspwFl"
+*** You are running in headless mode.
+1640194668019	Marionette	INFO	Marionette enabled
+JavaScript error: resource:///modules/BrowserGlue.jsm, line 1356: uncaught exception: undefined
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+JavaScript error: resource://gre/modules/addons/XPIProvider.jsm, line 3149: TypeError: state is undefined
+console.error: BackgroundUpdate: 
+  _reasonsToNotScheduleUpdates: Failed to check for Maintenance Service Registry Key: [Exception... "Component returned failure code: 0x80004001 (NS_ERROR_NOT_IMPLEMENTED) [nsIUpdateProcessor.getServiceRegKeyExists]"  nsresult: "0x80004001 (NS_ERROR_NOT_IMPLEMENTED)"  location: "JS frame :: resource://gre/modules/BackgroundUpdate.jsm :: _reasonsToNotScheduleUpdates :: line 243"  data: no]
+1640194673464	Marionette	INFO	Listening on port 64526
+2021-12-22 19:37:53.605 plugin-container[71580:1676707] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:37:53.605 plugin-container[71580:1676707] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 19:37:53.616 plugin-container[71580:1676707] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:37:53.616 plugin-container[71580:1676707] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 19:37:53.617 plugin-container[71580:1676737] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:37:53.617 plugin-container[71580:1676737] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1640194673966	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1640194680041	geckodriver	INFO	Listening on 127.0.0.1:64641
+Exiting due to channel error.
+[GFX1-]: Receive IPC close with reason=AbnormalShutdown
+[GFX1-]: Receive IPC close with reason=AbnormalShutdown
+Exiting due to channel error.
+[GFX1-]: Receive IPC close with reason=AbnormalShutdown
+Exiting due to channel error.
+Exiting due to channel error.
+[GFX1-]: Receive IPC close with reason=AbnormalShutdown
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+[GFX1-]: Receive IPC close with reason=AbnormalShutdown
+Exiting due to channel error.
+[GFX1-]: Receive IPC close with reason=AbnormalShutdown
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+[GFX1-]: Receive IPC close with reason=AbnormalShutdown
+[GFX1-]: Receive IPC close with reason=AbnormalShutdown
+Exiting due to channel error.
+Exiting due to channel error.
+[GFX1-]: Receive IPC close with reason=AbnormalShutdown
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+1640194687011	geckodriver	INFO	Listening on 127.0.0.1:64654
+1640194706256	geckodriver	INFO	Listening on 127.0.0.1:64741
+1640194711531	geckodriver	INFO	Listening on 127.0.0.1:64750
+1640194723535	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-foreground" "-no-remote" "-profile" "/var/folders/_y/0c61p6fd3kxb8d7c2l2pd_jc0000gn/T/rust_mozprofilezan6QT"
+1640194724084	Marionette	INFO	Marionette enabled
+2021-12-22 19:38:45.244 firefox-bin[71615:1677797] Warning: Expected min height of view: (<NSButton: 0x127f9dc00>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:38:45.245 firefox-bin[71615:1677797] Warning: Expected min height of view: (<NSButton: 0x12f6dbc00>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:38:45.246 firefox-bin[71615:1677797] Warning: Expected min height of view: (<NSButton: 0x12f6dc000>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:38:45.247 firefox-bin[71615:1677797] Warning: Expected min height of view: (<NSButton: 0x12f6e0000>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:38:45.247 firefox-bin[71615:1677797] Warning: Expected min height of view: (<NSButton: 0x12f6dc800>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:38:45.248 firefox-bin[71615:1677797] Warning: Expected min height of view: (<NSPopoverTouchBarItemButton: 0x12f6de400>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:38:45.249 firefox-bin[71615:1677797] Warning: Expected min height of view: (<NSPopoverTouchBarItemButton: 0x12f717400>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+console.error: BackgroundUpdate: 
+  _reasonsToNotScheduleUpdates: Failed to check for Maintenance Service Registry Key: [Exception... "Component returned failure code: 0x80004001 (NS_ERROR_NOT_IMPLEMENTED) [nsIUpdateProcessor.getServiceRegKeyExists]"  nsresult: "0x80004001 (NS_ERROR_NOT_IMPLEMENTED)"  location: "JS frame :: resource://gre/modules/BackgroundUpdate.jsm :: _reasonsToNotScheduleUpdates :: line 243"  data: no]
+1640194726889	Marionette	INFO	Listening on port 64768
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+2021-12-22 19:38:47.010 plugin-container[71623:1678214] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:38:47.011 plugin-container[71623:1678214] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 19:38:47.023 plugin-container[71623:1678214] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:38:47.023 plugin-container[71623:1678214] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 19:38:47.024 plugin-container[71623:1678244] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:38:47.024 plugin-container[71623:1678244] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1640194727226	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1640194730240	geckodriver	INFO	Listening on 127.0.0.1:64833
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+JavaScript warning: https://accounts.google.com/ServiceLogin?service=mail&passive=true&rm=false&continue=https://mail.google.com/mail/&ss=1&scc=1&ltmpl=default&ltmplcache=2&emr=1&osid=1# line 1 > eval line 3233 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1640194745926	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-foreground" "-no-remote" "-profile" "/var/folders/_y/0c61p6fd3kxb8d7c2l2pd_jc0000gn/T/rust_mozprofilewuiClv"
+1640194746518	Marionette	INFO	Marionette enabled
+2021-12-22 19:39:08.007 firefox-bin[71638:1678741] Warning: Expected min height of view: (<NSButton: 0x11d47bc00>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:39:08.009 firefox-bin[71638:1678741] Warning: Expected min height of view: (<NSButton: 0x11d718800>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:39:08.010 firefox-bin[71638:1678741] Warning: Expected min height of view: (<NSButton: 0x11d717400>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:39:08.012 firefox-bin[71638:1678741] Warning: Expected min height of view: (<NSButton: 0x11d71a000>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:39:08.015 firefox-bin[71638:1678741] Warning: Expected min height of view: (<NSButton: 0x11d716800>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:39:08.017 firefox-bin[71638:1678741] Warning: Expected min height of view: (<NSPopoverTouchBarItemButton: 0x11d718000>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:39:08.019 firefox-bin[71638:1678741] Warning: Expected min height of view: (<NSPopoverTouchBarItemButton: 0x11d754000>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+console.error: BackgroundUpdate: 
+  _reasonsToNotScheduleUpdates: Failed to check for Maintenance Service Registry Key: [Exception... "Component returned failure code: 0x80004001 (NS_ERROR_NOT_IMPLEMENTED) [nsIUpdateProcessor.getServiceRegKeyExists]"  nsresult: "0x80004001 (NS_ERROR_NOT_IMPLEMENTED)"  location: "JS frame :: resource://gre/modules/BackgroundUpdate.jsm :: _reasonsToNotScheduleUpdates :: line 243"  data: no]
+1640194750633	Marionette	INFO	Listening on port 64971
+2021-12-22 19:39:10.738 plugin-container[71643:1679093] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:39:10.739 plugin-container[71643:1679093] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 19:39:10.745 plugin-container[71643:1679093] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:39:10.745 plugin-container[71643:1679093] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 19:39:10.745 plugin-container[71643:1679104] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:39:10.745 plugin-container[71643:1679104] nil host used in call to allowsAnyHTTPSCertificateForHost:
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+1640194750993	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1640194751036	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1640194758046	geckodriver	INFO	Listening on 127.0.0.1:65089
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+1640194773799	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-foreground" "-no-remote" "-profile" "/var/folders/_y/0c61p6fd3kxb8d7c2l2pd_jc0000gn/T/rust_mozprofile8f3olC"
+1640194774404	Marionette	INFO	Marionette enabled
+2021-12-22 19:39:36.026 firefox-bin[71650:1679490] Warning: Expected min height of view: (<NSButton: 0x1274a5800>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:39:36.027 firefox-bin[71650:1679490] Warning: Expected min height of view: (<NSButton: 0x1279e2800>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:39:36.029 firefox-bin[71650:1679490] Warning: Expected min height of view: (<NSButton: 0x1279e4800>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:39:36.030 firefox-bin[71650:1679490] Warning: Expected min height of view: (<NSButton: 0x1279e1000>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:39:36.031 firefox-bin[71650:1679490] Warning: Expected min height of view: (<NSButton: 0x1279e6000>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:39:36.032 firefox-bin[71650:1679490] Warning: Expected min height of view: (<NSPopoverTouchBarItemButton: 0x1279e0800>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:39:36.033 firefox-bin[71650:1679490] Warning: Expected min height of view: (<NSPopoverTouchBarItemButton: 0x1274a2000>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+console.error: BackgroundUpdate: 
+  _reasonsToNotScheduleUpdates: Failed to check for Maintenance Service Registry Key: [Exception... "Component returned failure code: 0x80004001 (NS_ERROR_NOT_IMPLEMENTED) [nsIUpdateProcessor.getServiceRegKeyExists]"  nsresult: "0x80004001 (NS_ERROR_NOT_IMPLEMENTED)"  location: "JS frame :: resource://gre/modules/BackgroundUpdate.jsm :: _reasonsToNotScheduleUpdates :: line 243"  data: no]
+1640194777997	Marionette	INFO	Listening on port 65162
+2021-12-22 19:39:38.159 plugin-container[71655:1679987] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:39:38.161 plugin-container[71655:1679987] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 19:39:38.201 plugin-container[71655:1679987] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:39:38.201 plugin-container[71655:1679987] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 19:39:38.202 plugin-container[71655:1680029] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:39:38.202 plugin-container[71655:1680029] nil host used in call to allowsAnyHTTPSCertificateForHost:
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+1640194778339	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+1640194787715	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+1640194788770	geckodriver	INFO	Listening on 127.0.0.1:65262
+1640194801569	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-foreground" "-no-remote" "-profile" "/var/folders/_y/0c61p6fd3kxb8d7c2l2pd_jc0000gn/T/rust_mozprofileIBXdfe"
+1640194802190	Marionette	INFO	Marionette enabled
+2021-12-22 19:40:03.419 firefox-bin[71664:1680710] Warning: Expected min height of view: (<NSButton: 0x11ec12800>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:40:03.420 firefox-bin[71664:1680710] Warning: Expected min height of view: (<NSButton: 0x12e8c3c00>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:40:03.421 firefox-bin[71664:1680710] Warning: Expected min height of view: (<NSButton: 0x12e8c4000>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:40:03.422 firefox-bin[71664:1680710] Warning: Expected min height of view: (<NSButton: 0x12e8c4800>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:40:03.422 firefox-bin[71664:1680710] Warning: Expected min height of view: (<NSButton: 0x12e8e7800>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:40:03.423 firefox-bin[71664:1680710] Warning: Expected min height of view: (<NSPopoverTouchBarItemButton: 0x12e8e3800>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:40:03.424 firefox-bin[71664:1680710] Warning: Expected min height of view: (<NSPopoverTouchBarItemButton: 0x128eb3000>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+console.error: BackgroundUpdate: 
+  _reasonsToNotScheduleUpdates: Failed to check for Maintenance Service Registry Key: [Exception... "Component returned failure code: 0x80004001 (NS_ERROR_NOT_IMPLEMENTED) [nsIUpdateProcessor.getServiceRegKeyExists]"  nsresult: "0x80004001 (NS_ERROR_NOT_IMPLEMENTED)"  location: "JS frame :: resource://gre/modules/BackgroundUpdate.jsm :: _reasonsToNotScheduleUpdates :: line 243"  data: no]
+1640194805342	Marionette	INFO	Listening on port 65312
+2021-12-22 19:40:05.470 plugin-container[71671:1681160] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:40:05.471 plugin-container[71671:1681160] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 19:40:05.484 plugin-container[71671:1681160] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:40:05.484 plugin-container[71671:1681160] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 19:40:05.485 plugin-container[71671:1681161] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:40:05.485 plugin-container[71671:1681161] nil host used in call to allowsAnyHTTPSCertificateForHost:
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+1640194805662	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1640194811121	geckodriver	INFO	Listening on 127.0.0.1:65389
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+JavaScript warning: https://accounts.google.com/ServiceLogin?service=mail&passive=true&rm=false&continue=https://mail.google.com/mail/&ss=1&scc=1&ltmpl=default&ltmplcache=2&emr=1&osid=1# line 1 > eval line 6561 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1640194825572	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-foreground" "-no-remote" "-profile" "/var/folders/_y/0c61p6fd3kxb8d7c2l2pd_jc0000gn/T/rust_mozprofileCW93CS"
+1640194826298	Marionette	INFO	Marionette enabled
+2021-12-22 19:40:27.485 firefox-bin[71682:1681733] Warning: Expected min height of view: (<NSButton: 0x114435800>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:40:27.487 firefox-bin[71682:1681733] Warning: Expected min height of view: (<NSButton: 0x1172b1400>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:40:27.489 firefox-bin[71682:1681733] Warning: Expected min height of view: (<NSButton: 0x1172b0400>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:40:27.490 firefox-bin[71682:1681733] Warning: Expected min height of view: (<NSButton: 0x1172afc00>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:40:27.491 firefox-bin[71682:1681733] Warning: Expected min height of view: (<NSButton: 0x1172b0800>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:40:27.491 firefox-bin[71682:1681733] Warning: Expected min height of view: (<NSPopoverTouchBarItemButton: 0x1172b2c00>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:40:27.492 firefox-bin[71682:1681733] Warning: Expected min height of view: (<NSPopoverTouchBarItemButton: 0x114430c00>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+Exiting due to channel error.
+[GFX1-]: Receive IPC close with reason=AbnormalShutdown
+Exiting due to channel error.
+Exiting due to channel error.
+[GFX1-]: Receive IPC close with reason=AbnormalShutdown
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+[GFX1-]: Receive IPC close with reason=AbnormalShutdown
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+[GFX1-]: Receive IPC close with reason=AbnormalShutdown
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+[GFX1-]: Receive IPC close with reason=AbnormalShutdown
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+[GFX1-]: Receive IPC close with reason=AbnormalShutdown
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+[GFX1-]: Receive IPC close with reason=AbnormalShutdown
+Exiting due to channel error.
+1640195010138	geckodriver	INFO	Listening on 127.0.0.1:49408
+1640195022282	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-foreground" "-no-remote" "-profile" "/var/folders/_y/0c61p6fd3kxb8d7c2l2pd_jc0000gn/T/rust_mozprofiler9k3NC"
+1640195022902	Marionette	INFO	Marionette enabled
+2021-12-22 19:43:44.173 firefox-bin[71732:1684039] Warning: Expected min height of view: (<NSButton: 0x120ba6400>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:43:44.175 firefox-bin[71732:1684039] Warning: Expected min height of view: (<NSButton: 0x120cfb800>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:43:44.176 firefox-bin[71732:1684039] Warning: Expected min height of view: (<NSButton: 0x120cf7400>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:43:44.178 firefox-bin[71732:1684039] Warning: Expected min height of view: (<NSButton: 0x120cfbc00>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:43:44.179 firefox-bin[71732:1684039] Warning: Expected min height of view: (<NSButton: 0x120cf9000>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:43:44.181 firefox-bin[71732:1684039] Warning: Expected min height of view: (<NSPopoverTouchBarItemButton: 0x120cf7c00>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:43:44.182 firefox-bin[71732:1684039] Warning: Expected min height of view: (<NSPopoverTouchBarItemButton: 0x11f830800>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+console.error: BackgroundUpdate: 
+  _reasonsToNotScheduleUpdates: Failed to check for Maintenance Service Registry Key: [Exception... "Component returned failure code: 0x80004001 (NS_ERROR_NOT_IMPLEMENTED) [nsIUpdateProcessor.getServiceRegKeyExists]"  nsresult: "0x80004001 (NS_ERROR_NOT_IMPLEMENTED)"  location: "JS frame :: resource://gre/modules/BackgroundUpdate.jsm :: _reasonsToNotScheduleUpdates :: line 243"  data: no]
+1640195026715	Marionette	INFO	Listening on port 49501
+2021-12-22 19:43:46.881 plugin-container[71741:1684418] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:43:46.882 plugin-container[71741:1684418] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 19:43:46.912 plugin-container[71741:1684418] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:43:46.912 plugin-container[71741:1684418] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 19:43:46.914 plugin-container[71741:1684431] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:43:46.914 plugin-container[71741:1684431] nil host used in call to allowsAnyHTTPSCertificateForHost:
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+1640195027474	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://www.tradingview.com/static/bundles/3766.bb588146383ef3752969.js, line 17: unreachable code after return statement
+JavaScript warning: https://accounts.google.com/ServiceLogin?service=mail&passive=true&rm=false&continue=https://mail.google.com/mail/&ss=1&scc=1&ltmpl=default&ltmplcache=2&emr=1&osid=1# line 1 > eval line 6967 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x5A0008,name=PHttpChannel::Msg_DeletingChannel) Channel closing: too late to send/recv, messages will be lost
+
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+JavaScript error: resource://gre/modules/ConduitsParent.jsm, line 127: Error: Bad webextension@metamask.io principal: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background.html
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+1640195092481	geckodriver	INFO	Listening on 127.0.0.1:49808
+1640195108291	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-foreground" "-no-remote" "-profile" "/var/folders/_y/0c61p6fd3kxb8d7c2l2pd_jc0000gn/T/rust_mozprofilejsVSV9"
+1640195109322	Marionette	INFO	Marionette enabled
+2021-12-22 19:45:11.208 firefox-bin[71779:1685701] Warning: Expected min height of view: (<NSButton: 0x117921000>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:45:11.208 firefox-bin[71779:1685701] Warning: Expected min height of view: (<NSButton: 0x11a1e4800>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:45:11.209 firefox-bin[71779:1685701] Warning: Expected min height of view: (<NSButton: 0x11a1e7c00>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:45:11.210 firefox-bin[71779:1685701] Warning: Expected min height of view: (<NSButton: 0x11a1e8000>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:45:11.210 firefox-bin[71779:1685701] Warning: Expected min height of view: (<NSButton: 0x11a1e8800>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:45:11.211 firefox-bin[71779:1685701] Warning: Expected min height of view: (<NSPopoverTouchBarItemButton: 0x11a1e5400>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:45:11.211 firefox-bin[71779:1685701] Warning: Expected min height of view: (<NSPopoverTouchBarItemButton: 0x11a220400>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+console.error: BackgroundUpdate: 
+  _reasonsToNotScheduleUpdates: Failed to check for Maintenance Service Registry Key: [Exception... "Component returned failure code: 0x80004001 (NS_ERROR_NOT_IMPLEMENTED) [nsIUpdateProcessor.getServiceRegKeyExists]"  nsresult: "0x80004001 (NS_ERROR_NOT_IMPLEMENTED)"  location: "JS frame :: resource://gre/modules/BackgroundUpdate.jsm :: _reasonsToNotScheduleUpdates :: line 243"  data: no]
+1640195114546	Marionette	INFO	Listening on port 49826
+2021-12-22 19:45:14.948 plugin-container[71784:1686158] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:45:14.951 plugin-container[71784:1686158] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 19:45:14.969 plugin-container[71784:1686158] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:45:14.969 plugin-container[71784:1686158] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 19:45:14.970 plugin-container[71784:1686161] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:45:14.970 plugin-container[71784:1686161] nil host used in call to allowsAnyHTTPSCertificateForHost:
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+1640195115372	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://www.tradingview.com/static/bundles/3766.bb588146383ef3752969.js, line 17: unreachable code after return statement
+JavaScript warning: https://accounts.google.com/ServiceLogin?service=mail&passive=true&rm=false&continue=https://mail.google.com/mail/&ss=1&scc=1&ltmpl=default&ltmplcache=2&emr=1&osid=1# line 1 > eval line 3555 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+1640195144328	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://remote/content/marionette/sync.js:238:19
+TimedPromise@chrome://remote/content/marionette/sync.js:223:10
+interaction.flushEventLoop@chrome://remote/content/marionette/interaction.js:431:10
+webdriverClickElement@chrome://remote/content/marionette/interaction.js:179:31
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+1640195219237	geckodriver	INFO	Listening on 127.0.0.1:50114
+1640195231307	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-foreground" "-no-remote" "-profile" "/var/folders/_y/0c61p6fd3kxb8d7c2l2pd_jc0000gn/T/rust_mozprofileClzVOA"
+1640195231863	Marionette	INFO	Marionette enabled
+2021-12-22 19:47:12.982 firefox-bin[71826:1688370] Warning: Expected min height of view: (<NSButton: 0x120286800>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:47:12.983 firefox-bin[71826:1688370] Warning: Expected min height of view: (<NSButton: 0x1233b3400>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:47:12.984 firefox-bin[71826:1688370] Warning: Expected min height of view: (<NSButton: 0x1233b4c00>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:47:12.985 firefox-bin[71826:1688370] Warning: Expected min height of view: (<NSButton: 0x1233b2c00>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:47:12.986 firefox-bin[71826:1688370] Warning: Expected min height of view: (<NSButton: 0x1233b4800>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:47:12.987 firefox-bin[71826:1688370] Warning: Expected min height of view: (<NSPopoverTouchBarItemButton: 0x1233b6c00>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:47:12.989 firefox-bin[71826:1688370] Warning: Expected min height of view: (<NSPopoverTouchBarItemButton: 0x1233ea000>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+1640195234863	Marionette	INFO	Listening on port 50130
+console.error: BackgroundUpdate: 
+  _reasonsToNotScheduleUpdates: Failed to check for Maintenance Service Registry Key: [Exception... "Component returned failure code: 0x80004001 (NS_ERROR_NOT_IMPLEMENTED) [nsIUpdateProcessor.getServiceRegKeyExists]"  nsresult: "0x80004001 (NS_ERROR_NOT_IMPLEMENTED)"  location: "JS frame :: resource://gre/modules/BackgroundUpdate.jsm :: _reasonsToNotScheduleUpdates :: line 243"  data: no]
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+2021-12-22 19:47:15.060 plugin-container[71831:1688782] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:47:15.061 plugin-container[71831:1688782] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 19:47:15.091 plugin-container[71831:1688782] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:47:15.091 plugin-container[71831:1688782] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 19:47:15.095 plugin-container[71831:1688781] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:47:15.095 plugin-container[71831:1688781] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1640195235257	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://www.tradingview.com/static/bundles/3766.bb588146383ef3752969.js, line 17: unreachable code after return statement
+JavaScript warning: https://accounts.google.com/ServiceLogin?service=mail&passive=true&rm=false&continue=https://mail.google.com/mail/&ss=1&scc=1&ltmpl=default&ltmplcache=2&emr=1&osid=1# line 1 > eval line 5489 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+JavaScript error: resource://gre/modules/ConduitsParent.jsm, line 127: Error: Bad webextension@metamask.io principal: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background.html
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+2021-12-22 19:52:30.609 firefox-bin[71826:1688370] TSM AdjustCapsLockLEDForKeyTransitionHandling - _ISSetPhysicalKeyboardCapsLockLED Inhibit
+2021-12-22 19:52:46.949 firefox-bin[71826:1688370] Warning: Expected min height of view: (<NSButton: 0x120289800>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:52:46.950 firefox-bin[71826:1688370] Warning: Expected min height of view: (<NSButton: 0x1202ca800>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:52:46.951 firefox-bin[71826:1688370] Warning: Expected min height of view: (<NSButton: 0x120b8fc00>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:52:46.952 firefox-bin[71826:1688370] Warning: Expected min height of view: (<NSButton: 0x120b92800>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:52:46.952 firefox-bin[71826:1688370] Warning: Expected min height of view: (<NSButton: 0x120b90c00>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:52:46.953 firefox-bin[71826:1688370] Warning: Expected min height of view: (<NSPopoverTouchBarItemButton: 0x120bf0800>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:52:46.953 firefox-bin[71826:1688370] Warning: Expected min height of view: (<NSPopoverTouchBarItemButton: 0x1215ee400>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+[GFX1-]: Receive IPC close with reason=AbnormalShutdown
+Exiting due to channel error.
+Exiting due to channel error.
+1640195574099	geckodriver	INFO	Listening on 127.0.0.1:50463
+1640195584142	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-foreground" "-no-remote" "-profile" "/var/folders/_y/0c61p6fd3kxb8d7c2l2pd_jc0000gn/T/rust_mozprofileBCVXoJ"
+1640195584588	Marionette	INFO	Marionette enabled
+2021-12-22 19:53:05.501 firefox-bin[71917:1694070] Warning: Expected min height of view: (<NSButton: 0x125697400>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:53:05.501 firefox-bin[71917:1694070] Warning: Expected min height of view: (<NSButton: 0x12ccd3000>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:53:05.502 firefox-bin[71917:1694070] Warning: Expected min height of view: (<NSButton: 0x12ccd3c00>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:53:05.503 firefox-bin[71917:1694070] Warning: Expected min height of view: (<NSButton: 0x12cccd800>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:53:05.503 firefox-bin[71917:1694070] Warning: Expected min height of view: (<NSButton: 0x12cccf800>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:53:05.504 firefox-bin[71917:1694070] Warning: Expected min height of view: (<NSPopoverTouchBarItemButton: 0x12ccd0c00>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 19:53:05.505 firefox-bin[71917:1694070] Warning: Expected min height of view: (<NSPopoverTouchBarItemButton: 0x12cd0c000>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+console.error: BackgroundUpdate: 
+  _reasonsToNotScheduleUpdates: Failed to check for Maintenance Service Registry Key: [Exception... "Component returned failure code: 0x80004001 (NS_ERROR_NOT_IMPLEMENTED) [nsIUpdateProcessor.getServiceRegKeyExists]"  nsresult: "0x80004001 (NS_ERROR_NOT_IMPLEMENTED)"  location: "JS frame :: resource://gre/modules/BackgroundUpdate.jsm :: _reasonsToNotScheduleUpdates :: line 243"  data: no]
+1640195586940	Marionette	INFO	Listening on port 50540
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+2021-12-22 19:53:07.048 plugin-container[71922:1694474] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:53:07.048 plugin-container[71922:1694474] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 19:53:07.056 plugin-container[71922:1694474] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:53:07.056 plugin-container[71922:1694474] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 19:53:07.056 plugin-container[71922:1694515] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 19:53:07.056 plugin-container[71922:1694515] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1640195587183	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://www.tradingview.com/static/bundles/3766.bb588146383ef3752969.js, line 17: unreachable code after return statement
+JavaScript warning: https://accounts.google.com/ServiceLogin?service=mail&passive=true&rm=false&continue=https://mail.google.com/mail/&ss=1&scc=1&ltmpl=default&ltmplcache=2&emr=1&osid=1# line 1 > eval line 6649 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+2021-12-22 19:56:08.265 firefox-bin[71917:1694070] TSM AdjustCapsLockLEDForKeyTransitionHandling - _ISSetPhysicalKeyboardCapsLockLED Inhibit
+JavaScript warning: https://pagead2.googlesyndication.com/bg/f8gou5y2Dfq0zn72-W9hYw99gWviw2ua4IRi-orcC78.js line 1 > eval line 3168 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: https://www.tradingview.com/static/bundles/main_chart.6f8916d2286b6ede5103.js, line 1: Error: Value is null
+JavaScript warning: https://pagead2.googlesyndication.com/bg/f8gou5y2Dfq0zn72-W9hYw99gWviw2ua4IRi-orcC78.js line 1 > eval line 5914 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+Port.onMessage event fired while context is inactive.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: https://www.tradingview.com/static/bundles/main_chart.6f8916d2286b6ede5103.js, line 1: Error: Value is null
+JavaScript error: https://www.tradingview.com/static/bundles/main_chart.6f8916d2286b6ede5103.js, line 1: Error: Value is null
+JavaScript error: https://www.tradingview.com/static/bundles/main_chart.6f8916d2286b6ede5103.js, line 1: Error: Value is null
+2021-12-22 20:21:22.448 firefox-bin[71917:1694070] Warning: Expected min height of view: (<NSButton: 0x134a68c00>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 20:21:22.449 firefox-bin[71917:1694070] Warning: Expected min height of view: (<NSButton: 0x13c0f6000>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 20:21:22.451 firefox-bin[71917:1694070] Warning: Expected min height of view: (<NSButton: 0x13c0f8800>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 20:21:22.452 firefox-bin[71917:1694070] Warning: Expected min height of view: (<NSButton: 0x13c305800>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 20:21:22.453 firefox-bin[71917:1694070] Warning: Expected min height of view: (<NSButton: 0x13c306c00>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 20:21:22.454 firefox-bin[71917:1694070] Warning: Expected min height of view: (<NSPopoverTouchBarItemButton: 0x13c302800>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 20:21:22.454 firefox-bin[71917:1694070] Warning: Expected min height of view: (<NSPopoverTouchBarItemButton: 0x13c588000>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 20:21:32.809 firefox-bin[71917:1694070] Warning: Expected min height of view: (<NSButton: 0x12cd06400>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 20:21:32.811 firefox-bin[71917:1694070] Warning: Expected min height of view: (<NSButton: 0x134a5e400>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 20:21:32.812 firefox-bin[71917:1694070] Warning: Expected min height of view: (<NSButton: 0x134a5fc00>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 20:21:32.813 firefox-bin[71917:1694070] Warning: Expected min height of view: (<NSButton: 0x12cde6c00>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 20:21:32.815 firefox-bin[71917:1694070] Warning: Expected min height of view: (<NSButton: 0x12cd06800>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 20:21:32.816 firefox-bin[71917:1694070] Warning: Expected min height of view: (<NSPopoverTouchBarItemButton: 0x12d20e400>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 20:21:32.817 firefox-bin[71917:1694070] Warning: Expected min height of view: (<NSPopoverTouchBarItemButton: 0x13c588000>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+JavaScript warning: https://www.tradingview.com/static/bundles/3766.bb588146383ef3752969.js, line 17: unreachable code after return statement
+1640198584378	geckodriver	INFO	Listening on 127.0.0.1:55590
+1640198599614	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-foreground" "-no-remote" "-profile" "/var/folders/_y/0c61p6fd3kxb8d7c2l2pd_jc0000gn/T/rust_mozprofileynKDop"
+1640198600367	Marionette	INFO	Marionette enabled
+2021-12-22 20:43:21.794 firefox-bin[72285:1726395] Warning: Expected min height of view: (<NSButton: 0x11f129400>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 20:43:21.796 firefox-bin[72285:1726395] Warning: Expected min height of view: (<NSButton: 0x126adbc00>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 20:43:21.797 firefox-bin[72285:1726395] Warning: Expected min height of view: (<NSButton: 0x126adac00>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 20:43:21.799 firefox-bin[72285:1726395] Warning: Expected min height of view: (<NSButton: 0x105181c00>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 20:43:21.800 firefox-bin[72285:1726395] Warning: Expected min height of view: (<NSButton: 0x126adf400>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 20:43:21.801 firefox-bin[72285:1726395] Warning: Expected min height of view: (<NSPopoverTouchBarItemButton: 0x126add400>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 20:43:21.803 firefox-bin[72285:1726395] Warning: Expected min height of view: (<NSPopoverTouchBarItemButton: 0x126c15c00>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+console.error: BackgroundUpdate: 
+  _reasonsToNotScheduleUpdates: Failed to check for Maintenance Service Registry Key: [Exception... "Component returned failure code: 0x80004001 (NS_ERROR_NOT_IMPLEMENTED) [nsIUpdateProcessor.getServiceRegKeyExists]"  nsresult: "0x80004001 (NS_ERROR_NOT_IMPLEMENTED)"  location: "JS frame :: resource://gre/modules/BackgroundUpdate.jsm :: _reasonsToNotScheduleUpdates :: line 243"  data: no]
+1640198604398	Marionette	INFO	Listening on port 55606
+2021-12-22 20:43:24.641 plugin-container[72290:1726813] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 20:43:24.642 plugin-container[72290:1726813] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 20:43:24.661 plugin-container[72290:1726813] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 20:43:24.661 plugin-container[72290:1726813] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 20:43:24.662 plugin-container[72290:1726829] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 20:43:24.662 plugin-container[72290:1726829] nil host used in call to allowsAnyHTTPSCertificateForHost:
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+1640198604852	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://accounts.google.com/ServiceLogin?service=mail&passive=true&rm=false&continue=https://mail.google.com/mail/&ss=1&scc=1&ltmpl=default&ltmplcache=2&emr=1&osid=1# line 1 > eval line 4672 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+JavaScript warning: https://www.tradingview.com/static/bundles/3766.bb588146383ef3752969.js, line 17: unreachable code after return statement
+JavaScript warning: https://www.tradingview.com/static/bundles/3766.bb588146383ef3752969.js, line 17: unreachable code after return statement
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1640198720325	geckodriver	INFO	Listening on 127.0.0.1:56093
+1640198734834	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-foreground" "-no-remote" "-profile" "/var/folders/_y/0c61p6fd3kxb8d7c2l2pd_jc0000gn/T/rust_mozprofileANAKMM"
+1640198735509	Marionette	INFO	Marionette enabled
+2021-12-22 20:45:36.862 firefox-bin[72317:1728101] Warning: Expected min height of view: (<NSButton: 0x11321d800>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 20:45:36.865 firefox-bin[72317:1728101] Warning: Expected min height of view: (<NSButton: 0x1159df400>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 20:45:36.866 firefox-bin[72317:1728101] Warning: Expected min height of view: (<NSButton: 0x1159d9c00>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 20:45:36.867 firefox-bin[72317:1728101] Warning: Expected min height of view: (<NSButton: 0x1159dc000>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 20:45:36.868 firefox-bin[72317:1728101] Warning: Expected min height of view: (<NSButton: 0x1159db000>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 20:45:36.869 firefox-bin[72317:1728101] Warning: Expected min height of view: (<NSPopoverTouchBarItemButton: 0x1159dcc00>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 20:45:36.870 firefox-bin[72317:1728101] Warning: Expected min height of view: (<NSPopoverTouchBarItemButton: 0x115c10400>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+console.error: BackgroundUpdate: 
+  _reasonsToNotScheduleUpdates: Failed to check for Maintenance Service Registry Key: [Exception... "Component returned failure code: 0x80004001 (NS_ERROR_NOT_IMPLEMENTED) [nsIUpdateProcessor.getServiceRegKeyExists]"  nsresult: "0x80004001 (NS_ERROR_NOT_IMPLEMENTED)"  location: "JS frame :: resource://gre/modules/BackgroundUpdate.jsm :: _reasonsToNotScheduleUpdates :: line 243"  data: no]
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+1640198739683	Marionette	INFO	Listening on port 56110
+1640198739766	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+2021-12-22 20:45:40.043 plugin-container[72322:1728570] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 20:45:40.044 plugin-container[72322:1728570] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 20:45:40.063 plugin-container[72322:1728570] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 20:45:40.063 plugin-container[72322:1728570] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 20:45:40.065 plugin-container[72322:1728568] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 20:45:40.065 plugin-container[72322:1728568] nil host used in call to allowsAnyHTTPSCertificateForHost:
+JavaScript warning: https://www.tradingview.com/static/bundles/3766.bb588146383ef3752969.js, line 17: unreachable code after return statement
+JavaScript warning: https://accounts.google.com/ServiceLogin?service=mail&passive=true&rm=false&continue=https://mail.google.com/mail/&ss=1&scc=1&ltmpl=default&ltmplcache=2&emr=1&osid=1# line 1 > eval line 4463 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+JavaScript error: resource://gre/modules/ConduitsParent.jsm, line 127: Error: Bad webextension@metamask.io principal: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background.html
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+1640198842345	geckodriver	INFO	Listening on 127.0.0.1:56510
+Exiting due to channel error.
+Exiting due to channel error.
+[GFX1-]: Receive IPC close with reason=AbnormalShutdown
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+[GFX1-]: Receive IPC close with reason=AbnormalShutdown
+Exiting due to channel error.
+Exiting due to channel error.
+1640198871254	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-foreground" "-no-remote" "-profile" "/var/folders/_y/0c61p6fd3kxb8d7c2l2pd_jc0000gn/T/rust_mozprofile6coIRd"
+1640198871888	Marionette	INFO	Marionette enabled
+2021-12-22 20:47:53.276 firefox-bin[72365:1730169] Warning: Expected min height of view: (<NSButton: 0x11472bc00>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 20:47:53.277 firefox-bin[72365:1730169] Warning: Expected min height of view: (<NSButton: 0x1178b3400>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 20:47:53.277 firefox-bin[72365:1730169] Warning: Expected min height of view: (<NSButton: 0x1178b2400>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 20:47:53.278 firefox-bin[72365:1730169] Warning: Expected min height of view: (<NSButton: 0x1178b2800>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 20:47:53.279 firefox-bin[72365:1730169] Warning: Expected min height of view: (<NSButton: 0x1178af800>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 20:47:53.280 firefox-bin[72365:1730169] Warning: Expected min height of view: (<NSPopoverTouchBarItemButton: 0x1178ae800>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 20:47:53.280 firefox-bin[72365:1730169] Warning: Expected min height of view: (<NSPopoverTouchBarItemButton: 0x1178eac00>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+console.error: BackgroundUpdate: 
+  _reasonsToNotScheduleUpdates: Failed to check for Maintenance Service Registry Key: [Exception... "Component returned failure code: 0x80004001 (NS_ERROR_NOT_IMPLEMENTED) [nsIUpdateProcessor.getServiceRegKeyExists]"  nsresult: "0x80004001 (NS_ERROR_NOT_IMPLEMENTED)"  location: "JS frame :: resource://gre/modules/BackgroundUpdate.jsm :: _reasonsToNotScheduleUpdates :: line 243"  data: no]
+1640198875711	Marionette	INFO	Listening on port 56584
+2021-12-22 20:47:55.860 plugin-container[72377:1730649] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 20:47:55.861 plugin-container[72377:1730649] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 20:47:55.874 plugin-container[72377:1730649] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 20:47:55.874 plugin-container[72377:1730649] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2021-12-22 20:47:55.880 plugin-container[72377:1730654] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2021-12-22 20:47:55.880 plugin-container[72377:1730654] nil host used in call to allowsAnyHTTPSCertificateForHost:
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+1640198876294	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://www.tradingview.com/static/bundles/3766.bb588146383ef3752969.js, line 17: unreachable code after return statement
+JavaScript warning: https://accounts.google.com/ServiceLogin?service=mail&passive=true&rm=false&continue=https://mail.google.com/mail/&ss=1&scc=1&ltmpl=default&ltmplcache=2&emr=1&osid=1# line 1 > eval line 6436 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
+JavaScript warning: moz-extension://6b603626-8289-3b4a-ad10-1d893b9ecc1f/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+1640198955948	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://remote/content/marionette/sync.js:238:19
+TimedPromise@chrome://remote/content/marionette/sync.js:223:10
+interaction.flushEventLoop@chrome://remote/content/marionette/interaction.js:431:10
+webdriverClickElement@chrome://remote/content/marionette/interaction.js:179:31
+2021-12-22 20:51:45.148 firefox-bin[72365:1730169] Warning: Expected min height of view: (<NSButton: 0x108e1dc00>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 20:51:45.149 firefox-bin[72365:1730169] Warning: Expected min height of view: (<NSButton: 0x112acf000>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 20:51:45.151 firefox-bin[72365:1730169] Warning: Expected min height of view: (<NSButton: 0x112ad6400>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 20:51:45.153 firefox-bin[72365:1730169] Warning: Expected min height of view: (<NSButton: 0x112add000>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 20:51:45.158 firefox-bin[72365:1730169] Warning: Expected min height of view: (<NSButton: 0x112adb000>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 20:51:45.159 firefox-bin[72365:1730169] Warning: Expected min height of view: (<NSPopoverTouchBarItemButton: 0x112adc000>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 20:51:45.161 firefox-bin[72365:1730169] Warning: Expected min height of view: (<NSPopoverTouchBarItemButton: 0x112b70c00>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2021-12-22 20:51:49.503 firefox-bin[72365:1730169] TSM AdjustCapsLockLEDForKeyTransitionHandling - _ISSetPhysicalKeyboardCapsLockLED Inhibit
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+
+###!!! [Parent][MessageChannel] Error: (msgtype=0x390078,name=PContent::Msg_DestroyBrowsingContextGroup) Closed channel: cannot send/recv
+
+JavaScript warning: https://www.tradingview.com/static/bundles/3766.bb588146383ef3752969.js, line 17: unreachable code after return statement

@@ -5,20 +5,19 @@ from selenium.common.exceptions import (NoSuchElementException,
                                         TimeoutException)
 from selenium.webdriver.support.ui import WebDriverWait
 
-from my_functions import Functions
+from my_functions import TvGetter
 from profit import profits
-from TradeViewGUI import Main
 
 
-class LongShortScript(Functions):
+class LongShortScript:
     """find the best stop loss and take profit values for your strategy."""
 
-    def __init__(self):
-        Main.__init__(self)
-        self.driver = self.create_driver()
-        self.run_script()
+    def __init__(self, driver, strategy_params):
+        self.driver = driver
+        self.tvGetter = TvGetter(driver)
+        self.run_script(strategy_params)
 
-    def run_script(self):
+    def run_script(self, strategy_params):
         # Loading website with web driver.
         wait = WebDriverWait(self.driver, 15)
         try:
@@ -34,62 +33,63 @@ class LongShortScript(Functions):
 
         # Making sure strategy tester tab is clicked so automation runs properly.
         try:
-            self.click_strategy_tester(wait)
-            self.click_overview()
+            self.tvGetter.click_strategy_tester(wait)
+            self.tvGetter.click_overview()
         except NoSuchElementException:
-            self.click_overview()
+            self.tvGetter.click_overview()
         print("Generating Max Profit For Stop Loss.")
         print("Loading script...\n")
 
         # Making sure we are on inputs tab and resetting values to default settings.
-        self.click_settings_button(wait)
-        self.click_input_tab()
-        self.click_enable_both_checkboxes()
-        self.click_rest_all_inputs()
-        self.click_ok_button()
+        self.tvGetter.click_settings_button(wait)
+        self.tvGetter.click_input_tab()
+        self.tvGetter.click_enable_both_checkboxes()
+        self.tvGetter.click_rest_all_inputs()
+        self.tvGetter.click_ok_button()
 
         # Loop through max attempts while randomizing values each attempt.
         count = 0
+        maxAttemptsValue = 5
         try:
-            while count < int(self.maxAttemptsValue.text()):
+            while count < maxAttemptsValue:
                 try:
                     count = count + 1
 
                     # Creating random values every loop.
                     long_stoploss_value = round(
                         random.uniform(
-                            float(self.minLongStoplossValue.text()),
-                            float(self.maxLongStoplossValue.text()),
+                            float(strategy_params['longStoplossValue'][0]),
+                            float(strategy_params['longStoplossValue'][1]),
                         ),
-                        int(self.decimalPlaceValue.text()),
+                        int(strategy_params['longStoplossValue'][2]),
                     )
                     long_takeprofit_value = round(
                         random.uniform(
-                            float(self.minLongTakeprofitValue.text()),
-                            float(self.maxLongTakeprofitValue.text()),
+                            float(strategy_params['longTakeprofitValue'][0]),
+                            float(strategy_params['longTakeprofitValue'][1]),
                         ),
-                        int(self.decimalPlaceValue.text()),
+                        int(strategy_params['longTakeprofitValue'][2]),
                     )
                     short_stoploss_value = round(
                         random.uniform(
-                            float(self.minShortStoplossValue.text()),
-                            float(self.maxShortStoplossValue.text()),
+                            float(strategy_params['shortStoplossValue'][0]),
+                            float(strategy_params['shortStoplossValue'][1]),
                         ),
-                        int(self.decimalPlaceValue.text()),
+                        int(strategy_params['shortStoplossValue'][2]),
                     )
                     short_takeprofit_value = round(
                         random.uniform(
-                            float(self.minShortTakeprofitValue.text()),
-                            float(self.maxShortTakeprofitValue.text()),
+                            float(strategy_params['shortTakeprofitValue'][0]),
+                            float(strategy_params['shortTakeprofitValue'][1]),
                         ),
-                        int(self.decimalPlaceValue.text()),
+                        int(strategy_params['shortTakeprofitValue'][2]),
                     )
 
                     # Click settings button
-                    self.click_settings_button(wait)
+                    self.tvGetter.click_settings_button(wait)
 
                     # Click all input boxes and add new values.
-                    self.click_all_inputs(
+                    self.tvGetter.click_all_inputs(
                         long_stoploss_value,
                         long_takeprofit_value,
                         short_stoploss_value,
@@ -98,7 +98,7 @@ class LongShortScript(Functions):
                     )
 
                     # Saving the profitability of the new values into a dictionary.
-                    self.get_net_all(
+                    self.tvGetter.get_net_all(
                         long_stoploss_value,
                         long_takeprofit_value,
                         short_stoploss_value,
@@ -121,9 +121,9 @@ class LongShortScript(Functions):
             return
 
         # Adding the best parameters into your strategy.
-        self.click_settings_button(wait)
-        best_key = self.find_best_key_both()
-        self.click_all_inputs(
+        self.tvGetter.click_settings_button(wait)
+        best_key = self.tvGetter.find_best_key_both()
+        self.tvGetter.click_all_inputs(
             profits[best_key][1],
             profits[best_key][3],
             profits[best_key][5],
@@ -133,36 +133,36 @@ class LongShortScript(Functions):
         self.driver.implicitly_wait(1)
 
         print("\n----------Results----------\n")
-        self.click_overview()
-        self.print_best_all()
-        self.click_performance_summary()
-        self.print_total_closed_trades()
-        self.print_net_profit()
-        self.print_win_rate()
-        self.print_max_drawdown()
-        self.print_sharpe_ratio()
-        self.print_sortino_ratio()
-        self.print_win_loss_ratio()
-        self.print_avg_win_trade()
-        self.print_avg_loss_trade()
-        self.print_avg_bars_in_winning_trades()
+        self.tvGetter.click_overview()
+        self.tvGetter.print_best_all()
+        self.tvGetter.click_performance_summary()
+        self.tvGetter.print_total_closed_trades()
+        self.tvGetter.print_net_profit()
+        self.tvGetter.print_win_rate()
+        self.tvGetter.print_max_drawdown()
+        self.tvGetter.print_sharpe_ratio()
+        self.tvGetter.print_sortino_ratio()
+        self.tvGetter.print_win_loss_ratio()
+        self.tvGetter.print_avg_win_trade()
+        self.tvGetter.print_avg_loss_trade()
+        self.tvGetter.print_avg_bars_in_winning_trades()
         # print("\n----------More Results----------\n")
-        # self.print_gross_profit()
-        # self.print_gross_loss()
-        # self.print_buy_and_hold_return()
-        # self.print_max_contracts_held()
-        # self.print_open_pl()
-        # self.print_commission_paid()
-        # self.print_total_open_trades()
-        # self.print_number_winning_trades()
-        # self.print_number_losing_trades()
-        # self.print_percent_profitable()
-        # self.print_avg_trade()
-        # self.print_avg_win_trade()
-        # self.print_avg_loss_trade()
-        # self.print_largest_winning_trade()
-        # self.print_largest_losing_trade()
-        # self.print_avg_bars_in_trades()
-        # self.print_avg_bars_in_winning_trades()
-        # self.print_avg_bars_in_losing_trades()
-        # self.print_margin_calls()
+        # self.tvGetter.print_gross_profit()
+        # self.tvGetter.print_gross_loss()
+        # self.tvGetter.print_buy_and_hold_return()
+        # self.tvGetter.print_max_contracts_held()
+        # self.tvGetter.print_open_pl()
+        # self.tvGetter.print_commission_paid()
+        # self.tvGetter.print_total_open_trades()
+        # self.tvGetter.print_number_winning_trades()
+        # self.tvGetter.print_number_losing_trades()
+        # self.tvGetter.print_percent_profitable()
+        # self.tvGetter.print_avg_trade()
+        # self.tvGetter.print_avg_win_trade()
+        # self.tvGetter.print_avg_loss_trade()
+        # self.tvGetter.print_largest_winning_trade()
+        # self.tvGetter.print_largest_losing_trade()
+        # self.tvGetter.print_avg_bars_in_trades()
+        # self.tvGetter.print_avg_bars_in_winning_trades()
+        # self.tvGetter.print_avg_bars_in_losing_trades()
+        # self.tvGetter.print_margin_calls()

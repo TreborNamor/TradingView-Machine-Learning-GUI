@@ -1,0 +1,6 @@
+{
+    "longStoplossValue": [1, 2, 1],
+    "longTakeprofitValue": [1, 2, 1],
+    "shortStoplossValue": [1, 2, 1],
+    "shortTakeprofitValue": [1, 2, 1]
+}

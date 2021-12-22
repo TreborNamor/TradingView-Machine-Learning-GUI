@@ -1,0 +1,8 @@
+{
+  "SMA Length": [100, 400, 3],
+  "ATR Length": [10, 50, 1],
+  "Upperband Offset": [10, 50, 1],
+  "Lowerband Offset": [10, 50, 1],
+  "Risk %": [0.25, 5, 0.5],
+  "Use Position Sizing?": true
+}
