@@ -10,7 +10,6 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from termcolor import colored
 
-from TradeViewGUI import Main
 from profit import profits
 
 

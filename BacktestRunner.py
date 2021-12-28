@@ -9,7 +9,7 @@ from my_functions import TvGetter
 from profit import profits
 
 
-class LongShortScript:
+class BacktestRunner:
     """find the best stop loss and take profit values for your strategy."""
 
     def __init__(self, driver, indicator_params_config):

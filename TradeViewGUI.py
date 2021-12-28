@@ -21,9 +21,9 @@ class Main:
         return driver
 
     def optimize_longs_shorts(self):
-        import OptimizeLongsShorts
+        import BacktestRunner
         indicator_params_config = self.load_indicator_params_config()
-        OptimizeLongsShorts.LongShortScript(self.driver, indicator_params_config)
+        BacktestRunner.BacktestRunner(self.driver, indicator_params_config)
 
 
     def load_indicator_params_config(self):
