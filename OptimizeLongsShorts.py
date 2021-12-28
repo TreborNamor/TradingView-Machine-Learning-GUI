@@ -12,12 +12,12 @@ from profit import profits
 class LongShortScript:
     """find the best stop loss and take profit values for your strategy."""
 
-    def __init__(self, driver, strategy_params):
+    def __init__(self, driver, indicator_params_config):
         self.driver = driver
         self.tvGetter = TvGetter(driver)
-        self.run_script(strategy_params)
+        self.run_script(indicator_params_config)
 
-    def run_script(self, strategy_params):
+    def run_script(self, indicator_params_config):
         # Loading website with web driver.
         wait = WebDriverWait(self.driver, 15)
         try:
@@ -46,90 +46,12 @@ class LongShortScript:
         self.tvGetter.click_enable_both_checkboxes()
         self.tvGetter.click_rest_all_inputs()
         self.tvGetter.click_ok_button()
-
-        # Loop through max attempts while randomizing values each attempt.
-        count = 0
-        maxAttemptsValue = 5
-        try:
-            while count < maxAttemptsValue:
-                try:
-                    count = count + 1
-
-                    # Creating random values every loop.
-                    long_stoploss_value = round(
-                        random.uniform(
-                            float(strategy_params['longStoplossValue'][0]),
-                            float(strategy_params['longStoplossValue'][1]),
-                        ),
-                        int(strategy_params['longStoplossValue'][2]),
-                    )
-                    long_takeprofit_value = round(
-                        random.uniform(
-                            float(strategy_params['longTakeprofitValue'][0]),
-                            float(strategy_params['longTakeprofitValue'][1]),
-                        ),
-                        int(strategy_params['longTakeprofitValue'][2]),
-                    )
-                    short_stoploss_value = round(
-                        random.uniform(
-                            float(strategy_params['shortStoplossValue'][0]),
-                            float(strategy_params['shortStoplossValue'][1]),
-                        ),
-                        int(strategy_params['shortStoplossValue'][2]),
-                    )
-                    short_takeprofit_value = round(
-                        random.uniform(
-                            float(strategy_params['shortTakeprofitValue'][0]),
-                            float(strategy_params['shortTakeprofitValue'][1]),
-                        ),
-                        int(strategy_params['shortTakeprofitValue'][2]),
-                    )
-
-                    # Click settings button
-                    self.tvGetter.click_settings_button(wait)
-
-                    # Click all input boxes and add new values.
-                    self.tvGetter.click_all_inputs(
-                        long_stoploss_value,
-                        long_takeprofit_value,
-                        short_stoploss_value,
-                        short_takeprofit_value,
-                        wait,
-                    )
-
-                    # Saving the profitability of the new values into a dictionary.
-                    self.tvGetter.get_net_all(
-                        long_stoploss_value,
-                        long_takeprofit_value,
-                        short_stoploss_value,
-                        short_takeprofit_value,
-                        wait,
-                    )
-
-                except (
-                    StaleElementReferenceException,
-                    TimeoutException,
-                    NoSuchElementException,
-                ) as error:
-                    if error:
-                        count -= 1
-                        continue
-        except ValueError:
-            print(
-                "\nValue Error: Make sure all available text input boxes are filled with a number for script to run properly.\n"
-            )
-            return
-
+        # Click all input boxes and add new values.
+        self.tvGetter.backtest_strategy(indicator_params_config, wait)
         # Adding the best parameters into your strategy.
         self.tvGetter.click_settings_button(wait)
         best_key = self.tvGetter.find_best_key_both()
-        self.tvGetter.click_all_inputs(
-            profits[best_key][1],
-            profits[best_key][3],
-            profits[best_key][5],
-            profits[best_key][7],
-            wait,
-        )
+        self.tvGetter.backtest_strategy(profits[best_key], wait)
         self.driver.implicitly_wait(1)
 
         print("\n----------Results----------\n")

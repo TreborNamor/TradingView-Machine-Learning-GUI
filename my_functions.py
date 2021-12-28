@@ -1,5 +1,8 @@
+import itertools
+import json
 import time
 
+import numpy
 from selenium.common.exceptions import (ElementNotInteractableException,
                                         NoSuchElementException)
 from selenium.webdriver.common.by import By
@@ -152,168 +155,51 @@ class TvGetter:
                 "Could Not Click Strategy Tester Tab: trades tab. Please Check web element XPATH."
             )
 
-    def click_long_stoploss_input(self, count, wait):
-        """click short stoploss input."""
-        wait.until(EC.visibility_of_element_located(
-            (By.XPATH, "//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")))
-        stoploss_input_box = self.driver.find_elements_by_xpath(
-            "//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")[0]
-        stoploss_input_box.send_keys(
-            Keys.BACK_SPACE +
-            Keys.BACK_SPACE +
-            Keys.BACK_SPACE +
-            Keys.BACK_SPACE)
-        stoploss_input_box.send_keys(str(count))
-        stoploss_input_box.send_keys(Keys.ENTER)
-        time.sleep(.5)
-        ok_button = self.driver.find_element_by_name("submit")
-        ok_button.click()
-
-    def click_long_takeprofit_input(self, count, wait):
-        """click long take profit input."""
-        wait.until(EC.visibility_of_element_located(
-            (By.XPATH, "//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")))
-        takeprofit_input_box = self.driver.find_elements_by_xpath(
-            "//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")[1]
-        takeprofit_input_box.send_keys(
-            Keys.BACK_SPACE +
-            Keys.BACK_SPACE +
-            Keys.BACK_SPACE +
-            Keys.BACK_SPACE)
-        takeprofit_input_box.send_keys(str(count))
-        takeprofit_input_box.send_keys(Keys.ENTER)
-        time.sleep(.5)
-        ok_button = self.driver.find_element_by_name("submit")
-        ok_button.click()
-
-    def click_short_stoploss_input(self, count, wait):
-        """click short stoploss input."""
-        wait.until(EC.visibility_of_element_located(
-            (By.XPATH, "//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")))
-        stoploss_input_box = self.driver.find_elements_by_xpath(
-            "//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")[2]
-        stoploss_input_box.send_keys(
-            Keys.BACK_SPACE +
-            Keys.BACK_SPACE +
-            Keys.BACK_SPACE +
-            Keys.BACK_SPACE)
-        stoploss_input_box.send_keys(str(count))
-        stoploss_input_box.send_keys(Keys.ENTER)
-        time.sleep(.5)
-        ok_button = self.driver.find_element_by_name("submit")
-        ok_button.click()
-
-    def click_short_takeprofit_input(self, count, wait):
-        """click short take profit input."""
-        wait.until(EC.visibility_of_element_located(
-            (By.XPATH, "//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")))
-        stoploss_input_box = self.driver.find_elements_by_xpath(
-            "//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")[3]
-        stoploss_input_box.send_keys(
-            Keys.BACK_SPACE +
-            Keys.BACK_SPACE +
-            Keys.BACK_SPACE +
-            Keys.BACK_SPACE)
-        stoploss_input_box.send_keys(str(count))
-        stoploss_input_box.send_keys(Keys.ENTER)
-        time.sleep(.5)
-        ok_button = self.driver.find_element_by_name("submit")
-        ok_button.click()
-
-    def click_long_inputs(
+    def backtest_strategy(
             self,
-            long_stoploss_value,
-            long_takeprofit_value,
-            wait):
-        """click both long inputs."""
-        wait.until(EC.visibility_of_element_located(
-            (By.XPATH, "//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")))
-        stoploss_input_box = self.driver.find_elements_by_xpath(
-            "//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")[0]
-        takeprofit_input_box = self.driver.find_elements_by_xpath(
-            "//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")[1]
-        stoploss_input_box.send_keys(
-            Keys.BACK_SPACE +
-            Keys.BACK_SPACE +
-            Keys.BACK_SPACE +
-            Keys.BACK_SPACE)
-        stoploss_input_box.send_keys(str(long_stoploss_value))
-        takeprofit_input_box.send_keys(
-            Keys.BACK_SPACE +
-            Keys.BACK_SPACE +
-            Keys.BACK_SPACE +
-            Keys.BACK_SPACE)
-        takeprofit_input_box.send_keys(str(long_takeprofit_value))
-        takeprofit_input_box.send_keys(Keys.ENTER)
-        time.sleep(.5)
-        ok_button = self.driver.find_element_by_name("submit")
-        ok_button.click()
-
-    def click_short_inputs(
-            self,
-            short_stoploss_value,
-            short_takeprofit_value,
-            wait):
-        """click both short inputs."""
-        wait.until(EC.visibility_of_element_located(
-            (By.XPATH, "//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")))
-        stoploss_input_box = self.driver.find_elements_by_xpath(
-            "//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")[2]
-        takeprofit_input_box = self.driver.find_elements_by_xpath(
-            "//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")[3]
-        stoploss_input_box.send_keys(
-            Keys.BACK_SPACE +
-            Keys.BACK_SPACE +
-            Keys.BACK_SPACE +
-            Keys.BACK_SPACE)
-        stoploss_input_box.send_keys(str(short_stoploss_value))
-        takeprofit_input_box.send_keys(
-            Keys.BACK_SPACE +
-            Keys.BACK_SPACE +
-            Keys.BACK_SPACE +
-            Keys.BACK_SPACE)
-        takeprofit_input_box.send_keys(str(short_takeprofit_value))
-        takeprofit_input_box.send_keys(Keys.ENTER)
-        time.sleep(.5)
-        ok_button = self.driver.find_element_by_name("submit")
-        ok_button.click()
-
-
-    def click_all_inputs(
-            self,
-            long_stoploss_value,
-            long_takeprofit_value,
-            short_stoploss_value,
-            short_takeprofit_value,
+            indicator_params_config,
             wait,
     ):
-        """click short stoploss input."""
-        wait.until(EC.visibility_of_element_located(
-            (By.XPATH, "//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']")))
-        long_stoploss_input_box = self.driver.find_elements_by_xpath(
-            "//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']"
-        )[0]
-        long_takeprofit_input_box = self.driver.find_elements_by_xpath(
-            "//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']"
-        )[1]
-        short_stoploss_input_box = self.driver.find_elements_by_xpath(
-            "//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']"
-        )[2]
-        short_takeprofit_input_box = self.driver.find_elements_by_xpath(
-            "//*[@class='input-3bEGcMc9 with-end-slot-S5RrC8PC']"
-        )[3]
-        long_stoploss_input_box.send_keys(Keys.BACK_SPACE * 8)
-        long_stoploss_input_box.send_keys(str(long_stoploss_value))
-        long_takeprofit_input_box.send_keys(Keys.BACK_SPACE * 8)
-        long_takeprofit_input_box.send_keys(str(long_takeprofit_value))
-        short_stoploss_input_box.send_keys(Keys.BACK_SPACE * 8)
-        short_stoploss_input_box.send_keys(str(short_stoploss_value))
-        short_takeprofit_input_box.send_keys(Keys.BACK_SPACE * 8)
-        short_takeprofit_input_box.send_keys(str(short_takeprofit_value))
-        short_takeprofit_input_box.send_keys(Keys.ENTER)
-        time.sleep(0.5)
-        ok_button = self.driver.find_element_by_name("submit")
-        ok_button.click()
+        strategy_params_range = self.build_strategy_params_range(indicator_params_config)
+        strategy_params_cartesian_product = self.build_strategy_params_cartesian_product(strategy_params_range)
+        print("The number of backtests that will be run: " + str(len(strategy_params_cartesian_product)))
+        backtest_number = 0
+        for params in strategy_params_cartesian_product:
+            self.click_settings_button(wait)
+            self.set_backtest_strategy_params(params, wait)
+            ok_button = self.driver.find_element_by_name("submit")
+            ok_button.click()
+            self.log_backtest_result(backtest_number, params, strategy_params_cartesian_product, wait)
+            backtest_number = backtest_number + 1
+
+    def build_strategy_params_cartesian_product(self, params_range):
+        backtest_param_maps = []
+        for params_value_set in itertools.product(*params_range.values()):
+            params_map = {}
+            for index, key in enumerate(params_range):
+                params_map[key] = params_value_set[index]
+            backtest_param_maps.append(params_map)
+        return backtest_param_maps
+
+    def set_backtest_strategy_params(self, params, wait):
+        for key in params:
+            self.set_strategy_param(key, params[key], wait)
+            # time.sleep(0.5)
+
+    def build_strategy_params_range(self, indicator_params_config):
+        params_range = {}
+        for key in indicator_params_config:
+            param_range_config = indicator_params_config[key]
+            param_range = numpy.arange(param_range_config[0], param_range_config[1], param_range_config[2])
+            params_range[key] = param_range
+        return params_range
+
+    def set_strategy_param(self, field_label, param_value, wait):
+        input_xpath = "//div[text()='" + field_label + "']/parent::div/following-sibling::div//input"
+        wait.until(EC.visibility_of_element_located((By.XPATH, input_xpath)))
+        input_element = self.driver.find_element_by_xpath(input_xpath)
+        input_element.send_keys(Keys.BACK_SPACE * 8)
+        input_element.send_keys(str(param_value))
 
     def click_input_tab(self):
         """making sure the input tab is clicked."""
@@ -404,38 +290,34 @@ class TvGetter:
         short_takeprofit_input_box.send_keys(str("50"))
         short_takeprofit_input_box.send_keys(Keys.ENTER)
 
-    # Get Functions
-    def get_net_all(
+    def log_backtest_result(
             self,
-            long_stoploss_value,
-            long_takeprofit_value,
-            short_stoploss_value,
-            short_takeprofit_value,
+            backtest_number,
+            strategy_params,
+            all_params_maps,
             wait,
     ):
-        wait.until(EC.visibility_of_element_located(
-            (By.CLASS_NAME, "additional_percent_value")))
+        net_profit_xpath = "/html/body/div[2]/div[6]/div[2]/div[4]/div[3]/div/div/div[1]/div[1]/p/span"
+        wait.until(EC.visibility_of_element_located((By.XPATH, net_profit_xpath)))
+        net_profit = float(self.driver.find_element_by_xpath(net_profit_xpath).text.split("%")[0])
 
-        net_profit = float(self.driver.find_element_by_xpath("/html/body/div[2]/div[6]/div[2]/div[4]/div[3]/div/div/div[1]/div[1]/p/span/span").text.split("%")[0])
-        trades_amount = self.driver.find_element_by_xpath("/html/body/div[2]/div[6]/div[2]/div[4]/div[3]/div/div/div[1]/div[2]/strong").text
-        max_drawdown = self.driver.find_element_by_xpath("/html/body/div[2]/div[6]/div[2]/div[4]/div[3]/div/div/div[1]/div[5]/p/span/span").text
+        trades_amount_xpath = "/html/body/div[2]/div[6]/div[2]/div[4]/div[3]/div/div/div[1]/div[2]/strong"
+        wait.until(EC.visibility_of_element_located((By.XPATH, trades_amount_xpath)))
+        trades_amount = self.driver.find_element_by_xpath(trades_amount_xpath).text
+
+        max_drawdown_xpath = "/html/body/div[2]/div[6]/div[2]/div[4]/div[3]/div/div/div[1]/div[1]/p/span"
+        wait.until(EC.visibility_of_element_located((By.XPATH, max_drawdown_xpath)))
+        max_drawdown = self.driver.find_element_by_xpath(max_drawdown_xpath).text
         profits.update(
             {
-                net_profit: [
-                    "Long Stoploss:",
-                    long_stoploss_value,
-                    "Long Take Profit:",
-                    long_takeprofit_value,
-                    "Short Stoploss:",
-                    short_stoploss_value,
-                    "Short Take Profit:",
-                    short_takeprofit_value,
-                ]
+                net_profit: strategy_params
             }
         )
         print(
             colored(
-                f"Net Profit:{net_profit}, trades:{trades_amount}  max_drawdown:{max_drawdown}  --> Long Stoploss: {long_stoploss_value}, Long Take Profit: {long_takeprofit_value}, Short Stoploss: {short_stoploss_value}, Short Take Profit: {short_takeprofit_value}",
+                f"Backtest {str(backtest_number)}/{str(len(all_params_maps))} results:"
+                f" Net Profit:{str(net_profit)}%, trades:{trades_amount}  max_drawdown:{max_drawdown}  -->"
+                f" Params: " + json.dumps(strategy_params, cls=NpEncoder),
                 "red",
             )
         )
@@ -626,14 +508,7 @@ class TvGetter:
     def print_best_all(self):
         try:
             best_key = self.find_best_key_both()
-            best_long_stoploss = profits[best_key][1]
-            best_long_takeprofit = profits[best_key][3]
-            best_short_stoploss = profits[best_key][5]
-            best_short_takeprofit = profits[best_key][7]
-            print(f"Best Long Stop Loss: {best_long_stoploss}")
-            print(f"Best Long Take Profit: {best_long_takeprofit}")
-            print(f"Best Short Stop Loss: {best_short_stoploss}")
-            print(f"Best Short Take Profit: {best_short_takeprofit}\n")
+            print(profits[best_key])
         except (UnboundLocalError, ValueError):
             print("error printing stoploss.")
 
@@ -1034,3 +909,14 @@ class TvGetter:
                 .find_elements_by_tag_name("td")[1]
         )
         print(f"Win Rate: {win_rate.text}")
+
+
+class NpEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, numpy.integer):
+            return int(obj)
+        if isinstance(obj, numpy.floating):
+            return float(obj)
+        if isinstance(obj, numpy.ndarray):
+            return obj.tolist()
+        return super(NpEncoder, self).default(obj)

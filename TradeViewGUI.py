@@ -22,11 +22,11 @@ class Main:
 
     def optimize_longs_shorts(self):
         import OptimizeLongsShorts
-        params = self.loadIndicatorParams()
-        OptimizeLongsShorts.LongShortScript(self.driver, params)
+        indicator_params_config = self.load_indicator_params_config()
+        OptimizeLongsShorts.LongShortScript(self.driver, indicator_params_config)
 
 
-    def loadIndicatorParams(self):
+    def load_indicator_params_config(self):
         with open('indicator-params/test-stg.json') as json_file:
             return json.load(json_file)
 
