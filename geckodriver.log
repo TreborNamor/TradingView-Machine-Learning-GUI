@@ -1,5 +1,5 @@
 1630204233959	geckodriver	INFO	Listening on 127.0.0.1:65220
-1630204238706	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\Trebor\\AppData\\Local\\Temp\\rust_mozprofile1YwaNA"
+1630204238706	mozrunner::runner	INFO	Running command: "Users\\aesc\\Library\\Application Support\\Firefox" "--marionette" "-headless" "-foreground" "-no-remote" "-profile" "Profiles\\pc68n4mg.Standard-Benutzer-1642114627719"
 *** You are running in headless mode.
 1630204239865	Marionette	INFO	Marionette enabled
 [GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
@@ -12,7 +12,7 @@ console.log: WebExtensions: reset-default-search: has already ran once and saw p
 JavaScript warning: https://www.tradingview.com/static/bundles/313.4fc946359c3371983dde.js, line 11: unreachable code after return statement
 JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
 JavaScript error: https://www.tradingview.com/static/bundles/156.4b1b4b078a8349fe43e5.js, line 11: TypeError: i.filter is not a function
-d" "-no-remote" "-profile" "C:\\Users\\Trebor\\AppData\\Local\\Temp\\rust_mozprofilezzIrbD"
+d" "-no-remote" "-profile" "Users\\aesc\\Library\\Application Support\\Firefox/Profiles\\pc68n4mg.Standard-Benutzer-1642114627719"
 1630204554566	Marionette	INFO	Marionette enabled
 console.log: WebExtensions: reset-default-search: starting.
 console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
@@ -29,7 +29,7 @@ JavaScript error: chrome://remote/content/marionette/cert.js, line 55: NS_ERROR_
 
 JavaScript error: resource://services-sync/engines/extension-storage.js, line 53: TypeError: Svc.Prefs is undefined
 1630204805914	geckodriver	INFO	Listening on 127.0.0.1:64899
-1630204810592	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Trebor\\AppData\\Local\\Temp\\rust_mozprofileZsL72J"
+1630204810592	mozrunner::runner	INFO	Running command: "Users\\aesc\\Library\\Application Support\\Firefox" "--marionette" "-headless" "-foreground" "-no-remote" "-profile" "Profiles\\pc68n4mg.Standard-Benutzer-1642114627719
 1630204811016	Marionette	INFO	Marionette enabled
 console.log: WebExtensions: reset-default-search: starting.
 console.log: WebExtensions: reset-default-search: has already ran once and saw panel, exit.
@@ -287,7 +287,7 @@ JavaScript error: chrome://remote/content/marionette/cert.js, line 55: NS_ERROR_
 
 1630205878108	geckodriver	INFO	Listening on 127.0.0.1:57993
 1630206925352	geckodriver	INFO	Listening on 127.0.0.1:61900
-1630206930071	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\Trebor\\AppData\\Local\\Temp\\rust_mozprofileqMOwqw"
+1630206930071	mozrunner::runner	INFO	Running command: "Users\\aesc\\Library\\Application Support\\Firefox" "--marionette" "-headless" "-foreground" "-no-remote" "-profile" "Profiles\\pc68n4mg.Standard-Benutzer-1642114627719
 *** You are running in headless mode.
 1630206930216	Marionette	INFO	Marionette enabled
 [GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
