@@ -30,13 +30,13 @@ plot(enable_short_strategy and not enable_long_strategy ? short_stoploss_price: 
 plot(enable_short_strategy and not enable_long_strategy ? short_takeprofit_price: na, color=#008000, style=plot.style_linebr, linewidth=2, title="Short TP Level")
 
 // Date Range
-start_date = input(title="Start Date", type=input.integer, defval=1, minval=1, maxval=31, group="Date Range")
-start_month = input(title="Start Month", type=input.integer, defval=1, minval=1, maxval=12, group="Date Range")
-start_year = input(title="Start Year", type=input.integer, defval=1804, minval=1800, maxval=3000, group="Date Range")
-end_date = input(title="End Date", type=input.integer, defval=1, minval=1, maxval=3, group="Date Range")
-end_month = input(title="End Month", type=input.integer, defval=1, minval=1, maxval=12, group="Date Range")
-end_year = input(title="End Year", type=input.integer, defval=2077, minval=1800, maxval=3000, group="Date Range")
-in_date_range = (time >= timestamp(syminfo.timezone, start_year, start_month, start_date, 0, 0)) and (time < timestamp(syminfo.timezone, end_year, end_month, end_date, 0, 0))
+start_date = input.int(title='Start Date', defval=1, minval=1, maxval=31, group='Date Range', inline='1')
+end_date = input.int(title='End Date', defval=1, minval=1, maxval=31, group='Date Range', inline='1')
+start_month = input.int(title='Start Month', defval=1, minval=1, maxval=12, group='Date Range', inline='2')
+end_month = input.int(title='End Month', defval=1, minval=1, maxval=12, group='Date Range', inline='2')
+start_year = input.int(title='Start Year', defval=1804, minval=1800, maxval=3000, group='Date Range', inline='3')
+end_year = input.int(title='End Year', defval=2077, minval=1800, maxval=3000, group='Date Range', inline='3')
+in_date_range = time >= timestamp(syminfo.timezone, start_year, start_month, start_date, 0, 0) and time < timestamp(syminfo.timezone, end_year, end_month, end_date, 0, 0)
 
 
 //// Indicators
