@@ -1,3 +1,6 @@
-venv
+*.xml
+*.pyc
+*.log
 geckodriver.log
+venv
 debug.log

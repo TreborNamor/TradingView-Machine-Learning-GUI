@@ -3,8 +3,14 @@ from distutils.util import strtobool
 
 from PyQt5 import uic
 from PyQt5.QtCore import QSettings
-from PyQt5.QtWidgets import (QApplication, QCheckBox, QLineEdit, QMainWindow,
-                             QMessageBox, QWidget)
+from PyQt5.QtWidgets import (
+    QApplication,
+    QCheckBox,
+    QLineEdit,
+    QMainWindow,
+    QMessageBox,
+    QWidget,
+)
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from webdriver_manager.firefox import GeckoDriverManager
@@ -142,43 +148,43 @@ class Main(QMainWindow):
 
     def optimize_longs_shorts(self):
         if self.comboBox.currentIndex() == 0:
-            import OptimizeLongsShorts
+            from scripts import OptimizeLongsShorts
 
             OptimizeLongsShorts.LongShortScript()
 
     def optimize_long(self):
         if self.comboBox.currentIndex() == 1:
-            import OptimizeLong
+            from scripts import OptimizeLong
 
             OptimizeLong.LongScript()
 
     def optimize_short(self):
         if self.comboBox.currentIndex() == 2:
-            import OptimizeShort
+            from scripts import OptimizeShort
 
             OptimizeShort.ShortScript()
 
     def optimize_long_stoploss(self):
         if self.comboBox.currentIndex() == 3:
-            import OptimizeLongStoploss
+            from scripts import OptimizeLongStoploss
 
             OptimizeLongStoploss.LongStoploss()
 
     def optimize_long_takeprofit(self):
         if self.comboBox.currentIndex() == 4:
-            import OptimizeLongTakeprofit
+            from scripts import OptimizeLongTakeprofit
 
             OptimizeLongTakeprofit.LongTakeProfit()
 
     def optimize_short_stoploss(self):
         if self.comboBox.currentIndex() == 5:
-            import OptimizeShortStoploss
+            from scripts import OptimizeShortStoploss
 
             OptimizeShortStoploss.ShortStoploss()
 
     def optimize_short_takeprofit(self):
         if self.comboBox.currentIndex() == 6:
-            import OptimizeShortTakeprofit
+            from scripts import OptimizeShortTakeprofit
 
             OptimizeShortTakeprofit.ShortTakeProfit()
 
