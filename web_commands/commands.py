@@ -127,26 +127,16 @@ class Functions(Main):
     def click_list_of_trades(self):
         """click list of trades tab."""
         try:
-            strategy_tester_tab = self.driver.find_elements_by_xpath(
-                "//*[@class='title-YKxsrK2Q']"
-            )
-            for index, web_element in enumerate(strategy_tester_tab):
-                if web_element.text == "Strategy Tester":
-                    active_tab = strategy_tester_tab[index].get_attribute("data-active")
-                    if active_tab == "false":
-                        strategy_tester_tab[index].click()
-                        list_of_trades = self.driver.find_element_by_class_name(
-                            "report-tabs"
-                        ).find_elements_by_tag_name("li")[2]
-                        list_of_trades.click()
-                    else:
-                        list_of_trades = self.driver.find_element_by_class_name(
-                            "report-tabs"
-                        ).find_elements_by_tag_name("li")[2]
-                        list_of_trades.click()
+            list_of_trades_tab = self.driver.find_elements_by_class_name("tab-xvzZPiW2")
+            for index, web_element in enumerate(list_of_trades_tab):
+                if web_element.text == "List of Trades":
+                    list_of_trades_tab[index].click()
                     break
-        except (IndexError, NoSuchElementException, ElementNotInteractableException):
-            print("Could Not click list of trades tab. Please Check web element XPATH.")
+
+        except IndexError:
+            print(
+                "Could Not Click List Of Trades Tab. Please check web_element's in commands.py file."
+            )
 
     def click_long_stoploss_input(self, count, wait):
         """click long stoploss input text box."""
@@ -255,12 +245,12 @@ class Functions(Main):
         ok_button.click()
 
     def click_all_inputs(
-        self,
-        long_stoploss_value,
-        long_takeprofit_value,
-        short_stoploss_value,
-        short_takeprofit_value,
-        wait,
+            self,
+            long_stoploss_value,
+            long_takeprofit_value,
+            short_stoploss_value,
+            short_takeprofit_value,
+            wait,
     ):
         """click all input text boxes."""
         wait.until(
@@ -388,12 +378,12 @@ class Functions(Main):
             return
 
     def get_net_all(
-        self,
-        long_stoploss_value,
-        long_takeprofit_value,
-        short_stoploss_value,
-        short_takeprofit_value,
-        wait,
+            self,
+            long_stoploss_value,
+            long_takeprofit_value,
+            short_stoploss_value,
+            short_takeprofit_value,
+            wait,
     ):
         """will get the net profit of all four values."""
         wait.until(
@@ -675,11 +665,11 @@ class Functions(Main):
         try:
             negative = (
                 self.driver.find_element_by_class_name("report-content")
-                .find_element_by_tag_name("table")
-                .find_element_by_tag_name("tbody")
-                .find_elements_by_tag_name("tr")[0]
-                .find_elements_by_tag_name("td")[1]
-                .find_elements_by_class_name("negativeValue-ll5aPuFn")[1]
+                    .find_element_by_tag_name("table")
+                    .find_element_by_tag_name("tbody")
+                    .find_elements_by_tag_name("tr")[0]
+                    .find_elements_by_tag_name("td")[1]
+                    .find_elements_by_class_name("negativeValue-ll5aPuFn")[1]
             )
             if negative:
                 display = colored(f"{negative.text}", "red")
@@ -687,111 +677,133 @@ class Functions(Main):
         except (NoSuchElementException, IndexError):
             net_profit = (
                 self.driver.find_element_by_class_name("report-content")
-                .find_element_by_tag_name("table")
-                .find_element_by_tag_name("tbody")
-                .find_elements_by_tag_name("tr")[0]
-                .find_elements_by_tag_name("td")[1]
-                .find_elements_by_tag_name("div")[2]
+                    .find_element_by_tag_name("table")
+                    .find_element_by_tag_name("tbody")
+                    .find_elements_by_tag_name("tr")[0]
+                    .find_elements_by_tag_name("td")[1]
+                    .find_elements_by_tag_name("div")[2]
             )
             display = colored(f"{net_profit.text}", "green")
             print(f"Net Profit: {display}")
 
     def print_gross_profit(self):
         """print gross profit to console."""
-        gross_profit = (
-            self.driver.find_element_by_class_name("report-content")
-            .find_element_by_tag_name("table")
-            .find_element_by_tag_name("tbody")
-            .find_elements_by_tag_name("tr")[1]
-            .find_element_by_class_name("additional_percent_value")
-        )
         try:
-            negative = gross_profit.find_element_by_class_name("neg")
+            negative = (
+                self.driver.find_element_by_class_name("report-content")
+                    .find_element_by_tag_name("table")
+                    .find_element_by_tag_name("tbody")
+                    .find_elements_by_tag_name("tr")[1]
+                    .find_elements_by_tag_name("td")[1]
+                    .find_elements_by_class_name("negativeValue-ll5aPuFn")[1]
+            )
             if negative:
-                display = colored(f"{gross_profit.text}", "red")
-                print(f"Gross Profit: {display}")
-        except NoSuchElementException:
-            display = colored(f"{gross_profit.text}", "green")
-            print(f"Gross Profit: {display}")
+                print(f"Gross Profit: {negative.text}")
+        except (NoSuchElementException, IndexError):
+            gross_profit = (
+                self.driver.find_element_by_class_name("report-content")
+                    .find_element_by_tag_name("table")
+                    .find_element_by_tag_name("tbody")
+                    .find_elements_by_tag_name("tr")[1]
+                    .find_elements_by_tag_name("td")[1]
+                    .find_elements_by_tag_name("div")[2]
+            )
+            print(f"Gross Profit: {gross_profit.text}")
 
     def print_gross_loss(self):
         """print gross loss to console."""
-        gross_loss = (
-            self.driver.find_element_by_class_name("report-content")
-            .find_element_by_tag_name("table")
-            .find_element_by_tag_name("tbody")
-            .find_elements_by_tag_name("tr")[2]
-            .find_element_by_class_name("additional_percent_value")
-        )
         try:
-            negative = gross_loss.find_element_by_class_name("neg")
+            negative = (
+                self.driver.find_element_by_class_name("report-content")
+                    .find_element_by_tag_name("table")
+                    .find_element_by_tag_name("tbody")
+                    .find_elements_by_tag_name("tr")[2]
+                    .find_elements_by_tag_name("td")[1]
+                    .find_elements_by_class_name("negativeValue-ll5aPuFn")[1]
+            )
             if negative:
-                display = colored(f"{gross_loss.text}", "red")
-                print(f"Gross Loss: {display}")
-        except NoSuchElementException:
-            display = colored(f"{gross_loss.text}", "green")
-            print(f"Gross Loss: {display}")
+                print(f"Gross Loss: {negative.text}")
+        except (NoSuchElementException, IndexError):
+            gross_loss = (
+                self.driver.find_element_by_class_name("report-content")
+                    .find_element_by_tag_name("table")
+                    .find_element_by_tag_name("tbody")
+                    .find_elements_by_tag_name("tr")[2]
+                    .find_elements_by_tag_name("td")[1]
+                    .find_elements_by_tag_name("div")[2]
+            )
+            print(f"Gross Loss: {gross_loss.text}")
 
     def print_max_runup(self):
-        """print max drawdown to console."""
-        max_runup = (
-            self.driver.find_element_by_class_name("report-content")
-            .find_element_by_tag_name("table")
-            .find_element_by_tag_name("tbody")
-            .find_elements_by_tag_name("tr")[3]
-            .find_element_by_class_name("additional_percent_value")
-        )
-
+        """print max run up to console."""
         try:
-            negative = max_runup.find_element_by_class_name("neg")
+            negative = (
+                self.driver.find_element_by_class_name("report-content")
+                    .find_element_by_tag_name("table")
+                    .find_element_by_tag_name("tbody")
+                    .find_elements_by_tag_name("tr")[3]
+                    .find_elements_by_tag_name("td")[1]
+                    .find_elements_by_class_name("negativeValue-ll5aPuFn")[1]
+            )
             if negative:
-                display = colored(f"{max_runup.text}", "red")
-                print(f"Max Drawdown: {display}")
-        except NoSuchElementException:
-            display = colored(f"{max_runup.text}", "green")
-            print(f"Max Drawdown: {display}")
+                print(f"Max Run Up: {negative.text}")
+        except (NoSuchElementException, IndexError):
+            max_runup = (
+                self.driver.find_element_by_class_name("report-content")
+                    .find_element_by_tag_name("table")
+                    .find_element_by_tag_name("tbody")
+                    .find_elements_by_tag_name("tr")[3]
+                    .find_elements_by_tag_name("td")[1]
+                    .find_elements_by_tag_name("div")[2]
+            )
+            print(f"Max Run Up: {max_runup.text}")
 
     def print_max_drawdown(self):
         """print max drawdown to console."""
         max_drawdown = (
             self.driver.find_element_by_class_name("report-content")
-            .find_element_by_tag_name("table")
-            .find_element_by_tag_name("tbody")
-            .find_elements_by_tag_name("tr")[4]
-            .find_elements_by_tag_name("td")[1]
-            .find_elements_by_tag_name("div")[2]
+                .find_element_by_tag_name("table")
+                .find_element_by_tag_name("tbody")
+                .find_elements_by_tag_name("tr")[4]
+                .find_elements_by_tag_name("td")[1]
+                .find_elements_by_tag_name("div")[2]
         )
         print(f"Max Drawdown: {max_drawdown.text}")
 
     def print_buy_and_hold_return(self):
         """print buy and hold return to console."""
-        buy_and_hold_return = (
-            self.driver.find_element_by_class_name("report-content")
-            .find_element_by_tag_name("table")
-            .find_element_by_tag_name("tbody")
-            .find_elements_by_tag_name("tr")[5]
-            .find_element_by_class_name("additional_percent_value")
-        )
-
         try:
-            negative = buy_and_hold_return.find_element_by_class_name("neg")
+            negative = (
+                self.driver.find_element_by_class_name("report-content")
+                    .find_element_by_tag_name("table")
+                    .find_element_by_tag_name("tbody")
+                    .find_elements_by_tag_name("tr")[5]
+                    .find_elements_by_tag_name("td")[1]
+                    .find_elements_by_class_name("negativeValue-ll5aPuFn")[1]
+            )
             if negative:
-                display = colored(f"{buy_and_hold_return.text}", "red")
-                print(f"Buy & Hold Return: {display}")
-        except NoSuchElementException:
-            display = colored(f"{buy_and_hold_return.text}", "green")
-            print(f"Buy & Hold Return: {display}")
+                print(f"Buy & Hold Return: {negative.text}")
+        except (NoSuchElementException, IndexError):
+            buy_and_hold_return = (
+                self.driver.find_element_by_class_name("report-content")
+                    .find_element_by_tag_name("table")
+                    .find_element_by_tag_name("tbody")
+                    .find_elements_by_tag_name("tr")[5]
+                    .find_elements_by_tag_name("td")[1]
+                    .find_elements_by_tag_name("div")[2]
+            )
+            print(f"Buy & Hold Return: {buy_and_hold_return.text}")
 
     def print_sharpe_ratio(self):
         """print sharpe ratio to console."""
         try:
             negative = (
                 self.driver.find_element_by_class_name("report-content")
-                .find_element_by_tag_name("table")
-                .find_element_by_tag_name("tbody")
-                .find_elements_by_tag_name("tr")[6]
-                .find_elements_by_tag_name("td")[1]
-                .find_element_by_class_name("negativeValue-ll5aPuFn")
+                    .find_element_by_tag_name("table")
+                    .find_element_by_tag_name("tbody")
+                    .find_elements_by_tag_name("tr")[6]
+                    .find_elements_by_tag_name("td")[1]
+                    .find_element_by_class_name("negativeValue-ll5aPuFn")
             )
             if negative:
                 display = colored(f"{negative.text}", "red")
@@ -799,10 +811,10 @@ class Functions(Main):
         except (NoSuchElementException, IndexError):
             sharpe_ratio = (
                 self.driver.find_element_by_class_name("report-content")
-                .find_element_by_tag_name("table")
-                .find_element_by_tag_name("tbody")
-                .find_elements_by_tag_name("tr")[6]
-                .find_elements_by_tag_name("td")[1]
+                    .find_element_by_tag_name("table")
+                    .find_element_by_tag_name("tbody")
+                    .find_elements_by_tag_name("tr")[6]
+                    .find_elements_by_tag_name("td")[1]
             )
             display = colored(f"{sharpe_ratio.text}", "green")
             print(f"Sharpe Ratio: {display}")
@@ -812,11 +824,11 @@ class Functions(Main):
         try:
             negative = (
                 self.driver.find_element_by_class_name("report-content")
-                .find_element_by_tag_name("table")
-                .find_element_by_tag_name("tbody")
-                .find_elements_by_tag_name("tr")[7]
-                .find_elements_by_tag_name("td")[1]
-                .find_element_by_class_name("negativeValue-ll5aPuFn")
+                    .find_element_by_tag_name("table")
+                    .find_element_by_tag_name("tbody")
+                    .find_elements_by_tag_name("tr")[7]
+                    .find_elements_by_tag_name("td")[1]
+                    .find_element_by_class_name("negativeValue-ll5aPuFn")
             )
             if negative:
                 display = colored(f"{negative.text}", "red")
@@ -824,10 +836,10 @@ class Functions(Main):
         except (NoSuchElementException, IndexError):
             sortino_ratio = (
                 self.driver.find_element_by_class_name("report-content")
-                .find_element_by_tag_name("table")
-                .find_element_by_tag_name("tbody")
-                .find_elements_by_tag_name("tr")[7]
-                .find_elements_by_tag_name("td")[1]
+                    .find_element_by_tag_name("table")
+                    .find_element_by_tag_name("tbody")
+                    .find_elements_by_tag_name("tr")[7]
+                    .find_elements_by_tag_name("td")[1]
             )
             display = colored(f"{sortino_ratio.text}", "green")
             print(f"Sortino Ratio: {display}")
@@ -836,10 +848,10 @@ class Functions(Main):
         """print profit factor to console."""
         profit_factor = (
             self.driver.find_element_by_class_name("report-content")
-            .find_element_by_tag_name("table")
-            .find_element_by_tag_name("tbody")
-            .find_elements_by_tag_name("tr")[8]
-            .find_elements_by_tag_name("td")[1]
+                .find_element_by_tag_name("table")
+                .find_element_by_tag_name("tbody")
+                .find_elements_by_tag_name("tr")[8]
+                .find_elements_by_tag_name("td")[1]
         )
         try:
             negative = profit_factor.find_element_by_class_name("neg")
@@ -854,46 +866,50 @@ class Functions(Main):
         """print max contract to console."""
         max_contracts_held = (
             self.driver.find_element_by_class_name("report-content")
-            .find_element_by_tag_name("table")
-            .find_element_by_tag_name("tbody")
-            .find_elements_by_tag_name("tr")[9]
-            .find_elements_by_tag_name("td")[1]
+                .find_element_by_tag_name("table")
+                .find_element_by_tag_name("tbody")
+                .find_elements_by_tag_name("tr")[9]
+                .find_elements_by_tag_name("td")[1]
         )
         try:
             negative = max_contracts_held.find_element_by_class_name("neg")
             if negative:
-                display = colored(f"{max_contracts_held.text}", "red")
-                print(f"Max Contracts Held: {display}")
+                print(f"Max Contracts Held: {max_contracts_held.text}")
         except NoSuchElementException:
-            display = colored(f"{max_contracts_held.text}", "green")
-            print(f"Max Contracts Held: {display}")
+            print(f"Max Contracts Held: {max_contracts_held.text}")
 
     def print_open_pl(self):
         """print open pl to console."""
-        open_pl = (
-            self.driver.find_element_by_class_name("report-content")
-            .find_element_by_tag_name("table")
-            .find_element_by_tag_name("tbody")
-            .find_elements_by_tag_name("tr")[10]
-            .find_element_by_class_name("additional_percent_value")
-        )
         try:
-            negative = open_pl.find_element_by_class_name("neg")
+            negative = (
+                self.driver.find_element_by_class_name("report-content")
+                    .find_element_by_tag_name("table")
+                    .find_element_by_tag_name("tbody")
+                    .find_elements_by_tag_name("tr")[10]
+                    .find_elements_by_tag_name("td")[1]
+                    .find_elements_by_class_name("negativeValue-ll5aPuFn")[1]
+            )
             if negative:
-                display = colored(f"{open_pl.text}", "red")
-                print(f"Open PL: {display}")
-        except NoSuchElementException:
-            display = colored(f"{open_pl.text}", "green")
-            print(f"Open PL: {display}")
+                print(f"Open PL: {negative.text}")
+        except (NoSuchElementException, IndexError):
+            open_pl = (
+                self.driver.find_element_by_class_name("report-content")
+                    .find_element_by_tag_name("table")
+                    .find_element_by_tag_name("tbody")
+                    .find_elements_by_tag_name("tr")[10]
+                    .find_elements_by_tag_name("td")[1]
+                    .find_elements_by_tag_name("div")[2]
+            )
+            print(f"Open PL: {open_pl.text}")
 
     def print_commission_paid(self):
         """print commission paid to console."""
         commission_paid = (
             self.driver.find_element_by_class_name("report-content")
-            .find_element_by_tag_name("table")
-            .find_element_by_tag_name("tbody")
-            .find_elements_by_tag_name("tr")[11]
-            .find_elements_by_tag_name("td")[1]
+                .find_element_by_tag_name("table")
+                .find_element_by_tag_name("tbody")
+                .find_elements_by_tag_name("tr")[11]
+                .find_elements_by_tag_name("td")[1]
         )
         print(f"Commission Paid: {commission_paid.text}")
 
@@ -901,10 +917,10 @@ class Functions(Main):
         """print total closed trades to console."""
         total_closed_trades = (
             self.driver.find_element_by_class_name("report-content")
-            .find_element_by_tag_name("table")
-            .find_element_by_tag_name("tbody")
-            .find_elements_by_tag_name("tr")[12]
-            .find_elements_by_tag_name("td")[1]
+                .find_element_by_tag_name("table")
+                .find_element_by_tag_name("tbody")
+                .find_elements_by_tag_name("tr")[12]
+                .find_elements_by_tag_name("td")[1]
         )
         print(f"Total Closed Trades: {total_closed_trades.text}")
 
@@ -912,10 +928,10 @@ class Functions(Main):
         """print total open trades to console."""
         total_open_trades = (
             self.driver.find_element_by_class_name("report-content")
-            .find_element_by_tag_name("table")
-            .find_element_by_tag_name("tbody")
-            .find_elements_by_tag_name("tr")[13]
-            .find_elements_by_tag_name("td")[1]
+                .find_element_by_tag_name("table")
+                .find_element_by_tag_name("tbody")
+                .find_elements_by_tag_name("tr")[13]
+                .find_elements_by_tag_name("td")[1]
         )
         print(f"Total Open Trades: {total_open_trades.text}")
 
@@ -923,10 +939,10 @@ class Functions(Main):
         """print number of winning trades to console."""
         number_winning_trades = (
             self.driver.find_element_by_class_name("report-content")
-            .find_element_by_tag_name("table")
-            .find_element_by_tag_name("tbody")
-            .find_elements_by_tag_name("tr")[14]
-            .find_elements_by_tag_name("td")[1]
+                .find_element_by_tag_name("table")
+                .find_element_by_tag_name("tbody")
+                .find_elements_by_tag_name("tr")[14]
+                .find_elements_by_tag_name("td")[1]
         )
         print(f"Number Winning Trades: {number_winning_trades.text}")
 
@@ -934,10 +950,10 @@ class Functions(Main):
         """print number of losing trades to console."""
         number_losing_trades = (
             self.driver.find_element_by_class_name("report-content")
-            .find_element_by_tag_name("table")
-            .find_element_by_tag_name("tbody")
-            .find_elements_by_tag_name("tr")[15]
-            .find_elements_by_tag_name("td")[1]
+                .find_element_by_tag_name("table")
+                .find_element_by_tag_name("tbody")
+                .find_elements_by_tag_name("tr")[15]
+                .find_elements_by_tag_name("td")[1]
         )
         print(f"Number Losing Trades: {number_losing_trades.text}")
 
@@ -945,40 +961,46 @@ class Functions(Main):
         """print percent profitable to console."""
         percent_profitable = (
             self.driver.find_element_by_class_name("report-content")
-            .find_element_by_tag_name("table")
-            .find_element_by_tag_name("tbody")
-            .find_elements_by_tag_name("tr")[16]
-            .find_elements_by_tag_name("td")[1]
+                .find_element_by_tag_name("table")
+                .find_element_by_tag_name("tbody")
+                .find_elements_by_tag_name("tr")[16]
+                .find_elements_by_tag_name("td")[1]
         )
         print(f"Percent Profitable: {percent_profitable.text}")
 
     def print_avg_trade(self):
         """print average trade to console."""
-        avg_trade = (
-            self.driver.find_element_by_class_name("report-content")
-            .find_element_by_tag_name("table")
-            .find_element_by_tag_name("tbody")
-            .find_elements_by_tag_name("tr")[17]
-            .find_element_by_class_name("additional_percent_value")
-        )
         try:
-            negative = avg_trade.find_element_by_class_name("neg")
+            negative = (
+                self.driver.find_element_by_class_name("report-content")
+                    .find_element_by_tag_name("table")
+                    .find_element_by_tag_name("tbody")
+                    .find_elements_by_tag_name("tr")[17]
+                    .find_elements_by_tag_name("td")[1]
+                    .find_elements_by_class_name("negativeValue-ll5aPuFn")[1]
+            )
             if negative:
-                display = colored(f"{avg_trade.text}", "red")
-                print(f"Avg Trade: {display}")
-        except NoSuchElementException:
-            display = colored(f"{avg_trade.text}", "green")
-            print(f"Avg Trade: {display}")
+                print(f"Avg Trade: {negative.text}")
+        except (NoSuchElementException, IndexError):
+            avg_trade = (
+                self.driver.find_element_by_class_name("report-content")
+                    .find_element_by_tag_name("table")
+                    .find_element_by_tag_name("tbody")
+                    .find_elements_by_tag_name("tr")[17]
+                    .find_elements_by_tag_name("td")[1]
+                    .find_elements_by_tag_name("div")[2]
+            )
+            print(f"Avg Trade: {avg_trade.text}")
 
     def print_avg_win_trade(self):
         """print average winning trades to console."""
         avg_win_ratio = (
             self.driver.find_element_by_class_name("report-content")
-            .find_element_by_tag_name("table")
-            .find_element_by_tag_name("tbody")
-            .find_elements_by_tag_name("tr")[18]
-            .find_elements_by_tag_name("td")[1]
-            .find_elements_by_tag_name("div")[2]
+                .find_element_by_tag_name("table")
+                .find_element_by_tag_name("tbody")
+                .find_elements_by_tag_name("tr")[18]
+                .find_elements_by_tag_name("td")[1]
+                .find_elements_by_tag_name("div")[2]
         )
         print(f"Avg Win Trade: {avg_win_ratio.text}")
 
@@ -986,11 +1008,11 @@ class Functions(Main):
         """print average losing trades to console."""
         avg_loss_ratio = (
             self.driver.find_element_by_class_name("report-content")
-            .find_element_by_tag_name("table")
-            .find_element_by_tag_name("tbody")
-            .find_elements_by_tag_name("tr")[19]
-            .find_elements_by_tag_name("td")[1]
-            .find_elements_by_tag_name("div")[2]
+                .find_element_by_tag_name("table")
+                .find_element_by_tag_name("tbody")
+                .find_elements_by_tag_name("tr")[19]
+                .find_elements_by_tag_name("td")[1]
+                .find_elements_by_tag_name("div")[2]
         )
         print(f"Avg Loss Trade: {avg_loss_ratio.text}")
 
@@ -998,58 +1020,70 @@ class Functions(Main):
         """print win/loss ratio to console."""
         win_loss_ratio = (
             self.driver.find_element_by_class_name("report-content")
-            .find_element_by_tag_name("table")
-            .find_element_by_tag_name("tbody")
-            .find_elements_by_tag_name("tr")[20]
-            .find_elements_by_tag_name("td")[1]
-            .find_element_by_tag_name("div")
+                .find_element_by_tag_name("table")
+                .find_element_by_tag_name("tbody")
+                .find_elements_by_tag_name("tr")[20]
+                .find_elements_by_tag_name("td")[1]
+                .find_element_by_tag_name("div")
         )
         print(f"Win/Loss Ratio: {win_loss_ratio.text}")
 
     def print_largest_winning_trade(self):
         """print largest winning trade to console."""
-        largest_winning_trade = (
-            self.driver.find_element_by_class_name("report-content")
-            .find_element_by_tag_name("table")
-            .find_element_by_tag_name("tbody")
-            .find_elements_by_tag_name("tr")[21]
-            .find_element_by_class_name("additional_percent_value")
-        )
         try:
-            negative = largest_winning_trade.find_element_by_class_name("neg")
+            negative = (
+                self.driver.find_element_by_class_name("report-content")
+                    .find_element_by_tag_name("table")
+                    .find_element_by_tag_name("tbody")
+                    .find_elements_by_tag_name("tr")[21]
+                    .find_elements_by_tag_name("td")[1]
+                    .find_elements_by_class_name("negativeValue-ll5aPuFn")[1]
+            )
             if negative:
-                display = colored(f"{largest_winning_trade.text}", "red")
-                print(f"Largest Win Trade: {display}")
-        except NoSuchElementException:
-            display = colored(f"{largest_winning_trade.text}", "green")
-            print(f"Largest Win Trade: {display}")
+                print(f"Largest Win Trade: {negative.text}")
+        except (NoSuchElementException, IndexError):
+            largest_winning_trade = (
+                self.driver.find_element_by_class_name("report-content")
+                    .find_element_by_tag_name("table")
+                    .find_element_by_tag_name("tbody")
+                    .find_elements_by_tag_name("tr")[21]
+                    .find_elements_by_tag_name("td")[1]
+                    .find_elements_by_tag_name("div")[2]
+            )
+            print(f"Largest Win Trade: {largest_winning_trade.text}")
 
     def print_largest_losing_trade(self):
         """print largest losing trade to console."""
-        largest_losing_trade = (
-            self.driver.find_element_by_class_name("report-content")
-            .find_element_by_tag_name("table")
-            .find_element_by_tag_name("tbody")
-            .find_elements_by_tag_name("tr")[22]
-            .find_element_by_class_name("additional_percent_value")
-        )
         try:
-            negative = largest_losing_trade.find_element_by_class_name("neg")
+            negative = (
+                self.driver.find_element_by_class_name("report-content")
+                    .find_element_by_tag_name("table")
+                    .find_element_by_tag_name("tbody")
+                    .find_elements_by_tag_name("tr")[22]
+                    .find_elements_by_tag_name("td")[1]
+                    .find_elements_by_class_name("negativeValue-ll5aPuFn")[1]
+            )
             if negative:
-                display = colored(f"{largest_losing_trade.text}", "red")
-                print(f"Largest Loss Trade: {display}")
-        except NoSuchElementException:
-            display = colored(f"{largest_losing_trade.text}", "green")
-            print(f"Largest Loss Trade: {display}")
+                print(f"Largest Loss Trade: {negative.text}")
+        except (NoSuchElementException, IndexError):
+            largest_losing_trade = (
+                self.driver.find_element_by_class_name("report-content")
+                    .find_element_by_tag_name("table")
+                    .find_element_by_tag_name("tbody")
+                    .find_elements_by_tag_name("tr")[22]
+                    .find_elements_by_tag_name("td")[1]
+                    .find_elements_by_tag_name("div")[2]
+            )
+            print(f"Largest Loss Trade: {largest_losing_trade.text}")
 
     def print_avg_bars_in_trades(self):
         """print average bars to console."""
         avg_bars_in_trades = (
             self.driver.find_element_by_class_name("report-content")
-            .find_element_by_tag_name("table")
-            .find_element_by_tag_name("tbody")
-            .find_elements_by_tag_name("tr")[23]
-            .find_elements_by_tag_name("td")[1]
+                .find_element_by_tag_name("table")
+                .find_element_by_tag_name("tbody")
+                .find_elements_by_tag_name("tr")[23]
+                .find_elements_by_tag_name("td")[1]
         )
         print(f"Avg Bars In Trades: {avg_bars_in_trades.text}")
 
@@ -1057,10 +1091,10 @@ class Functions(Main):
         """print average bars of winning trades to console."""
         avg_bars_in_winning_trades = (
             self.driver.find_element_by_class_name("report-content")
-            .find_element_by_tag_name("table")
-            .find_element_by_tag_name("tbody")
-            .find_elements_by_tag_name("tr")[24]
-            .find_elements_by_tag_name("td")[1]
+                .find_element_by_tag_name("table")
+                .find_element_by_tag_name("tbody")
+                .find_elements_by_tag_name("tr")[24]
+                .find_elements_by_tag_name("td")[1]
         )
         print(f"Avg Bars In Winning Trades: {avg_bars_in_winning_trades.text}")
 
@@ -1068,10 +1102,10 @@ class Functions(Main):
         """print average bars of losing trades to console."""
         avg_bars_in_losing_trades = (
             self.driver.find_element_by_class_name("report-content")
-            .find_element_by_tag_name("table")
-            .find_element_by_tag_name("tbody")
-            .find_elements_by_tag_name("tr")[25]
-            .find_elements_by_tag_name("td")[1]
+                .find_element_by_tag_name("table")
+                .find_element_by_tag_name("tbody")
+                .find_elements_by_tag_name("tr")[25]
+                .find_elements_by_tag_name("td")[1]
         )
         print(f"Avg Bars In Losing Trades: {avg_bars_in_losing_trades.text}")
 
@@ -1079,9 +1113,9 @@ class Functions(Main):
         """print win rate to console."""
         win_rate = (
             self.driver.find_element_by_class_name("report-content")
-            .find_element_by_tag_name("table")
-            .find_element_by_tag_name("tbody")
-            .find_elements_by_tag_name("tr")[16]
-            .find_elements_by_tag_name("td")[1]
+                .find_element_by_tag_name("table")
+                .find_element_by_tag_name("tbody")
+                .find_elements_by_tag_name("tr")[16]
+                .find_elements_by_tag_name("td")[1]
         )
         print(f"Win Rate: {win_rate.text}")
