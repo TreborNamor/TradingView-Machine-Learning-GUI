@@ -1,4 +1,6 @@
 import random
+import time
+
 from web_commands.commands import Functions
 from web_commands.profit import profits
 from TradeViewGUI import Main
@@ -19,33 +21,21 @@ class ShortScript(Functions):
         self.run_script()
 
     def run_script(self):
+
         # Loading website with web driver.
+        print("Loading script...\n")
         wait = WebDriverWait(self.driver, 15)
-        try:
-            self.driver.get("https://www.tradingview.com/chart/")
-        except Exception:
-            print(
-                "WebDriver Error: Please Check Your FireFox Profile Path Is Correct.\n"
-            )
-            print(
-                "Find Your Firefox Path Instructions. https://imgur.com/gallery/rdCqeT5 "
-            )
-            return
+        self.get_webpage()
 
         # Making sure strategy tester tab is clicked so automation runs properly.
-        try:
-            self.click_strategy_tester(wait)
-            self.click_overview()
-        except NoSuchElementException:
-            self.click_overview()
-        print("Generating Max Profit For Stop Loss.")
-        print("Loading script...\n")
+        self.click_strategy_tester(wait)
+        self.click_overview(wait)
 
         # Making sure we are on inputs tab and resetting values to default settings.
         self.click_settings_button(wait)
         self.click_input_tab()
         self.click_enable_short_strategy_checkbox()
-        self.click_rest_all_inputs()
+        self.click_reset_all_inputs(wait)
         self.click_ok_button()
 
         # Loop through max attempts while randomizing values each attempt.
@@ -70,6 +60,9 @@ class ShortScript(Functions):
                         ),
                         int(self.decimalPlaceValue.text()),
                     )
+
+                    # Gives time for webpage to refresh data.
+                    time.sleep(1)
 
                     # Click settings button
                     self.click_settings_button(wait)
@@ -101,7 +94,7 @@ class ShortScript(Functions):
         self.driver.implicitly_wait(1)
 
         print("\n----------Results----------\n")
-        self.click_overview()
+        self.click_overview(wait)
         self.print_best_both()
         self.click_performance_summary()
         self.print_total_closed_trades()

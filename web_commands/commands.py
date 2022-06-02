@@ -39,106 +39,89 @@ class Functions(Main):
     These commands help the script click certain buttons or text boxes on the website. 
     They can also insert data on to the website through automation. """
 
-    def click_settings_button(self, wait):
-        """click settings button."""
-        try:
-            wait.until(
-                EC.visibility_of_element_located(
-                    (
-                        By.XPATH,
-                        "//*[@class='icon-button "
-                        "js-backtesting-open-format-dialog "
-                        "apply-common-tooltip']",
-                    )
-                )
-            )
-            settings_button = self.driver.find_element_by_xpath(
-                "//*[@class='icon-button js-backtesting-open-format-dialog "
-                "apply-common-tooltip']"
-            )
-            settings_button.click()
-        except AttributeError:
-            pass
-
     def click_strategy_tester(self, wait):
         """check if strategy tester tab is the active tab. If it's not, click to open tab."""
         try:
             wait.until(
-                EC.presence_of_element_located(
-                    (By.XPATH, "//*[@class='title-YKxsrK2Q']")
-                )
-            )
-            strategy_tester_tab = self.driver.find_elements_by_xpath(
-                "//*[@class='title-YKxsrK2Q']"
-            )
-            for index, web_element in enumerate(strategy_tester_tab):
-                if web_element.text == "Strategy Tester":
-                    active_tab = strategy_tester_tab[index].get_attribute("data-active")
-                    if active_tab == "false":
-                        strategy_tester_tab[index].click()
-                    break
-        except (
-            TimeoutError,
-            IndexError,
-            NoSuchElementException,
-            ElementNotInteractableException,
-        ):
-            print(
-                "Could Not Click Strategy Tester Tab. Please Check web element's XPATH."
+                EC.presence_of_element_located((By.CLASS_NAME, "title-eYOhHEJX"))
             )
 
-    def click_overview(self):
-        """click overview tab."""
-        try:
-            strategy_tester_tab = self.driver.find_elements_by_xpath(
-                "//*[@class='title-YKxsrK2Q']"
+            strategy_tester_tab = self.driver.find_elements_by_class_name(
+                "title-eYOhHEJX"
             )
             for index, web_element in enumerate(strategy_tester_tab):
                 if web_element.text == "Strategy Tester":
                     active_tab = strategy_tester_tab[index].get_attribute("data-active")
                     if active_tab == "false":
                         strategy_tester_tab[index].click()
-                        time.sleep(0.3)
-                        overview = self.driver.find_element_by_class_name(
-                            "report-tabs"
-                        ).find_elements_by_tag_name("li")[0]
-                        overview.click()
-                    else:
-                        overview = self.driver.find_element_by_class_name(
-                            "report-tabs"
-                        ).find_elements_by_tag_name("li")[0]
-                        overview.click()
-                    break
-        except (IndexError, NoSuchElementException, ElementNotInteractableException):
+                        break
+
+        except Exception:
             print(
-                "Could Not Click Strategy Tester Tab. Please Check web element's XPATH."
+                "Could Not Click Strategy Tester Tab. Please Check web element's class name in commands.py file."
+            )
+
+    def click_overview(self, wait):
+        """click overview tab."""
+        try:
+            wait.until(
+                EC.presence_of_element_located((By.CLASS_NAME, "title-eYOhHEJX"))
+            )
+
+            overview_tab = self.driver.find_elements_by_class_name("tab-xvzZPiW2")
+            for index, web_element in enumerate(overview_tab):
+                if web_element.text == "Overview":
+                    overview_tab[index].click()
+                    break
+
+        except Exception:
+            print(
+                "Could Not click Overview Tab. Please Check web element's class name in commands.py file."
+            )
+
+    def click_settings_button(self, wait):
+        """click settings button."""
+        try:
+            wait.until(
+                EC.presence_of_element_located(
+                    (By.CLASS_NAME, "typography-small-1f5iHRsw")
+                )
+            )
+
+            settings_button = self.driver.find_element_by_class_name(
+                "typography-small-1f5iHRsw"
+            )
+            settings_button.click()
+
+        except Exception:
+            print(
+                "Could not click settings button. Please check web_element's in commands.py file."
+            )
+
+    def click_input_tab(self):
+        """click the input tab."""
+        try:
+            input_tab = self.driver.find_elements_by_class_name("tab-rKFlMYkc")[0]
+            if input_tab.get_attribute("data-value") == "inputs":
+                input_tab.click()
+
+        except IndexError:
+            print(
+                "Could not input tab button. Please check web_element's in commands.py file."
             )
 
     def click_performance_summary(self):
         """click performance summary tab."""
         try:
-            strategy_tester_tab = self.driver.find_elements_by_xpath(
-                "//*[@class='title-YKxsrK2Q']"
-            )
-            for index, web_element in enumerate(strategy_tester_tab):
-                if web_element.text == "Strategy Tester":
-                    active_tab = strategy_tester_tab[index].get_attribute("data-active")
-                    if active_tab == "false":
-                        strategy_tester_tab[index].click()
-                        # time.sleep(.3)
-                        performance_tab = self.driver.find_elements_by_class_name(
-                            "report-tabs"
-                        ).find_elements_by_tag_name("li")[1]
-                        performance_tab.click()
-                    else:
-                        performance_tab = self.driver.find_element_by_class_name(
-                            "report-tabs"
-                        ).find_elements_by_tag_name("li")[1]
-                        performance_tab.click()
+            performance_tab = self.driver.find_elements_by_class_name("tab-xvzZPiW2")
+            for index, web_element in enumerate(performance_tab):
+                if web_element.text == "Performance Summary":
+                    performance_tab[index].click()
                     break
-        except (IndexError, NoSuchElementException, ElementNotInteractableException):
+
+        except IndexError:
             print(
-                "Could Not Click Strategy Tester Tab. Please Check web element's XPATH."
+                "Could Not Click Performance Summary Tab. Please check web_element's in commands.py file."
             )
 
     def click_list_of_trades(self):
@@ -163,20 +146,17 @@ class Functions(Main):
                         list_of_trades.click()
                     break
         except (IndexError, NoSuchElementException, ElementNotInteractableException):
-            print(
-                "Could Not Click Strategy Tester Tab. Please Check web element XPATH."
-            )
+            print("Could Not click list of trades tab. Please Check web element XPATH.")
 
     def click_long_stoploss_input(self, count, wait):
         """click long stoploss input text box."""
         wait.until(
-            EC.visibility_of_element_located(
-                (By.XPATH, "//*[@class='input-uGWFLwEy with-end-slot-uGWFLwEy']")
-            )
+            EC.presence_of_element_located((By.CLASS_NAME, "with-end-slot-uGWFLwEy"))
         )
-        stoploss_input_box = self.driver.find_elements_by_xpath(
-            "//*[@class='input-uGWFLwEy with-end-slot-uGWFLwEy']"
-        )[0]
+
+        stoploss_input_box = self.driver.find_elements_by_class_name(
+            "with-end-slot-uGWFLwEy"
+        )[2]
         stoploss_input_box.send_keys(Keys.BACK_SPACE * 4)
         stoploss_input_box.send_keys(str(count))
         stoploss_input_box.send_keys(Keys.ENTER)
@@ -187,13 +167,12 @@ class Functions(Main):
     def click_long_takeprofit_input(self, count, wait):
         """click long take profit input text box."""
         wait.until(
-            EC.visibility_of_element_located(
-                (By.XPATH, "//*[@class='input-uGWFLwEy with-end-slot-uGWFLwEy']")
-            )
+            EC.presence_of_element_located((By.CLASS_NAME, "with-end-slot-uGWFLwEy"))
         )
-        takeprofit_input_box = self.driver.find_elements_by_xpath(
-            "//*[@class='input-uGWFLwEy with-end-slot-uGWFLwEy']"
-        )[1]
+
+        takeprofit_input_box = self.driver.find_elements_by_class_name(
+            "with-end-slot-uGWFLwEy"
+        )[3]
         takeprofit_input_box.send_keys(Keys.BACK_SPACE * 4)
         takeprofit_input_box.send_keys(str(count))
         takeprofit_input_box.send_keys(Keys.ENTER)
@@ -204,13 +183,12 @@ class Functions(Main):
     def click_short_stoploss_input(self, count, wait):
         """click short stoploss input text box."""
         wait.until(
-            EC.visibility_of_element_located(
-                (By.XPATH, "//*[@class='input-uGWFLwEy with-end-slot-uGWFLwEy']")
-            )
+            EC.presence_of_element_located((By.CLASS_NAME, "with-end-slot-uGWFLwEy"))
         )
-        stoploss_input_box = self.driver.find_elements_by_xpath(
-            "//*[@class='input-uGWFLwEy with-end-slot-uGWFLwEy']"
-        )[2]
+
+        stoploss_input_box = self.driver.find_elements_by_class_name(
+            "with-end-slot-uGWFLwEy"
+        )[4]
         stoploss_input_box.send_keys(Keys.BACK_SPACE * 4)
         stoploss_input_box.send_keys(str(count))
         stoploss_input_box.send_keys(Keys.ENTER)
@@ -221,13 +199,12 @@ class Functions(Main):
     def click_short_takeprofit_input(self, count, wait):
         """click short take profit input text box."""
         wait.until(
-            EC.visibility_of_element_located(
-                (By.XPATH, "//*[@class='input-uGWFLwEy with-end-slot-uGWFLwEy']")
-            )
+            EC.presence_of_element_located((By.CLASS_NAME, "with-end-slot-uGWFLwEy"))
         )
-        stoploss_input_box = self.driver.find_elements_by_xpath(
-            "//*[@class='input-uGWFLwEy with-end-slot-uGWFLwEy']"
-        )[3]
+
+        stoploss_input_box = self.driver.find_elements_by_class_name(
+            "with-end-slot-uGWFLwEy"
+        )[5]
         stoploss_input_box.send_keys(Keys.BACK_SPACE * 4)
         stoploss_input_box.send_keys(str(count))
         stoploss_input_box.send_keys(Keys.ENTER)
@@ -238,16 +215,15 @@ class Functions(Main):
     def click_long_inputs(self, long_stoploss_value, long_takeprofit_value, wait):
         """click both long input text boxes."""
         wait.until(
-            EC.visibility_of_element_located(
-                (By.XPATH, "//*[@class='input-uGWFLwEy with-end-slot-uGWFLwEy']")
-            )
+            EC.presence_of_element_located((By.CLASS_NAME, "with-end-slot-uGWFLwEy"))
         )
-        stoploss_input_box = self.driver.find_elements_by_xpath(
-            "//*[@class='input-uGWFLwEy with-end-slot-uGWFLwEy']"
-        )[0]
-        takeprofit_input_box = self.driver.find_elements_by_xpath(
-            "//*[@class='input-uGWFLwEy with-end-slot-uGWFLwEy']"
-        )[1]
+
+        stoploss_input_box = self.driver.find_elements_by_class_name(
+            "with-end-slot-uGWFLwEy"
+        )[2]
+        takeprofit_input_box = self.driver.find_elements_by_class_name(
+            "with-end-slot-uGWFLwEy"
+        )[3]
         stoploss_input_box.send_keys(Keys.BACK_SPACE * 4)
         stoploss_input_box.send_keys(str(long_stoploss_value))
         takeprofit_input_box.send_keys(Keys.BACK_SPACE * 4)
@@ -260,16 +236,15 @@ class Functions(Main):
     def click_short_inputs(self, short_stoploss_value, short_takeprofit_value, wait):
         """click both short input text boxes."""
         wait.until(
-            EC.visibility_of_element_located(
-                (By.XPATH, "//*[@class='input-uGWFLwEy with-end-slot-uGWFLwEy']")
-            )
+            EC.presence_of_element_located((By.CLASS_NAME, "with-end-slot-uGWFLwEy"))
         )
-        stoploss_input_box = self.driver.find_elements_by_xpath(
-            "//*[@class='input-uGWFLwEy with-end-slot-uGWFLwEy']"
-        )[2]
-        takeprofit_input_box = self.driver.find_elements_by_xpath(
-            "//*[@class='input-uGWFLwEy with-end-slot-uGWFLwEy']"
-        )[3]
+
+        stoploss_input_box = self.driver.find_elements_by_class_name(
+            "with-end-slot-uGWFLwEy"
+        )[4]
+        takeprofit_input_box = self.driver.find_elements_by_class_name(
+            "with-end-slot-uGWFLwEy"
+        )[5]
         stoploss_input_box.send_keys(Keys.BACK_SPACE * 4)
         stoploss_input_box.send_keys(str(short_stoploss_value))
         takeprofit_input_box.send_keys(Keys.BACK_SPACE * 4)
@@ -289,45 +264,34 @@ class Functions(Main):
     ):
         """click all input text boxes."""
         wait.until(
-            EC.visibility_of_element_located(
-                (By.XPATH, "//*[@class='input-uGWFLwEy with-end-slot-uGWFLwEy']")
-            )
+            EC.presence_of_element_located((By.CLASS_NAME, "with-end-slot-uGWFLwEy"))
         )
-        long_stoploss_input_box = self.driver.find_elements_by_xpath(
-            "//*[@class='input-uGWFLwEy with-end-slot-uGWFLwEy']"
-        )[0]
-        long_takeprofit_input_box = self.driver.find_elements_by_xpath(
-            "//*[@class='input-uGWFLwEy with-end-slot-uGWFLwEy']"
-        )[1]
-        short_stoploss_input_box = self.driver.find_elements_by_xpath(
-            "//*[@class='input-uGWFLwEy with-end-slot-uGWFLwEy']"
+
+        long_stoploss_input_box = self.driver.find_elements_by_class_name(
+            "with-end-slot-uGWFLwEy"
         )[2]
-        short_takeprofit_input_box = self.driver.find_elements_by_xpath(
-            "//*[@class='input-uGWFLwEy with-end-slot-uGWFLwEy']"
+        long_takeprofit_input_box = self.driver.find_elements_by_class_name(
+            "with-end-slot-uGWFLwEy"
         )[3]
-        long_stoploss_input_box.send_keys(Keys.BACK_SPACE * 8)
+        short_stoploss_input_box = self.driver.find_elements_by_class_name(
+            "with-end-slot-uGWFLwEy"
+        )[4]
+        short_takeprofit_input_box = self.driver.find_elements_by_class_name(
+            "with-end-slot-uGWFLwEy"
+        )[5]
+
+        long_stoploss_input_box.send_keys(Keys.BACK_SPACE * 4)
         long_stoploss_input_box.send_keys(str(long_stoploss_value))
-        long_takeprofit_input_box.send_keys(Keys.BACK_SPACE * 8)
+        long_takeprofit_input_box.send_keys(Keys.BACK_SPACE * 4)
         long_takeprofit_input_box.send_keys(str(long_takeprofit_value))
-        short_stoploss_input_box.send_keys(Keys.BACK_SPACE * 8)
+        short_stoploss_input_box.send_keys(Keys.BACK_SPACE * 4)
         short_stoploss_input_box.send_keys(str(short_stoploss_value))
-        short_takeprofit_input_box.send_keys(Keys.BACK_SPACE * 8)
+        short_takeprofit_input_box.send_keys(Keys.BACK_SPACE * 4)
         short_takeprofit_input_box.send_keys(str(short_takeprofit_value))
         short_takeprofit_input_box.send_keys(Keys.ENTER)
-        time.sleep(0.5)
+
         ok_button = self.driver.find_element_by_name("submit")
         ok_button.click()
-
-    def click_input_tab(self):
-        """click the input tab."""
-        try:
-            input_tab = self.driver.find_elements_by_xpath(
-                "//*[@class='tab-1KEqJy8_ withHover-1KEqJy8_ tab-3I2ohC86']"
-            )[0]
-            if input_tab.get_attribute("data-value") == "inputs":
-                input_tab.click()
-        except IndexError:
-            pass
 
     def click_ok_button(self):
         """click the ok button inside settings."""
@@ -337,87 +301,91 @@ class Functions(Main):
 
     def click_enable_both_checkboxes(self):
         """click both long and short checkboxes."""
-        long_checkbox = self.driver.find_elements_by_xpath(
-            "//*[@class='input-5Xd5conM']"
-        )[0]
-        short_checkbox = self.driver.find_elements_by_xpath(
-            "//*[@class='input-5Xd5conM']"
-        )[1]
+        long_checkbox = self.driver.find_elements_by_class_name("input-5Xd5conM")[0]
+        short_checkbox = self.driver.find_elements_by_class_name("input-5Xd5conM")[1]
         if not long_checkbox.get_attribute("checked"):
-            click_long_checkbox = self.driver.find_elements_by_xpath(
-                "//*[@class='box-5Xd5conM check-5Xd5conM']"
+            click_long_checkbox = self.driver.find_elements_by_class_name(
+                "check-5Xd5conM"
             )[0]
             click_long_checkbox.click()
         if not short_checkbox.get_attribute("checked"):
-            click_short_checkbox = self.driver.find_elements_by_xpath(
-                "//*[@class='box-5Xd5conM check-5Xd5conM']"
+            click_short_checkbox = self.driver.find_elements_by_class_name(
+                "check-5Xd5conM"
             )[1]
             click_short_checkbox.click()
 
     def click_enable_long_strategy_checkbox(self):
         """click enable on the long checkbox."""
-        long_checkbox = self.driver.find_elements_by_xpath(
-            "//*[@class='input-5Xd5conM']"
-        )[0]
-        short_checkbox = self.driver.find_elements_by_xpath(
-            "//*[@class='input-5Xd5conM']"
-        )[1]
+        long_checkbox = self.driver.find_elements_by_class_name("input-5Xd5conM")[0]
+        short_checkbox = self.driver.find_elements_by_class_name("input-5Xd5conM")[1]
         if not long_checkbox.get_attribute("checked"):
-            click_long_checkbox = self.driver.find_elements_by_xpath(
-                "//*[@class='box-5Xd5conM check-5Xd5conM']"
+            click_long_checkbox = self.driver.find_elements_by_class_name(
+                "check-5Xd5conM"
             )[0]
             click_long_checkbox.click()
         if short_checkbox.get_attribute("checked"):
-            click_short_checkbox = self.driver.find_elements_by_xpath(
-                "//*[@class='box-5Xd5conM check-5Xd5conM']"
+            click_short_checkbox = self.driver.find_elements_by_class_name(
+                "check-5Xd5conM"
             )[1]
             click_short_checkbox.click()
 
     def click_enable_short_strategy_checkbox(self):
         """click enable on the short checkbox."""
-        long_checkbox = self.driver.find_elements_by_xpath(
-            "//*[@class='input-5Xd5conM']"
-        )[0]
-        short_checkbox = self.driver.find_elements_by_xpath(
-            "//*[@class='input-5Xd5conM']"
-        )[1]
+        long_checkbox = self.driver.find_elements_by_class_name("input-5Xd5conM")[0]
+        short_checkbox = self.driver.find_elements_by_class_name("input-5Xd5conM")[1]
         if long_checkbox.get_attribute("checked"):
-            click_long_checkbox = self.driver.find_elements_by_xpath(
-                "//*[@class='box-5Xd5conM check-5Xd5conM']"
+            click_long_checkbox = self.driver.find_elements_by_class_name(
+                "check-5Xd5conM"
             )[0]
             click_long_checkbox.click()
         if not short_checkbox.get_attribute("checked"):
-            click_short_checkbox = self.driver.find_elements_by_xpath(
-                "//*[@class='box-5Xd5conM check-5Xd5conM']"
+            click_short_checkbox = self.driver.find_elements_by_class_name(
+                "check-5Xd5conM"
             )[1]
             click_short_checkbox.click()
 
-    def click_rest_all_inputs(self):
+    def click_reset_all_inputs(self, wait):
         """click and reset all input text boxes to 50."""
-        long_stoploss_input_box = self.driver.find_elements_by_xpath(
-            "//*[@class='input-uGWFLwEy with-end-slot-uGWFLwEy']"
-        )[0]
-        long_takeprofit_input_box = self.driver.find_elements_by_xpath(
-            "//*[@class='input-uGWFLwEy with-end-slot-uGWFLwEy']"
-        )[1]
-        short_stoploss_input_box = self.driver.find_elements_by_xpath(
-            "//*[@class='input-uGWFLwEy with-end-slot-uGWFLwEy']"
+        wait.until(
+            EC.presence_of_element_located((By.CLASS_NAME, "with-end-slot-uGWFLwEy"))
+        )
+
+        long_stoploss_input_box = self.driver.find_elements_by_class_name(
+            "with-end-slot-uGWFLwEy"
         )[2]
-        short_takeprofit_input_box = self.driver.find_elements_by_xpath(
-            "//*[@class='input-uGWFLwEy with-end-slot-uGWFLwEy']"
+        long_takeprofit_input_box = self.driver.find_elements_by_class_name(
+            "with-end-slot-uGWFLwEy"
         )[3]
-        long_stoploss_input_box.send_keys(Keys.BACK_SPACE * 8)
-        long_stoploss_input_box.send_keys(str("50"))
-        long_takeprofit_input_box.send_keys(Keys.BACK_SPACE * 8)
-        long_takeprofit_input_box.send_keys(str("50"))
-        short_stoploss_input_box.send_keys(Keys.BACK_SPACE * 8)
-        short_stoploss_input_box.send_keys(str("50"))
-        short_takeprofit_input_box.send_keys(Keys.BACK_SPACE * 8)
-        short_takeprofit_input_box.send_keys(str("50"))
+        short_stoploss_input_box = self.driver.find_elements_by_class_name(
+            "with-end-slot-uGWFLwEy"
+        )[4]
+        short_takeprofit_input_box = self.driver.find_elements_by_class_name(
+            "with-end-slot-uGWFLwEy"
+        )[5]
+        long_stoploss_input_box.send_keys(Keys.BACK_SPACE * 4)
+        long_stoploss_input_box.send_keys(str("20"))
+        long_takeprofit_input_box.send_keys(Keys.BACK_SPACE * 4)
+        long_takeprofit_input_box.send_keys(str("20"))
+        short_stoploss_input_box.send_keys(Keys.BACK_SPACE * 4)
+        short_stoploss_input_box.send_keys(str("20"))
+        short_takeprofit_input_box.send_keys(Keys.BACK_SPACE * 4)
+        short_takeprofit_input_box.send_keys(str("20"))
         short_takeprofit_input_box.send_keys(Keys.ENTER)
 
     # Get Commands
     """ The get commands will get the stoploss and take profit data that tradingview returns to user. """
+
+    def get_webpage(self):
+        try:
+            self.driver.get("https://www.tradingview.com/chart/")
+        except Exception:
+            print(
+                "WebDriver Error: Please Check Your FireFox Profile Path Is Correct.\n"
+            )
+            print(
+                "Find Your Firefox Path Instructions. https://imgur.com/gallery/rdCqeT5 "
+            )
+            return
 
     def get_net_all(
         self,
@@ -429,15 +397,13 @@ class Functions(Main):
     ):
         """will get the net profit of all four values."""
         wait.until(
-            EC.visibility_of_element_located(
-                (By.CLASS_NAME, "additional_percent_value")
-            )
+            EC.presence_of_element_located((By.CLASS_NAME, "additional_percent_value"))
         )
         try:
             check = self.driver.find_elements_by_class_name("additional_percent_value")[
                 0
             ]
-            check.find_element_by_xpath('./span[contains(@class, "neg")]')
+            check.find_element_by_class_name("neg")
             negative = True
         except NoSuchElementException:
             negative = False
@@ -496,16 +462,13 @@ class Functions(Main):
     def get_net_both(self, stoploss_value, takeprofit_value, wait):
         """will get the net profit of two values."""
         wait.until(
-            EC.visibility_of_element_located(
-                (By.CLASS_NAME, "additional_percent_value")
-            )
+            EC.presence_of_element_located((By.CLASS_NAME, "additional_percent_value"))
         )
         try:
-            time.sleep(0.5)
             check = self.driver.find_elements_by_class_name("additional_percent_value")[
                 0
             ]
-            check.find_element_by_xpath('./span[contains(@class, "neg")]')
+            check.find_element_by_class_name("neg")
             negative = True
         except NoSuchElementException:
             negative = False
@@ -557,16 +520,13 @@ class Functions(Main):
     def get_net_profit_stoploss(self, count, wait):
         """will get the net profit of stoploss values."""
         wait.until(
-            EC.visibility_of_element_located(
-                (By.CLASS_NAME, "additional_percent_value")
-            )
+            EC.presence_of_element_located((By.CLASS_NAME, "additional_percent_value"))
         )
         try:
-            time.sleep(0.5)
             check = self.driver.find_elements_by_class_name("additional_percent_value")[
                 0
             ]
-            check.find_element_by_xpath('./span[contains(@class, "neg")]')
+            check.find_element_by_class_name("neg")
             negative = True
         except NoSuchElementException:
             negative = False
@@ -591,15 +551,14 @@ class Functions(Main):
         """will get the net profit of take profit values."""
         try:
             wait.until(
-                EC.visibility_of_element_located(
+                EC.presence_of_element_located(
                     (By.CLASS_NAME, "additional_percent_value")
                 )
             )
-            time.sleep(0.5)
             check = self.driver.find_elements_by_class_name("additional_percent_value")[
                 0
             ]
-            check.find_element_by_xpath('./span[contains(@class, "neg")]')
+            check.find_element_by_class_name("neg")
             negative = True
         except (NoSuchElementException, IndexError):
             negative = False
@@ -631,7 +590,7 @@ class Functions(Main):
             win_rate = self.driver.find_elements_by_class_name(
                 "additional_percent_value"
             )[1]
-            win_rate.find_element_by_xpath('./span[contains(@class, "neg")]')
+            win_rate.find_element_by_class_name("neg")
             negative = True
         except NoSuchElementException:
             negative = False
@@ -664,10 +623,10 @@ class Functions(Main):
             max_percentage = profits[best_stoploss]
             if max_percentage > 0:
                 profitable = colored(str(best_stoploss) + " %", "green")
-                print(f"Best Stoploss: " + str(profitable))
+                print(f"Best Stoploss: " + str(profitable) + "\n")
             else:
                 profitable = colored(str(best_stoploss) + " %", "red")
-                print(f"Best Stoploss: " + str(profitable))
+                print(f"Best Stoploss: " + str(profitable) + "\n")
         except (UnboundLocalError, ValueError):
             print("error printing stoploss.")
 
@@ -678,10 +637,10 @@ class Functions(Main):
             max_percentage = profits[best_takeprofit]
             if max_percentage > 0:
                 profitable = colored(str(best_takeprofit) + " %", "green")
-                print(f"Best Take Profit: " + str(profitable))
+                print(f"Best Take Profit: " + str(profitable) + "\n")
             else:
                 profitable = colored(str(best_takeprofit) + " %", "red")
-                print(f"Best Take Profit: " + str(profitable))
+                print(f"Best Take Profit: " + str(profitable) + "\n")
         except (UnboundLocalError, ValueError):
             print("error printing take profit.")
 
@@ -713,26 +672,34 @@ class Functions(Main):
 
     def print_net_profit(self):
         """print net profit to console."""
-        net_profit = (
-            self.driver.find_element_by_class_name("report-data")
-            .find_element_by_tag_name("table")
-            .find_element_by_tag_name("tbody")
-            .find_elements_by_tag_name("tr")[0]
-            .find_element_by_class_name("additional_percent_value")
-        )
         try:
-            negative = net_profit.find_element_by_class_name("neg")
+            negative = (
+                self.driver.find_element_by_class_name("report-content")
+                .find_element_by_tag_name("table")
+                .find_element_by_tag_name("tbody")
+                .find_elements_by_tag_name("tr")[0]
+                .find_elements_by_tag_name("td")[1]
+                .find_elements_by_class_name("negativeValue-ll5aPuFn")[1]
+            )
             if negative:
-                display = colored(f"{net_profit.text}", "red")
+                display = colored(f"{negative.text}", "red")
                 print(f"Net Profit: {display}")
-        except NoSuchElementException:
+        except (NoSuchElementException, IndexError):
+            net_profit = (
+                self.driver.find_element_by_class_name("report-content")
+                .find_element_by_tag_name("table")
+                .find_element_by_tag_name("tbody")
+                .find_elements_by_tag_name("tr")[0]
+                .find_elements_by_tag_name("td")[1]
+                .find_elements_by_tag_name("div")[2]
+            )
             display = colored(f"{net_profit.text}", "green")
             print(f"Net Profit: {display}")
 
     def print_gross_profit(self):
         """print gross profit to console."""
         gross_profit = (
-            self.driver.find_element_by_class_name("report-data")
+            self.driver.find_element_by_class_name("report-content")
             .find_element_by_tag_name("table")
             .find_element_by_tag_name("tbody")
             .find_elements_by_tag_name("tr")[1]
@@ -750,7 +717,7 @@ class Functions(Main):
     def print_gross_loss(self):
         """print gross loss to console."""
         gross_loss = (
-            self.driver.find_element_by_class_name("report-data")
+            self.driver.find_element_by_class_name("report-content")
             .find_element_by_tag_name("table")
             .find_element_by_tag_name("tbody")
             .find_elements_by_tag_name("tr")[2]
@@ -765,10 +732,10 @@ class Functions(Main):
             display = colored(f"{gross_loss.text}", "green")
             print(f"Gross Loss: {display}")
 
-    def print_max_drawdown(self):
+    def print_max_runup(self):
         """print max drawdown to console."""
-        max_drawdown = (
-            self.driver.find_element_by_class_name("report-data")
+        max_runup = (
+            self.driver.find_element_by_class_name("report-content")
             .find_element_by_tag_name("table")
             .find_element_by_tag_name("tbody")
             .find_elements_by_tag_name("tr")[3]
@@ -776,21 +743,33 @@ class Functions(Main):
         )
 
         try:
-            negative = max_drawdown.find_element_by_class_name("neg")
+            negative = max_runup.find_element_by_class_name("neg")
             if negative:
-                display = colored(f"{max_drawdown.text}", "red")
+                display = colored(f"{max_runup.text}", "red")
                 print(f"Max Drawdown: {display}")
         except NoSuchElementException:
-            display = colored(f"{max_drawdown.text}", "green")
+            display = colored(f"{max_runup.text}", "green")
             print(f"Max Drawdown: {display}")
+
+    def print_max_drawdown(self):
+        """print max drawdown to console."""
+        max_drawdown = (
+            self.driver.find_element_by_class_name("report-content")
+            .find_element_by_tag_name("table")
+            .find_element_by_tag_name("tbody")
+            .find_elements_by_tag_name("tr")[4]
+            .find_elements_by_tag_name("td")[1]
+            .find_elements_by_tag_name("div")[2]
+        )
+        print(f"Max Drawdown: {max_drawdown.text}")
 
     def print_buy_and_hold_return(self):
         """print buy and hold return to console."""
         buy_and_hold_return = (
-            self.driver.find_element_by_class_name("report-data")
+            self.driver.find_element_by_class_name("report-content")
             .find_element_by_tag_name("table")
             .find_element_by_tag_name("tbody")
-            .find_elements_by_tag_name("tr")[4]
+            .find_elements_by_tag_name("tr")[5]
             .find_element_by_class_name("additional_percent_value")
         )
 
@@ -807,22 +786,22 @@ class Functions(Main):
         """print sharpe ratio to console."""
         try:
             negative = (
-                self.driver.find_element_by_class_name("report-data")
+                self.driver.find_element_by_class_name("report-content")
                 .find_element_by_tag_name("table")
                 .find_element_by_tag_name("tbody")
-                .find_elements_by_tag_name("tr")[5]
+                .find_elements_by_tag_name("tr")[6]
                 .find_elements_by_tag_name("td")[1]
-                .find_element_by_class_name("neg")
+                .find_element_by_class_name("negativeValue-ll5aPuFn")
             )
             if negative:
                 display = colored(f"{negative.text}", "red")
                 print(f"Sharpe Ratio: {display}")
-        except NoSuchElementException:
+        except (NoSuchElementException, IndexError):
             sharpe_ratio = (
-                self.driver.find_element_by_class_name("report-data")
+                self.driver.find_element_by_class_name("report-content")
                 .find_element_by_tag_name("table")
                 .find_element_by_tag_name("tbody")
-                .find_elements_by_tag_name("tr")[5]
+                .find_elements_by_tag_name("tr")[6]
                 .find_elements_by_tag_name("td")[1]
             )
             display = colored(f"{sharpe_ratio.text}", "green")
@@ -832,22 +811,22 @@ class Functions(Main):
         """print sortino ratio to console."""
         try:
             negative = (
-                self.driver.find_element_by_class_name("report-data")
+                self.driver.find_element_by_class_name("report-content")
                 .find_element_by_tag_name("table")
                 .find_element_by_tag_name("tbody")
-                .find_elements_by_tag_name("tr")[6]
+                .find_elements_by_tag_name("tr")[7]
                 .find_elements_by_tag_name("td")[1]
-                .find_element_by_class_name("neg")
+                .find_element_by_class_name("negativeValue-ll5aPuFn")
             )
             if negative:
                 display = colored(f"{negative.text}", "red")
                 print(f"Sortino Ratio: {display}")
-        except NoSuchElementException:
+        except (NoSuchElementException, IndexError):
             sortino_ratio = (
-                self.driver.find_element_by_class_name("report-data")
+                self.driver.find_element_by_class_name("report-content")
                 .find_element_by_tag_name("table")
                 .find_element_by_tag_name("tbody")
-                .find_elements_by_tag_name("tr")[6]
+                .find_elements_by_tag_name("tr")[7]
                 .find_elements_by_tag_name("td")[1]
             )
             display = colored(f"{sortino_ratio.text}", "green")
@@ -856,10 +835,10 @@ class Functions(Main):
     def print_profit_factor(self):
         """print profit factor to console."""
         profit_factor = (
-            self.driver.find_element_by_class_name("report-data")
+            self.driver.find_element_by_class_name("report-content")
             .find_element_by_tag_name("table")
             .find_element_by_tag_name("tbody")
-            .find_elements_by_tag_name("tr")[7]
+            .find_elements_by_tag_name("tr")[8]
             .find_elements_by_tag_name("td")[1]
         )
         try:
@@ -874,10 +853,10 @@ class Functions(Main):
     def print_max_contracts_held(self):
         """print max contract to console."""
         max_contracts_held = (
-            self.driver.find_element_by_class_name("report-data")
+            self.driver.find_element_by_class_name("report-content")
             .find_element_by_tag_name("table")
             .find_element_by_tag_name("tbody")
-            .find_elements_by_tag_name("tr")[8]
+            .find_elements_by_tag_name("tr")[9]
             .find_elements_by_tag_name("td")[1]
         )
         try:
@@ -892,10 +871,10 @@ class Functions(Main):
     def print_open_pl(self):
         """print open pl to console."""
         open_pl = (
-            self.driver.find_element_by_class_name("report-data")
+            self.driver.find_element_by_class_name("report-content")
             .find_element_by_tag_name("table")
             .find_element_by_tag_name("tbody")
-            .find_elements_by_tag_name("tr")[9]
+            .find_elements_by_tag_name("tr")[10]
             .find_element_by_class_name("additional_percent_value")
         )
         try:
@@ -910,10 +889,10 @@ class Functions(Main):
     def print_commission_paid(self):
         """print commission paid to console."""
         commission_paid = (
-            self.driver.find_element_by_class_name("report-data")
+            self.driver.find_element_by_class_name("report-content")
             .find_element_by_tag_name("table")
             .find_element_by_tag_name("tbody")
-            .find_elements_by_tag_name("tr")[10]
+            .find_elements_by_tag_name("tr")[11]
             .find_elements_by_tag_name("td")[1]
         )
         print(f"Commission Paid: {commission_paid.text}")
@@ -921,10 +900,10 @@ class Functions(Main):
     def print_total_closed_trades(self):
         """print total closed trades to console."""
         total_closed_trades = (
-            self.driver.find_element_by_class_name("report-data")
+            self.driver.find_element_by_class_name("report-content")
             .find_element_by_tag_name("table")
             .find_element_by_tag_name("tbody")
-            .find_elements_by_tag_name("tr")[11]
+            .find_elements_by_tag_name("tr")[12]
             .find_elements_by_tag_name("td")[1]
         )
         print(f"Total Closed Trades: {total_closed_trades.text}")
@@ -932,10 +911,10 @@ class Functions(Main):
     def print_total_open_trades(self):
         """print total open trades to console."""
         total_open_trades = (
-            self.driver.find_element_by_class_name("report-data")
+            self.driver.find_element_by_class_name("report-content")
             .find_element_by_tag_name("table")
             .find_element_by_tag_name("tbody")
-            .find_elements_by_tag_name("tr")[12]
+            .find_elements_by_tag_name("tr")[13]
             .find_elements_by_tag_name("td")[1]
         )
         print(f"Total Open Trades: {total_open_trades.text}")
@@ -943,10 +922,10 @@ class Functions(Main):
     def print_number_winning_trades(self):
         """print number of winning trades to console."""
         number_winning_trades = (
-            self.driver.find_element_by_class_name("report-data")
+            self.driver.find_element_by_class_name("report-content")
             .find_element_by_tag_name("table")
             .find_element_by_tag_name("tbody")
-            .find_elements_by_tag_name("tr")[13]
+            .find_elements_by_tag_name("tr")[14]
             .find_elements_by_tag_name("td")[1]
         )
         print(f"Number Winning Trades: {number_winning_trades.text}")
@@ -954,10 +933,10 @@ class Functions(Main):
     def print_number_losing_trades(self):
         """print number of losing trades to console."""
         number_losing_trades = (
-            self.driver.find_element_by_class_name("report-data")
+            self.driver.find_element_by_class_name("report-content")
             .find_element_by_tag_name("table")
             .find_element_by_tag_name("tbody")
-            .find_elements_by_tag_name("tr")[14]
+            .find_elements_by_tag_name("tr")[15]
             .find_elements_by_tag_name("td")[1]
         )
         print(f"Number Losing Trades: {number_losing_trades.text}")
@@ -965,10 +944,10 @@ class Functions(Main):
     def print_percent_profitable(self):
         """print percent profitable to console."""
         percent_profitable = (
-            self.driver.find_element_by_class_name("report-data")
+            self.driver.find_element_by_class_name("report-content")
             .find_element_by_tag_name("table")
             .find_element_by_tag_name("tbody")
-            .find_elements_by_tag_name("tr")[15]
+            .find_elements_by_tag_name("tr")[16]
             .find_elements_by_tag_name("td")[1]
         )
         print(f"Percent Profitable: {percent_profitable.text}")
@@ -976,10 +955,10 @@ class Functions(Main):
     def print_avg_trade(self):
         """print average trade to console."""
         avg_trade = (
-            self.driver.find_element_by_class_name("report-data")
+            self.driver.find_element_by_class_name("report-content")
             .find_element_by_tag_name("table")
             .find_element_by_tag_name("tbody")
-            .find_elements_by_tag_name("tr")[16]
+            .find_elements_by_tag_name("tr")[17]
             .find_element_by_class_name("additional_percent_value")
         )
         try:
@@ -993,65 +972,47 @@ class Functions(Main):
 
     def print_avg_win_trade(self):
         """print average winning trades to console."""
-        try:
-            negative = (
-                self.driver.find_element_by_class_name("report-data")
-                .find_element_by_tag_name("table")
-                .find_element_by_tag_name("tbody")
-                .find_elements_by_tag_name("tr")[17]
-                .find_element_by_class_name("additional_percent_value")
-                .find_element_by_class_name("neg")
-            )
-            if negative:
-                display = colored(f"{negative.text}", "red")
-                print(f"Avg Win Trade: {display}")
-        except NoSuchElementException:
-            avg_win_trade = (
-                self.driver.find_element_by_class_name("report-data")
-                .find_element_by_tag_name("table")
-                .find_element_by_tag_name("tbody")
-                .find_elements_by_tag_name("tr")[17]
-                .find_element_by_class_name("additional_percent_value")
-            )
-            display = colored(f"{avg_win_trade.text}", "green")
-            print(f"Avg Win Trade: {display}")
-
-    def print_avg_loss_trade(self):
-        """print average losing trades to console."""
-        avg_loss_trade = (
-            self.driver.find_element_by_class_name("report-data")
+        avg_win_ratio = (
+            self.driver.find_element_by_class_name("report-content")
             .find_element_by_tag_name("table")
             .find_element_by_tag_name("tbody")
             .find_elements_by_tag_name("tr")[18]
-            .find_element_by_class_name("additional_percent_value")
+            .find_elements_by_tag_name("td")[1]
+            .find_elements_by_tag_name("div")[2]
         )
-        try:
-            negative = avg_loss_trade.find_element_by_class_name("neg")
-            if negative:
-                display = colored(f"{avg_loss_trade.text}", "red")
-                print(f"Avg Loss Trade: {display}")
-        except NoSuchElementException:
-            display = colored(f"{avg_loss_trade.text}", "green")
-            print(f"Avg Loss Trade: {display}")
+        print(f"Avg Win Trade: {avg_win_ratio.text}")
 
-    def print_win_loss_ratio(self):
-        """print win/loss ratio to console."""
-        win_loss_ratio = (
-            self.driver.find_element_by_class_name("report-data")
+    def print_avg_loss_trade(self):
+        """print average losing trades to console."""
+        avg_loss_ratio = (
+            self.driver.find_element_by_class_name("report-content")
             .find_element_by_tag_name("table")
             .find_element_by_tag_name("tbody")
             .find_elements_by_tag_name("tr")[19]
             .find_elements_by_tag_name("td")[1]
+            .find_elements_by_tag_name("div")[2]
+        )
+        print(f"Avg Loss Trade: {avg_loss_ratio.text}")
+
+    def print_win_loss_ratio(self):
+        """print win/loss ratio to console."""
+        win_loss_ratio = (
+            self.driver.find_element_by_class_name("report-content")
+            .find_element_by_tag_name("table")
+            .find_element_by_tag_name("tbody")
+            .find_elements_by_tag_name("tr")[20]
+            .find_elements_by_tag_name("td")[1]
+            .find_element_by_tag_name("div")
         )
         print(f"Win/Loss Ratio: {win_loss_ratio.text}")
 
     def print_largest_winning_trade(self):
         """print largest winning trade to console."""
         largest_winning_trade = (
-            self.driver.find_element_by_class_name("report-data")
+            self.driver.find_element_by_class_name("report-content")
             .find_element_by_tag_name("table")
             .find_element_by_tag_name("tbody")
-            .find_elements_by_tag_name("tr")[20]
+            .find_elements_by_tag_name("tr")[21]
             .find_element_by_class_name("additional_percent_value")
         )
         try:
@@ -1066,10 +1027,10 @@ class Functions(Main):
     def print_largest_losing_trade(self):
         """print largest losing trade to console."""
         largest_losing_trade = (
-            self.driver.find_element_by_class_name("report-data")
+            self.driver.find_element_by_class_name("report-content")
             .find_element_by_tag_name("table")
             .find_element_by_tag_name("tbody")
-            .find_elements_by_tag_name("tr")[21]
+            .find_elements_by_tag_name("tr")[22]
             .find_element_by_class_name("additional_percent_value")
         )
         try:
@@ -1084,10 +1045,10 @@ class Functions(Main):
     def print_avg_bars_in_trades(self):
         """print average bars to console."""
         avg_bars_in_trades = (
-            self.driver.find_element_by_class_name("report-data")
+            self.driver.find_element_by_class_name("report-content")
             .find_element_by_tag_name("table")
             .find_element_by_tag_name("tbody")
-            .find_elements_by_tag_name("tr")[22]
+            .find_elements_by_tag_name("tr")[23]
             .find_elements_by_tag_name("td")[1]
         )
         print(f"Avg Bars In Trades: {avg_bars_in_trades.text}")
@@ -1095,10 +1056,10 @@ class Functions(Main):
     def print_avg_bars_in_winning_trades(self):
         """print average bars of winning trades to console."""
         avg_bars_in_winning_trades = (
-            self.driver.find_element_by_class_name("report-data")
+            self.driver.find_element_by_class_name("report-content")
             .find_element_by_tag_name("table")
             .find_element_by_tag_name("tbody")
-            .find_elements_by_tag_name("tr")[23]
+            .find_elements_by_tag_name("tr")[24]
             .find_elements_by_tag_name("td")[1]
         )
         print(f"Avg Bars In Winning Trades: {avg_bars_in_winning_trades.text}")
@@ -1106,32 +1067,21 @@ class Functions(Main):
     def print_avg_bars_in_losing_trades(self):
         """print average bars of losing trades to console."""
         avg_bars_in_losing_trades = (
-            self.driver.find_element_by_class_name("report-data")
-            .find_element_by_tag_name("table")
-            .find_element_by_tag_name("tbody")
-            .find_elements_by_tag_name("tr")[24]
-            .find_elements_by_tag_name("td")[1]
-        )
-        print(f"Avg Bars In Losing Trades: {avg_bars_in_losing_trades.text}")
-
-    def print_margin_calls(self):
-        """print margin calls to console."""
-        margin_calls = (
-            self.driver.find_element_by_class_name("report-data")
+            self.driver.find_element_by_class_name("report-content")
             .find_element_by_tag_name("table")
             .find_element_by_tag_name("tbody")
             .find_elements_by_tag_name("tr")[25]
             .find_elements_by_tag_name("td")[1]
         )
-        print(f"Avg Bars In Losing Trades: {margin_calls.text}")
+        print(f"Avg Bars In Losing Trades: {avg_bars_in_losing_trades.text}")
 
     def print_win_rate(self):
         """print win rate to console."""
         win_rate = (
-            self.driver.find_element_by_class_name("report-data")
+            self.driver.find_element_by_class_name("report-content")
             .find_element_by_tag_name("table")
             .find_element_by_tag_name("tbody")
-            .find_elements_by_tag_name("tr")[15]
+            .find_elements_by_tag_name("tr")[16]
             .find_elements_by_tag_name("td")[1]
         )
         print(f"Win Rate: {win_rate.text}")
