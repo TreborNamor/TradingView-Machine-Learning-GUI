@@ -68,7 +68,7 @@ class Functions(Main):
                 EC.presence_of_element_located((By.CLASS_NAME, "title-eYOhHEJX"))
             )
 
-            overview_tab = self.driver.find_elements_by_class_name("tab-xvzZPiW2")
+            overview_tab = self.driver.find_elements_by_class_name("tab-QB2ABAyt")
             for index, web_element in enumerate(overview_tab):
                 if web_element.text == "Overview":
                     overview_tab[index].click()
@@ -113,7 +113,7 @@ class Functions(Main):
     def click_performance_summary(self):
         """click performance summary tab."""
         try:
-            performance_tab = self.driver.find_elements_by_class_name("tab-xvzZPiW2")
+            performance_tab = self.driver.find_elements_by_class_name("tab-QB2ABAyt")
             for index, web_element in enumerate(performance_tab):
                 if web_element.text == "Performance Summary":
                     performance_tab[index].click()
@@ -127,7 +127,7 @@ class Functions(Main):
     def click_list_of_trades(self):
         """click list of trades tab."""
         try:
-            list_of_trades_tab = self.driver.find_elements_by_class_name("tab-xvzZPiW2")
+            list_of_trades_tab = self.driver.find_elements_by_class_name("tab-QB2ABAyt")
             for index, web_element in enumerate(list_of_trades_tab):
                 if web_element.text == "List of Trades":
                     list_of_trades_tab[index].click()
