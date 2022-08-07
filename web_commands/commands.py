@@ -84,12 +84,12 @@ class Functions(Main):
         try:
             wait.until(
                 EC.presence_of_element_located(
-                    (By.CLASS_NAME, "typography-small-1f5iHRsw")
+                    (By.CLASS_NAME, "light-button-1f5iHRsw")
                 )
             )
 
             settings_button = self.driver.find_element_by_class_name(
-                "typography-small-1f5iHRsw"
+                "light-button-1f5iHRsw"
             )
             settings_button.click()
 
