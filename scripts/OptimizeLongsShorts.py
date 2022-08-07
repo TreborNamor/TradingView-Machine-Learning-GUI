@@ -75,9 +75,6 @@ class LongShortScript(Functions):
                         int(self.decimalPlaceValue.text()),
                     )
 
-                    # Gives time for webpage to refresh data.
-                    time.sleep(1)
-
                     # Click settings button
                     self.click_settings_button(wait)
 
@@ -89,6 +86,9 @@ class LongShortScript(Functions):
                         short_takeprofit_value,
                         wait,
                     )
+
+                    # Gives time for webpage to refresh data.
+                    time.sleep(1)
 
                     # Saving the profitability of the new values into a dictionary.
                     self.get_net_all(

@@ -61,14 +61,14 @@ class ShortScript(Functions):
                         int(self.decimalPlaceValue.text()),
                     )
 
-                    # Gives time for webpage to refresh data.
-                    time.sleep(1)
-
                     # Click settings button
                     self.click_settings_button(wait)
 
                     # Click both input boxes and add new values.
                     self.click_short_inputs(stoploss_value, takeprofit_value, wait)
+
+                    # Gives time for webpage to refresh data.
+                    time.sleep(1)
 
                     # Saving the profitability of the new values into a dictionary.
                     self.get_net_both(stoploss_value, takeprofit_value, wait)

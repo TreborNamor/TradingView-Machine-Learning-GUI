@@ -47,11 +47,12 @@ class LongStoploss(Functions):
             for number in my_range:
                 count = round(number, 2)
                 try:
+                    self.click_settings_button(wait)
+                    self.click_long_stoploss_input(count, wait)
+
                     # Gives time for webpage to refresh data.
                     time.sleep(1)
 
-                    self.click_settings_button(wait)
-                    self.click_long_stoploss_input(count, wait)
                     self.get_net_profit_stoploss(count, wait)
                 except (
                     StaleElementReferenceException,
