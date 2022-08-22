@@ -43,11 +43,11 @@ class Functions(Main):
         """check if strategy tester tab is the active tab. If it's not, click to open tab."""
         try:
             wait.until(
-                EC.presence_of_element_located((By.CLASS_NAME, "title-eYOhHEJX"))
+                EC.presence_of_element_located((By.CLASS_NAME, "title-dD6UT4Qn"))
             )
 
             strategy_tester_tab = self.driver.find_elements_by_class_name(
-                "title-eYOhHEJX"
+                "title-dD6UT4Qn"
             )
             for index, web_element in enumerate(strategy_tester_tab):
                 if web_element.text == "Strategy Tester":
@@ -65,10 +65,10 @@ class Functions(Main):
         """click overview tab."""
         try:
             wait.until(
-                EC.presence_of_element_located((By.CLASS_NAME, "title-eYOhHEJX"))
+                EC.presence_of_element_located((By.CLASS_NAME, "tab-CVIqEYNj"))
             )
 
-            overview_tab = self.driver.find_elements_by_class_name("tab-QB2ABAyt")
+            overview_tab = self.driver.find_elements_by_class_name("tab-CVIqEYNj")
             for index, web_element in enumerate(overview_tab):
                 if web_element.text == "Overview":
                     overview_tab[index].click()
@@ -84,12 +84,12 @@ class Functions(Main):
         try:
             wait.until(
                 EC.presence_of_element_located(
-                    (By.CLASS_NAME, "light-button-1f5iHRsw")
+                    (By.CLASS_NAME, "light-button-EjHRS7Ad")
                 )
             )
 
             settings_button = self.driver.find_element_by_class_name(
-                "light-button-1f5iHRsw"
+                "light-button-EjHRS7Ad"
             )
             settings_button.click()
 
@@ -101,7 +101,7 @@ class Functions(Main):
     def click_input_tab(self):
         """click the input tab."""
         try:
-            input_tab = self.driver.find_elements_by_class_name("tab-rKFlMYkc")[0]
+            input_tab = self.driver.find_elements_by_class_name("tab-OXV0h0xk")[0]
             if input_tab.get_attribute("data-value") == "inputs":
                 input_tab.click()
 
@@ -113,7 +113,7 @@ class Functions(Main):
     def click_performance_summary(self):
         """click performance summary tab."""
         try:
-            performance_tab = self.driver.find_elements_by_class_name("tab-QB2ABAyt")
+            performance_tab = self.driver.find_elements_by_class_name("tab-CVIqEYNj")
             for index, web_element in enumerate(performance_tab):
                 if web_element.text == "Performance Summary":
                     performance_tab[index].click()
@@ -127,7 +127,7 @@ class Functions(Main):
     def click_list_of_trades(self):
         """click list of trades tab."""
         try:
-            list_of_trades_tab = self.driver.find_elements_by_class_name("tab-QB2ABAyt")
+            list_of_trades_tab = self.driver.find_elements_by_class_name("tab-CVIqEYNj")
             for index, web_element in enumerate(list_of_trades_tab):
                 if web_element.text == "List of Trades":
                     list_of_trades_tab[index].click()
@@ -141,11 +141,11 @@ class Functions(Main):
     def click_long_stoploss_input(self, count, wait):
         """click long stoploss input text box."""
         wait.until(
-            EC.presence_of_element_located((By.CLASS_NAME, "with-end-slot-uGWFLwEy"))
+            EC.presence_of_element_located((By.CLASS_NAME, "with-end-slot-sjBsvTFR"))
         )
 
         stoploss_input_box = self.driver.find_elements_by_class_name(
-            "with-end-slot-uGWFLwEy"
+            "with-end-slot-sjBsvTFR"
         )[2]
         stoploss_input_box.send_keys(Keys.BACK_SPACE * 4)
         stoploss_input_box.send_keys(str(count))
@@ -157,11 +157,11 @@ class Functions(Main):
     def click_long_takeprofit_input(self, count, wait):
         """click long take profit input text box."""
         wait.until(
-            EC.presence_of_element_located((By.CLASS_NAME, "with-end-slot-uGWFLwEy"))
+            EC.presence_of_element_located((By.CLASS_NAME, "with-end-slot-sjBsvTFR"))
         )
 
         takeprofit_input_box = self.driver.find_elements_by_class_name(
-            "with-end-slot-uGWFLwEy"
+            "with-end-slot-sjBsvTFR"
         )[3]
         takeprofit_input_box.send_keys(Keys.BACK_SPACE * 4)
         takeprofit_input_box.send_keys(str(count))
@@ -173,11 +173,11 @@ class Functions(Main):
     def click_short_stoploss_input(self, count, wait):
         """click short stoploss input text box."""
         wait.until(
-            EC.presence_of_element_located((By.CLASS_NAME, "with-end-slot-uGWFLwEy"))
+            EC.presence_of_element_located((By.CLASS_NAME, "with-end-slot-sjBsvTFR"))
         )
 
         stoploss_input_box = self.driver.find_elements_by_class_name(
-            "with-end-slot-uGWFLwEy"
+            "with-end-slot-sjBsvTFR"
         )[4]
         stoploss_input_box.send_keys(Keys.BACK_SPACE * 4)
         stoploss_input_box.send_keys(str(count))
@@ -189,11 +189,11 @@ class Functions(Main):
     def click_short_takeprofit_input(self, count, wait):
         """click short take profit input text box."""
         wait.until(
-            EC.presence_of_element_located((By.CLASS_NAME, "with-end-slot-uGWFLwEy"))
+            EC.presence_of_element_located((By.CLASS_NAME, "with-end-slot-sjBsvTFR"))
         )
 
         stoploss_input_box = self.driver.find_elements_by_class_name(
-            "with-end-slot-uGWFLwEy"
+            "with-end-slot-sjBsvTFR"
         )[5]
         stoploss_input_box.send_keys(Keys.BACK_SPACE * 4)
         stoploss_input_box.send_keys(str(count))
@@ -205,14 +205,14 @@ class Functions(Main):
     def click_long_inputs(self, long_stoploss_value, long_takeprofit_value, wait):
         """click both long input text boxes."""
         wait.until(
-            EC.presence_of_element_located((By.CLASS_NAME, "with-end-slot-uGWFLwEy"))
+            EC.presence_of_element_located((By.CLASS_NAME, "with-end-slot-sjBsvTFR"))
         )
 
         stoploss_input_box = self.driver.find_elements_by_class_name(
-            "with-end-slot-uGWFLwEy"
+            "with-end-slot-sjBsvTFR"
         )[2]
         takeprofit_input_box = self.driver.find_elements_by_class_name(
-            "with-end-slot-uGWFLwEy"
+            "with-end-slot-sjBsvTFR"
         )[3]
         stoploss_input_box.send_keys(Keys.BACK_SPACE * 4)
         stoploss_input_box.send_keys(str(long_stoploss_value))
@@ -226,14 +226,14 @@ class Functions(Main):
     def click_short_inputs(self, short_stoploss_value, short_takeprofit_value, wait):
         """click both short input text boxes."""
         wait.until(
-            EC.presence_of_element_located((By.CLASS_NAME, "with-end-slot-uGWFLwEy"))
+            EC.presence_of_element_located((By.CLASS_NAME, "with-end-slot-sjBsvTFR"))
         )
 
         stoploss_input_box = self.driver.find_elements_by_class_name(
-            "with-end-slot-uGWFLwEy"
+            "with-end-slot-sjBsvTFR"
         )[4]
         takeprofit_input_box = self.driver.find_elements_by_class_name(
-            "with-end-slot-uGWFLwEy"
+            "with-end-slot-sjBsvTFR"
         )[5]
         stoploss_input_box.send_keys(Keys.BACK_SPACE * 4)
         stoploss_input_box.send_keys(str(short_stoploss_value))
@@ -254,20 +254,20 @@ class Functions(Main):
     ):
         """click all input text boxes."""
         wait.until(
-            EC.presence_of_element_located((By.CLASS_NAME, "with-end-slot-uGWFLwEy"))
+            EC.presence_of_element_located((By.CLASS_NAME, "with-end-slot-sjBsvTFR"))
         )
 
         long_stoploss_input_box = self.driver.find_elements_by_class_name(
-            "with-end-slot-uGWFLwEy"
+            "with-end-slot-sjBsvTFR"
         )[2]
         long_takeprofit_input_box = self.driver.find_elements_by_class_name(
-            "with-end-slot-uGWFLwEy"
+            "with-end-slot-sjBsvTFR"
         )[3]
         short_stoploss_input_box = self.driver.find_elements_by_class_name(
-            "with-end-slot-uGWFLwEy"
+            "with-end-slot-sjBsvTFR"
         )[4]
         short_takeprofit_input_box = self.driver.find_elements_by_class_name(
-            "with-end-slot-uGWFLwEy"
+            "with-end-slot-sjBsvTFR"
         )[5]
 
         long_stoploss_input_box.send_keys(Keys.BACK_SPACE * 4)
@@ -291,66 +291,66 @@ class Functions(Main):
 
     def click_enable_both_checkboxes(self):
         """click both long and short checkboxes."""
-        long_checkbox = self.driver.find_elements_by_class_name("input-5Xd5conM")[0]
-        short_checkbox = self.driver.find_elements_by_class_name("input-5Xd5conM")[1]
+        long_checkbox = self.driver.find_elements_by_class_name("input-xyjveAH8")[0]
+        short_checkbox = self.driver.find_elements_by_class_name("input-xyjveAH8")[1]
         if not long_checkbox.get_attribute("checked"):
             click_long_checkbox = self.driver.find_elements_by_class_name(
-                "check-5Xd5conM"
+                ""
             )[0]
             click_long_checkbox.click()
         if not short_checkbox.get_attribute("checked"):
             click_short_checkbox = self.driver.find_elements_by_class_name(
-                "check-5Xd5conM"
+                "check-xyjveAH8"
             )[1]
             click_short_checkbox.click()
 
     def click_enable_long_strategy_checkbox(self):
         """click enable on the long checkbox."""
-        long_checkbox = self.driver.find_elements_by_class_name("input-5Xd5conM")[0]
-        short_checkbox = self.driver.find_elements_by_class_name("input-5Xd5conM")[1]
+        long_checkbox = self.driver.find_elements_by_class_name("input-xyjveAH8")[0]
+        short_checkbox = self.driver.find_elements_by_class_name("input-xyjveAH8")[1]
         if not long_checkbox.get_attribute("checked"):
             click_long_checkbox = self.driver.find_elements_by_class_name(
-                "check-5Xd5conM"
+                "check-xyjveAH8"
             )[0]
             click_long_checkbox.click()
         if short_checkbox.get_attribute("checked"):
             click_short_checkbox = self.driver.find_elements_by_class_name(
-                "check-5Xd5conM"
+                "check-xyjveAH8"
             )[1]
             click_short_checkbox.click()
 
     def click_enable_short_strategy_checkbox(self):
         """click enable on the short checkbox."""
-        long_checkbox = self.driver.find_elements_by_class_name("input-5Xd5conM")[0]
-        short_checkbox = self.driver.find_elements_by_class_name("input-5Xd5conM")[1]
+        long_checkbox = self.driver.find_elements_by_class_name("input-xyjveAH8")[0]
+        short_checkbox = self.driver.find_elements_by_class_name("input-xyjveAH8")[1]
         if long_checkbox.get_attribute("checked"):
             click_long_checkbox = self.driver.find_elements_by_class_name(
-                "check-5Xd5conM"
+                "check-xyjveAH8"
             )[0]
             click_long_checkbox.click()
         if not short_checkbox.get_attribute("checked"):
             click_short_checkbox = self.driver.find_elements_by_class_name(
-                "check-5Xd5conM"
+                "check-xyjveAH8"
             )[1]
             click_short_checkbox.click()
 
     def click_reset_all_inputs(self, wait):
         """click and reset all input text boxes to 50."""
         wait.until(
-            EC.presence_of_element_located((By.CLASS_NAME, "with-end-slot-uGWFLwEy"))
+            EC.presence_of_element_located((By.CLASS_NAME, "with-end-slot-sjBsvTFR"))
         )
 
         long_stoploss_input_box = self.driver.find_elements_by_class_name(
-            "with-end-slot-uGWFLwEy"
+            "with-end-slot-sjBsvTFR"
         )[2]
         long_takeprofit_input_box = self.driver.find_elements_by_class_name(
-            "with-end-slot-uGWFLwEy"
+            "with-end-slot-sjBsvTFR"
         )[3]
         short_stoploss_input_box = self.driver.find_elements_by_class_name(
-            "with-end-slot-uGWFLwEy"
+            "with-end-slot-sjBsvTFR"
         )[4]
         short_takeprofit_input_box = self.driver.find_elements_by_class_name(
-            "with-end-slot-uGWFLwEy"
+            "with-end-slot-sjBsvTFR"
         )[5]
         long_stoploss_input_box.send_keys(Keys.BACK_SPACE * 4)
         long_stoploss_input_box.send_keys(str("20"))
