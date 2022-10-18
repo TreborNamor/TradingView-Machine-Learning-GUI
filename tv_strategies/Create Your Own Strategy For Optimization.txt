@@ -1,5 +1,7 @@
-Hello GitHub! In this document I will be showing you how to create your own strategy for optimization in Python. It is actually quite simple. I will provide a checklist down below just in case you get lost. As well, I will be releasing a future YouTube video how to run script for everyone new to programming. Subscribe to my 
-YouTube channel for more information and new releases.
+Hello GitHub! In this document I will be showing you how to create your own strategy for optimization in Python. It is actually quite simple. 
+I will provide a checklist down below just in case you get lost. 
+As well, I will be releasing a future YouTube video how to run script for everyone new to programming. 
+Subscribe to my YouTube channel for more information and new releases.
 
 1. The first thing you need to do is copy and paste all of this pinescript code into your new or pre-existing tradingview strategy. It includes everything from stoploss, 
 take profit, and date range parameters.
@@ -70,6 +72,8 @@ if sell_signal and in_date_range and enable_short_strategy == true
     strategy.close('Short', when=buy_signal, alert_message='Close Short Position')
     
 
-4. That's it! Now you have the opportunity to optimize your code when using my Python script. I hope I made it simple for you to understand. I will post the complete script I just made down below so you can see how it looks all put together. As well, take a look at my other strategies on GitHub if you're still having trouble understanding this.
+4. That's it! Now you have the opportunity to optimize your code when using my Python script. 
+I hope I made it simple for you to understand. I will post the complete script I just made down below so you can see how it looks all put together. 
+As well, take a look at my other strategies on GitHub if you're still having trouble understanding this.
 
 https://www.tradingview.com/script/ImCFrBhi-Strategy-Template/
