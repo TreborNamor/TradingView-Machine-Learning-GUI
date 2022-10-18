@@ -29,14 +29,15 @@ hesitate to read the source code and understand the mechanism of this bot.
 [TradingView_Machine Learning](https://github.com/TreborNamor/TradingView_Machine_Learning/archive/master.zip)
 
 #2. Extract zip file to Desktop and Execute TradeViewGUI.exe file.
+
 ![image](https://github.com/TreborNamor/TradingView_Machine_Learning/blob/bd4a703fb0b3ec964c305dd7c720b17b111535fc/pictures/extractZip.png)
 
 #3. Copy and Paste Firefox Profile Path to App.
 ![image](https://github.com/TreborNamor/TradingView_Machine_Learning/blob/16ab9d3fae94258a715965e271d5c80b6517051c/pictures/FindFirefoxPath.png)
 ![image](https://github.com/TreborNamor/TradingView_Machine_Learning/blob/bd4a703fb0b3ec964c305dd7c720b17b111535fc/pictures/addPath.png)
 
-#4. Inside Firefox, login into your TradingView profile. Go to your TradingView chart and add the TradingView strategy you want to optimize. When you add the strategy to chart make sure to press CTRL + S on your keyboard to save your chart. I have a TradingView Strategy that is ready to use. You can browse the strategy source code [here.](https://github.com/TreborNamor/TradingView-Machine-Learning-GUI/blob/master/strategies/MACD-RSI%20%20Strategy)
-If you want to create a custom TradingView Strategy click [here.](https://github.com/TreborNamor/TradingView-Machine-Learning-GUI/blob/master/strategies/Create%20Your%20Own%20Strategy%20For%20Optimization.txt)
+#4. Inside Firefox, login into your TradingView profile. Go to your TradingView chart and add the TradingView strategy you want to optimize. When you add the strategy to chart make sure to press CTRL + S on your keyboard to save your chart. I have a TradingView Strategy that is ready to use. You can browse the strategy source code [here.](https://github.com/TreborNamor/TradingView-Machine-Learning-GUI/blob/master/tv_strategies/MACD-RSI%20%20Strategy)
+If you want to create a custom TradingView Strategy click [here.](https://github.com/TreborNamor/TradingView-Machine-Learning-GUI/blob/master/tv_strategies/Create%20Your%20Own%20Strategy%20For%20Optimization.txt)
 ![image](https://github.com/TreborNamor/TradingView-Machine-Learning-GUI/blob/cee46135f1f0d8656c9f1614abb334d8205a6110/pictures/addStrategy.png)
 
 #5. Enter Your long and short parameters and click Run button.
