@@ -11,7 +11,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 
 class ShortStoploss(Functions):
-    """find the best stop loss and take profit values for your strategy."""
+    """Find the best stop loss and take profit values for your strategy."""
 
     def __init__(self):
         Main.__init__(self)
@@ -19,16 +19,16 @@ class ShortStoploss(Functions):
         self.run_script()
 
     def run_script(self):
-        # Loading website with web driver.
+        # Load website with web driver.
         print("Loading script...\n")
         wait = WebDriverWait(self.driver, 15)
         self.get_webpage()
 
-        # Making sure strategy tester tab is clicked so automation runs properly.
+        # Ensure the Strategy Tester tab is clicked for proper automation.
         self.click_strategy_tester(wait)
         self.click_overview(wait)
 
-        # Making sure we are on inputs tab and resetting values to default settings.
+        # Ensure we are on the Inputs tab and reset values to default settings.
         self.click_settings_button(wait)
         self.click_input_tab()
         self.click_enable_short_strategy_checkbox()
@@ -36,21 +36,21 @@ class ShortStoploss(Functions):
         self.click_ok_button()
 
         try:
-            # Creating my range variable.
+            # Create a range variable.
             my_range = np.arange(
                 float(self.minShortStoplossValue.text()),
                 float(self.maxShortStoplossValue.text()),
                 float(self.ShortIncrementValue.text()),
             )
 
-            # Increment through my range.
+            # Increment through the range.
             for number in my_range:
                 count = round(number, 2)
                 try:
                     self.click_settings_button(wait)
                     self.click_short_stoploss_input(count, wait)
 
-                    # Gives time for webpage to refresh data.
+                    # Allow time for webpage data refresh.
                     time.sleep(1)
 
                     self.get_net_profit_stoploss(count, wait)
@@ -64,11 +64,11 @@ class ShortStoploss(Functions):
                         continue
         except ValueError:
             print(
-                "\nValue Error: Make sure all available text input boxes are filled with a number for script to run properly.\n"
+                "\nValue Error: Ensure all text input boxes are filled with a number for proper script execution.\n"
             )
             return
 
-        # Adding the best parameters into your strategy.
+        # Add the best parameters to the strategy.
         self.click_settings_button(wait)
         best_key = self.find_best_stoploss()
         self.click_short_stoploss_input(best_key, wait)

@@ -12,7 +12,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 
 class LongScript(Functions):
-    """find the best stop loss and take profit values for your strategy."""
+    """Find the best stop loss and take profit values for your strategy."""
 
     def __init__(self):
         Main.__init__(self)
@@ -20,16 +20,15 @@ class LongScript(Functions):
         self.run_script()
 
     def run_script(self):
-        # Loading website with web driver.
         print("Loading script...\n")
         wait = WebDriverWait(self.driver, 15)
         self.get_webpage()
 
-        # Making sure strategy tester tab is clicked so automation runs properly.
+        # Click the Strategy Tester tab to ensure proper automation.
         self.click_strategy_tester(wait)
         self.click_overview(wait)
 
-        # Making sure we are on inputs tab and resetting values to default settings.
+        # Click the settings button, select the inputs tab, and reset to default settings.
         self.click_settings_button(wait)
         self.click_input_tab()
         self.click_enable_long_strategy_checkbox()
@@ -43,7 +42,7 @@ class LongScript(Functions):
                 try:
                     count += 1
 
-                    # Creating random values every loop.
+                    # Create random stoploss and takeprofit values every loop.
                     stoploss_value = round(
                         random.uniform(
                             float(self.minLongStoplossValue.text()),
@@ -59,16 +58,14 @@ class LongScript(Functions):
                         int(self.decimalPlaceValue.text()),
                     )
 
-                    # Click settings button
+                    # Click the settings button and update input values.
                     self.click_settings_button(wait)
-
-                    # Click both input boxes and add new values.
                     self.click_long_inputs(stoploss_value, takeprofit_value, wait)
 
-                    # Gives time for webpage to refresh data.
+                    # Allow time for webpage data to refresh.
                     time.sleep(1)
 
-                    # Saving the profitability of the new values into a dictionary.
+                    # Save the profitability of the new values into a dictionary.
                     self.get_net_both(stoploss_value, takeprofit_value, wait)
 
                 except (
@@ -81,16 +78,17 @@ class LongScript(Functions):
                         continue
         except ValueError:
             print(
-                "\nValue Error: Make sure all available text input boxes are filled with a number for script to run properly.\n"
+                "\nValue Error: Ensure all text input boxes are filled with a number for the script to run properly.\n"
             )
             return
 
-        # Adding the best parameters into your strategy.
+        # Add the best parameters to your strategy.
         self.click_settings_button(wait)
         best_key = self.find_best_key_both()
         self.click_long_inputs(profits[best_key][1], profits[best_key][3], wait)
         self.driver.implicitly_wait(1)
 
+        # Print results.
         print("\n----------Results----------\n")
         self.click_overview(wait)
         self.print_best_both()
@@ -124,4 +122,4 @@ class LongScript(Functions):
         # self.print_avg_bars_in_trades()
         # self.print_avg_bars_in_winning_trades()
         # self.print_avg_bars_in_losing_trades()
-        # self.print_margin_calls()"""
+        # self.print_margin_calls()

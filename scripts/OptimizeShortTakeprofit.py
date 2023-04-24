@@ -11,7 +11,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 
 class ShortTakeProfit(Functions):
-    """find the best take profit values for your strategy."""
+    """Find the best take profit values for your strategy."""
 
     def __init__(self):
         Main.__init__(self)
@@ -19,17 +19,16 @@ class ShortTakeProfit(Functions):
         self.run_script()
 
     def run_script(self):
-
-        # Loading website with web driver.
+        # Load the website using the web driver
         print("Loading script...\n")
         wait = WebDriverWait(self.driver, 15)
         self.get_webpage()
 
-        # Making sure strategy tester tab is clicked so automation runs properly.
+        # Ensure the strategy tester tab is selected
         self.click_strategy_tester(wait)
         self.click_overview(wait)
 
-        # Making sure we are on inputs tab and resetting values to default settings.
+        # Ensure the inputs tab is selected and reset values to default settings
         self.click_settings_button(wait)
         self.click_input_tab()
         self.click_enable_short_strategy_checkbox()
@@ -37,21 +36,21 @@ class ShortTakeProfit(Functions):
         self.click_ok_button()
 
         try:
-            # Creating my range variable.
+            # Create the range variable
             my_range = np.arange(
                 float(self.minShortTakeprofitValue.text()),
                 float(self.maxShortTakeprofitValue.text()),
                 float(self.ShortIncrementValue.text()),
             )
 
-            # Increment through my range.
+            # Iterate through the range
             for number in my_range:
                 count = round(number, 2)
                 try:
                     self.click_settings_button(wait)
                     self.click_short_takeprofit_input(count, wait)
 
-                    # Gives time for webpage to refresh data.
+                    # Allow time for the webpage to refresh data
                     time.sleep(1)
 
                     self.get_net_profit_stoploss(count, wait)
@@ -69,12 +68,13 @@ class ShortTakeProfit(Functions):
             )
             return
 
-        # Adding the best parameters into your strategy.
+        # Add the best parameters into the strategy
         self.click_settings_button(wait)
         best_key = self.find_best_takeprofit()
         self.click_short_takeprofit_input(best_key, wait)
         self.driver.implicitly_wait(1)
 
+        # Print the results
         print("\n----------Results----------\n")
         self.click_overview(wait)
         self.print_best_takeprofit()
@@ -89,6 +89,7 @@ class ShortTakeProfit(Functions):
         self.print_avg_win_trade()
         self.print_avg_loss_trade()
         self.print_avg_bars_in_winning_trades()
+        # Additional results can be printed by uncommenting the lines below
         # print("\n----------More Results----------\n")
         # self.print_gross_profit()
         # self.print_gross_loss()

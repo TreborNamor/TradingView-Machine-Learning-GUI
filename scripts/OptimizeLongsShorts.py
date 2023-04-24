@@ -13,7 +13,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 
 class LongShortScript(Functions):
-    """find the best stop loss and take profit values for your strategy."""
+    """Find the best stop loss and take profit values for your strategy."""
 
     def __init__(self):
         Main.__init__(self)
@@ -21,64 +21,35 @@ class LongShortScript(Functions):
         self.run_script()
 
     def run_script(self):
-
-        # Loading website with web driver.
+        # Load the website with the web driver
         print("Loading script...\n")
         wait = WebDriverWait(self.driver, 15)
         self.get_webpage()
 
-        # Making sure strategy tester tab is clicked so automation runs properly.
+        # Ensure the strategy tester tab is clicked for proper automation
         self.click_strategy_tester(wait)
         self.click_overview(wait)
 
-        # Making sure we are on inputs tab and resetting values to default settings.
+        # Ensure we are on the inputs tab and reset values to default settings
         self.click_settings_button(wait)
         self.click_input_tab()
         self.click_enable_both_checkboxes()
         self.click_reset_all_inputs(wait)
         self.click_ok_button()
 
-        # Loop through max attempts while randomizing values each attempt.
+        # Loop through max attempts, randomizing values each attempt
         count = 0
         try:
             while count < int(self.maxAttemptsValue.text()):
                 try:
                     count += 1
 
-                    # Creating random values every loop.
-                    long_stoploss_value = round(
-                        random.uniform(
-                            float(self.minLongStoplossValue.text()),
-                            float(self.maxLongStoplossValue.text()),
-                        ),
-                        int(self.decimalPlaceValue.text()),
-                    )
-                    long_takeprofit_value = round(
-                        random.uniform(
-                            float(self.minLongTakeprofitValue.text()),
-                            float(self.maxLongTakeprofitValue.text()),
-                        ),
-                        int(self.decimalPlaceValue.text()),
-                    )
-                    short_stoploss_value = round(
-                        random.uniform(
-                            float(self.minShortStoplossValue.text()),
-                            float(self.maxShortStoplossValue.text()),
-                        ),
-                        int(self.decimalPlaceValue.text()),
-                    )
-                    short_takeprofit_value = round(
-                        random.uniform(
-                            float(self.minShortTakeprofitValue.text()),
-                            float(self.maxShortTakeprofitValue.text()),
-                        ),
-                        int(self.decimalPlaceValue.text()),
-                    )
+                    # Create random values every loop
+                    long_stoploss_value, long_takeprofit_value, short_stoploss_value, short_takeprofit_value = \
+                        self.generate_random_values()
 
-                    # Click settings button
+                    # Click settings button and input new values
                     self.click_settings_button(wait)
-
-                    # Click all input boxes and add new values.
                     self.click_all_inputs(
                         long_stoploss_value,
                         long_takeprofit_value,
@@ -87,10 +58,10 @@ class LongShortScript(Functions):
                         wait,
                     )
 
-                    # Gives time for webpage to refresh data.
+                    # Wait for webpage to refresh data
                     time.sleep(1)
 
-                    # Saving the profitability of the new values into a dictionary.
+                    # Save profitability of new values into a dictionary
                     self.get_net_all(
                         long_stoploss_value,
                         long_takeprofit_value,
@@ -115,7 +86,7 @@ class LongShortScript(Functions):
             )
             return
 
-        # Adding the best parameters into your strategy.
+        # Add the best parameters to the strategy
         self.click_settings_button(wait)
         best_key = self.find_best_key_both()
         self.click_all_inputs(
@@ -127,6 +98,7 @@ class LongShortScript(Functions):
         )
         self.driver.implicitly_wait(1)
 
+        # Print results
         print("\n----------Results----------\n")
         self.click_overview(wait)
         self.print_best_all()
@@ -160,3 +132,38 @@ class LongShortScript(Functions):
         # self.print_avg_bars_in_trades()
         # self.print_avg_bars_in_winning_trades()
         # self.print_avg_bars_in_losing_trades()
+        # self.print_margin_calls()
+
+    def generate_random_values(self):
+        """Generate random values for stop loss and take profit."""
+        long_stoploss_value = round(
+            random.uniform(
+                float(self.minLongStoplossValue.text()),
+                float(self.maxLongStoplossValue.text()),
+            ),
+            int(self.decimalPlaceValue.text()),
+        )
+        long_takeprofit_value = round(
+            random.uniform(
+                float(self.minLongTakeprofitValue.text()),
+                float(self.maxLongTakeprofitValue.text()),
+            ),
+            int(self.decimalPlaceValue.text()),
+        )
+        short_stoploss_value = round(
+            random.uniform(
+                float(self.minShortStoplossValue.text()),
+                float(self.maxShortStoplossValue.text()),
+            ),
+            int(self.decimalPlaceValue.text()),
+        )
+        short_takeprofit_value = round(
+            random.uniform(
+                float(self.minShortTakeprofitValue.text()),
+                float(self.maxShortTakeprofitValue.text()),
+            ),
+            int(self.decimalPlaceValue.text()),
+        )
+
+        return long_stoploss_value, long_takeprofit_value, short_stoploss_value, short_takeprofit_value
+

@@ -19,17 +19,16 @@ class LongStoploss(Functions):
         self.run_script()
 
     def run_script(self):
-
-        # Loading website with web driver.
+        # Load the website with the web driver
         print("Loading script...\n")
         wait = WebDriverWait(self.driver, 15)
         self.get_webpage()
 
-        # Making sure strategy tester tab is clicked so automation runs properly.
+        # Ensure the strategy tester tab is clicked for proper automation
         self.click_strategy_tester(wait)
         self.click_overview(wait)
 
-        # Making sure we are on inputs tab and resetting values to default settings.
+        # Ensure we are on the inputs tab and reset values to default settings
         self.click_settings_button(wait)
         self.click_input_tab()
         self.click_enable_long_strategy_checkbox()
@@ -37,27 +36,28 @@ class LongStoploss(Functions):
         self.click_ok_button()
 
         try:
-            # Creating my range variable.
+            # Create a range variable
             my_range = np.arange(
                 float(self.minLongStoplossValue.text()),
                 float(self.maxLongStoplossValue.text()),
                 float(self.LongIncrementValue.text()),
             )
-            # Increment through my range.
+
+            # Increment through the range
             for number in my_range:
                 count = round(number, 2)
                 try:
                     self.click_settings_button(wait)
                     self.click_long_stoploss_input(count, wait)
 
-                    # Gives time for webpage to refresh data.
+                    # Allow time for the webpage to refresh data
                     time.sleep(1)
 
                     self.get_net_profit_stoploss(count, wait)
                 except (
-                    StaleElementReferenceException,
-                    TimeoutException,
-                    NoSuchElementException,
+                        StaleElementReferenceException,
+                        TimeoutException,
+                        NoSuchElementException,
                 ) as error:
                     if error:
                         count -= 1
@@ -68,12 +68,13 @@ class LongStoploss(Functions):
             )
             return
 
-        # Adding the best parameters into your strategy.
+        # Add the best parameters to the strategy
         self.click_settings_button(wait)
         best_key = self.find_best_stoploss()
         self.click_long_stoploss_input(best_key, wait)
         self.driver.implicitly_wait(1)
 
+        # Display results
         print("\n----------Results----------\n")
         self.click_overview(wait)
         self.print_best_stoploss()

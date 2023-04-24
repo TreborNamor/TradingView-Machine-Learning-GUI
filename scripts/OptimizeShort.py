@@ -13,7 +13,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 
 class ShortScript(Functions):
-    """find the best stop loss and take profit values for your strategy."""
+    """Find the best stop loss and take profit values for your strategy."""
 
     def __init__(self):
         Main.__init__(self)
@@ -21,31 +21,30 @@ class ShortScript(Functions):
         self.run_script()
 
     def run_script(self):
-
-        # Loading website with web driver.
+        # Loading website with web driver
         print("Loading script...\n")
         wait = WebDriverWait(self.driver, 15)
         self.get_webpage()
 
-        # Making sure strategy tester tab is clicked so automation runs properly.
+        # Ensuring the strategy tester tab is clicked for proper automation
         self.click_strategy_tester(wait)
         self.click_overview(wait)
 
-        # Making sure we are on inputs tab and resetting values to default settings.
+        # Ensuring we are on the inputs tab and resetting values to default settings
         self.click_settings_button(wait)
         self.click_input_tab()
         self.click_enable_short_strategy_checkbox()
         self.click_reset_all_inputs(wait)
         self.click_ok_button()
 
-        # Loop through max attempts while randomizing values each attempt.
+        # Loop through max attempts while randomizing values each attempt
         count = 0
         try:
             while count < int(self.maxAttemptsValue.text()):
                 try:
                     count += 1
 
-                    # Creating random values every loop.
+                    # Creating random values every loop
                     stoploss_value = round(
                         random.uniform(
                             float(self.minShortStoplossValue.text()),
@@ -64,13 +63,13 @@ class ShortScript(Functions):
                     # Click settings button
                     self.click_settings_button(wait)
 
-                    # Click both input boxes and add new values.
+                    # Click both input boxes and add new values
                     self.click_short_inputs(stoploss_value, takeprofit_value, wait)
 
-                    # Gives time for webpage to refresh data.
+                    # Give time for webpage to refresh data
                     time.sleep(1)
 
-                    # Saving the profitability of the new values into a dictionary.
+                    # Save the profitability of the new values into a dictionary
                     self.get_net_both(stoploss_value, takeprofit_value, wait)
 
                 except (
@@ -87,12 +86,13 @@ class ShortScript(Functions):
             )
             return
 
-        # Adding the best parameters into your strategy.
+        # Add the best parameters into your strategy
         self.click_settings_button(wait)
         best_key = self.find_best_key_both()
         self.click_short_inputs(profits[best_key][1], profits[best_key][3], wait)
         self.driver.implicitly_wait(1)
 
+        # Print results
         print("\n----------Results----------\n")
         self.click_overview(wait)
         self.print_best_both()

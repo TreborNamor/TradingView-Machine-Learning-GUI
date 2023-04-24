@@ -11,7 +11,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 
 class LongTakeProfit(Functions):
-    """find the best take profit values for your strategy."""
+    """Find the best take profit values for your strategy."""
 
     def __init__(self):
         Main.__init__(self)
@@ -19,16 +19,16 @@ class LongTakeProfit(Functions):
         self.run_script()
 
     def run_script(self):
-        # Loading website with web driver.
+        # Load the website with the web driver.
         print("Loading script...\n")
         wait = WebDriverWait(self.driver, 15)
         self.get_webpage()
 
-        # Making sure strategy tester tab is clicked so automation runs properly.
+        # Make sure the strategy tester tab is clicked so automation runs properly.
         self.click_strategy_tester(wait)
         self.click_overview(wait)
 
-        # Making sure we are on inputs tab and resetting values to default settings.
+        # Make sure we are on the inputs tab and reset values to default settings.
         self.click_settings_button(wait)
         self.click_input_tab()
         self.click_enable_long_strategy_checkbox()
@@ -36,21 +36,21 @@ class LongTakeProfit(Functions):
         self.click_ok_button()
 
         try:
-            # Creating my range variable.
+            # Create a range variable.
             my_range = np.arange(
                 float(self.minLongTakeprofitValue.text()),
                 float(self.maxLongTakeprofitValue.text()),
                 float(self.LongIncrementValue.text()),
             )
 
-            # Increment through my range.
+            # Increment through the range.
             for number in my_range:
                 count = round(number, 2)
                 try:
                     self.click_settings_button(wait)
                     self.click_long_takeprofit_input(count, wait)
 
-                    # Gives time for webpage to refresh data.
+                    # Give time for the webpage to refresh data.
                     time.sleep(1)
 
                     self.get_net_profit_takeprofit(count, wait)
@@ -64,16 +64,17 @@ class LongTakeProfit(Functions):
                         continue
         except ValueError:
             print(
-                "\nValue Error: Make sure all available text input boxes are filled with a number for script to run properly.\n"
+                "\nValue Error: Make sure all available text input boxes are filled with a number for the script to run properly.\n"
             )
             return
 
-        # Adding the best parameters into your strategy.
+        # Add the best parameters into your strategy.
         self.click_settings_button(wait)
         best_key = self.find_best_takeprofit()
         self.click_long_takeprofit_input(best_key, wait)
         self.driver.implicitly_wait(1)
 
+        # Print the results.
         print("\n----------Results----------\n")
         self.click_overview(wait)
         self.print_best_takeprofit()
@@ -88,6 +89,7 @@ class LongTakeProfit(Functions):
         self.print_avg_win_trade()
         self.print_avg_loss_trade()
         self.print_avg_bars_in_winning_trades()
+        # Uncomment the following lines for additional results.
         # print("\n----------More Results----------\n")
         # self.print_gross_profit()
         # self.print_gross_loss()
