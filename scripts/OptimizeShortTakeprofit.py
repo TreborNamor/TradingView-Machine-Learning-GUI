@@ -78,7 +78,7 @@ class ShortTakeProfit(Functions):
         print("\n----------Results----------\n")
         self.click_overview(wait)
         self.print_best_takeprofit()
-        self.click_performance_summary()
+        self.click_performance_summary(wait)
         self.print_total_closed_trades()
         self.print_win_rate()
         self.print_net_profit()

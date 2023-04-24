@@ -13,7 +13,7 @@ import re
 class Functions(Main):
     """In this class you have all the selenium web commands I've created to navigate through Trading View's website.
     These web commands control your web browser to do certain task.
-    Currently uou will find the click, get, find, and show_me web commands here.
+    Currently, uou will find the click, get, find, and show_me web commands here.
     More web commands will be added as this project grows."""
 
     # Find Commands
@@ -23,17 +23,41 @@ class Functions(Main):
 
     @staticmethod
     def find_best_stoploss():
-        best_in_dict = max(profits, key=profits.get)
+        # Convert values in profits to floats
+        float_profits = {}
+        for k, v in profits.items():
+            if isinstance(v, list):
+                v = float(v[0])
+            float_profits[k] = v
+
+        # Find key with the highest float value
+        best_in_dict = max(float_profits, key=float_profits.get)
         return best_in_dict
 
     @staticmethod
     def find_best_takeprofit():
-        best_in_dict = max(profits, key=profits.get)
+        # Convert values in profits to floats
+        float_profits = {}
+        for k, v in profits.items():
+            if isinstance(v, list):
+                v = float(v[0])
+            float_profits[k] = v
+
+        # Find key with the highest float value
+        best_in_dict = max(float_profits, key=float_profits.get)
         return best_in_dict
 
     @staticmethod
     def find_best_key_both():
-        best_in_dict = max(profits)
+        # Convert values in profits to floats
+        float_profits = {}
+        for k, v in profits.items():
+            if isinstance(v, list):
+                v = float(v[0])
+            float_profits[k] = v
+
+        # Find key with the highest float value
+        best_in_dict = max(float_profits, key=float_profits.get)
         return best_in_dict
 
     # Click Commands
@@ -161,7 +185,8 @@ class Functions(Main):
         wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, "input[class*='input-'][inputmode='numeric']")))
         input_boxes = self.driver.find_elements(By.CSS_SELECTOR, "input[class*='input-'][inputmode='numeric']")
         stoploss_input_box = input_boxes[0]
-        stoploss_input_box.click()  # This will click on the input text box
+
+        stoploss_input_box.click()
         stoploss_input_box.send_keys(Keys.BACK_SPACE * 4)
         stoploss_input_box.send_keys(str(count))
         stoploss_input_box.send_keys(Keys.ENTER)
@@ -185,42 +210,40 @@ class Functions(Main):
 
     def click_short_stoploss_input(self, count, wait):
         """click short stoploss input text box."""
-        wait.until(EC.presence_of_element_located((By.CLASS_NAME, "input-oiYdY6I4")))
-
-        stoploss_input_box = self.driver.find_elements(By.CLASS_NAME, "input-oiYdY6I4")[
-            4
-        ]
+        wait.until(
+            EC.presence_of_all_elements_located((By.CSS_SELECTOR, "input[class*='input-'][inputmode='numeric']")))
+        input_boxes = self.driver.find_elements(By.CSS_SELECTOR, "input[class*='input-'][inputmode='numeric']")
+        stoploss_input_box = input_boxes[2]
+        stoploss_input_box.click()
         stoploss_input_box.send_keys(Keys.BACK_SPACE * 4)
         stoploss_input_box.send_keys(str(count))
         stoploss_input_box.send_keys(Keys.ENTER)
-        time.sleep(0.5)
+        # time.sleep(0.5)
         ok_button = self.driver.find_element(By.NAME, "submit")
         ok_button.click()
 
     def click_short_takeprofit_input(self, count, wait):
         """click short take profit input text box."""
-        wait.until(EC.presence_of_element_located((By.CLASS_NAME, "input-oiYdY6I4")))
+        wait.until(
+            EC.presence_of_all_elements_located((By.CSS_SELECTOR, "input[class*='input-'][inputmode='numeric']")))
+        input_boxes = self.driver.find_elements(By.CSS_SELECTOR, "input[class*='input-'][inputmode='numeric']")
+        takeprofit_input_box = input_boxes[3]
 
-        stoploss_input_box = self.driver.find_elements(By.CLASS_NAME, "input-oiYdY6I4")[
-            5
-        ]
-        stoploss_input_box.send_keys(Keys.BACK_SPACE * 4)
-        stoploss_input_box.send_keys(str(count))
-        stoploss_input_box.send_keys(Keys.ENTER)
+        takeprofit_input_box.send_keys(Keys.BACK_SPACE * 4)
+        takeprofit_input_box.send_keys(str(count))
+        takeprofit_input_box.send_keys(Keys.ENTER)
         time.sleep(0.5)
         ok_button = self.driver.find_element(By.NAME, "submit")
         ok_button.click()
 
     def click_long_inputs(self, long_stoploss_value, long_takeprofit_value, wait):
         """click both long input text boxes."""
-        wait.until(EC.presence_of_element_located((By.CLASS_NAME, "input-oiYdY6I4")))
+        wait.until(
+            EC.presence_of_all_elements_located((By.CSS_SELECTOR, "input[class*='input-'][inputmode='numeric']")))
+        input_boxes = self.driver.find_elements(By.CSS_SELECTOR, "input[class*='input-'][inputmode='numeric']")
+        stoploss_input_box = input_boxes[0]
+        takeprofit_input_box = input_boxes[1]
 
-        stoploss_input_box = self.driver.find_elements(By.CLASS_NAME, "input-oiYdY6I4")[
-            2
-        ]
-        takeprofit_input_box = self.driver.find_elements(
-            By.CLASS_NAME, "input-oiYdY6I4"
-        )[3]
         stoploss_input_box.send_keys(Keys.BACK_SPACE * 4)
         stoploss_input_box.send_keys(str(long_stoploss_value))
         takeprofit_input_box.send_keys(Keys.BACK_SPACE * 4)
@@ -232,14 +255,12 @@ class Functions(Main):
 
     def click_short_inputs(self, short_stoploss_value, short_takeprofit_value, wait):
         """click both short input text boxes."""
-        wait.until(EC.presence_of_element_located((By.CLASS_NAME, "input-oiYdY6I4")))
+        wait.until(
+            EC.presence_of_all_elements_located((By.CSS_SELECTOR, "input[class*='input-'][inputmode='numeric']")))
+        input_boxes = self.driver.find_elements(By.CSS_SELECTOR, "input[class*='input-'][inputmode='numeric']")
+        stoploss_input_box = input_boxes[2]
+        takeprofit_input_box = input_boxes[3]
 
-        stoploss_input_box = self.driver.find_elements(By.CLASS_NAME, "input-oiYdY6I4")[
-            4
-        ]
-        takeprofit_input_box = self.driver.find_elements(
-            By.CLASS_NAME, "input-oiYdY6I4"
-        )[5]
         stoploss_input_box.send_keys(Keys.BACK_SPACE * 4)
         stoploss_input_box.send_keys(str(short_stoploss_value))
         takeprofit_input_box.send_keys(Keys.BACK_SPACE * 4)
@@ -258,20 +279,12 @@ class Functions(Main):
         wait,
     ):
         """click all input text boxes."""
-        wait.until(EC.presence_of_element_located((By.CLASS_NAME, "input-oiYdY6I4")))
-
-        long_stoploss_input_box = self.driver.find_elements(
-            By.CLASS_NAME, "input-oiYdY6I4"
-        )[2]
-        long_takeprofit_input_box = self.driver.find_elements(
-            By.CLASS_NAME, "input-oiYdY6I4"
-        )[3]
-        short_stoploss_input_box = self.driver.find_elements(
-            By.CLASS_NAME, "input-oiYdY6I4"
-        )[4]
-        short_takeprofit_input_box = self.driver.find_elements(
-            By.CLASS_NAME, "input-oiYdY6I4"
-        )[5]
+        wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, "input[class*='input-'][inputmode='numeric']")))
+        input_boxes = self.driver.find_elements(By.CSS_SELECTOR, "input[class*='input-'][inputmode='numeric']")
+        long_stoploss_input_box = input_boxes[0]
+        long_takeprofit_input_box = input_boxes[1]
+        short_stoploss_input_box = input_boxes[2]
+        short_takeprofit_input_box = input_boxes[3]
 
         long_stoploss_input_box.send_keys(Keys.BACK_SPACE * 4)
         long_stoploss_input_box.send_keys(str(long_stoploss_value))
@@ -297,7 +310,8 @@ class Functions(Main):
         if long:
             long_checkbox = self.driver.find_element(By.XPATH, "//span[contains(., 'Enable Long Strategy')]/preceding-sibling::span/input[@type='checkbox']")
             if not long_checkbox.is_selected():
-                long_checkbox.click()
+                action = ActionChains(self.driver)
+                action.move_to_element(long_checkbox).click().perform()
         if short:
             short_checkbox = self.driver.find_element(By.XPATH, "//span[contains(., 'Enable Short Strategy')]/preceding-sibling::span/input[@type='checkbox']")
             if not short_checkbox.is_selected():
@@ -309,7 +323,8 @@ class Functions(Main):
         if long:
             long_checkbox = self.driver.find_element(By.XPATH, "//span[contains(., 'Enable Long Strategy')]/preceding-sibling::span/input[@type='checkbox']")
             if not long_checkbox.is_selected():
-                long_checkbox.click()
+                action = ActionChains(self.driver)
+                action.move_to_element(long_checkbox).click().perform()
         if not short:
             short_checkbox = self.driver.find_element(By.XPATH, "//span[contains(., 'Enable Short Strategy')]/preceding-sibling::span/input[@type='checkbox']")
             if short_checkbox.is_selected():
@@ -317,29 +332,29 @@ class Functions(Main):
                 action.move_to_element(short_checkbox).click().perform()
 
 
-    def click_enable_short_strategy_checkbox(self):
+    def click_enable_short_strategy_checkbox(self, long=False, short=True):
             """click enable on the short checkbox."""
-            long_checkbox = self.driver.find_element(By.CLASS_NAME, "input-bUw_gKIQ")
-            short_checkbox = self.driver.find_elements(By.CLASS_NAME, "input-bUw_gKIQ")[1]
-            if long_checkbox.get_attribute("checked"):
-                click_long_checkbox = self.driver.find_element(
-                    By.CLASS_NAME, "check-bUw_gKIQ"
-                )
-                click_long_checkbox.click()
-            if not short_checkbox.get_attribute("checked"):
-                click_short_checkbox = self.driver.find_elements(
-                    By.CLASS_NAME, "check-bUw_gKIQ"
-                )[1]
-                click_short_checkbox.click()
+            if not long:
+                long_checkbox = self.driver.find_element(By.XPATH,
+                                                         "//span[contains(., 'Enable Long Strategy')]/preceding-sibling::span/input[@type='checkbox']")
+                if long_checkbox.is_selected():
+                    action = ActionChains(self.driver)
+                    action.move_to_element(long_checkbox).click().perform()
+            if short:
+                short_checkbox = self.driver.find_element(By.XPATH,
+                                                          "//span[contains(., 'Enable Short Strategy')]/preceding-sibling::span/input[@type='checkbox']")
+                if not short_checkbox.is_selected():
+                    action = ActionChains(self.driver)
+                    action.move_to_element(short_checkbox).click().perform()
+
     def click_reset_all_inputs(self, wait):
         """click and reset all input text boxes to 20."""
-        wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, "input[class*='input-']")))
-        input_boxes = self.driver.find_elements(By.CSS_SELECTOR, "input[class*='input-']")
-        long_stoploss_input_box = input_boxes[2]
-        long_takeprofit_input_box = input_boxes[3]
-        short_stoploss_input_box = input_boxes[4]
-        short_takeprofit_input_box = input_boxes[5]
-
+        wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, "input[class*='input-'][inputmode='numeric']")))
+        input_boxes = self.driver.find_elements(By.CSS_SELECTOR, "input[class*='input-'][inputmode='numeric']")
+        long_stoploss_input_box = input_boxes[0]
+        long_takeprofit_input_box = input_boxes[1]
+        short_stoploss_input_box = input_boxes[2]
+        short_takeprofit_input_box = input_boxes[3]
 
         long_stoploss_input_box.send_keys(Keys.BACK_SPACE * 4)
         long_stoploss_input_box.send_keys(str("20"))
@@ -367,29 +382,34 @@ class Functions(Main):
             return
 
     def get_net_all(
-        self,
-        long_stoploss_value,
-        long_takeprofit_value,
-        short_stoploss_value,
-        short_takeprofit_value,
-        wait,
+            self,
+            long_stoploss_value,
+            long_takeprofit_value,
+            short_stoploss_value,
+            short_takeprofit_value,
+            wait,
     ):
-        """will get the net profit of all four values."""
-        wait.until(
-            EC.presence_of_element_located((By.CLASS_NAME, "secondRow-b1pZpka9"))
-        )
-        try:
-            check = self.driver.find_element(By.CLASS_NAME, "negativeValue-b1pZpka9")
-            if check:
-                negative = True
-        except NoSuchElementException:
-            negative = False
+        """
+        Get the net profit of all four values.
+        """
 
-        if negative:
-            net_profit = self.driver.find_element(
-                By.CLASS_NAME, "additionalPercent-b1pZpka9"
-            ).text.split("%")
-            net_value = float(net_profit[0][1:])
+        def find_profit_element(selector, parent=None):
+            """
+            Find profit element by CSS selector.
+            """
+            if parent is None:
+                parent = self.driver
+            elements = parent.find_elements(By.CSS_SELECTOR, selector)
+            return elements[1] if len(elements) > 1 else None
+
+        # Wait for the required element to be located
+        second_row = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "div[class*='secondRow-']")))
+
+        # Check if a negative value is present
+        negative_element = find_profit_element("div[class*='negativeValue-']", second_row)
+        if negative_element is not None:
+            net_profit_text = re.findall(r"[-+]?\d*\.\d+|\d+", negative_element.text)
+            net_value = -float(net_profit_text[0])
             profits.update(
                 {
                     -net_value: [
@@ -406,15 +426,18 @@ class Functions(Main):
             )
             print(
                 colored(
-                    f"Net Profit: -{net_value}% --> Long Stoploss: {long_stoploss_value}, Long Take Profit: {long_takeprofit_value}, Short Stoploss: {short_stoploss_value}, Short Take Profit: {short_takeprofit_value}",
+                    f"Net Profit: {net_value}% --> Long Stoploss: {long_stoploss_value}, Long Take Profit: {long_takeprofit_value}, Short Stoploss: {short_stoploss_value}, Short Take Profit: {short_takeprofit_value}",
                     "red",
                 )
             )
         else:
-            net_profit = self.driver.find_element(
-                By.CLASS_NAME, "additionalPercent-b1pZpka9"
-            ).text.split("%")
-            net_value = float(net_profit[0])
+            positive_element = find_profit_element("div[class*='positiveValue-']", second_row)
+            if positive_element is not None and positive_element.text.strip():
+                net_profit_text = re.findall(r"[-+]?\d*\.\d+|\d+", positive_element.text)
+                net_value = float(net_profit_text[0])
+            else:
+                net_value = 0.0
+
             profits.update(
                 {
                     net_value: [
@@ -435,25 +458,29 @@ class Functions(Main):
                     "green",
                 )
             )
-        return net_profit
+
+        return net_profit_text
 
     def get_net_both(self, stoploss_value, takeprofit_value, wait):
         """will get the net profit of two values."""
-        wait.until(
-            EC.presence_of_element_located((By.CLASS_NAME, "secondRow-b1pZpka9"))
-        )
-        try:
-            check = self.driver.find_element(By.CLASS_NAME, "negativeValue-b1pZpka9")
-            if check:
-                negative = True
-        except NoSuchElementException:
-            negative = False
 
-        if negative:
-            net_profit = self.driver.find_element(
-                By.CLASS_NAME, "additionalPercent-b1pZpka9"
-            ).text.split("%")
-            net_value = float(net_profit[0][1:])
+        def find_profit_element(selector, parent=None):
+            """
+            Find profit element by CSS selector.
+            """
+            if parent is None:
+                parent = self.driver
+            elements = parent.find_elements(By.CSS_SELECTOR, selector)
+            return elements[1] if len(elements) > 1 else None
+
+        # Wait for the required element to be located
+        second_row = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "div[class*='secondRow-']")))
+
+        # Check if a negative value is present
+        negative_element = find_profit_element("div[class*='negativeValue-']", second_row)
+        if negative_element is not None:
+            net_profit_text = re.findall(r"[-+]?\d*\.\d+|\d+", negative_element.text)
+            net_value = -float(net_profit_text[0])
             profits.update(
                 {
                     -net_value: [
@@ -466,15 +493,17 @@ class Functions(Main):
             )
             print(
                 colored(
-                    f"Net Profit: -{net_value}% --> Stoploss: {stoploss_value}, Take Profit: {takeprofit_value}",
+                    f"Net Profit: {net_value}% --> Stoploss: {stoploss_value}, Take Profit: {takeprofit_value}",
                     "red",
                 )
             )
         else:
-            net_profit = self.driver.find_element(
-                By.CLASS_NAME, "additionalPercent-b1pZpka9"
-            ).text.split(" %")
-            net_value = float(net_profit[0])
+            positive_element = find_profit_element("div[class*='positiveValue-']", second_row)
+            if positive_element is not None and positive_element.text.strip():
+                net_profit_text = re.findall(r"[-+]?\d*\.\d+|\d+", positive_element.text)
+                net_value = float(net_profit_text[0])
+            else:
+                net_value = 0.0
             profits.update(
                 {
                     net_value: [
@@ -491,9 +520,8 @@ class Functions(Main):
                     "green",
                 )
             )
-        return net_profit
+        return net_profit_text
 
-    import re
 
     def get_net_profit_stoploss(self, count, wait):
         """Get the net profit of stoploss values."""
@@ -538,70 +566,92 @@ class Functions(Main):
 
     def get_net_profit_takeprofit(self, count, wait):
         """will get the net profit of take profit values."""
-        try:
-            wait.until(
-                EC.presence_of_element_located((By.CLASS_NAME, "secondRow-b1pZpka9"))
-            )
-            check = self.driver.find_element(By.CLASS_NAME, "negativeValue-b1pZpka9")
-            if check:
-                negative = True
-        except NoSuchElementException:
-            negative = False
+
+        def find_profit_element(selector, parent=None):
+            """Find profit element by CSS selector."""
+            if parent is None:
+                parent = self.driver
+            elements = parent.find_elements(By.CSS_SELECTOR, selector)
+            return elements[1] if len(elements) > 1 else None
+
+        # Wait for the required element to be located
+        second_row = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "div[class*='secondRow-']")))
+
+        # Check if a negative value is present
+        negative = False
+        negative_element = find_profit_element("div[class*='negativeValue-']", second_row)
+        if negative_element is not None:
+            negative = True
+
+        # Initialize net_profit_text
+        net_profit_text = None
 
         if negative:
-            net_profit = self.driver.find_element(
-                By.CLASS_NAME, "additionalPercent-b1pZpka9"
-            ).text.split(" %")
-            net_value = float(net_profit[0][1:])
-            profits.update({count: -net_value})
+            net_profit_text = re.findall(r"[-+]?\d*\.\d+|\d+", negative_element.text)
+            net_value = -float(net_profit_text[0])
+            profits.update({count: net_value})
             print(colored(f"Take Profit: {count}%, Net Profit: {net_value}%", "red"))
         else:
-            net_profit = self.driver.find_element(
-                By.CLASS_NAME, "additionalPercent-b1pZpka9"
-            ).text.split(" %")
-            net_value = float(net_profit[0])
+            positive_element = find_profit_element("div[class*='positiveValue-']", second_row)
+            if positive_element is not None and positive_element.text.strip():
+                net_profit_text = re.findall(r"[-+]?\d*\.\d+|\d+", positive_element.text)
+                net_value = float(net_profit_text[0])
+            else:
+                net_value = 0.0
+
             profits.update({count: net_value})
             print(colored(f"Take Profit: {count}%, Net Profit: {net_value}%", "green"))
-        return net_profit
+        return net_profit_text
 
     def get_win_rate(self, count, wait):
         """will get the winrate value."""
-        wait.until(
-            EC.visibility_of_element_located(
-                (By.CLASS_NAME, "additional_percent_value")
-            )
-        )
-        try:
-            win_rate = self.driver.find_elements(
-                By.CLASS_NAME, "additional_percent_value"
-            )[1]
-            win_rate.find_element(By.CLASS_NAME, "neg")
-            negative = True
-        except NoSuchElementException:
-            negative = False
 
+        def find_profit_element(selector, parent=None):
+            """Find profit element by CSS selector."""
+            if parent is None:
+                parent = self.driver
+            elements = parent.find_elements(By.CSS_SELECTOR, selector)
+            return elements[2] if len(elements) > 2 else None
+
+        # Wait for the required element to be located
+        second_row = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "div[class*='secondRow-']")))
+
+        # Check if a negative value is present
+        negative = False
+        negative_element = find_profit_element("div[class*='negativeValue-']", second_row)
+        if negative_element is not None:
+            negative = True
+
+        # Initialize net_profit_text
+        winrate_text = None
+
+        # Extract and update net profit
         if negative:
-            win_rate = self.driver.find_elements(
-                By.CLASS_NAME, "additional_percent_value"
-            )[1].text.split(" %")
-            net_value = float(win_rate[0])
-            profits.update({count: -net_value})
+            win_rate_text = re.findall(r"[-+]?\d*\.\d+|\d+", negative_element.text)
+            net_value = -float(win_rate_text[0])
+            profits.update({count: net_value})
             negative_color = {count: net_value}
             print(colored(f"{negative_color}", "red"))
+
         else:
-            win_rate = self.driver.find_elements(
-                By.CLASS_NAME, "additional_percent_value"
-            )[1].text.split(" %")
-            net_value = float(win_rate[0])
+            positive_element = find_profit_element("div[class*='positiveValue-']", second_row)
+            if positive_element is not None and positive_element.text.strip():
+                win_rate_text = re.findall(r"[-+]?\d*\.\d+|\d+", positive_element.text)
+                net_value = float(win_rate_text[0])
+            else:
+                net_value = 0.0
+
             profits.update({count: net_value})
             positive_color = {count: net_value}
             print(colored(f"{positive_color}", "green"))
-        return win_rate
+
+        return win_rate_text
 
     # Show Me Commands
     """ The show me commands will print important data to the console. It will shows the end results of the script. """
 
-    def print_best_stoploss(self):
+    @staticmethod
+    def print_best_stoploss():
         """print best stoploss to console."""
         try:
             best_stoploss = max(profits, key=profits.get)
@@ -615,7 +665,8 @@ class Functions(Main):
         except (UnboundLocalError, ValueError):
             print("error printing stoploss.")
 
-    def print_best_takeprofit(self):
+    @staticmethod
+    def print_best_takeprofit():
         """print best take profit to console."""
         try:
             best_takeprofit = max(profits, key=profits.get)
