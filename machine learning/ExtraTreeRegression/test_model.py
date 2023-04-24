@@ -32,6 +32,9 @@ X = df[['open', 'high', 'low', 'close']]
 y = df['close'].shift(-1)[:-1]
 X = X[:-1]
 
+# Remove feature names from the input DataFrame
+X.columns = [None] * len(X.columns)
+
 # Define the best hyperparameters found by GridSearchCV
 best_params = {
     'n_estimators': 300,  # Use the best value found by GridSearchCV
@@ -44,8 +47,17 @@ best_params = {
 
 # Create Final Model
 final_model = ExtraTreesRegressor(**best_params, n_jobs=-1)
-final_model.fit(X, y)
+# Initialize a list to store the predictions
+predictions = []
 
-# Print Predicted Close Price
-final_prediction = final_model.predict([[predicted_open, predicted_high, predicted_low, predicted_close]])
-print('Predicted Close Price:', round(final_prediction[0], 2))
+# Train the model and make predictions 10 times
+for _ in range(10):
+    final_model.fit(X, y)
+    final_prediction = final_model.predict([[predicted_open, predicted_high, predicted_low, predicted_close]])
+    predictions.append(final_prediction[0])
+
+# Calculate the average prediction
+average_prediction = sum(predictions) / len(predictions)
+
+# Print the average predicted close price
+print('Average Predicted Close Price:', round(average_prediction, 2))
