@@ -1,9 +1,9 @@
-""" This script is an implementation of Extra Trees Regressor model to predict the close prices of a stock using open
-prices as a feature. The dataset used is stored in a CSV file and is read using pandas library. The script first
-splits the dataset into training and testing sets and then performs hyperparameter tuning using GridSearchCV. The
-best model is then trained with the best hyperparameters obtained from GridSearchCV. The script also calculates and
-prints evaluation metrics such as RMSE, MAE, and R^2 for the test set. Finally, it creates a candlestick chart using
-plotly library to visualize the actual and predicted close prices and saves it as an HTML file. """
+"""
+    The script reads the stock data from a CSV file, preprocesses the data, splits it into training and testing sets,
+    defines an Extra Trees Regressor model, performs hyperparameter tuning using GridSearchCV, trains the model with the
+    best parameters, and predicts the close prices for the test set. It then calculates evaluation metrics (RMSE, MAE, and R^2),
+    prints the results, and creates a candlestick chart to visualize the actual and predicted close prices, saving it as an HTML file.
+"""
 import pandas as pd
 import numpy as np
 import plotly.graph_objs as go
@@ -37,12 +37,17 @@ if __name__ == "__main__":
     filename = '../datasets/BATS_SPY, 1D.csv'
     df = pd.read_csv(filename)
 
-    # Prepare the input (open prices) and output (close prices) data
-    X = np.array(df[['open']])
-    y = df['close']
+    # Prepare the input (open, high, low, close prices) and output (next day close prices) data
+    X = df[['open', 'high', 'low', 'close']]
+    y = df['close'].shift(-1)[:-1]
+
+    # Remove the last row from X to match the length of y
+    X = X[:-1]
 
     # Split the data into training and testing sets
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+    test_size = int(len(X) * 0.3)
+    X_train, X_test = X[:-test_size], X[-test_size:]
+    y_train, y_test = y[:-test_size], y[-test_size:]
 
     # Define the Extra Trees Regressor model with some initial parameters
     model = ExtraTreesRegressor(n_estimators=100, bootstrap=True, n_jobs=-1)

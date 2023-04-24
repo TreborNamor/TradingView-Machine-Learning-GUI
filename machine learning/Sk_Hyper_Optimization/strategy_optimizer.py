@@ -11,7 +11,7 @@ from skopt.space import Integer
 from skopt import gp_minimize
 
 # Read the dataset and initialize the enter_trade and exit_trade columns
-DataFrame = pd.read_csv('../datasets/BATS SPY, 1D.csv')
+DataFrame = pd.read_csv('../datasets/spy_1D_tradingview.csv')
 DataFrame.dropna(inplace=True)  # Remove rows with missing data
 DataFrame['enter_trade'] = 0
 DataFrame['exit_trade'] = 0
