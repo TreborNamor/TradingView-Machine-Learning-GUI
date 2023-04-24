@@ -2,7 +2,6 @@ import time
 from web_commands.profit import profits
 from TradeViewGUI import Main
 from termcolor import colored
-from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
@@ -23,41 +22,17 @@ class Functions(Main):
 
     @staticmethod
     def find_best_stoploss():
-        # Convert values in profits to floats
-        float_profits = {}
-        for k, v in profits.items():
-            if isinstance(v, list):
-                v = float(v[0])
-            float_profits[k] = v
-
-        # Find key with the highest float value
-        best_in_dict = max(float_profits, key=float_profits.get)
+        best_in_dict = max(profits, key=profits.get)
         return best_in_dict
 
     @staticmethod
     def find_best_takeprofit():
-        # Convert values in profits to floats
-        float_profits = {}
-        for k, v in profits.items():
-            if isinstance(v, list):
-                v = float(v[0])
-            float_profits[k] = v
-
-        # Find key with the highest float value
-        best_in_dict = max(float_profits, key=float_profits.get)
+        best_in_dict = max(profits, key=profits.get)
         return best_in_dict
 
     @staticmethod
     def find_best_key_both():
-        # Convert values in profits to floats
-        float_profits = {}
-        for k, v in profits.items():
-            if isinstance(v, list):
-                v = float(v[0])
-            float_profits[k] = v
-
-        # Find key with the highest float value
-        best_in_dict = max(float_profits, key=float_profits.get)
+        best_in_dict = max(profits)
         return best_in_dict
 
     # Click Commands
