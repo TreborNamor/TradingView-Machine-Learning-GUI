@@ -6,7 +6,9 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
-
+from selenium.common.exceptions import TimeoutException, NoSuchElementException
+from selenium.webdriver.common.action_chains import ActionChains
+import re
 
 class Functions(Main):
     """In this class you have all the selenium web commands I've created to navigate through Trading View's website.
@@ -19,15 +21,18 @@ class Functions(Main):
     The profits variable is a declared dictionary imported from the web_commands folder. 
     This is where the stoploss and take profit values are stored. """
 
-    def find_best_stoploss(self):
+    @staticmethod
+    def find_best_stoploss():
         best_in_dict = max(profits, key=profits.get)
         return best_in_dict
 
-    def find_best_takeprofit(self):
+    @staticmethod
+    def find_best_takeprofit():
         best_in_dict = max(profits, key=profits.get)
         return best_in_dict
 
-    def find_best_key_both(self):
+    @staticmethod
+    def find_best_key_both():
         best_in_dict = max(profits)
         return best_in_dict
 
@@ -36,130 +41,141 @@ class Functions(Main):
     These commands help the script click certain buttons or text boxes on the website. 
     They can also insert data on to the website through automation. """
 
-    def click_strategy_tester(self, wait):
-        """check if strategy tester tab is the active tab. If it's not, click to open tab."""
+    @staticmethod
+    def click_strategy_tester(wait):
+        """Check if the strategy tester tab is active, if not, open the tab."""
+        # Use the CSS selector to locate the button with a specific data-name attribute
+        element_selector = 'button[data-name="backtesting"]'
+
         try:
-            wait.until(
-                EC.presence_of_element_located((By.CLASS_NAME, "title-uqXh1Q3i"))
-            )
+            # Wait for the element with the specified data-name attribute to show up
+            element = wait.until(
+                EC.presence_of_element_located((By.CSS_SELECTOR, element_selector)))
 
-            strategy_tester_tab = self.driver.find_elements(
-                By.CLASS_NAME, "title-uqXh1Q3i"
-            )
-            for index, web_element in enumerate(strategy_tester_tab):
-                if web_element.text == "Strategy Tester":
-                    active_tab = strategy_tester_tab[index].get_attribute("data-active")
-                    if active_tab == "false":
-                        strategy_tester_tab[index].click()
-                        break
+            data_active = element.get_attribute("data-active")
 
-        except Exception:
-            print(
-                "Could Not Click Strategy Tester Tab. Please Check web element's class name in commands.py file."
-            )
+            if data_active != "true":
+                element.click()
 
-    def click_overview(self, wait):
+        except (TimeoutException, NoSuchElementException):
+            print("Could Not Click Strategy Tester Tab. Please Check web element's class name in commands.py file.")
+
+
+    @staticmethod
+    def click_overview(wait):
         """click overview tab."""
+        # Find the "Overview" tab button using its text content
+        overview_tab_xpath = "//button[contains(text(), 'Overview')]"
+
         try:
-            wait.until(
-                EC.presence_of_element_located((By.CLASS_NAME, "tab-button-diDiUvd9"))
+            # Wait for the "Overview" tab button to be clickable
+            overview_tab = wait.until(
+                EC.element_to_be_clickable((By.XPATH, overview_tab_xpath))
             )
 
-            overview_tab = self.driver.find_elements(
-                By.CLASS_NAME, "tab-button-diDiUvd9"
-            )
-            for index, web_element in enumerate(overview_tab):
-                if web_element.text == "Overview":
-                    overview_tab[index].click()
-                    break
-
-        except Exception:
+            # Click the "Overview" tab button
+            overview_tab.click()
+        except (TimeoutException, NoSuchElementException):
             print(
                 "Could Not click Overview Tab. Please Check web element's class name in commands.py file."
             )
 
     def click_settings_button(self, wait):
-        """click settings button."""
+        """Click the settings button."""
         try:
+            # Wait until a div containing buttons is present
             wait.until(
-                EC.presence_of_element_located((By.CLASS_NAME, "light-button-msfP1I4t"))
+                EC.presence_of_element_located((By.XPATH, "//div[contains(@class, 'fixedContent') and button]"))
             )
 
-            settings_button = self.driver.find_element(
-                By.CLASS_NAME, "light-button-msfP1I4t"
+            # Find the div containing buttons by matching a partial class name 'fixedContent'
+            parent_div = self.driver.find_element(
+                By.XPATH, "//div[contains(@class, 'fixedContent') and button]"
             )
-            settings_button.click()
 
-        except Exception:
+            # Find all the buttons within the div
+            buttons = parent_div.find_elements(By.TAG_NAME, "button")
+
+            # Click the first button
+            if len(buttons) > 0:
+                buttons[0].click()
+            else:
+                print("Could Not click settings button. No buttons found in the div with a class containing 'fixedContent'.")
+
+        except (TimeoutException, NoSuchElementException):
             print(
-                "Could not click settings button. Please check web_element's in commands.py file."
+                "Could not click the settings button. Please check web_element's in commands.py file."
             )
 
     def click_input_tab(self):
         """click the input tab."""
         try:
-            input_tab = self.driver.find_element(By.CLASS_NAME, "tab-Rf5MOAG5")
-            if input_tab.get_attribute("data-value") == "inputs":
+            input_tab = self.driver.find_element(By.CSS_SELECTOR, '[data-id="indicator-properties-dialog-tabs-inputs"]')
+            if input_tab.get_attribute("aria-selected") != "true":
                 input_tab.click()
-
-        except IndexError:
+        except NoSuchElementException:
             print(
                 "Could not input tab button. Please check web_element's in commands.py file."
             )
 
-    def click_performance_summary(self):
+    @staticmethod
+    def click_performance_summary(wait):
         """click performance summary tab."""
+        # Find the "Performance Summary" tab button using its text content
+        performance_summary_tab_xpath = "//button[contains(text(), 'Performance Summary')]"
+
         try:
-            performance_tab = self.driver.find_elements(
-                By.CLASS_NAME, "tab-button-diDiUvd9"
+            # Wait for the "Performance Summary" tab button to be clickable
+            performance_summary_tab = wait.until(
+                EC.element_to_be_clickable((By.XPATH, performance_summary_tab_xpath))
             )
-            for index, web_element in enumerate(performance_tab):
-                if web_element.text == "Performance Summary":
-                    performance_tab[index].click()
-                    break
 
-        except IndexError:
+            # Click the "Performance Summary" tab button
+            performance_summary_tab.click()
+        except (TimeoutException, NoSuchElementException):
             print(
-                "Could Not Click Performance Summary Tab. Please check web_element's in commands.py file."
+                "Could Not click Performance Summary Tab. Please Check web element's in commands.py file."
             )
 
-    def click_list_of_trades(self):
+    @staticmethod
+    def click_list_of_trades(wait):
         """click list of trades tab."""
-        try:
-            list_of_trades_tab = self.driver.find_elements(
-                By.CLASS_NAME, "tab-button-diDiUvd9"
-            )
-            for index, web_element in enumerate(list_of_trades_tab):
-                if web_element.text == "List of Trades":
-                    list_of_trades_tab[index].click()
-                    break
+        # Find the "List of Trades" tab button using its text content
+        list_of_trades_tab_xpath = "//button[contains(text(), 'List of Trades')]"
 
-        except IndexError:
+        try:
+            # Wait for the "List of Trades" tab button to be clickable
+            list_of_trades_tab = wait.until(
+                EC.element_to_be_clickable((By.XPATH, list_of_trades_tab_xpath))
+            )
+
+            # Click the "List of Trades" tab button
+            list_of_trades_tab.click()
+        except (TimeoutException, NoSuchElementException):
             print(
-                "Could Not Click List Of Trades Tab. Please check web_element's in commands.py file."
+                "Could Not click List of Trades Tab. Please Check web element's in commands.py file."
             )
 
     def click_long_stoploss_input(self, count, wait):
         """click long stoploss input text box."""
-        wait.until(EC.presence_of_element_located((By.CLASS_NAME, "input-oiYdY6I4")))
-
-        stoploss_input_box = self.driver.find_elements(By.CLASS_NAME, "input-oiYdY6I4")[
-            2
-        ]
+        wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, "input[class*='input-'][inputmode='numeric']")))
+        input_boxes = self.driver.find_elements(By.CSS_SELECTOR, "input[class*='input-'][inputmode='numeric']")
+        stoploss_input_box = input_boxes[0]
+        stoploss_input_box.click()  # This will click on the input text box
         stoploss_input_box.send_keys(Keys.BACK_SPACE * 4)
         stoploss_input_box.send_keys(str(count))
         stoploss_input_box.send_keys(Keys.ENTER)
-        time.sleep(0.5)
+        # time.sleep(0.5)
         ok_button = self.driver.find_element(By.NAME, "submit")
         ok_button.click()
 
     def click_long_takeprofit_input(self, count, wait):
         """click long take profit input text box."""
-        wait.until(EC.presence_of_element_located((By.CLASS_NAME, "input-oiYdY6I4")))
+        wait.until(
+            EC.presence_of_all_elements_located((By.CSS_SELECTOR, "input[class*='input-'][inputmode='numeric']")))
+        input_boxes = self.driver.find_elements(By.CSS_SELECTOR, "input[class*='input-'][inputmode='numeric']")
+        takeprofit_input_box = input_boxes[1]
 
-        takeprofit_input_box = self.driver.find_elements(
-            By.CLASS_NAME, "input-oiYdY6I4"
-        )[3]
         takeprofit_input_box.send_keys(Keys.BACK_SPACE * 4)
         takeprofit_input_box.send_keys(str(count))
         takeprofit_input_box.send_keys(Keys.ENTER)
@@ -276,68 +292,55 @@ class Functions(Main):
         ok_button = self.driver.find_element(By.NAME, "submit")
         ok_button.click()
 
-    def click_enable_both_checkboxes(self):
-        """click both long and short checkboxes."""
-        long_checkbox = self.driver.find_element(By.CLASS_NAME, "input-bUw_gKIQ")
-        short_checkbox = self.driver.find_elements(By.CLASS_NAME, "input-bUw_gKIQ")[1]
-        if not long_checkbox.get_attribute("checked"):
-            click_long_checkbox = self.driver.find_element(
-                By.CLASS_NAME, "check-bUw_gKIQ"
-            )
-            click_long_checkbox.click()
-        if not short_checkbox.get_attribute("checked"):
-            click_short_checkbox = self.driver.find_elements(
-                By.CLASS_NAME, "check-bUw_gKIQ"
-            )[1]
-            click_short_checkbox.click()
-
-    def click_enable_long_strategy_checkbox(self):
+    def click_enable_both_checkboxes(self, long=True, short=True):
         """click enable on the long checkbox."""
-        long_checkbox = self.driver.find_element(By.CLASS_NAME, "input-bUw_gKIQ")
-        short_checkbox = self.driver.find_elements(By.CLASS_NAME, "input-bUw_gKIQ")[1]
-        if not long_checkbox.get_attribute("checked"):
-            click_long_checkbox = self.driver.find_element(
-                By.CLASS_NAME, "check-bUw_gKIQ"
-            )
-            click_long_checkbox.click()
-        if short_checkbox.get_attribute("checked"):
-            click_short_checkbox = self.driver.find_elements(
-                By.CLASS_NAME, "check-bUw_gKIQ"
-            )[1]
-            click_short_checkbox.click()
+        if long:
+            long_checkbox = self.driver.find_element(By.XPATH, "//span[contains(., 'Enable Long Strategy')]/preceding-sibling::span/input[@type='checkbox']")
+            if not long_checkbox.is_selected():
+                long_checkbox.click()
+        if short:
+            short_checkbox = self.driver.find_element(By.XPATH, "//span[contains(., 'Enable Short Strategy')]/preceding-sibling::span/input[@type='checkbox']")
+            if not short_checkbox.is_selected():
+                action = ActionChains(self.driver)
+                action.move_to_element(short_checkbox).click().perform()
+
+    def click_enable_long_strategy_checkbox(self, long=True, short=False):
+        """click enable on the long checkbox."""
+        if long:
+            long_checkbox = self.driver.find_element(By.XPATH, "//span[contains(., 'Enable Long Strategy')]/preceding-sibling::span/input[@type='checkbox']")
+            if not long_checkbox.is_selected():
+                long_checkbox.click()
+        if not short:
+            short_checkbox = self.driver.find_element(By.XPATH, "//span[contains(., 'Enable Short Strategy')]/preceding-sibling::span/input[@type='checkbox']")
+            if short_checkbox.is_selected():
+                action = ActionChains(self.driver)
+                action.move_to_element(short_checkbox).click().perform()
+
 
     def click_enable_short_strategy_checkbox(self):
-        """click enable on the short checkbox."""
-        long_checkbox = self.driver.find_element(By.CLASS_NAME, "input-bUw_gKIQ")
-        short_checkbox = self.driver.find_elements(By.CLASS_NAME, "input-bUw_gKIQ")[1]
-        if long_checkbox.get_attribute("checked"):
-            click_long_checkbox = self.driver.find_element(
-                By.CLASS_NAME, "check-bUw_gKIQ"
-            )
-            click_long_checkbox.click()
-        if not short_checkbox.get_attribute("checked"):
-            click_short_checkbox = self.driver.find_elements(
-                By.CLASS_NAME, "check-bUw_gKIQ"
-            )[1]
-            click_short_checkbox.click()
-
+            """click enable on the short checkbox."""
+            long_checkbox = self.driver.find_element(By.CLASS_NAME, "input-bUw_gKIQ")
+            short_checkbox = self.driver.find_elements(By.CLASS_NAME, "input-bUw_gKIQ")[1]
+            if long_checkbox.get_attribute("checked"):
+                click_long_checkbox = self.driver.find_element(
+                    By.CLASS_NAME, "check-bUw_gKIQ"
+                )
+                click_long_checkbox.click()
+            if not short_checkbox.get_attribute("checked"):
+                click_short_checkbox = self.driver.find_elements(
+                    By.CLASS_NAME, "check-bUw_gKIQ"
+                )[1]
+                click_short_checkbox.click()
     def click_reset_all_inputs(self, wait):
-        """click and reset all input text boxes to 50."""
-        wait.until(
-            EC.presence_of_all_elements_located((By.CLASS_NAME, "input-oiYdY6I4"))
-        )
-        long_stoploss_input_box = self.driver.find_elements(
-            By.CLASS_NAME, "input-oiYdY6I4"
-        )[2]
-        long_takeprofit_input_box = self.driver.find_elements(
-            By.CLASS_NAME, "input-oiYdY6I4"
-        )[3]
-        short_stoploss_input_box = self.driver.find_elements(
-            By.CLASS_NAME, "input-oiYdY6I4"
-        )[4]
-        short_takeprofit_input_box = self.driver.find_elements(
-            By.CLASS_NAME, "input-oiYdY6I4"
-        )[5]
+        """click and reset all input text boxes to 20."""
+        wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, "input[class*='input-']")))
+        input_boxes = self.driver.find_elements(By.CSS_SELECTOR, "input[class*='input-']")
+        long_stoploss_input_box = input_boxes[2]
+        long_takeprofit_input_box = input_boxes[3]
+        short_stoploss_input_box = input_boxes[4]
+        short_takeprofit_input_box = input_boxes[5]
+
+
         long_stoploss_input_box.send_keys(Keys.BACK_SPACE * 4)
         long_stoploss_input_box.send_keys(str("20"))
         long_takeprofit_input_box.send_keys(Keys.BACK_SPACE * 4)
@@ -490,33 +493,48 @@ class Functions(Main):
             )
         return net_profit
 
-    def get_net_profit_stoploss(self, count, wait):
-        """will get the net profit of stoploss values."""
-        wait.until(
-            EC.presence_of_element_located((By.CLASS_NAME, "secondRow-b1pZpka9"))
-        )
-        try:
-            check = self.driver.find_element(By.CLASS_NAME, "negativeValue-b1pZpka9")
-            if check:
-                negative = True
-        except NoSuchElementException:
-            negative = False
+    import re
 
+    def get_net_profit_stoploss(self, count, wait):
+        """Get the net profit of stoploss values."""
+
+        def find_profit_element(selector, parent=None):
+            """Find profit element by CSS selector."""
+            if parent is None:
+                parent = self.driver
+            elements = parent.find_elements(By.CSS_SELECTOR, selector)
+            return elements[1] if len(elements) > 1 else None
+
+        # Wait for the required element to be located
+        second_row = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "div[class*='secondRow-']")))
+
+        # Check if a negative value is present
+        negative = False
+        negative_element = find_profit_element("div[class*='negativeValue-']", second_row)
+        if negative_element is not None:
+            negative = True
+
+        # Initialize net_profit_text
+        net_profit_text = None
+
+        # Extract and update net profit
         if negative:
-            net_profit = self.driver.find_element(
-                By.CLASS_NAME, "additionalPercent-b1pZpka9"
-            ).text.split("%")
-            net_value = float(net_profit[0][1:])
-            profits.update({count: -net_value})
+            net_profit_text = re.findall(r"[-+]?\d*\.\d+|\d+", negative_element.text)
+            net_value = -float(net_profit_text[0])
+            profits.update({count: net_value})
             print(colored(f"Stoploss: {count}%, Net Profit: {net_value}%", "red"))
         else:
-            net_profit = self.driver.find_element(
-                By.CLASS_NAME, "additionalPercent-b1pZpka9"
-            ).text.split(" %")
-            net_value = float(net_profit[0])
+            positive_element = find_profit_element("div[class*='positiveValue-']", second_row)
+            if positive_element is not None and positive_element.text.strip():
+                net_profit_text = re.findall(r"[-+]?\d*\.\d+|\d+", positive_element.text)
+                net_value = float(net_profit_text[0])
+            else:
+                net_value = 0.0
+
             profits.update({count: net_value})
             print(colored(f"Stoploss: {count}%, Net Profit: {net_value}%", "green"))
-        return net_profit
+
+        return net_profit_text
 
     def get_net_profit_takeprofit(self, count, wait):
         """will get the net profit of take profit values."""
