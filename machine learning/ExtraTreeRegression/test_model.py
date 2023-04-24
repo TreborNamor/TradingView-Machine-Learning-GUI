@@ -16,6 +16,7 @@ from sklearn.ensemble import ExtraTreesRegressor
 # Predicted Close Price: 412.27
 # Actual Close Price: 412.20
 
+# You can find SPY historical prices for free on https://finance.yahoo.com/quote/SPY/history?p=SPY
 historical_open = 411.21  # Enter the day's current open price for the model to predict its close price.
 historical_high = 413.70  # Enter the day's current high price.
 historical_low = 410.27   # Enter the day's current low price.
