@@ -13,13 +13,13 @@ from sklearn.ensemble import ExtraTreesRegressor
 
 # With the day's current price information of 4/20/2023, I attempted to predict 4/21/2023
 # Results:
-# Predicted Close Price: 412.13
+# Predicted Close Price: 412.27
 # Actual Close Price: 412.20
 
-predicted_open = 411.21  # Enter the day's current open price for the model to predict its close price.
-predicted_high = 413.70  # Enter the day's current high price.
-predicted_low = 410.27   # Enter the day's current low price.
-predicted_close = 411.88 # Enter the day's current close price.
+historical_open = 411.21  # Enter the day's current open price for the model to predict its close price.
+historical_high = 413.70  # Enter the day's current high price.
+historical_low = 410.27   # Enter the day's current low price.
+historical_close = 411.88 # Enter the day's current close price.
 
 # Preprocessing DataFrame
 df = pd.read_csv('../datasets/BATS_SPY, 1D.csv')
@@ -47,17 +47,18 @@ best_params = {
 
 # Create Final Model
 final_model = ExtraTreesRegressor(**best_params, n_jobs=-1)
+
 # Initialize a list to store the predictions
 predictions = []
 
 # Train the model and make predictions 10 times
 for _ in range(10):
     final_model.fit(X, y)
-    final_prediction = final_model.predict([[predicted_open, predicted_high, predicted_low, predicted_close]])
+    final_prediction = final_model.predict([[historical_open, historical_high, historical_low, historical_close]])
     predictions.append(final_prediction[0])
 
 # Calculate the average prediction
 average_prediction = sum(predictions) / len(predictions)
 
 # Print the average predicted close price
-print('Average Predicted Close Price:', round(average_prediction, 2))
+print('Predicted Close Price:', round(average_prediction, 2))
