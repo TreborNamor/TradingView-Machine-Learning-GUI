@@ -1,19 +1,27 @@
 """
     The script reads the stock data from a CSV file, preprocesses the data, splits it into training and testing sets,
     defines an Extra Trees Regressor model, performs hyperparameter tuning using GridSearchCV, trains the model with the
-    best parameters, and predicts the close prices for the test set. It then calculates evaluation metrics (RMSE, MAE, and R^2),
-    prints the results, and creates a candlestick chart to visualize the actual and predicted close prices, saving it as an HTML file.
+    best parameters to predict the close prices for the test set. It then calculates evaluation metrics
+    (RMSE, MAE, and R^2), prints the results, and creates a candlestick chart to visualize the actual and predicted
+    close prices, saving it as an HTML file.
 """
 import pandas as pd
 import numpy as np
 import plotly.graph_objs as go
 from sklearn.ensemble import ExtraTreesRegressor
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
-from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.model_selection import GridSearchCV
+from sklearn.utils import shuffle
 
 
 def create_and_save_candlestick_chart(df, y_test, y_pred, filename):
-    # Create candlestick chart with actual and predicted values
+    """
+        This function creates a candlestick chart that visualizes the stock's open, high, low, and close prices,
+        and overlays the actual and predicted closing prices on the same chart. This allows for a visual comparison
+        of the model's predictions against the true closing prices. The actual close is represented by a circle,
+        and the predicted close is shown as an X. Whenever the X lies inside the circle, it signifies that the
+        model has accurately predicted the actual close price for that day. Finally, the chart is saved as an HTML file.
+    """
     candlestick = go.Candlestick(x=df.index, open=df['open'], high=df['high'], low=df['low'], close=df['close'],
                                  name='Candlestick Chart')
 
@@ -33,21 +41,28 @@ def create_and_save_candlestick_chart(df, y_test, y_pred, filename):
     fig.write_html(filename)
 
 if __name__ == "__main__":
-    # Read data from CSV file
     filename = '../datasets/BATS_SPY, 1D.csv'
     df = pd.read_csv(filename)
 
-    # Prepare the input (open, high, low, close prices) and output (next day close prices) data
     X = df[['open', 'high', 'low', 'close']]
     y = df['close'].shift(-1)[:-1]
 
-    # Remove the last row from X to match the length of y
     X = X[:-1]
 
-    # Split the data into training and testing sets
-    test_size = int(len(X) * 0.3)
-    X_train, X_test = X[:-test_size], X[-test_size:]
-    y_train, y_test = y[:-test_size], y[-test_size:]
+    # Combine the input features and target variable into a single DataFrame
+    data = X.copy()
+    data['target'] = y
+
+    # Shuffle the data row by row
+    data_shuffled = shuffle(data, random_state=42)
+
+    # Split the shuffled data into input features and target variable
+    X_shuffled = data_shuffled[['open', 'high', 'low', 'close']]
+    y_shuffled = data_shuffled['target']
+
+    test_size = int(len(X_shuffled) * 0.3)
+    X_train, X_test = X_shuffled[:-test_size], X_shuffled[-test_size:]
+    y_train, y_test = y_shuffled[:-test_size], y_shuffled[-test_size:]
 
     # Define the Extra Trees Regressor model with some initial parameters
     model = ExtraTreesRegressor(n_estimators=100, bootstrap=True, n_jobs=-1)
@@ -87,5 +102,5 @@ if __name__ == "__main__":
     print(f"R^2: {r2:.2f}")
 
     # Call the function with the appropriate arguments
-    filename = 'pictures/actual_vs_predicted_close_prices.html'
+    filename = 'pictures/train_model.html'
     create_and_save_candlestick_chart(df, y_test, y_pred, filename)

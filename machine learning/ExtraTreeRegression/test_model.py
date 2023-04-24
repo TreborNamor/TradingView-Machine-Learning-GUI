@@ -11,10 +11,15 @@
 import pandas as pd
 from sklearn.ensemble import ExtraTreesRegressor
 
-predicted_open = 422.99  # Enter the day's current open price for the model to predict its close price.
-predicted_high = 424.50  # Enter the day's current high price.
-predicted_low = 421.80   # Enter the day's current low price.
-predicted_close = 423.25  # Enter the day's current close price.
+# With the day's current price information of 4/20/2023, I attempted to predict 4/21/2023
+# Results:
+# Predicted Close Price: 412.13
+# Actual Close Price: 412.20
+
+predicted_open = 411.21  # Enter the day's current open price for the model to predict its close price.
+predicted_high = 413.70  # Enter the day's current high price.
+predicted_low = 410.27   # Enter the day's current low price.
+predicted_close = 411.88 # Enter the day's current close price.
 
 # Preprocessing DataFrame
 df = pd.read_csv('../datasets/BATS_SPY, 1D.csv')
@@ -29,12 +34,12 @@ X = X[:-1]
 
 # Define the best hyperparameters found by GridSearchCV
 best_params = {
-    'n_estimators': 1000,  # Use the best value found by GridSearchCV
-    'max_depth': None,     # Use the best value found by GridSearchCV
-    'min_samples_split': 2,  # Use the best value found by GridSearchCV
-    'min_samples_leaf': 1,   # Use the best value found by GridSearchCV
-    'bootstrap': False,      # Use the best value found by GridSearchCV
-    'max_features': 'sqrt',  # Use the best value found by GridSearchCV
+    'n_estimators': 300,  # Use the best value found by GridSearchCV
+    'max_depth': 40,     # Use the best value found by GridSearchCV
+    'min_samples_split': 15,  # Use the best value found by GridSearchCV
+    'min_samples_leaf': 2,   # Use the best value found by GridSearchCV
+    'bootstrap': True,      # Use the best value found by GridSearchCV
+    'max_features': 1.0,  # Use the best value found by GridSearchCV
 }
 
 # Create Final Model
