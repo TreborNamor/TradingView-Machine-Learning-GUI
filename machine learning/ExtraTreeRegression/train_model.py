@@ -22,6 +22,11 @@ def create_and_save_candlestick_chart(df, y_test, y_pred, filename):
         and the predicted close is shown as an X. Whenever the X lies inside the circle, it signifies that the
         model has accurately predicted the actual close price for that day. Finally, the chart is saved as an HTML file.
     """
+
+    # Convert the UNIX timestamps to datetime objects in the dataframe
+    df.index = pd.to_datetime(df.index, unit='s')
+    y_test.index = pd.to_datetime(y_test.index, unit='s')
+
     candlestick = go.Candlestick(x=df.index, open=df['open'], high=df['high'], low=df['low'], close=df['close'],
                                  name='Candlestick Chart')
 
@@ -41,7 +46,7 @@ def create_and_save_candlestick_chart(df, y_test, y_pred, filename):
     fig.write_html(filename)
 
 if __name__ == "__main__":
-    filename = '../datasets/BATS_SPY, 1D.csv'
+    filename = '../datasets/SPY_DATA_20_YEARS/SPX_1day.csv'
     df = pd.read_csv(filename)
 
     X = df[['open', 'high', 'low', 'close']]

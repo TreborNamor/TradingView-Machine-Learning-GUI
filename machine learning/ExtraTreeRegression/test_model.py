@@ -23,7 +23,7 @@ historical_low = 410.27   # Enter the day's current low price.
 historical_close = 411.88 # Enter the day's current close price.
 
 # Preprocessing DataFrame
-df = pd.read_csv('../datasets/BATS_SPY, 1D.csv')
+df = pd.read_csv('../datasets/SPY_DATA_20_YEARS/SPX_1day.csv')
 df['time'] = pd.to_datetime(df['time'], unit='s')
 df.set_index(pd.DatetimeIndex(df['time']), inplace=True)
 del df['time']
