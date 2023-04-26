@@ -14,7 +14,7 @@ from ta.momentum import RSIIndicator
 import numpy as np
 
 # Read the dataset
-dataframe = pd.read_csv('../datasets/SPY_DATA_20_YEARS/SPX_5min.csv')
+dataframe = pd.read_csv('datasets/SPY_DATA_20_YEARS/SPX_5min.csv')
 dataframe.dropna(inplace=True)
 
 class Backtester:

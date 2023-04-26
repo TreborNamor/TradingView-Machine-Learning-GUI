@@ -1,7 +1,7 @@
 import unittest
 import pandas as pd
 from unittest.mock import patch
-from backtesting import Backtester
+from max_profit import Backtester
 import numpy as np
 
 
@@ -10,7 +10,7 @@ class TestBacktester(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # Load the dataset
-        cls.dataframe = pd.read_csv('../datasets/SPY_DATA_20_YEARS/SPX_1day.csv')
+        cls.dataframe = pd.read_csv('datasets/SPY_DATA_20_YEARS/SPX_1day.csv')
         cls.dataframe.dropna(inplace=True)
 
     def setUp(self):

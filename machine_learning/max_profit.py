@@ -13,7 +13,7 @@ from ta.trend import MACD
 from ta.momentum import RSIIndicator
 
 # Read the dataset
-dataframe = pd.read_csv('../datasets/SPY_DATA_20_YEARS/SPX_5min.csv')
+dataframe = pd.read_csv('datasets/SPY_DATA_20_YEARS/SPX_5min.csv')
 dataframe.dropna(inplace=True)
 
 class Backtester:
