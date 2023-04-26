@@ -24,6 +24,7 @@ class Backtester:
         self.buy_signals = []
         self.sell_signals = []
         self.generate_indicators()
+        self.highest_profit = float('-inf')
 
     search_space = [
         Integer(low=5, high=50, name='rsi_buy_threshold', dtype=int),
@@ -57,21 +58,24 @@ class Backtester:
         return dataframe
 
     @staticmethod
-    def remove_extra_rows(dataframe: pd.DataFrame) -> bool:
+    def remove_extra_rows(dataframe: pd.DataFrame) -> pd.DataFrame:
         enter_trade_indices = dataframe[dataframe['enter_trade'] == 1].index
         exit_trade_indices = dataframe[dataframe['exit_trade'] == 1].index
 
         if len(enter_trade_indices) == 0 or len(exit_trade_indices) == 0:
-            return False
+            return pd.DataFrame()
 
         start_date = enter_trade_indices[0]
         end_date = exit_trade_indices[-1] + 1
 
-        dataframe.drop(dataframe.index[end_date:], axis=0, inplace=True)
+        if end_date <= start_date:
+            return dataframe.iloc[start_date:end_date]
+
+        dataframe.drop(dataframe.index[end_date + 1:], axis=0, inplace=True)
         dataframe.drop(dataframe.index[:start_date], axis=0, inplace=True)
         dataframe.dropna(subset=['enter_trade', 'exit_trade'], inplace=True, thresh=1)
 
-        return True
+        return dataframe
 
     @staticmethod
     def calculate_profit(buy_signals: list, sell_signals: list) -> float:
@@ -90,7 +94,6 @@ class Backtester:
                         self.sell_signals.append(sell_trigger['close'])
                         break
 
-        # Remove the last buy signal if there are more buy signals than sell signals
         if len(self.buy_signals) > len(self.sell_signals):
             self.buy_signals.pop(-1)
 
@@ -109,43 +112,45 @@ class Backtester:
         dataframe = self.set_entry_conditions(buy_rsi)
         dataframe = self.set_exit_conditions(sell_rsi)
 
-        is_valid = self.remove_extra_rows(dataframe)
+        filtered_dataframe = self.remove_extra_rows(dataframe)
 
-        if not is_valid:
-            return -1e9
+        if filtered_dataframe.empty:
+            return 1e9
 
-        self.process_trading_signals(dataframe)
-        neg_profit, _ = self.evaluate_strategy(dataframe)
+        self.process_trading_signals(filtered_dataframe)
+        neg_profit, profit = self.evaluate_strategy(filtered_dataframe)
+        rounded_profit = round(profit, 2)
 
+        # Check if the current profit is greater than the highest_profit
+        if profit > self.highest_profit:
+            self.highest_profit = profit
+            print("Attempt with rsi_buy_threshold={}, rsi_sell_threshold={}, profit={}%".format(buy_rsi, sell_rsi,
+                                                                                                rounded_profit))
         return neg_profit
 
     def optimize_trading_strategy(self, find_optimal_parameters, search_space):
         result = gp_minimize(
             func=find_optimal_parameters,
             dimensions=search_space,
-            n_calls=300,
+            n_calls=20,
             n_random_starts=20,
-            random_state=42
+            random_state=42,
+            n_jobs=-1
         )
 
         best_params = result.x
-        _, best_profit = self.evaluate_strategy(self.dataframe.copy())
+        self.dataframe = self.set_entry_conditions(best_params[0])
+        self.dataframe = self.set_exit_conditions(best_params[1])
+        best_dataframe = self.remove_extra_rows(self.dataframe)
 
-        best_dataframe = self.set_entry_conditions(best_params[0])
-        best_dataframe = self.set_exit_conditions(best_params[1])
-        is_valid = self.remove_extra_rows(best_dataframe)
-
-        if is_valid:
+        if not best_dataframe.empty:
             _, best_profit = self.evaluate_strategy(best_dataframe)
-            if best_profit > 0:
-                message = "Best parameters: rsi_buy_threshold={}, rsi_sell_threshold={}, profit={}".format(best_params[0],
-                                                                                                   best_params[1],
-                                                                                                   best_profit)
-            else:
-                message = "Optimization failed to find a profitable strategy with the given search space."
+            message = "Best parameters: rsi_buy_threshold={}, rsi_sell_threshold={}, profit={}%".format(
+                best_params[0], best_params[1], round(best_profit, 2))
         else:
-            message = "Best parameters: rsi_buy_threshold={}, rsi_sell_threshold={}, profit not available due to empty DataFrame".format(
-                best_params[0], best_params[1])
+            best_profit = self.highest_profit
+            message = "Best parameters: rsi_buy_threshold={}, rsi_sell_threshold={}, profit={}%".format(
+                best_params[0], best_params[1], round(best_profit, 2))
 
         return best_params, best_profit, message
 
