@@ -42,18 +42,18 @@ class Backtester:
 
     def set_entry_conditions(self, buy_rsi: int) -> pd.DataFrame:
         dataframe = self.dataframe
-        # macd_crosses_signal = (dataframe['MACD'].shift(1) < dataframe['Signal'].shift(1)) & (
-        #         dataframe['MACD'] > dataframe['Signal'])
+        macd_crosses_signal = (dataframe['MACD'].shift(1) < dataframe['Signal'].shift(1)) & (
+                dataframe['MACD'] > dataframe['Signal'])
         rsi_condition = dataframe['RSI'].rolling(5).min() <= buy_rsi
-        dataframe.loc[rsi_condition, 'enter_trade'] = 1
+        dataframe.loc[macd_crosses_signal & rsi_condition, 'enter_trade'] = 1
         return dataframe
 
     def set_exit_conditions(self, sell_rsi: int) -> pd.DataFrame:
         dataframe = self.dataframe
-        # macd_crosses_under_signal = (dataframe['MACD'].shift(1) > dataframe['Signal'].shift(1)) & (
-        #         dataframe['MACD'] < dataframe['Signal'])
+        macd_crosses_under_signal = (dataframe['MACD'].shift(1) > dataframe['Signal'].shift(1)) & (
+                dataframe['MACD'] < dataframe['Signal'])
         rsi_condition = dataframe['RSI'].rolling(5).max() >= sell_rsi
-        dataframe.loc[ rsi_condition, 'exit_trade'] = 1
+        dataframe.loc[macd_crosses_under_signal & rsi_condition, 'exit_trade'] = 1
         return dataframe
 
     @staticmethod
