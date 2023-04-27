@@ -21,22 +21,22 @@ dataframe.dropna(inplace=True)
 
 class Backtester:
     """
-    Class for backtesting a trading strategy.
+        Class for backtesting a trading strategy.
 
-    Attributes
-    ----------
-    dataframe : pd.DataFrame
-        The input data.
-    buy_signals : list of float
-        The prices at which to enter trades.
-    sell_signals : list of float
-        The prices at which to exit trades.
-    highest_profit : float
-        The highest profit seen during optimization.
-    best_profit : float
-        The profit at the best set of parameters seen during optimization.
-    search_space : list of skopt.space.Dimension
-        The hyperparameter search space.
+        Attributes
+        ----------
+        dataframe : pd.DataFrame
+            The input data.
+        buy_signals : list of float
+            The prices at which to enter trades.
+        sell_signals : list of float
+            The prices at which to exit trades.
+        highest_profit : float
+            The highest profit seen during optimization.
+        best_profit : float
+            The profit at the best set of parameters seen during optimization.
+        search_space : list of skopt.space.Dimension
+            The hyperparameter search space.
     """
 
     search_space = [
