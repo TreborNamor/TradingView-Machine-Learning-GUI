@@ -206,7 +206,7 @@ class Backtester:
         result = gp_minimize(
             func=find_optimal_parameters,
             dimensions=search_space,
-            n_calls=20,
+            n_calls=300,
             n_random_starts=20,
             random_state=42,
             n_jobs=-1
