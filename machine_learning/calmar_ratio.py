@@ -70,12 +70,10 @@ class Backtester:
         """
             Generates indicators for the dataframe.
         """
-        # Generate MACD
         macd_indicator = MACD(self.dataframe['close'], window_slow=26, window_fast=12, window_sign=9)
         self.dataframe['MACD'] = macd_indicator.macd()
         self.dataframe['Signal'] = macd_indicator.macd_signal()
 
-        # Generate RSI
         rsi_indicator = RSIIndicator(self.dataframe['close'], window=14)
         self.dataframe['RSI'] = rsi_indicator.rsi()
 
