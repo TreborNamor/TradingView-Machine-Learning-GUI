@@ -11,10 +11,13 @@
 import pandas as pd
 from sklearn.ensemble import ExtraTreesRegressor
 
-# With the day's current price information of 4/20/2023, I attempted to predict 4/21/2023
-# Results:
-# Predicted Close Price: 412.27
-# Actual Close Price: 412.20
+
+"""
+With the day's current price information of 4/20/2023, an attempt was made to predict the close price for 4/21/2023.
+Results:
+- Predicted Close Price: 412.27
+- Actual Close Price: 412.20
+"""
 
 # You can find SPY historical prices for free on https://finance.yahoo.com/quote/SPY/history?p=SPY
 historical_open = 411.21  # Enter the day's current open price for the model to predict its close price.
