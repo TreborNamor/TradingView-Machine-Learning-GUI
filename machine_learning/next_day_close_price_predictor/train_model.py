@@ -12,7 +12,7 @@ from sklearn.ensemble import ExtraTreesRegressor
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 from sklearn.model_selection import GridSearchCV
 from sklearn.utils import shuffle
-
+import joblib
 
 def create_and_save_candlestick_chart(df, y_test, y_pred, filename):
     """
@@ -94,6 +94,9 @@ if __name__ == "__main__":
     # Train the model with the best parameters
     best_model = ExtraTreesRegressor(**best_params, n_jobs=-1)
     best_model.fit(X_train, y_train)
+
+    # Save the trained model to a file
+    joblib.dump(best_model, 'trained_model.pkl')
 
     # Predict the close prices for the test set
     y_pred = best_model.predict(X_test)
