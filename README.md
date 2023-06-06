@@ -1,6 +1,8 @@
-# TradeView GUI
+# TradingView Machine Learning GUI
 
-TradeView is a free and open source Trading View bot written in Python. It is designed to support all major exchanges. It contains back testing, money management tools as well as strategy optimization by machine learning. [Here is live example of TradeView](https://vimeo.com/594037879)
+## Project Overview
+
+This project primarily features a stop loss/take profit generator capable of determining the optimal parameters for your TradingView strategy. Additionally, it incorporates machine learning algorithms, using sklearn, to hyper-optimize your TradingView strategy. The project includes a comprehensive range of ratios, such as Sharpe, Sortino, Calmar, Information, Treynor, and Max Profit, providing a multifaceted approach to strategy optimization. Another key feature is the next-day closing price predictor, a script that empowers you to forecast the following day's closing price accurately. To ensure user-friendliness and accessibility for traders of all expertise levels, the project includes a Graphical User Interface (GUI). [Here is live example of TradeView](https://vimeo.com/594037879)
 
 ![image](https://github.com/TreborNamor/TradingView_Machine_Learning/blob/16ab9d3fae94258a715965e271d5c80b6517051c/pictures/TradeViewGUI.png)
 ![image](https://github.com/TreborNamor/TradingView_Machine_Learning/blob/16ab9d3fae94258a715965e271d5c80b6517051c/pictures/TradeViewResultsExample.png)
@@ -14,13 +16,7 @@ AND ALL AFFILIATES ASSUME NO RESPONSIBILITY FOR YOUR TRADING RESULTS.
 We strongly recommend you to have coding and Python knowledge. Do not
 hesitate to read the source code and understand the mechanism of this bot.
 
-## Features
-
-- [x] **Based on Python 3.8+**: The bot will work on any operating system - Windows, macOS and Linux.
-- [x] **SL/TP Generator**: Let the bot decide what stop loss or take profit you should use.
-- [x] **Functions**: A growing library of functions you can use to optimize your script.
-
-## Installation
+## Installation Instructions
 
 #1. Download Firefox, and TradingView_Machine_Learning folder here.
 
@@ -43,7 +39,7 @@ If you want to create a custom TradingView Strategy click [here.](https://github
 #5. Enter Your long and short parameters and click Run button.
 ![image](https://github.com/TreborNamor/TradingView_Machine_Learning/blob/bd4a703fb0b3ec964c305dd7c720b17b111535fc/pictures/parameters.png)
 
-# Tips:
+## Tips:
 - CheckBox: You can hide Firefox browser when checkbox is enabled.
 - Minimum Long Stoploss: The minimum percentage you are willing to risk for your strategy. For example, a 1% minimum risk.
 - Maximum Long Stoploss: The maximum percentage you are willing to risk for your strategy. For example, a 30% maximum risk.
@@ -61,3 +57,30 @@ If you want to create a custom TradingView Strategy click [here.](https://github
 - Max Attempts: What is the maximum amount of attempts would you like the strategy try. (Default is set to 30)
 - Firefox Path: The path used to run selenium webdriver.
 
+## Contributing
+
+We welcome contributions from the community. If you wish to contribute:
+
+1. Fork the repository.
+2. Create a new branch for your changes.
+3. Make the changes/additions.
+4. Commit your changes.
+5. Push the changes to your forked repository.
+6. Open a pull request from your forked repository to this repository.
+
+Please ensure your code adheres to our coding standards and passes all tests before submitting a pull request.
+
+## License
+
+This project is licensed under the [MIT License](https://github.com/TreborNamor/TradingView-Machine-Learning-GUI/blob/master/LICENSE). 
+
+## Contact Information
+
+For any questions, feedback, or discussions, feel free to reach out to me:
+
+- Email: robertroman7@gmail.com
+- LinkedIn: [Profile](https://www.linkedin.com/in/robert-roman7/)
+
+## Acknowledgements
+
+Thanks to all contributors and users for making this project possible. If you find this project helpful, please consider starring the repository to show your support.
