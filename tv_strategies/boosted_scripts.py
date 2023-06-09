@@ -14,33 +14,24 @@ def fetch_strategies(page_url):
     }
     response = requests.get(page_url, headers=headers)
 
-    # If the GET request is successful, the status code will be 200
     if response.status_code != 200:
         return [], None
 
     soup = BeautifulSoup(response.text, 'html.parser')
 
-    # Find all the strategy blocks
     strategy_blocks = soup.find_all('div', class_='tv-widget-idea js-userlink-popup-anchor')
 
     strategies = []
     for strategy_block in strategy_blocks:
-        # Find the title and likes within each strategy block
-        title = strategy_block.find('a',
-                                    class_='tv-widget-idea__title apply-overflow-tooltip js-widget-idea__popup').text
-        likes = strategy_block.find('span',
-                                    class_='tv-card-social-item apply-common-tooltip tv-card-social-item--agrees tv-card-social-item--button tv-card-social-item--border tv-social-row__item').find(
-            'span', class_='tv-card-social-item__count').text
-
-        # Convert likes from string to integer
+        title_tag = strategy_block.find('a', class_='tv-widget-idea__title apply-overflow-tooltip js-widget-idea__popup')
+        title = title_tag.text
+        link = base_url + title_tag['href']
+        likes = strategy_block.find('span', class_='tv-card-social-item apply-common-tooltip tv-card-social-item--agrees tv-card-social-item--button tv-card-social-item--border tv-social-row__item').find('span', class_='tv-card-social-item__count').text
         likes = int(likes)
 
-        # Add the strategy to the list
-        strategies.append({"title": title, "likes": likes})
+        strategies.append({"title": title, "likes": likes, "link": link})
 
-    # Find the link to the next page, if it exists
     next_page_link = soup.find('a', class_='tv-feed-rounded-button tv-feed-pagination__next js-page-reference')
-
     next_page_url = next_page_link.get('href') if next_page_link else None
 
     return strategies, next_page_url
@@ -71,8 +62,8 @@ start_page = '/scripts/?script_type=strategies'
 all_strategies = scrape_all_strategies(base_url, start_page)
 
 # Sort the data in descending order by likes.
-sorted_strategies = sorted(all_strategies, key=lambda x: x['likes'], reverse=True)
+sorted_strategies = sorted(all_strategies, key=lambda x: x['likes'], reverse=False)
 
 # Print out the sorted data.
 for strategy in sorted_strategies:
-    print(f'Title: {strategy["title"]}, Likes: {strategy["likes"]}')
+    print(f'Title: {strategy["title"]}, Likes: {strategy["likes"]}, Link: {strategy["link"]}')
