@@ -166,4 +166,3 @@ class LongShortScript(Functions):
         )
 
         return long_stoploss_value, long_takeprofit_value, short_stoploss_value, short_takeprofit_value
-

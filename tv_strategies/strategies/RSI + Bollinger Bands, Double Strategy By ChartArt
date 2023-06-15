@@ -1,0 +1,73 @@
+// @version=5
+// Creator: ChartArt
+// Revised By: Bunghole
+// Strategy Name: RSI + Bollinger Bands, Double Strategy
+
+strategy("Oscillating Band Strategy", shorttitle="BB_RSI_Strat", initial_capital=10000, default_qty_type=strategy.percent_of_equity, default_qty_value=100, pyramiding=0, currency='USD', overlay=true)
+
+// Enable Long Strategy
+enable_long_strategy = input.bool(true, title='Enable Long Strategy', group='SL/TP For Long Strategy', inline='1')
+long_stoploss_value = input.float(defval=20, title='Stoploss %', minval=0.1, group='SL/TP For Long Strategy', inline='2')
+long_stoploss_percentage = close * (long_stoploss_value / 100) / syminfo.mintick
+long_takeprofit_value = input.float(defval=20, title='Take Profit %', minval=0.1, group='SL/TP For Long Strategy', inline='2')
+long_takeprofit_percentage = close * (long_takeprofit_value / 100) / syminfo.mintick
+
+// Enable Short Strategy
+enable_short_strategy = input.bool(true, title='Enable Short Strategy', group='SL/TP For Short Strategy', inline='3')
+short_stoploss_value = input.float(defval=20, title='Stoploss %', minval=0.1, group='SL/TP For Short Strategy', inline='4')
+short_stoploss_percentage = close * (short_stoploss_value / 100) / syminfo.mintick
+short_takeprofit_value = input.float(defval=20, title='Take Profit %', minval=0.1, group='SL/TP For Short Strategy', inline='4')
+short_takeprofit_percentage = close * (short_takeprofit_value / 100) / syminfo.mintick
+
+// Plot Stoploss & Take Profit Levels
+long_stoploss_price = strategy.position_avg_price * (1 - long_stoploss_value / 100)
+long_takeprofit_price = strategy.position_avg_price * (1 + long_takeprofit_value / 100)
+short_stoploss_price = strategy.position_avg_price * (1 + short_stoploss_value / 100)
+short_takeprofit_price = strategy.position_avg_price * (1 - short_takeprofit_value / 100)
+plot(enable_long_strategy and not enable_short_strategy ? long_stoploss_price : na, color=color.new(#ff0000, 0), style=plot.style_linebr, linewidth=2, title='Long SL Level')
+plot(enable_long_strategy and not enable_short_strategy ? long_takeprofit_price : na, color=color.new(#008000, 0), style=plot.style_linebr, linewidth=2, title='Long TP Level')
+plot(enable_short_strategy and not enable_long_strategy ? short_stoploss_price : na, color=color.new(#ff0000, 0), style=plot.style_linebr, linewidth=2, title='Short SL Level')
+plot(enable_short_strategy and not enable_long_strategy ? short_takeprofit_price : na, color=color.new(#008000, 0), style=plot.style_linebr, linewidth=2, title='Short TP Level')
+
+// Date Range
+start_date = input.int(title='Start Date', defval=1, minval=1, maxval=31, group='Date Range', inline='1')
+end_date = input.int(title='End Date', defval=1, minval=1, maxval=31, group='Date Range', inline='1')
+start_month = input.int(title='Start Month', defval=1, minval=1, maxval=12, group='Date Range', inline='2')
+end_month = input.int(title='End Month', defval=1, minval=1, maxval=12, group='Date Range', inline='2')
+start_year = input.int(title='Start Year', defval=1804, minval=1800, maxval=3000, group='Date Range', inline='3')
+end_year = input.int(title='End Year', defval=2077, minval=1800, maxval=3000, group='Date Range', inline='3')
+in_date_range = time >= timestamp(syminfo.timezone, start_year, start_month, start_date, 0, 0) and time < timestamp(syminfo.timezone, end_year, end_month, end_date, 0, 0)
+
+// RSI
+rsi = ta.rsi(close, 6)
+
+// Bollinger Bands
+BBbasis = ta.sma(close, 200)
+dev = 2 * ta.stdev(close, 200)
+BBupper = BBbasis + dev
+BBlower = BBbasis - dev
+
+// Bollinger Bands plot
+plot(BBbasis, color=color.new(#FF6D00, 0), title='Bollinger Bands SMA Basis Line')
+p1 = plot(BBupper, color=color.new(#2962FF, 0), title='Bollinger Bands Upper Line')
+p2 = plot(BBlower, color=color.new(#2962FF, 0), title='Bollinger Bands Lower Line')
+fillColor = close > BBupper ? color.new(color.red, 95) : close < BBlower ? color.new(#4caf4f, 91) : color.new(#2195f3, 95)
+fill(p1, p2, title = "Background", color=fillColor)
+
+// Strategy
+buy_signal = ta.crossover(rsi, 50) and ta.crossover(close, BBlower)
+sell_signal = ta.crossunder(rsi, 50) and ta.crossunder(close, BBupper)
+
+// Long Strategy
+if buy_signal and in_date_range and enable_long_strategy == true
+    strategy.entry('Long', strategy.long, alert_message='Open Long Position')
+    switch
+        buy_signal => strategy.exit('Long SL/TP', from_entry='Long', loss=long_stoploss_percentage, profit=long_takeprofit_percentage, alert_message='Your Long SL/TP Limit Has Been Triggered.')
+        sell_signal => strategy.close('Long', alert_message='Close Long Position')
+
+// Short Strategy
+if sell_signal and in_date_range and enable_short_strategy == true
+    strategy.entry('Short', strategy.short, alert_message='Open Short Position')
+    switch
+        sell_signal => strategy.exit('Short SL/TP', from_entry='Short', loss=short_stoploss_percentage, profit=short_takeprofit_percentage, alert_message='Your Short SL/TP Limit Has Been Triggered.')
+        buy_signal => strategy.close('Short', alert_message='Close Short Position')
