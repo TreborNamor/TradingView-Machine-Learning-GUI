@@ -74,7 +74,7 @@ if __name__ == "__main__":
 
     # Define a grid of parameters to search for the best combination
     param_grid = {
-        'n_estimators': [1000, 2000, 3000, 4000, 5000, 10000],
+        'n_estimators': [100, 200, 300, 400, 500, 1000],
         'max_depth': list(range(5, 51, 5)) + [None],
         'min_samples_split': [2, 5, 10, 15, 20, 30, 40],
         'min_samples_leaf': [1, 2, 3, 4, 5, 6, 8, 10, 12],
