@@ -26,7 +26,7 @@ def fetch_strategies(page_url):
         title_tag = strategy_block.find('a', class_='tv-widget-idea__title apply-overflow-tooltip js-widget-idea__popup')
         title = title_tag.text
         link = base_url + title_tag['href']
-        likes = strategy_block.find('span', class_='tv-card-social-item apply-common-tooltip tv-card-social-item--agrees tv-card-social-item--button tv-card-social-item--border tv-social-row__item').find('span', class_='tv-card-social-item__count').text
+        likes = strategy_block.find('span', class_='tv-card-social-item apply-common-tooltip tv-card-social-item--agrees tv-card-social-item--button tv-card-social-item--border tv-social-row_is_item').find('span', class_='tv-card-social-item__count').text
         likes = int(likes)
 
         strategies.append({"title": title, "likes": likes, "link": link})
