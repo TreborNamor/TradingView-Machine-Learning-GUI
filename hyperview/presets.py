@@ -23,6 +23,7 @@ _ALLOWED_TOP_LEVEL_KEYS: frozenset[str] = frozenset({"strategy", "updated_at", "
 _ALLOWED_PRESET_KEYS: frozenset[str] = frozenset({
     "pair", "timeframe", "session", "adjustment", "mode",
     "sl", "tp", "objective", "search_method", "updated_at", "metrics",
+    "rank", "map_id", "session_window", "analysis_tags", "min_trades_gate", "meta",
 })
 
 
@@ -52,6 +53,7 @@ def find_preset(
     session: str,
     adjustment: str,
     mode: str,
+    rank: int | None = None,
 ) -> dict[str, Any] | None:
     payload = load_strategy_presets(path)
     if payload.get("strategy") != strategy:
@@ -65,10 +67,85 @@ def find_preset(
         "adjustment": adjustment,
         "mode": mode,
     }
-    for preset in payload["presets"]:
-        if all(preset.get(key) == value for key, value in scope.items()):
-            return dict(preset)
-    return None
+    matches = [preset for preset in payload["presets"] if all(preset.get(key) == value for key, value in scope.items())]
+    if not matches:
+        return None
+    if rank is not None:
+        for preset in matches:
+            if int(preset.get("rank", 1)) == rank:
+                return dict(preset)
+    matches = sorted(matches, key=lambda item: int(item.get("rank", 1)))
+    return dict(matches[0])
+    
+
+def save_top_presets(
+    path: str | Path,
+    *,
+    strategy: str,
+    pair: str,
+    timeframe: str,
+    session: str,
+    adjustment: str,
+    mode: str,
+    objective: str,
+    search_method: str,
+    items: list[dict[str, Any]],
+) -> Path:
+    file_path = Path(path)
+    payload = _read_existing_payload(file_path, strategy)
+
+    scope = {
+        "pair": pair,
+        "timeframe": timeframe,
+        "session": session,
+        "adjustment": adjustment,
+        "mode": mode,
+    }
+    payload["presets"] = [entry for entry in payload["presets"] if not _matches_scope(entry, scope)]
+    now = _utc_now()
+    cleaned: list[dict[str, Any]] = []
+    for index, item in enumerate(items, start=1):
+        preset: dict[str, Any] = {
+            **scope,
+            "sl": float(item["sl"]),
+            "tp": float(item["tp"]),
+            "objective": objective,
+            "search_method": search_method,
+            "updated_at": now,
+            "rank": int(item.get("rank", index)),
+        }
+        if item.get("map_id") is not None:
+            preset["map_id"] = str(item["map_id"])
+        if item.get("session_window") is not None:
+            preset["session_window"] = str(item["session_window"])
+        if item.get("analysis_tags") is not None:
+            preset["analysis_tags"] = item["analysis_tags"]
+        if item.get("min_trades_gate") is not None:
+            preset["min_trades_gate"] = int(item["min_trades_gate"])
+        if item.get("metrics") is not None:
+            preset["metrics"] = item["metrics"]
+        if item.get("meta") is not None:
+            preset["meta"] = item["meta"]
+        cleaned.append(preset)
+
+    payload["updated_at"] = now
+    payload["presets"].extend(cleaned)
+    payload["presets"] = sorted(
+        payload["presets"],
+        key=lambda item: (
+            item["pair"],
+            item["timeframe"],
+            item["session"],
+            item["adjustment"],
+            item["mode"],
+            int(item.get("rank", 1)),
+        ),
+    )
+
+    _validate_payload(payload)
+    file_path.parent.mkdir(parents=True, exist_ok=True)
+    file_path.write_text(json.dumps(payload, indent=4) + "\n", encoding="utf-8")
+    return file_path
 
 
 def save_best_preset(
@@ -177,10 +254,22 @@ def _validate_payload(payload: dict[str, Any]) -> None:
         check_positive_number(preset.get("sl"), f"{prefix}.sl")
         check_positive_number(preset.get("tp"), f"{prefix}.tp")
         check_choice(preset.get("objective"), ALLOWED_OBJECTIVES, f"{prefix}.objective")
-        check_choice(preset.get("search_method"), frozenset({"bayesian"}), f"{prefix}.search_method")
+        check_choice(preset.get("search_method"), frozenset({"bayesian", "coarse_to_fine"}), f"{prefix}.search_method")
         check_non_empty_string(preset.get("updated_at"), f"{prefix}.updated_at")
+        if "rank" in preset and (isinstance(preset.get("rank"), bool) or int(preset["rank"]) <= 0):
+            raise ValueError(f"Preset file value '{prefix}.rank' must be a positive integer")
+        if "map_id" in preset:
+            check_non_empty_string(preset.get("map_id"), f"{prefix}.map_id")
+        if "session_window" in preset:
+            check_non_empty_string(preset.get("session_window"), f"{prefix}.session_window")
+        if "analysis_tags" in preset and not isinstance(preset.get("analysis_tags"), list):
+            raise ValueError(f"Preset file value '{prefix}.analysis_tags' must be a list")
+        if "min_trades_gate" in preset and (isinstance(preset.get("min_trades_gate"), bool) or int(preset["min_trades_gate"]) <= 0):
+            raise ValueError(f"Preset file value '{prefix}.min_trades_gate' must be a positive integer")
         if "metrics" in preset:
             _validate_metrics(preset["metrics"], f"{prefix}.metrics")
+        if "meta" in preset and not isinstance(preset.get("meta"), dict):
+            raise ValueError(f"Preset file value '{prefix}.meta' must be an object")
 
 
 def _matches_scope(left: dict[str, Any], right: dict[str, Any]) -> bool:

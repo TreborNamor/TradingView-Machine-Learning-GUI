@@ -29,6 +29,7 @@ def _run_single_backtest(
     tp: float,
     start: str | None,
     end: str | None,
+    strategy_settings: dict | None = None,
     *,
     pair_index: int = 1,
     pair_total: int = 1,
@@ -61,7 +62,14 @@ def _run_single_backtest(
 
         # 2. Generate signals
         signal_frame, _ = generate_signals(
-            strategy_name, candles, mode, start, end, step="2/3", quiet=True
+            strategy_name,
+            candles,
+            mode,
+            start,
+            end,
+            strategy_settings=strategy_settings,
+            step="2/3",
+            quiet=True,
         )
         if signal_frame is None or len(signal_frame) == 0:
             print("skipped (no signals generated)")
@@ -102,6 +110,7 @@ def run_backtest(args: argparse.Namespace, config: dict) -> int:
     initial_capital = config.get("initial_capital", 1000.0)
     data_dir = config.get("data_dir", "./data")
     output_dir = config.get("output_dir", "./results")
+    strategy_settings = _resolve_strategy_settings(strategy_name, config, timeframe)
 
     _resolve_preset_file_path(args, output_dir, strategy_name)
 
@@ -165,6 +174,7 @@ def run_backtest(args: argparse.Namespace, config: dict) -> int:
             tp=tp,
             start=args.start,
             end=args.end,
+            strategy_settings=strategy_settings,
             pair_index=idx,
             pair_total=len(pairs),
         )
@@ -201,6 +211,7 @@ def _resolve_backtest_risk(
                 session=session,
                 adjustment=adjustment,
                 mode=mode,
+                rank=getattr(args, "preset_rank", None),
             )
         except (FileNotFoundError, ValueError) as exc:
             raise ValueError(str(exc)) from exc
@@ -241,3 +252,29 @@ def _resolve_preset_file_path(
             candidate = strategy_preset_path(output_dir, strategy_name)
             if candidate.is_file():
                 args.preset_file = str(candidate)
+
+
+def _resolve_strategy_settings(strategy_name: str, config: dict, timeframe: str) -> dict | None:
+    if strategy_name != "smc_swing":
+        return None
+    smc_cfg = config.get("smc", {})
+    settings: dict = {}
+    maps = smc_cfg.get("maps", [])
+    if isinstance(maps, list) and maps:
+        chosen = None
+        for item in maps:
+            if isinstance(item, dict) and str(item.get("ltf")) == str(timeframe):
+                chosen = item
+                break
+        if chosen is None:
+            chosen = maps[0] if isinstance(maps[0], dict) else None
+        if isinstance(chosen, dict):
+            settings["htf_timeframe"] = chosen.get("htf", "1h")
+            settings["ltf_timeframe"] = chosen.get("ltf", timeframe)
+            settings["map_id"] = chosen.get("id", f'{settings["htf_timeframe"]}_{settings["ltf_timeframe"]}')
+    settings["session_filter_enabled"] = bool(smc_cfg.get("session_filter_default", True))
+    if "session_windows_utc" in smc_cfg:
+        settings["session_windows_utc"] = smc_cfg["session_windows_utc"]
+    if "entry_modes" in smc_cfg and isinstance(smc_cfg["entry_modes"], list) and smc_cfg["entry_modes"]:
+        settings["entry_mode"] = smc_cfg["entry_modes"][0]
+    return settings

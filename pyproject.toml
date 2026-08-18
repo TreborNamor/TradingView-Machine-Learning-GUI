@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "hyperview"
+name = "tradingview-backtest"
 version = "0.1.0"
 description = "CLI-driven TradingView strategy backtester and hyper-optimizer"
 readme = "README.md"
@@ -21,6 +21,8 @@ dependencies = [
 ]
 
 [project.scripts]
+tradingview-backtest = "hyperview.cli:main"
+tvbacktest = "hyperview.cli:main"
 hyperview = "hyperview.cli:main"
 
 [tool.hatch.build]

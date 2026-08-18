@@ -33,6 +33,7 @@ _DEFAULTS: dict[str, Any] = {
     "output_dir": "results",
     "strategy_path": "strategy",
     "dataformat": "csv",
+    "strategy": "smc_swing",
     "pairlist": [],
     "add_config_files": [],
     "optimization": {
@@ -41,6 +42,24 @@ _DEFAULTS: dict[str, Any] = {
         "top_n": 10,
         "sl_range": {"min": 1.0, "max": 15.0},
         "tp_range": {"min": 1.0, "max": 15.0},
+    },
+    "smc": {
+        "maps": [
+            {"id": "h1_m5", "htf": "1h", "ltf": "5m"},
+            {"id": "h4_m15", "htf": "4h", "ltf": "15m"},
+        ],
+        "entry_modes": ["both", "retest_ob", "aggressive"],
+        "session_filter_optimize": True,
+        "session_filter_default": True,
+        "session_windows_utc": [[7, 17], [12, 22]],
+        "time_budget_minutes": 10,
+        "watchdog_seconds": 60,
+        "coarse_trials": 30,
+        "fine_trials": 120,
+        "coarse_top_k": 6,
+        "preset_top_n": 20,
+        "min_signals": 8,
+        "fine_span_ratio": 0.35,
     },
 }
 
@@ -217,6 +236,7 @@ def _validate_config(config: dict[str, Any]) -> None:
 
     _validate_range_config(optimization, "sl_range")
     _validate_range_config(optimization, "tp_range")
+    _validate_smc_config(config)
 
 
 def _validate_range_config(optimization: dict[str, Any], key: str) -> None:
@@ -243,3 +263,49 @@ def _validate_pairlist(config: dict[str, Any]) -> None:
         raise ValueError("Config value 'pairlist' must be a list of strings (e.g. 'EXCHANGE:SYMBOL')")
     for i, entry in enumerate(pairlist):
         require_pair_string(entry, key=f"pairlist[{i}]")
+
+
+def _validate_smc_config(config: dict[str, Any]) -> None:
+    smc = config.get("smc")
+    if smc is None:
+        return
+    if not isinstance(smc, dict):
+        raise ValueError("Config value 'smc' must be an object")
+
+    maps = smc.get("maps", [])
+    if not isinstance(maps, list) or not maps:
+        raise ValueError("Config value 'smc.maps' must be a non-empty list")
+    for idx, item in enumerate(maps):
+        if not isinstance(item, dict):
+            raise ValueError(f"Config value 'smc.maps[{idx}]' must be an object")
+        require_non_empty_string(item, "id", prefix=f"smc.maps[{idx}].")
+        require_non_empty_string(item, "htf", prefix=f"smc.maps[{idx}].")
+        require_non_empty_string(item, "ltf", prefix=f"smc.maps[{idx}].")
+
+    entry_modes = smc.get("entry_modes", [])
+    if not isinstance(entry_modes, list) or not entry_modes:
+        raise ValueError("Config value 'smc.entry_modes' must be a non-empty list")
+    allowed_entry_modes = {"retest_ob", "aggressive", "both"}
+    for idx, mode in enumerate(entry_modes):
+        if mode not in allowed_entry_modes:
+            raise ValueError(
+                f"Config value 'smc.entry_modes[{idx}]' must be one of: {', '.join(sorted(allowed_entry_modes))}"
+            )
+
+    windows = smc.get("session_windows_utc", [])
+    if not isinstance(windows, list) or not windows:
+        raise ValueError("Config value 'smc.session_windows_utc' must be a non-empty list")
+    for idx, item in enumerate(windows):
+        if not isinstance(item, list) or len(item) != 2:
+            raise ValueError(f"Config value 'smc.session_windows_utc[{idx}]' must be [start_hour, end_hour]")
+        if any((isinstance(v, bool) or not isinstance(v, int) or v < 0 or v > 23) for v in item):
+            raise ValueError(f"Config value 'smc.session_windows_utc[{idx}]' hours must be ints between 0 and 23")
+
+    for key in ("time_budget_minutes", "watchdog_seconds", "coarse_trials", "fine_trials", "coarse_top_k", "preset_top_n", "min_signals"):
+        value = smc.get(key)
+        if isinstance(value, bool) or not isinstance(value, int) or value <= 0:
+            raise ValueError(f"Config value 'smc.{key}' must be a positive integer")
+
+    ratio = smc.get("fine_span_ratio")
+    if isinstance(ratio, bool) or not isinstance(ratio, (int, float)) or not (0 < float(ratio) <= 1):
+        raise ValueError("Config value 'smc.fine_span_ratio' must be > 0 and <= 1")

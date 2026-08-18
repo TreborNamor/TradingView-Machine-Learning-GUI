@@ -1,19 +1,27 @@
 {
     "$schema": "./config.schema.json",
     "bot_name": "hyperview",
-    "timeframe": "1h",
+    "timeframe": "5m",
     "session": "extended",
     "mode": "long",
-    "strategy": "adx_stochastic",
+    "strategy": "smc_swing",
     "initial_capital": 100000,
     "data_dir": "data",
     "output_dir": "results",
     "strategy_path": "strategy",
     "dataformat": "csv",
     "pairlist": [
-        "NASDAQ:NFLX",
-        "NASDAQ:TSLA",
+        "OANDA:XAUUSD",
         "COINBASE:BTCUSD",
+        "OANDA:EURUSD",
+        "OANDA:GBPUSD",
+        "OANDA:USDJPY",
+        "OANDA:AUDUSD",
+        "OANDA:USDCAD",
+        "OANDA:USDCHF",
+        "OANDA:NZDUSD",
+        "OANDA:EURJPY",
+        "OANDA:GBPJPY",
         "COINBASE:ETHUSD"
     ],
     "optimization": {
@@ -28,5 +36,38 @@
             "min": 1.0,
             "max": 15.0
         }
+    },
+    "smc": {
+        "maps": [
+            {
+                "id": "h1_m5",
+                "htf": "1h",
+                "ltf": "5m"
+            },
+            {
+                "id": "h4_m15",
+                "htf": "4h",
+                "ltf": "15m"
+            }
+        ],
+        "entry_modes": [
+            "both",
+            "retest_ob",
+            "aggressive"
+        ],
+        "session_filter_optimize": true,
+        "session_filter_default": true,
+        "session_windows_utc": [
+            [7, 17],
+            [12, 22]
+        ],
+        "time_budget_minutes": 10,
+        "watchdog_seconds": 60,
+        "coarse_trials": 30,
+        "fine_trials": 120,
+        "coarse_top_k": 6,
+        "preset_top_n": 20,
+        "min_signals": 8,
+        "fine_span_ratio": 0.35
     }
 }

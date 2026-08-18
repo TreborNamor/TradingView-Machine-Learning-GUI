@@ -125,6 +125,56 @@
                 }
             },
             "additionalProperties": false
+        },
+        "smc": {
+            "type": "object",
+            "description": "SMC swing strategy and optimizer controls.",
+            "properties": {
+                "maps": {
+                    "type": "array",
+                    "description": "List of HTF/LTF mappings to scan.",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "id": {"type": "string", "minLength": 1},
+                            "htf": {"type": "string", "minLength": 1},
+                            "ltf": {"type": "string", "minLength": 1}
+                        },
+                        "required": ["id", "htf", "ltf"],
+                        "additionalProperties": false
+                    }
+                },
+                "entry_modes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "enum": ["retest_ob", "aggressive", "both"]
+                    },
+                    "minItems": 1
+                },
+                "session_filter_optimize": {"type": "boolean"},
+                "session_filter_default": {"type": "boolean"},
+                "session_windows_utc": {
+                    "type": "array",
+                    "items": {
+                        "type": "array",
+                        "items": {"type": "integer", "minimum": 0, "maximum": 23},
+                        "minItems": 2,
+                        "maxItems": 2
+                    },
+                    "minItems": 1
+                },
+                "time_budget_minutes": {"type": "integer", "minimum": 1},
+                "watchdog_seconds": {"type": "integer", "minimum": 1},
+                "coarse_trials": {"type": "integer", "minimum": 1},
+                "fine_trials": {"type": "integer", "minimum": 1},
+                "coarse_top_k": {"type": "integer", "minimum": 1},
+                "preset_top_n": {"type": "integer", "minimum": 1},
+                "min_signals": {"type": "integer", "minimum": 1},
+                "fine_span_ratio": {"type": "number", "exclusiveMinimum": 0, "maximum": 1}
+            },
+            "required": ["maps", "entry_modes"],
+            "additionalProperties": false
         }
     },
     "$defs": {

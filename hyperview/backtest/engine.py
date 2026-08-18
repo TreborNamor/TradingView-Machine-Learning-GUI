@@ -51,6 +51,8 @@ class _Position(NamedTuple):
 class _PendingOrder(NamedTuple):
     action: str
     signal_close: float
+    dynamic_stop_price: float | None = None
+    dynamic_target_price: float | None = None
 
 
 class _CompiledSignalFrame(NamedTuple):
@@ -64,6 +66,8 @@ class _CompiledSignalFrame(NamedTuple):
     sell_signal: list[bool]
     enable_long: list[bool]
     enable_short: list[bool]
+    dynamic_stop_price: list[float | None]
+    dynamic_target_price: list[float | None]
     end_date: str | None
     length: int
 
@@ -200,6 +204,8 @@ class TradingViewLikeBacktester:
             sell_signal=dataframe["sell_signal"].fillna(False).tolist(),
             enable_long=dataframe["enable_long"].fillna(False).tolist(),
             enable_short=dataframe["enable_short"].fillna(False).tolist(),
+            dynamic_stop_price=_optional_float_list(dataframe.get("dynamic_stop_price"), len(dataframe)),
+            dynamic_target_price=_optional_float_list(dataframe.get("dynamic_target_price"), len(dataframe)),
             end_date=end_date,
             length=int(time_values.size),
         )
@@ -231,6 +237,8 @@ class TradingViewLikeBacktester:
         sell_signals = signal_frame.sell_signal
         enable_longs = signal_frame.enable_long
         enable_shorts = signal_frame.enable_short
+        dynamic_stops = signal_frame.dynamic_stop_price
+        dynamic_targets = signal_frame.dynamic_target_price
         last_index = length - 1
 
         for index in range(length):
@@ -272,6 +280,8 @@ class TradingViewLikeBacktester:
                     enable_long=enable_longs[index],
                     enable_short=enable_shorts[index],
                     close_price=close_price,
+                    dynamic_stop_price=dynamic_stops[index],
+                    dynamic_target_price=dynamic_targets[index],
                     mode=mode,
                 )
 
@@ -297,14 +307,25 @@ class TradingViewLikeBacktester:
                 filled_trade, equity = self._close_position(position, bar_time, open_price, "reverse_to_long", equity)
                 position = None
             if position is None:
-                sl_offset = pending.signal_close * (risk.long_stoploss_pct / 100.0)
-                tp_offset = pending.signal_close * (risk.long_takeprofit_pct / 100.0)
+                dynamic_stop = pending.dynamic_stop_price
+                dynamic_target = pending.dynamic_target_price
+                if (
+                    dynamic_stop is not None and dynamic_target is not None
+                    and dynamic_stop < open_price < dynamic_target
+                ):
+                    stop_price = dynamic_stop
+                    target_price = dynamic_target
+                else:
+                    sl_offset = pending.signal_close * (risk.long_stoploss_pct / 100.0)
+                    tp_offset = pending.signal_close * (risk.long_takeprofit_pct / 100.0)
+                    stop_price = open_price - sl_offset
+                    target_price = open_price + tp_offset
                 position = _Position(
                     direction="long",
                     entry_time=bar_time,
                     entry_price=open_price,
-                    stop_price=open_price - sl_offset,
-                    target_price=open_price + tp_offset,
+                    stop_price=stop_price,
+                    target_price=target_price,
                     equity_before=equity,
                 )
         elif pending.action == "open_short":
@@ -312,14 +333,25 @@ class TradingViewLikeBacktester:
                 filled_trade, equity = self._close_position(position, bar_time, open_price, "reverse_to_short", equity)
                 position = None
             if position is None:
-                sl_offset = pending.signal_close * (risk.short_stoploss_pct / 100.0)
-                tp_offset = pending.signal_close * (risk.short_takeprofit_pct / 100.0)
+                dynamic_stop = pending.dynamic_stop_price
+                dynamic_target = pending.dynamic_target_price
+                if (
+                    dynamic_stop is not None and dynamic_target is not None
+                    and dynamic_target < open_price < dynamic_stop
+                ):
+                    stop_price = dynamic_stop
+                    target_price = dynamic_target
+                else:
+                    sl_offset = pending.signal_close * (risk.short_stoploss_pct / 100.0)
+                    tp_offset = pending.signal_close * (risk.short_takeprofit_pct / 100.0)
+                    stop_price = open_price + sl_offset
+                    target_price = open_price - tp_offset
                 position = _Position(
                     direction="short",
                     entry_time=bar_time,
                     entry_price=open_price,
-                    stop_price=open_price + sl_offset,
-                    target_price=open_price - tp_offset,
+                    stop_price=stop_price,
+                    target_price=target_price,
                     equity_before=equity,
                 )
 
@@ -366,6 +398,8 @@ class TradingViewLikeBacktester:
         enable_long: bool,
         enable_short: bool,
         close_price: float,
+        dynamic_stop_price: float | None,
+        dynamic_target_price: float | None,
         mode: Mode,
     ) -> _PendingOrder | None:
         if not in_date_range:
@@ -375,9 +409,19 @@ class TradingViewLikeBacktester:
         short_allowed = enable_short and mode in {"short", "both"}
 
         if buy_signal and long_allowed and not sell_signal:
-            return _PendingOrder("open_long", signal_close=close_price)
+            return _PendingOrder(
+                "open_long",
+                signal_close=close_price,
+                dynamic_stop_price=dynamic_stop_price,
+                dynamic_target_price=dynamic_target_price,
+            )
         if sell_signal and short_allowed and not buy_signal:
-            return _PendingOrder("open_short", signal_close=close_price)
+            return _PendingOrder(
+                "open_short",
+                signal_close=close_price,
+                dynamic_stop_price=dynamic_stop_price,
+                dynamic_target_price=dynamic_target_price,
+            )
         return None
 
     def _close_position(
@@ -479,3 +523,15 @@ class TradingViewLikeBacktester:
             tp_exit_pct=round(tp_exit_pct, 2),
             signal_exit_pct=round(signal_exit_pct, 2),
         )
+
+
+def _optional_float_list(series: pd.Series | None, length: int) -> list[float | None]:
+    if series is None:
+        return [None] * length
+    output: list[float | None] = []
+    for value in series.tolist():
+        if value is None or pd.isna(value):
+            output.append(None)
+        else:
+            output.append(float(value))
+    return output

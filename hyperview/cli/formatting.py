@@ -83,6 +83,7 @@ def generate_signals(
     mode: str,
     start: str | None,
     end: str | None,
+    strategy_settings: dict | None = None,
     *,
     step: str = "",
     quiet: bool = False,
@@ -100,6 +101,8 @@ def generate_signals(
         "start": start,
         "end": end,
     }
+    if strategy_settings:
+        signal_settings.update(strategy_settings)
     signal_frame = strategy.generate_signals(candles, signal_settings)
     buy_count = int(signal_frame["buy_signal"].sum())
     sell_count = int(signal_frame["sell_signal"].sum())

@@ -2,46 +2,238 @@
 
 **Turn TradingView ideas into testable, terminal-speed trading systems.**
 
-HyperView is for the moment a TradingView strategy stops being a chart experiment and starts needing hard evidence. It pulls historical candles straight from TradingView's websocket, runs your strategy logic in Python, and backtests with fill behavior designed to closely mirror Pine Script, so the results you tune locally in python still match the results you'll see on TradingView's strategy tester.
+HyperView is a CLI-first toolkit for downloading TradingView market data, backtesting Python strategies with Pine-like execution behavior, and optimizing parameters in a repeatable workflow.
 
-Instead of bouncing between Pine scripts, CSV exports, and improvised notebooks, HyperView gives you one clean loop: pull up to 40K bars, build on [TA-Lib](https://github.com/TA-Lib/ta-lib-python)'s 150+ indicators, simulate realistic SL/TP execution, and let Bayesian optimization (Optuna TPE) hunt for better parameter ranges. No API keys. No browser automation. No spreadsheet cleanup. Just faster iteration, sharper validation, and a workflow built for traders who want to develop strategies like engineers.
+Vietnamese version: [README.vi.md](README.vi.md)
+
+## Support This Project
+
+If you discover a strong strategy using this repo, please consider giving the project a **star** and **forking** it to support further development.
+
+## Pain Points
+
+- Manual optimization on TradingView charts is slow, hard to reproduce, and difficult to audit.
+- Results often diverge between Pine and local scripts because fill assumptions differ.
+- Data, presets, and reports are scattered across CSVs, notebooks, and ad-hoc scripts.
+- Multi-strategy and multi-pair research takes too long without a standardized pipeline.
+
+## Solution
+
+- A unified CLI workflow: `download -> signal -> backtest -> optimize -> export artifacts`.
+- A TradingView-like backtester (next-bar-open entries + intrabar SL/TP path simulation).
+- Automatic preset/report/context storage for comparison and reproducible reruns.
+- Pine input optimization with best-parameter injection into exported Pine scripts.
+
+## Key Features
+
+- Historical download from TradingView websocket (up to ~40K bars with eligible authenticated session).
+- Python strategy framework + TA-Lib (20 wrapped indicators + direct TA-Lib access).
+- Backtesting with mathematically correct portfolio aggregation from combined equity curves.
+- SL/TP optimization via Optuna (TPE), with top preset persistence.
+- Two-stage Pine optimization + batch optimization for multiple strategy files.
+- Structured artifacts (`data/`, `results/`, `strategies/raw/`, `strategies/optimized/`).
+
+## FAQ (Pro Account & Tick Data)
+
+### Can I use HyperView without a TradingView Pro account?
+
+Yes. You can still use download, backtest, and optimization features without Pro.  
+In practice, data depth is typically lower for anonymous/non-authenticated sessions (often around ~5K bars), while authenticated paid sessions can reach higher limits (up to ~40K bars, depending on account/session availability).
+
+### Does HyperView support tick data?
+
+No. HyperView is candle/timeframe based (`1m`, `5m`, `15m`, `1h`, etc.), not tick-by-tick data stream based.
+
+### Is `1m` data equivalent to tick data?
+
+No. `1m` is still aggregated OHLCV bar data, not raw market ticks.
+
+### Can this be used for tick-level/HFT validation?
+
+Not natively in the current architecture. The backtester uses bar-level + intrabar-path assumptions, not full tick replay.
+
+### Do I need any TradingView API key?
+
+No. The downloader uses TradingView websocket/session mechanics and optional local browser session credentials.
+
+## Practical Outcomes
+
+- Faster strategy research loops by replacing chart-click workflows with automated CLI pipelines.
+- Easier team collaboration through consistent presets, reports, and saved contexts.
+- Lower mismatch risk when moving from Pine ideas to quantitative validation.
+- Better scaling for multi-strategy, multi-symbol, and multi-timeframe experiments.
+
+## Improvements Over The Original Fork Source
+
+The fork improvements are not only cosmetic; they are implemented as concrete workflow tasks:
+
+1. **CLI Standardization Task**
+   - Unified command entry around `tradingview-backtest`.
+   - Kept backward-compatible aliases: `hyperview`, `python -m hyperview`.
+   - Goal: reduce team friction across local terminal + AI CLI usage.
+
+2. **Pine Optimization Pipeline Task**
+   - Added optimized Pine export with best params injected into defaults.
+   - Added compact filename metrics (`np/dd/pf/tc`) for fast scanning.
+   - Added per-run metadata headers in exported Pine snapshots.
+
+3. **Batch Orchestration Task**
+   - Added batch runner to optimize multiple Pine files from `strategies/raw/`.
+   - Added matrix execution for symbols/timeframes.
+   - Added leaderboard outputs for top results aggregation.
+
+4. **Artifact Contract Task**
+   - Standardized directories:
+     - `strategies/raw/`
+     - `strategies/optimized/`
+     - `results/optimizations/<symbol>/<timeframe>/`
+   - Goal: deterministic outputs for commit/push/audit and easier collaboration.
+
+5. **Automation & Onboarding Task**
+   - Added cross-platform bootstrap scripts (`.cmd`, `.ps1`, `.sh`).
+   - Added GitHub release workflow and build smoke checks.
+   - Added Codex/Claude quick workflow guidance in docs.
 
 ## Prerequisites
 
-- **Python 3.11+**
-- **TA-Lib** — installed automatically by `pip install`. Pre-built wheels ship for Python 3.9–3.14 on Windows, macOS, and Linux.
-- **rich** — installed automatically. Powers the styled terminal output (colored tables, progress indicators, panels).
-- **Firefox** *(optional)* — If you have a TradingView paid plan, HyperView can read your Firefox session cookies to download up to **40K candles**. Without it, the websocket still downloads up to **5K candles** anonymously. To use this, just log in to [tradingview.com](https://www.tradingview.com) in Firefox before downloading data.
+### Core runtime requirements
 
-## Quick Start
+- **Python 3.11+**
+- **TA-Lib** — installed automatically by `pip install`. Pre-built wheels are available for major OS/Python combinations.
+- **rich** — installed automatically for CLI tables/panels/progress UI.
+- **Firefox** *(optional)* — for authenticated TradingView session reuse (higher historical bar limits).
+
+### Additional requirements to use fork improvements fully
+
+- **Git + GitHub CLI (`gh`)** — needed for release automation, fork sync, and GitHub-native workflow management.
+- **One of `uvx` / `pipx` / `pip`** — needed for portable install/run modes documented in this fork.
+- **Writable workspace for artifacts** — required because this fork intentionally tracks richer outputs in:
+  - `data/`
+  - `results/`
+  - `strategies/raw/`
+  - `strategies/optimized/`
+
+### Verification baseline (recommended before serious runs)
 
 ```bash
-# Install in editable mode (creates the `hyperview` CLI command, installs all dependencies including TA-Lib)
+python -m unittest discover -s tests -v
+python -m hyperview --help
+python -m hyperview list-strategies
+```
+
+## Install & Run Anywhere
+
+Canonical CLI command is now `tradingview-backtest`.  
+Backwards-compatible aliases still work: `tvbacktest`, `hyperview`, and `python -m hyperview`.
+
+### Option A (Recommended, npx-like): `uvx`
+
+```bash
+# Run directly from GitHub (no long-lived install)
+uvx --from git+https://github.com/<org>/tradingview-backtest.git tradingview-backtest --help
+```
+
+```bash
+# After publishing to PyPI
+uvx tradingview-backtest --help
+```
+
+### Option B (npm -g-like): `pipx`
+
+```bash
+pipx install tradingview-backtest
+tradingview-backtest --help
+```
+
+### Option C (Universal fallback): `pip`
+
+```bash
+python -m pip install tradingview-backtest
+python -m hyperview --help
+```
+
+### Bootstrap Scripts (from this repo)
+
+```bash
+# Windows (cmd)
+scripts\bootstrap.cmd local
+
+# Windows (PowerShell)
+.\scripts\bootstrap.ps1 -Mode local
+
+# Linux/macOS
+./scripts/bootstrap.sh local
+```
+
+## Quick Start (Project Development)
+
+```bash
+# Install in editable mode (creates `tradingview-backtest`, `tvbacktest`, and `hyperview`)
 pip install -e .
 
 # Download data for specific pairs
-hyperview download-data --pairs NASDAQ:NFLX NASDAQ:AAPL --timeframe 1h --session extended
+tradingview-backtest download-data --pairs NASDAQ:NFLX NASDAQ:AAPL --timeframe 1h --session extended
 
 # Or define your pairs in config.json and download multiple timeframes at once:
-hyperview download-data --timeframe 1h 15m
+tradingview-backtest download-data --timeframe 1h 15m
 
 # Run a single backtest (uses config pairlist)
-hyperview backtest --sl 3.23 --tp 13.06 --mode long
+tradingview-backtest backtest --sl 3.23 --tp 13.06 --mode long
 
 # Or target a specific symbol using values from a hyperopt preset file
-hyperview backtest --symbol NASDAQ:NFLX --preset-file results/adx_stochastic_presets.json
+tradingview-backtest backtest --symbol NASDAQ:NFLX --preset-file results/adx_stochastic_presets.json
 
 # Hyper-optimize SL/TP across all pairs in config
-hyperview hyperopt --mode long
+tradingview-backtest hyperopt --mode long
 
 # List cached data and registered strategies
-hyperview list-data
-hyperview list-strategies
+tradingview-backtest list-data
+tradingview-backtest list-strategies
 ```
 
-You can also run via `python -m hyperview` instead of the `hyperview` command.
+You can still run via `python -m hyperview` for environments that prefer module execution.
 
 Python bytecode is redirected into the project-level `.pycache/` directory, so runtime imports do not create scattered `__pycache__` folders under `hyperview/` or `strategy/`.
+
+## Fast Workflow With Codex CLI / Claude Code
+
+This repo works well with both **Codex CLI** and **Claude Code** for AI-assisted development.
+
+### 1) One-time setup
+
+```bash
+# Clone repo
+git clone https://github.com/hungpixi/tradingview-backtest.git
+cd tradingview-backtest
+
+# Bootstrap local env (cross-platform script)
+# Windows:
+scripts\bootstrap.cmd local
+# Linux/macOS:
+./scripts/bootstrap.sh local
+```
+
+### 2) Prompt examples for AI CLI
+
+- `"Run pine-batch-optimize for OANDA:XAUUSD on 15m and summarize best result."`
+- `"Add a new CLI flag for pine-optimize and include unit tests."`
+- `"Refactor hyperview/cli/pine.py but keep command behavior backward-compatible."`
+- `"Review this branch for regressions in backtest and pine optimize flow."`
+
+### 3) Quick verification before commit
+
+```bash
+python -m unittest discover -s tests -v
+python -m hyperview --help
+python -m hyperview list-strategies
+```
+
+### 4) Tips for better AI output quality
+
+- Be explicit about the goal and desired output (specific files/reports/commands).
+- Always require verification commands before an AI says work is done.
+- For larger changes, ask for scoped commits (`feat`, `chore`, `docs`).
+- In this repo, prioritize real CLI validation (`download-data`, `backtest`, `hyperopt`, `pine-optimize`) rather than code-only edits.
 
 ## How It Works
 
@@ -65,6 +257,8 @@ config.json                 Default configuration (timeframe, pairlist, opt rang
 config.schema.json          JSON Schema for editor validation & autocompletion
 data/                       Cached candle CSVs (auto-generated)
 results/                    Optimization presets & reports (auto-generated)
+strategies/raw/             Source Pine scripts for optimization input
+strategies/optimized/       Best optimized Pine exports (filename includes metrics)
 ```
 
 ### `strategy/` — Pluggable Strategy Framework
@@ -168,6 +362,14 @@ hyperview --config crypto.json hyperopt --mode long
 
 ## CLI Reference
 
+All command examples below can use `tradingview-backtest` (recommended) or legacy alias `hyperview`.
+
+## Migration Notes
+
+- `hyperview` command is still supported for backward compatibility.
+- New canonical command for docs/releases is `tradingview-backtest`.
+- Short alias `tvbacktest` is also available.
+
 ### `download-data` — Fetch Candle Data
 
 ```bash
@@ -239,6 +441,29 @@ hyperview list-data
 ```bash
 hyperview list-strategies
 ```
+
+### `pine-optimize` — Optimize Pine Inputs + Export Best Pine
+
+```bash
+hyperview pine-optimize --pine-file strategies/raw/smc_swing_strategy.pine --symbol OANDA:XAUUSD --timeframe 15m
+```
+
+- Exports best Pine by default to `strategies/optimized/`.
+- Default optimized filename template:
+  `{symbol}_{tf}_{strategy}_np{net}_dd{dd}_pf{pf}_tc{trades}.pine`
+- Pair/timeframe reports are written under:
+  `results/optimizations/<symbol>/<timeframe>/`
+
+### `pine-batch-optimize` — Run Matrix Optimization for Many Pine Files
+
+```bash
+hyperview pine-batch-optimize --input-dir strategies/raw --symbols OANDA:XAUUSD OANDA:EURUSD --timeframes 15m 1h
+```
+
+- Runs `pine-optimize` for each `pine x symbol x timeframe`.
+- Writes aggregate leaderboard files:
+  - `results/optimizations/leaderboard.json`
+  - `results/optimizations/leaderboard.md`
 
 ## Indicators
 
